@@ -2,7 +2,8 @@ import React from "react";
 import HeroSection from "./Landing/HeroSection";
 import Navbar from "../Components/NavBar/Navbar";
 import DownloadApp from "./Landing/DownloadApp";
-
+import CityAdv from "./Landing/CityAdv";
+import "../style/pattern.css";
 const HomePage = () => {
   const [isVisible, setIsVisible] = React.useState(true);
 
@@ -22,10 +23,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="PatternBG">
       {isVisible && <Navbar />}
       <HeroSection />
-      <DownloadApp />
+      <CityAdv/>
+      {/* <DownloadApp /> */}
       <div className="h-[1000px]"></div>
     </div>
   );
