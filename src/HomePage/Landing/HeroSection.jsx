@@ -9,7 +9,7 @@ import {
   FaTiktok,
 } from "react-icons/fa";
 
-import image from "../../assets/img.png";
+import image from "../../assets/img1.png";
 const HeroSection = () => {
   const { t } = useTranslation();
 
@@ -61,11 +61,11 @@ const HeroSection = () => {
           <button className="bg-white text-purple-800 px-4 py-2 mt-4 rounded-full">
             {i18n.t("heroSection.button")}
           </button>
-          <div className="flex items-center mt-10 mx-auto">
+          <div className="flex items-center h-[50vh] absolute bottom-0 mt-10 mx-auto">
             <img
               src={image}
               alt="down-arrow"
-              className="w-[500px] drop-shadow-2xl"
+              className="h-full drop-shadow-2xl "
             />
             {/* <p className="text-2xl font-bold ml-2">{i18n.t("heroSection.scroll")}</p> */}
           </div>
