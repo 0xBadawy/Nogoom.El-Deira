@@ -44,7 +44,6 @@ const SocialMediaInfluencers = () => {
         {isSignedUp ? "🎉 تم التسجيل! أهلاً بك في النجوم" : "⭐ سجل الآن"}
       </button>
 
-      {/* Additional Info */}
       {!isSignedUp && (
         <p className="text-sm text-gray-300 mt-6">
           انضم إلى منصة مليئة بالفرص وساهم في صنع الفرق!
@@ -55,7 +54,7 @@ const SocialMediaInfluencers = () => {
       {isSignedUp && (
         <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
           <div className="w-4 h-4 bg-pink-400 rounded-full animate-bounce mx-1"></div>
-          <div className="w-4 h-4 bg-yellow-400 rounded-full animate-bounce delay-150 mx-1"></div>
+          <div className="w-4 h-4 bg-yellذow-400 rounded-full animate-bounce delay-150 mx-1"></div>
           <div className="w-4 h-4 bg-blue-400 rounded-full animate-bounce delay-300 mx-1"></div>
         </div>
       )}
