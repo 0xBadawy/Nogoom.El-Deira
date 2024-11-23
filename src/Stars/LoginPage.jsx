@@ -5,15 +5,12 @@ import { BsApple } from "react-icons/bs";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import LoginSchema from "../Validations/LoginValidation.js";
-// import { useAuth } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import handleFirebaseError from "../Validations/Errors";
-import Logo from "../../src/assets/Images/Logo/Deira-logo.jpg";
+import Logo from "../../src/assets/Images/Logo/Deira-logo2.png";
 import LoginImage from "../../src/assets/Images/LoginStar.jpg";
 
-// import { auth } from "../../Firebase/Firebase";
 const LoginPage = () => {
-  // const { login, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const redirectPath = location.state?.path || "/";
@@ -34,27 +31,14 @@ const LoginPage = () => {
   } = useForm();
 
   const onFormSubmit = async (data) => {
-    try {
-      setError(""); // Clear previous error
-      setLoading(true);
-      await login(data.email, data.password);
-      //console.log("done");
-
-      navigate(redirectPath, { replace: true });
-    } catch (error) {
-      setError(handleFirebaseError(error.code));
-      //console.log(error.code);
-    } finally {
-      setLoading(false);
-    }
-    //console.log(data);
+      console.log(data);
   };
 
   return ( 
     <div className="grid grid-cols-1 mx-auto  md:grid-cols-2" style={{direction:"rtl"}}>
       <div className="flex items-center justify-center min-h-screen ">
         <div className="w-full max-w-xl bg-white p-6 rounded-lg shado w-md">
-          <img src={Logo} alt="logo" className="w-52 mx-auto " />
+          <img src={Logo} alt="logo" className="w-52 pb-20  mx-auto " />
           <h2 className="text-2xl font-bold text-center mb-6">{Text.title}</h2>
 
           {/* Display error message */}
@@ -80,7 +64,7 @@ const LoginPage = () => {
                 id="email"
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
                 placeholder="email@example.com"
-                {...register("email")}
+                {...register("email")}  
               />
               <p className="text-red-500 text-xs mt-1">
                 {errors.email?.message}
@@ -110,7 +94,7 @@ const LoginPage = () => {
               // disabled={loading}
               type="submit"
               // onClick={confirm}
-              className="w-full bg-[#2c3d85] text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
+              className="w-full bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
             >
               {Text.login}
             </button>

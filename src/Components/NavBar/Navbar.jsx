@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "./../../assets/Images/Logo/Deira-logo.jpg";
+import Logo from "./../../assets/Images/Logo/Deira-logo.png";
 import toast, { Toaster } from "react-hot-toast";
 import { IoMdNotifications } from "react-icons/io";
 import SocialMedia from "./SocialMediaIcons";
@@ -138,7 +138,7 @@ const Navbar = () => {
           <div className="flex items-center ml-4">
             <div className="text-2xl mx-2 font-bold text-indigo-600">
               <Link to="/">
-                <img src={Logo} alt="logo" className="w-14" />
+                <img src={Logo} alt="logo" className="w-40" />
               </Link>
             </div>
           </div>
