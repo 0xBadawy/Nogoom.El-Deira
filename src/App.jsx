@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Components/NavBar/Navbar";
 import HomePage from "./HomePage/HomePage";
 import LoginPage from "./Stars/LoginPage";
-import SignUp from "./Stars/SignUp";
+import SignUp from "./Stars/SignUp/SignUp";
 
 
 const Router = createBrowserRouter([
