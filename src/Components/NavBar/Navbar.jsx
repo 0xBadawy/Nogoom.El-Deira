@@ -7,8 +7,10 @@ import SocialMedia from "./SocialMediaIcons";
 import SocialMediaIcons from "./SocialMediaIcons";
 import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
-const Navbar = () => {
-  const { t, } = useTranslation();
+const Navbar = ({ Type }) => {
+  const { t } = useTranslation();
+
+  console.log(Type);
 
   const [isOpen, setIsOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("/");
@@ -17,9 +19,9 @@ const Navbar = () => {
 
   const pages = [
     { path: "/", label: i18n.t("navbar.home") },
-    { path: "/privacy-policy", label: i18n.t("navbar.privacy")},
-    { path: "/contact", label:i18n.t("navbar.contact")},
-    { path: "/stars", label: i18n.t("navbar.stars")},
+    { path: "/privacy-policy", label: i18n.t("navbar.privacy") },
+    { path: "/contact", label: i18n.t("navbar.contact") },
+    { path: "/stars", label: i18n.t("navbar.stars") },
   ];
 
   const [notifications, setNotifications] = useState([
@@ -91,6 +93,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Conditional Button/User Icon */}
+          
+  
+
+          
           <div className="flex items-center md:mr-4">
             {true ? (
               <div className="relative flex justify-center items-center gap-5 flex-row-reverse">

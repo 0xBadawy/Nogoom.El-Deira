@@ -108,6 +108,7 @@ const SignUpPage = () => {
                 <label className="block text-gray-700">{TextData.area}</label>
                 <select
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none"
+                  {...register("govern")}
                   onChange={handleSelectChange}
                 >
                   <option value="">اختر المنطقة</option>

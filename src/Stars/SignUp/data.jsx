@@ -6,6 +6,7 @@ export const TextData = {
   area: "المنطقة",
   govern: "المحافظة",
   signUp: "تسجيل حساب",
+  password:"الرقم السري",
   iban: "رقم الحساب البنكى (IBAN)",
   privacyPolicy: "أوافق على الشروط والأحكام",
   privacyPolicyLink: "شروط الاستخدام",

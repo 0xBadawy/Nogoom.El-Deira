@@ -69,17 +69,22 @@ useEffect(() => {
       value: userData.phone,
     },
     {
-      label: "المنطقة",
+      label: "تاريخ إنشاء الحساب",
+      value: formatDate(userData.createdAt),
+    },
+    {
+      label: "المنظقة",
+      value: userData.govern,
+    },
+    {
+      label: "المحافظات",
       value: userData.area.join(", "),
     },
     {
       label: "رصيد الحساب",
       value: `$${userData.balance}`,
     },
-    {
-      label: "تاريخ إنشاء الحساب",
-      value: formatDate(userData.createdAt),
-    },
+
     {
       label: "رقم الحساب الدولي (IBAN)",
       value: userData.iban,
@@ -87,14 +92,6 @@ useEffect(() => {
     {
       label: "تم التحقق",
       value: userData.verified ? "نعم" : "لا",
-    },
-    {
-      label: "تم التحقق بواسطة",
-      value: userData.verifiedBy || "غير متوفر",
-    },
-    {
-      label: "تم قبول سياسة الخصوصية",
-      value: userData.privacyPolicy ? "تم القبول" : "لم يتم القبول",
     },
   ];
 
@@ -134,7 +131,7 @@ useEffect(() => {
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-3xl font-bold text-indigo-900">الملف الشخصي العام</h2>
-      <p className="mt-4 text-gray-600">
+      <p className="my-4 text-gray-600">
         هذه هي صفحة الملف الشخصي العام الخاصة بك حيث يمكنك عرض تفاصيلك.
       </p>
       <div className="flex flex-col items-center sm:items-start">
@@ -167,7 +164,9 @@ useEffect(() => {
             <div className="mt-2 p-2 w-full border border-indigo-300 rounded-lg bg-gray-100 flex items-center justify-between">
               <div>
                 {item.icon}
-                <span className="ml-2">{item.value}</span>
+                <span className="ml-2">
+                  {item.value.slice(0, 40) + "...."}
+                </span>
               </div>
               <a
                 href={item.link}
