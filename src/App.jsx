@@ -5,7 +5,8 @@ import HomePage from "./HomePage/HomePage";
 import LoginPage from "./Stars/LoginPage";
 import SignUp from "./Stars/SignUp/SignUp";
 import AuthProvider from "./Context/AuthContext";
-
+import SignUpStatus from "./Stars/SignUp/SignUpStatus";
+import Profile from "./Stars/Profile/Profile";
 
 const Router = createBrowserRouter([
   {
@@ -19,7 +20,15 @@ const Router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
-  }
+  },
+  {
+    path: "status",
+    element: <SignUpStatus />,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
+  },
 ]);
 
 const App = () => {

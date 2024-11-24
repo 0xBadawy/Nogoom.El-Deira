@@ -2,11 +2,11 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../Configuration/Firebase";
+import { auth, db } from "../Configuration/Firebase";
+import { setDoc, doc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -14,16 +14,39 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signUp = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password);
+  const signUp = async (email, password, userData) => {
+    try {
+      // Step 1: Create the user in Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      // Step 2: Save additional user data in Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        ...userData, // Add any extra data you want to save (e.g., name, role)
+        createdAt: new Date().toISOString(), // Optional: Add a timestamp
+        verified: false,
+        verifiedBy: "",
+        balance: 50,
+      });
 
+      // console.log("User successfully signed up and data saved!");
+      return { success: true }; // Optionally return a success response
+    } catch (error) {
+      // Return or throw the error to be handled in the onSubmit function
+      console.error("Error signing up or saving user data:", error.message);
+      return { success: false, error: error.message }; // Return the error message
+    }
   };
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-    const logOut = () => {
+  const logOut = () => {
     return signOut(auth);
   };
 

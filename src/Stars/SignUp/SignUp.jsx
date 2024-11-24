@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import FormField from "./FormField";
 import SocialMediaInputs from "./SocialMediaInputs";
 import TierSelection from "./TierSelection";
 import Logo from "../../assets/Images/Logo/Deira-logo2.png";
 import { GovernmentData, TextData, Tiers } from "./data";
+import { useAuth } from "../../Context/AuthContext";
+
 const SignUpPage = () => {
+  const { signUp } = useAuth();
+
   const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState([]);
+  const { register, watch, setValue, handleSubmit } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -29,10 +26,38 @@ const SignUpPage = () => {
       selectedGovernment ? selectedGovernment.subGovernments : []
     );
   };
+  const handleFirebaseError = (errorCode) => {
+    if (errorCode.includes("auth/email-already-in-use")) {
+      return "هذا البريد الإلكتروني مستخدم بالفعل.";
+    } else if (errorCode.includes("auth/weak-password")) {
+      return "كلمة المرور ضعيفة جدًا. يجب أن تحتوي على 6 أحرف على الأقل.";
+    } else {
+      return "حدث خطأ غير معروف. الرجاء المحاولة مرة أخرى.";
+    }
+  };
+  const onSubmit = async (data) => {
+    try {
+      setError(null);
+      setLoading(true);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Your form submission logic here
+      // Extract the necessary user data (e.g., name, role) excluding email and password
+      const { email, password, ...userData } = data;
+
+      // Call the signUp function
+      const result = await signUp(email, password, userData);
+
+      // Check if there was an error during sign-up
+      if (!result.success) {
+        setError(handleFirebaseError(result.error)); // Set error state
+      } else {
+        console.log("User successfully signed up and data saved!");
+      }
+    } catch (error) {
+      setError(handleFirebaseError(error.code));
+      console.error("Error during submission:", error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -43,30 +68,41 @@ const SignUpPage = () => {
           {TextData.title}
         </h2>
 
-        {error && <div className="alert-error">{error}</div>}
+        {
+          // Display error message
+          error && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <strong className="font-bold">{" خطأ! "}</strong>
+              <span className="block sm:inline">{error}</span>
+            </div>
+          )
+        }
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-4">
             {/* Main Data Section */}
+
             <div>
-              <FormField
-                id="name"
-                label={TextData.name}
-                register={register}
-                errors={errors}
-              />
+              <FormField id="name" label={TextData.name} register={register} />
               <FormField
                 id="email"
                 label={TextData.email}
                 type="email"
                 register={register}
-                errors={errors}
               />
               <FormField
                 id="phone"
                 label={TextData.phone}
                 register={register}
-                errors={errors}
+              />
+              <FormField
+                id="password"
+                label={TextData.password}
+                type="password"
+                register={register}
               />
               <div className="mb-4">
                 <label className="block text-gray-700">{TextData.area}</label>
@@ -101,23 +137,13 @@ const SignUpPage = () => {
                 selectedCategory={watch("category")}
                 setValue={setValue}
               />
-
-              <FormField
-                id="IBAN"
-                label={TextData.iban}
-                register={register}
-                errors={errors}
-              />
-              {/* // accept privacy and readit*/}
-
+              <FormField id="iban" label={TextData.iban} register={register} />
               <div className="mb-4">
                 <label className="block text-gray-700">
                   <input
                     type="checkbox"
                     className="mr-2"
-                    {...register("privacyPolicy", {
-                      required: TextData.privacyPolicyError,
-                    })}
+                    {...register("privacyPolicy")}
                   />
                   {TextData.privacyPolicy}
                   <a
@@ -134,7 +160,7 @@ const SignUpPage = () => {
             </div>
 
             {/* Social Media Data */}
-            <SocialMediaInputs register={register} errors={errors} />
+            <SocialMediaInputs register={register} />
           </div>
           <button
             type="submit"

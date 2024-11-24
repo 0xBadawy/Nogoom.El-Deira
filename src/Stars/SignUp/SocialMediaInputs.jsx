@@ -7,101 +7,96 @@ import {
 } from "react-icons/fa";
 import FormField from "./FormField";
 
-const SocialMediaInputs = ({ register, errors }) => {
+const SocialMediaInputs = ({ register }) => {
   const platforms = [
     {
-      id: "FaceBook",
+      id: "facebook",
       label: "Facebook",
       icon: <FaFacebook className="text-blue-600" />,
     },
     {
-      id: "Twitter",
+      id: "twitter",
       label: "Twitter",
       icon: <FaTwitter className="text-blue-400" />,
     },
     {
-      id: "Snapchat",
+      id: "snapchat",
       label: "Snapchat",
       icon: <FaSnapchat className="text-yellow-500" />,
     },
     {
-      id: "Tiktok",
+      id: "tiktok",
       label: "TikTok",
       icon: <FaTiktok className="text-black" />,
     },
     {
-      id: "Instagram",
+      id: "instagram",
       label: "Instagram",
       icon: <FaInstagram className="text-pink-500" />,
     },
   ];
 
-  const PostsLinl = [
+  const postLinks = [
     {
-      id: "FaceBookLink",
+      id: "facebookLink",
       label: "ربط مشاركة الفيسبوك",
       icon: <FaFacebook className="text-blue-600" />,
     },
     {
-      id: "TwitterLink",
+      id: "twitterLink",
       label: "ربط مشاركة تويتر",
       icon: <FaTwitter className="text-blue-400" />,
     },
     {
-      id: "SnapchatLink",
+      id: "snapchatLink",
       label: "ربط مشاركة سناب شات",
       icon: <FaSnapchat className="text-yellow-500" />,
     },
     {
-      id: "TiktokLink",
+      id: "tiktokLink",
       label: "ربط مشاركة تيك توك",
       icon: <FaTiktok className="text-black" />,
     },
     {
-      id: "InstagramLink",
+      id: "instagramLink",
       label: "ربط مشاركة انستجرام",
       icon: <FaInstagram className="text-pink-500" />,
     },
   ];
 
   return (
-    <>
-      <div>
-        <h4 className="text-xl font-bold text-center mb-4">
-          روابط حسابات السوشيال ميديا
-        </h4>
-        {platforms.map(({ id, label, icon }) => (
-          <FormField
-            key={id}
-            id={id}
-            label={
-              <span className="flex  items-center gap-2">
-                {icon} {label}
-              </span>
-            }
-            register={register}
-            errors={errors}
-          />
-        ))}
-
-        <h4 className="text-xl font-bold text-center mb-4">
-          روابط مشاركات السوشيال ميديا
-        </h4>
-        {PostsLinl.map(({ id, label, icon }) => (
-          <FormField
-            key={id}
-            id={id}
-            label={
-              <span className="flex  items-center gap-2">
-                {icon} {label}
-              </span>
-            }
-            register={register}
-            errors={errors}
-          />
-        ))}
-      </div>
-    </>
+    <div>
+      <h4 className="text-xl font-bold text-center mb-4">
+        روابط حسابات السوشيال ميديا
+      </h4>
+      {platforms.map(({ id, label, icon }) => (
+        <FormField
+          key={id}
+          id={id}
+          label={
+            <span className="flex items-center gap-2">
+              {icon} {label}
+            </span>
+          }
+          register={register}
+        />
+      ))}
+      <h4 className="text-xl font-bold text-center mb-4">
+        روابط مشاركات السوشيال ميديا
+      </h4>
+      {postLinks.map(({ id, label, icon }) => (
+        <FormField
+          key={id}
+          id={id}
+          label={
+            <span className="flex items-center gap-2">
+              {icon} {label}
+            </span>
+          }
+          register={register}
+        />
+      ))}
+    </div>
   );
 };
 
