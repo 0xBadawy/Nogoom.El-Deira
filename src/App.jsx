@@ -4,6 +4,7 @@ import Navbar from "./Components/NavBar/Navbar";
 import HomePage from "./HomePage/HomePage";
 import LoginPage from "./Stars/LoginPage";
 import SignUp from "./Stars/SignUp/SignUp";
+import AuthProvider from "./Context/AuthContext";
 
 
 const Router = createBrowserRouter([
@@ -22,7 +23,11 @@ const Router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={Router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={Router} />
+    </AuthProvider>
+  );
 };
 
 export default App;

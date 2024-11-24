@@ -36,7 +36,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="PatternBG py-10 flex items-center justify-center min-h-screen">
       <div className="w-full max-w-7xl bg-white p-6 rounded-lg shadow-md">
         <img src={Logo} alt="logo" className="w-10 mx-auto mb-4" />
         <h2 className="text-2xl font-bold text-center mb-6">
