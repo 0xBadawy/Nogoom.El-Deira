@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../Configuration/Firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -65,6 +65,13 @@ const AuthProvider = ({ children }) => {
     return currentUser.email;
   };
 
+const getUserData = async () => {
+  if (!currentUser) return null;
+  const userDocRef = doc(db, "users", currentUser.uid);
+  const userDoc = await getDoc(userDocRef); // Use 'getDoc' here instead of calling 'get' directly on doc
+  return userDoc.data();
+};
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setcurrentUser(user);
@@ -83,6 +90,7 @@ const AuthProvider = ({ children }) => {
         getUserId,
         getUserEmail,
         getUserFullEmail,
+        getUserData
       }}
     >
       {!loading && children}
