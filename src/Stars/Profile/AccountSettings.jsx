@@ -145,18 +145,7 @@ const AccountSettings = () => {
           />
         </div>
 
-        {/* Balance */}
-        <div>
-          <label className="block text-sm font-medium text-indigo-900">
-            رصيد الحساب
-          </label>
-          <input
-            type="number"
-            value={userData.balance}
-            onChange={(e) => handleInputChange("balance", e.target.value)}
-            className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
-          />
-        </div>
+      
 
         {/* Social Media */}
         {["facebook", "instagram", "snapchat", "tiktok", "twitter"].map(

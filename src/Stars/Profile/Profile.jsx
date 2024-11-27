@@ -16,7 +16,6 @@ const Profile = () => {
 
     return (
     <>
-    <Navbar Type="type1"/>
       <div className="bg-gradient-to-r pt-10 from-indigo-50 via-indigo-100 to-indigo-200 w-full flex flex-col gap-5 px-4 md:px-16 lg:px-28 md:flex-row text-[#161931]">
         <aside className="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
           <div className="sticky flex flex-col gap-4 p-6 text-sm border-r border-indigo-300 top-12 bg-white rounded-lg shadow-lg">

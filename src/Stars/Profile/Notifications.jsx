@@ -3,13 +3,17 @@ import React, { useState } from "react";
 const Notifications = () => {
   // بيانات وهمية للإشعارات مع خاصية readed
   const [notifications, setNotifications] = useState([
-    { id: 1, message: "تم تحديث سياسة الخصوصية الخاصة بنا.", readed: false },
+     {
+      id:1 ,message:"تم تحديث بياناتك - وفى انتظار الموافقة على التحديثات", readed:false
+    },
+    { id: 4, message: "تم تحديث سياسة الخصوصية الخاصة بنا.", readed: false },
     {
       id: 2,
       message: "لقد قمت بإضافة صورة جديدة للملف الشخصي.",
       readed: false,
     },
     { id: 3, message: "تم تسجيل الدخول بنجاح من جهاز جديد.", readed: true },
+   
   ]);
 
 
@@ -39,7 +43,7 @@ const Notifications = () => {
             <div
               key={notification.id}
               className={`flex justify-between items-center p-4 mb-4 rounded-lg shadow-sm ${
-                notification.readed ? "bg-indigo-100" : "bg-indigo-50"
+                notification.readed ? "bg-indigo- 100" : "bg-indigo-50"
               }`}
             >
               <div className="text-sm text-indigo-900">
