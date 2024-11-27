@@ -1,6 +1,7 @@
 // Users.js
 import React, { useEffect, useState } from "react";
 import UserDetails from "./UserDetails"; // استيراد المكون الجديد
+import { useDashboard } from "../../Context/DashboardContext";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([
@@ -9,92 +10,8 @@ const Users = () => {
       name: "محمد أحمد",
       email: "mohamed.ahmed@example.com",
       phone: "+201001234567",
-      area: "القاهرة",
-      govern: ["القاهرة", "الجيزة"],
-      balance: 1500,
-      createdAt: "2024-11-01T12:00:00Z",
-      facebook: "محمد أحمد",
-      facebookLink: "https://www.facebook.com/mohamed.ahmed",
-      iban: "EG12345678901234567890123456",
-      instagram: "mohamed_ahmed",
-      instagramLink: "https://www.instagram.com/mohamed_ahmed",
-      snapchat: "mohamedSnap",
-      snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
-      tiktok: "mohamedTikTok",
-      tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
-      twitter: "mohamedTwitter",
-      twitterLink: "https://twitter.com/mohamedTwitter",
-      privacyPolicy: true,
-      verified: true,
-      verifiedBy: "admin",
-      updatedAt: "2024-11-27T11:00:00Z",
-      address: "شارع التحرير، القاهرة، مصر",
-      profilePicture: "https://example.com/profile.jpg",
-      bio: "مبرمج ومطور ويب شغوف بالتقنية.",
-      dateOfBirth: "2000-05-15",
-      gender: "Male",
-      preferredLanguage: "Arabic",
-      lastLogin: "2024-11-26T20:30:00Z",
-      accountStatus: "Active",
-      accountType: "Premium",
-      notificationSettings: {
-        email: true,
-        sms: true,
-        push: true,
-      },
-      referralCode: "REF12345",
-      referredBy: "REF54321",
-      permissions: ["User", "Editor"],
-    },
-    {
-      Uid: "12311456789",
-      name: "محمد أحمد",
-      email: "mohamed.ahmed@example.com",
-      phone: "+201001234567",
-      area: "القاهرة",
-      govern: ["القاهرة", "الجيزة"],
-      balance: 1500,
-      createdAt: "2024-11-01T12:00:00Z",
-      facebook: "محمد أحمد",
-      facebookLink: "https://www.facebook.com/mohamed.ahmed",
-      iban: "EG12345678901234567890123456",
-      instagram: "mohamed_ahmed",
-      instagramLink: "https://www.instagram.com/mohamed_ahmed",
-      snapchat: "mohamedSnap",
-      snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
-      tiktok: "mohamedTikTok",
-      tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
-      twitter: "mohamedTwitter",
-      twitterLink: "https://twitter.com/mohamedTwitter",
-      privacyPolicy: true,
-      verified: true,
-      verifiedBy: "admin",
-      updatedAt: "2024-11-27T11:00:00Z",
-      address: "شارع التحرير، القاهرة، مصر",
-      profilePicture: "https://example.com/profile.jpg",
-      bio: "مبرمج ومطور ويب شغوف بالتقنية.",
-      dateOfBirth: "2000-05-15",
-      gender: "Male",
-      preferredLanguage: "Arabic",
-      lastLogin: "2024-11-26T20:30:00Z",
-      accountStatus: "Active",
-      accountType: "Premium",
-      notificationSettings: {
-        email: true,
-        sms: true,
-        push: true,
-      },
-      referralCode: "REF12345",
-      referredBy: "REF54321",
-      permissions: ["User", "Editor"],
-    },
-    {
-      Uid: "1234567289",
-      name: "محمد أحمد",
-      email: "mohamed.ahmed@example.com",
-      phone: "+201001234567",
-      area: "القاهرة",
-      govern: ["القاهرة", "الجيزة"],
+      govern: "القاهرة",
+      area: ["القاهرة", "الجيزة"],
       balance: 1500,
       createdAt: "2024-11-01T12:00:00Z",
       facebook: "محمد أحمد",
@@ -131,19 +48,35 @@ const Users = () => {
       permissions: ["User", "Editor"],
     },
   ]);
+  const { allUsers, updateUser } = useDashboard();
+  const [area, setArea] = useState("");
 
+  useEffect(() => {
+    const users = allUsers;
+    console.log("users", users);
+    setUsersData(users);
+  }, [allUsers]);
+
+  const Area = (areas) => {
+    let A = "";
+    return areas ? areas.join(",") : A;
+  };
 
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleSave = (updatedUser) => {
+
+
     setUsersData((prevState) =>
       prevState.map((user) =>
         user.Uid === updatedUser.Uid ? updatedUser : user
       )
     );
 
-        console.log(updatedUser);
+    updateUser(updatedUser);
 
+
+    console.log(updatedUser);
   };
 
   return (
@@ -185,8 +118,8 @@ const Users = () => {
                 <td className="py-2 px-4">{row.email}</td>
                 <td className="py-2 px-4">{row.phone}</td>
                 <td className="py-2 px-4">{row.iban}</td>
-                <td className="py-2 px-4">{row.area}</td>
-                <td className="py-2 px-4">{row.govern.join(", ")}</td>
+                <td className="py-2 px-4">{row.govern}</td>
+                <td className="py-2 px-4">{Area(row.area)}</td>
               </tr>
             ))}
           </tbody>

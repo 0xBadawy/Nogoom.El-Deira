@@ -13,6 +13,7 @@ import Profile from "./Stars/Profile/Profile";
 import AuthProvider from "./Context/AuthContext";
 import DataProvider from "./Context/DataContext";
 import ThemeContextProvider from "./context/ThemeContextProvider";
+import DashboardProvider from "./Context/DashboardContext";
 
 const router = createBrowserRouter([
   {
@@ -39,22 +40,24 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <ThemeContextProvider>
-        <div className="flex" >
-          <Sidebar />
-          <div className="grow mr-16 md:mr-64  h-full lg:h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
-            <Dashboard /> {/* Your Dashboard Component */}
+        <DashboardProvider>
+          <div className="flex">
+            <Sidebar />
+            <div className="grow mr-16 md:mr-64  h-full lg:h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
+              <Dashboard /> 
+            </div>
           </div>
-        </div>
+        </DashboardProvider>
       </ThemeContextProvider>
     ),
     children: [
       {
         path: "users",
-        element: <Users />, // Assuming Users is a subpage
+        element: <Users />, 
       },
       {
         path: "apartments",
-        element: <Apartments />, // Assuming Apartments is another subpage
+        element: <Apartments />, 
       },
     ],
   },

@@ -9,9 +9,13 @@ import {
   FaLink,
   FaRegAddressCard,
 } from "react-icons/fa";
+import { useDashboard } from "../../Context/DashboardContext";
+import { Tiers } from "../../Stars/SignUp/data";
 
 
 const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
+
+
   const {
     register,
     handleSubmit,
@@ -19,6 +23,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
     formState: { errors },
   } = useForm();
 
+ 
 
     useEffect(() => {
       const user = usersData.find((user) => user.Uid === selectedUserUid);
@@ -29,6 +34,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
     }, [selectedUserUid, usersData, reset]);
 
 
+    
   
 
 //   useEffect(() => {
@@ -143,7 +149,6 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         </div>
         {/* Facebook */}
         <div className="mb-4 grid col-span-2 ">
-            
           <label className="block mb-2 text-right">
             Facebook
             <input
@@ -362,33 +367,40 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
             />
           </label>
         </div>
+
         {/* Account Type */}
         <div className="mb-4 grid col-span-2 ">
           <label className="block mb-2 text-right">
-            Account Type
-            <input
-              type="text"
+            permissions
+            <select
               {...register("accountType")}
-              className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-            />
+              className="block w-full p-2 border rounded-lg dark:bg-gray-800"
+            >
+              <option value="" disabled>
+                اختر فئة
+              </option>
+              {Tiers.map((tier) => (
+                <option key={tier.name} value={tier.name}>
+                  {tier.name} - شرط المشاهدات: {tier.views}+ - الأرباح:{" "}
+                  {tier.earnings} ريال
+                </option>
+              ))}
+            </select>
           </label>
         </div>
-        
 
         {/* permissions */}
 
         <div className="mb-4 grid col-span-2 ">
-            <label className="block mb-2 text-right">
-                permissions
-                <input
-                type="text"
-                {...register("permissions")}
-                className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-                />
-            </label>
+          <label className="block mb-2 text-right">
+            permissions
+            <input
+              type="text"
+              {...register("permissions")}
+              className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
+            />
+          </label>
         </div>
-
-
 
         <button
           type="submit"

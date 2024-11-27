@@ -28,6 +28,7 @@ const AuthProvider = ({ children }) => {
         email,
         password
       );
+      const Uid = userCredential.user.uid;
       const user = userCredential.user;
       // Step 2: Save additional user data in Firestore
       await setDoc(doc(db, "users", user.uid), {
@@ -49,6 +50,7 @@ const AuthProvider = ({ children }) => {
         referralCode: "0",
         referredBy: "0",
         permissions: [],
+        Uid: Uid,
       });
 
        return { success: true };  
@@ -87,6 +89,7 @@ const AuthProvider = ({ children }) => {
     const userDoc = await getDoc(userDocRef); // Use 'getDoc' here instead of calling 'get' directly on doc
     return userDoc.data();
   };
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
