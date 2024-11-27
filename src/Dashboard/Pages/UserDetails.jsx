@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { useDashboard } from "../../Context/DashboardContext";
 import { Tiers } from "../../Stars/SignUp/data";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
@@ -48,8 +49,11 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
 //   }, [selectedUserUid, usersData, setValue]);
 
   const onSubmit = (data) => {
+
     onSave(data); 
     // console.log(data);
+    toast.success("تم حفظ التعديلات بنجاح");
+
   };
 
   return (
@@ -409,6 +413,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           حفظ التعديلات
         </button>
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };
