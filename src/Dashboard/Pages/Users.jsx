@@ -1,48 +1,159 @@
+// Users.js
 import React, { useEffect, useState } from "react";
-import {
-  FaMale,
-  FaFemale,
-  FaUserPlus,
-  FaUsers,
-  FaUserCircle,
-} from "react-icons/fa";
+import UserDetails from "./UserDetails"; // استيراد المكون الجديد
 
 const Users = () => {
   const [usersData, setUsersData] = useState([
     {
-      name: "أحمد علي",
-      createdAt: "2024-11-25",
-      email: "ahmed@example.com",
-      phone: "0123456789",
-      iban: "SA1234567890123456789012",
-      area: "مكة",
-      govern: ["اسم1", "اسم2", "اسم3"], 
-      facebook: "ahmed_ali",
-      tiktok: "ahmed_tiktok",
-      instagram: "ahmed_ig",
-      snapchat: "ahmed_snap",
-      facebookLink: "https://facebook.com/ahmed_ali",
-      instagramLink: "https://instagram.com/ahmed_ig",
-      snapchatLink: "https://snapchat.com/ahmed_snap",
-      tiktokLink: "https://tiktok.com/ahmed_tiktok",
-      twitterLink: "https://twitter.com/ahmed_ali",
-      privacyPolicy: "https://example.com/privacy",
-      imageProfile: "https://example.com/ahmed_profile.jpg",
+      Uid: "123456789",
+      name: "محمد أحمد",
+      email: "mohamed.ahmed@example.com",
+      phone: "+201001234567",
+      area: "القاهرة",
+      govern: ["القاهرة", "الجيزة"],
+      balance: 1500,
+      createdAt: "2024-11-01T12:00:00Z",
+      facebook: "محمد أحمد",
+      facebookLink: "https://www.facebook.com/mohamed.ahmed",
+      iban: "EG12345678901234567890123456",
+      instagram: "mohamed_ahmed",
+      instagramLink: "https://www.instagram.com/mohamed_ahmed",
+      snapchat: "mohamedSnap",
+      snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
+      tiktok: "mohamedTikTok",
+      tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
+      twitter: "mohamedTwitter",
+      twitterLink: "https://twitter.com/mohamedTwitter",
+      privacyPolicy: true,
+      verified: true,
+      verifiedBy: "admin",
+      updatedAt: "2024-11-27T11:00:00Z",
+      address: "شارع التحرير، القاهرة، مصر",
+      profilePicture: "https://example.com/profile.jpg",
+      bio: "مبرمج ومطور ويب شغوف بالتقنية.",
+      dateOfBirth: "2000-05-15",
+      gender: "Male",
+      preferredLanguage: "Arabic",
+      lastLogin: "2024-11-26T20:30:00Z",
+      accountStatus: "Active",
+      accountType: "Premium",
+      notificationSettings: {
+        email: true,
+        sms: true,
+        push: true,
+      },
+      referralCode: "REF12345",
+      referredBy: "REF54321",
+      permissions: ["User", "Editor"],
+    },
+    {
+      Uid: "12311456789",
+      name: "محمد أحمد",
+      email: "mohamed.ahmed@example.com",
+      phone: "+201001234567",
+      area: "القاهرة",
+      govern: ["القاهرة", "الجيزة"],
+      balance: 1500,
+      createdAt: "2024-11-01T12:00:00Z",
+      facebook: "محمد أحمد",
+      facebookLink: "https://www.facebook.com/mohamed.ahmed",
+      iban: "EG12345678901234567890123456",
+      instagram: "mohamed_ahmed",
+      instagramLink: "https://www.instagram.com/mohamed_ahmed",
+      snapchat: "mohamedSnap",
+      snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
+      tiktok: "mohamedTikTok",
+      tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
+      twitter: "mohamedTwitter",
+      twitterLink: "https://twitter.com/mohamedTwitter",
+      privacyPolicy: true,
+      verified: true,
+      verifiedBy: "admin",
+      updatedAt: "2024-11-27T11:00:00Z",
+      address: "شارع التحرير، القاهرة، مصر",
+      profilePicture: "https://example.com/profile.jpg",
+      bio: "مبرمج ومطور ويب شغوف بالتقنية.",
+      dateOfBirth: "2000-05-15",
+      gender: "Male",
+      preferredLanguage: "Arabic",
+      lastLogin: "2024-11-26T20:30:00Z",
+      accountStatus: "Active",
+      accountType: "Premium",
+      notificationSettings: {
+        email: true,
+        sms: true,
+        push: true,
+      },
+      referralCode: "REF12345",
+      referredBy: "REF54321",
+      permissions: ["User", "Editor"],
+    },
+    {
+      Uid: "1234567289",
+      name: "محمد أحمد",
+      email: "mohamed.ahmed@example.com",
+      phone: "+201001234567",
+      area: "القاهرة",
+      govern: ["القاهرة", "الجيزة"],
+      balance: 1500,
+      createdAt: "2024-11-01T12:00:00Z",
+      facebook: "محمد أحمد",
+      facebookLink: "https://www.facebook.com/mohamed.ahmed",
+      iban: "EG12345678901234567890123456",
+      instagram: "mohamed_ahmed",
+      instagramLink: "https://www.instagram.com/mohamed_ahmed",
+      snapchat: "mohamedSnap",
+      snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
+      tiktok: "mohamedTikTok",
+      tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
+      twitter: "mohamedTwitter",
+      twitterLink: "https://twitter.com/mohamedTwitter",
+      privacyPolicy: true,
+      verified: true,
+      verifiedBy: "admin",
+      updatedAt: "2024-11-27T11:00:00Z",
+      address: "شارع التحرير، القاهرة، مصر",
+      profilePicture: "https://example.com/profile.jpg",
+      bio: "مبرمج ومطور ويب شغوف بالتقنية.",
+      dateOfBirth: "2000-05-15",
+      gender: "Male",
+      preferredLanguage: "Arabic",
+      lastLogin: "2024-11-26T20:30:00Z",
+      accountStatus: "Active",
+      accountType: "Premium",
+      notificationSettings: {
+        email: true,
+        sms: true,
+        push: true,
+      },
+      referralCode: "REF12345",
+      referredBy: "REF54321",
+      permissions: ["User", "Editor"],
     },
   ]);
 
-  const [sortConfig, setSortConfig] = useState(null);
 
+  const [selectedUser, setSelectedUser] = useState(null);
 
+  const handleSave = (updatedUser) => {
+    setUsersData((prevState) =>
+      prevState.map((user) =>
+        user.Uid === updatedUser.Uid ? updatedUser : user
+      )
+    );
+
+        console.log(updatedUser);
+
+  };
 
   return (
-    <div className="grow p-8 dark:bg-gray-800">
+    <div className="grow p-8 dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">Users</h2>
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
         <h3 className="text-lg font-semibold mb-4">Users List</h3>
         <table className="min-w-full table-auto">
           <thead>
-            <tr className="border-b ">
+            <tr className="border-b">
               {[
                 "الاسم",
                 "تاريخ الإنشاء",
@@ -60,7 +171,15 @@ const Users = () => {
           </thead>
           <tbody>
             {usersData.map((row, index) => (
-              <tr key={index} className="border-b">
+              <tr
+                key={index}
+                onClick={() => {
+                  setSelectedUser(row.Uid);
+                }}
+                className={`border-b ${
+                  row.Uid === selectedUser ? "bg-gray-900" : ""
+                }`}
+              >
                 <td className="py-2 px-4">{row.name}</td>
                 <td className="py-2 px-4">{row.createdAt}</td>
                 <td className="py-2 px-4">{row.email}</td>
@@ -68,12 +187,20 @@ const Users = () => {
                 <td className="py-2 px-4">{row.iban}</td>
                 <td className="py-2 px-4">{row.area}</td>
                 <td className="py-2 px-4">{row.govern.join(", ")}</td>
-
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* عرض وتعديل بيانات المستخدم */}
+      {selectedUser && (
+        <UserDetails
+          selectedUserUid={selectedUser}
+          usersData={usersData}
+          onSave={handleSave}
+        />
+      )}
     </div>
   );
 };

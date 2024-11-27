@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       <ThemeContextProvider>
         <div className="flex" >
           <Sidebar />
-          <div className="grow mr-16 md:mr-64  h-full lg:h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
+          <div className="grow mr-16 md:mr-64  h-full lg:h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
             <Dashboard /> {/* Your Dashboard Component */}
           </div>
         </div>

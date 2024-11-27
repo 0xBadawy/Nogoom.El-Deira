@@ -2,42 +2,60 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 
 const AccountSettings = () => {
+  const { getUserData } = useAuth();
 
- const { getUserData } = useAuth();
+  const [userData, setUserData] = useState({
+    Uid: "",
+    name: "",
+    email: "",
+    phone: "",
+    area: [],
+    balance: 0,
+    createdAt: "",
+    facebook: "",
+    facebookLink: "",
+    iban: "",
+    instagram: "",
+    instagramLink: "",
+    snapchat: "",
+    snapchatLink: "",
+    tiktok: "",
+    tiktokLink: "",
+    twitter: "",
+    twitterLink: "",
+    privacyPolicy: false,
+    verified: false,
+    verifiedBy: "",
+    // بيانات إضافية
+    updatedAt: "", // تاريخ آخر تحديث للبيانات
+    address: "", // العنوان
+    profilePicture: "", // رابط صورة الملف الشخصي
+    bio: "", // نبذة عن المستخدم
+    dateOfBirth: "", // تاريخ الميلاد
+    gender: "", // الجنس (ذكر/أنثى)
+    preferredLanguage: "", // اللغة المفضلة
+    lastLogin: "", // تاريخ آخر تسجيل دخول
+    accountStatus: "", // حالة الحساب (نشط، معلق، إلخ)
+    accountType: "", // نوع الحساب (عادي، بريميوم)
+    notificationSettings: {
+      // إعدادات الإشعارات
+      email: true,
+      sms: false,
+      push: true,
+    },
+    referralCode: "", // كود الإحالة
+    referredBy: "", // المستخدم الذي قام بالإحالة
+    permissions: [], // صلاحيات المستخدم
+  });
 
- const [userData, setUserData] = useState({
-   name: "",
-   email: "",
-   phone: "",
-   area: [],
-   balance: 0,
-   createdAt: "",
-   facebook: "",
-   facebookLink: "",
-   iban: "",
-   instagram: "",
-   instagramLink: "",
-   snapchat: "",
-   snapchatLink: "",
-   tiktok: "",
-   tiktokLink: "",
-   twitter: "",
-   twitterLink: "",
-   privacyPolicy: false,
-   verified: false,
-   verifiedBy: "",
- });
-
- useEffect(() => {
-   const fetchData = async () => {
-     const data = await getUserData();
-     console.log(data);
-     setUserData(data);
-   };
-   fetchData();
- }, [getUserData]);
-
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserData();
+      console.log(data);
+      setUserData(data);
+    };
+    fetchData();
+  }, [getUserData]);
 
   const handleInputChange = (field, value) => {
     setUserData({ ...userData, [field]: value });
@@ -145,8 +163,6 @@ const AccountSettings = () => {
           />
         </div>
 
-      
-
         {/* Social Media */}
         {["facebook", "instagram", "snapchat", "tiktok", "twitter"].map(
           (platform) => (
@@ -184,8 +200,6 @@ const AccountSettings = () => {
             />
           </div>
         ))}
-
-     
 
         {/* باقي الكود نفسه */}
         <div className="col-span-2">
