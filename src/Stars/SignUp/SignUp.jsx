@@ -58,6 +58,8 @@ const SignUpPage = () => {
     } finally {
       setLoading(false);
     }
+
+    // console.log(data);  
   };
 
   return (

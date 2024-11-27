@@ -14,6 +14,49 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+
+  //  Uid: "1234567289",
+  //     name: "محمد أحمد",
+  //     email: "mohamed.ahmed@example.com",
+  //     phone: "+201001234567",
+  //     area: "القاهرة",
+  //     govern: ["القاهرة", "الجيزة"],
+  //     balance: 1500,
+  //     createdAt: "2024-11-01T12:00:00Z",
+  //     facebook: "محمد أحمد",
+  //     facebookLink: "https://www.facebook.com/mohamed.ahmed",
+  //     iban: "EG12345678901234567890123456",
+  //     instagram: "mohamed_ahmed",
+  //     instagramLink: "https://www.instagram.com/mohamed_ahmed",
+  //     snapchat: "mohamedSnap",
+  //     snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
+  //     tiktok: "mohamedTikTok",
+  //     tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
+  //     twitter: "mohamedTwitter",
+  //     twitterLink: "https://twitter.com/mohamedTwitter",
+  //     privacyPolicy: true,
+  //     verified: true,
+  //     verifiedBy: "admin",
+  //     updatedAt: "2024-11-27T11:00:00Z",
+  //     address: "شارع التحرير، القاهرة، مصر",
+  //     profilePicture: "https://example.com/profile.jpg",
+  //     bio: "مبرمج ومطور ويب شغوف بالتقنية.",
+  //     dateOfBirth: "2000-05-15",
+  //     gender: "Male",
+  //     preferredLanguage: "Arabic",
+  //     lastLogin: "2024-11-26T20:30:00Z",
+  //     accountStatus: "Active",
+  //     accountType: "Premium",
+  //     notificationSettings: {
+  //       email: true,
+  //       sms: true,
+  //       push: true,
+  //     },
+  //     referralCode: "REF12345",
+  //     referredBy: "REF54321",
+  //     permissions: ["User", "Editor"],
+
+
   const signUp = async (email, password, userData) => {
     try {
       // Step 1: Create the user in Firebase Authentication
@@ -30,7 +73,11 @@ const AuthProvider = ({ children }) => {
         createdAt: new Date().toISOString(), // Optional: Add a timestamp
         verified: false,
         verifiedBy: "",
-        balance: 50,
+        updatedAt: "",
+        accountStatus: "",
+        accountType: "",
+
+       
       });
 
       // console.log("User successfully signed up and data saved!");
