@@ -13,7 +13,7 @@ const SignUpPage = () => {
 
   const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState([]);
-  const { register, watch, setValue, handleSubmit } = useForm();
+  const { register,  handleSubmit } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -36,30 +36,30 @@ const SignUpPage = () => {
     }
   };
   const onSubmit = async (data) => {
-    try {
-      setError(null);
-      setLoading(true);
+    // try {
+    //   setError(null);
+    //   setLoading(true);
 
-      // Extract the necessary user data (e.g., name, role) excluding email and password
-      const { email, password, ...userData } = data;
+    //   // Extract the necessary user data (e.g., name, role) excluding email and password
+    //   const { email, password, ...userData } = data;
 
-      // Call the signUp function
-      const result = await signUp(email, password, userData);
+    //   // Call the signUp function
+    //   const result = await signUp(email, password, userData);
 
-      // Check if there was an error during sign-up
-      if (!result.success) {
-        setError(handleFirebaseError(result.error)); // Set error state
-      } else {
-        console.log("User successfully signed up and data saved!");
-      }
-    } catch (error) {
-      setError(handleFirebaseError(error.code));
-      console.error("Error during submission:", error.message);
-    } finally {
-      setLoading(false);
-    }
+    //   // Check if there was an error during sign-up
+    //   if (!result.success) {
+    //     setError(handleFirebaseError(result.error)); // Set error state
+    //   } else {
+    //     console.log("User successfully signed up and data saved!");
+    //   }
+    // } catch (error) {
+    //   setError(handleFirebaseError(error.code));
+    //   console.error("Error during submission:", error.message);
+    // } finally {
+    //   setLoading(false);
+    // }
 
-    // console.log(data);  
+    console.log(data);  
   };
 
   return (
@@ -136,9 +136,11 @@ const SignUpPage = () => {
                 </select>
               </div>
               <TierSelection
+                id="accountType"
                 tiers={Tiers}
-                selectedCategory={watch("category")}
-                setValue={setValue}
+                register={register}
+                // selectedCategory={watch("category")}
+                // setValue={setValue}
               />
               <FormField id="iban" label={TextData.iban} register={register} />
               <div className="mb-4">

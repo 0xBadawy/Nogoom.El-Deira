@@ -13,28 +13,12 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const Man =
+    "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FAvatar%2Fman.png?alt=media&token=dc8c1abd-015b-4ead-8d43-aa6abf80a5e9";
+    const Woman =
+      "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FAvatar%2Fwoman.png?alt=media&token=635d37e3-f902-4abd-bc79-169d9d2bc2c7";
 
-
-  //  Uid: "1234567289",
-  //     name: "محمد أحمد",
-  //     email: "mohamed.ahmed@example.com",
-  //     phone: "+201001234567",
-  //     area: "القاهرة",
-  //     govern: ["القاهرة", "الجيزة"],
   //     balance: 1500,
-  //     createdAt: "2024-11-01T12:00:00Z",
-  //     facebook: "محمد أحمد",
-  //     facebookLink: "https://www.facebook.com/mohamed.ahmed",
-  //     iban: "EG12345678901234567890123456",
-  //     instagram: "mohamed_ahmed",
-  //     instagramLink: "https://www.instagram.com/mohamed_ahmed",
-  //     snapchat: "mohamedSnap",
-  //     snapchatLink: "https://www.snapchat.com/add/mohamedSnap",
-  //     tiktok: "mohamedTikTok",
-  //     tiktokLink: "https://www.tiktok.com/@mohamedTikTok",
-  //     twitter: "mohamedTwitter",
-  //     twitterLink: "https://twitter.com/mohamedTwitter",
-  //     privacyPolicy: true,
   //     verified: true,
   //     verifiedBy: "admin",
   //     updatedAt: "2024-11-27T11:00:00Z",
@@ -46,15 +30,10 @@ const AuthProvider = ({ children }) => {
   //     preferredLanguage: "Arabic",
   //     lastLogin: "2024-11-26T20:30:00Z",
   //     accountStatus: "Active",
-  //     accountType: "Premium",
-  //     notificationSettings: {
-  //       email: true,
-  //       sms: true,
-  //       push: true,
-  //     },
   //     referralCode: "REF12345",
   //     referredBy: "REF54321",
   //     permissions: ["User", "Editor"],
+
 
 
   const signUp = async (email, password, userData) => {
@@ -71,13 +50,22 @@ const AuthProvider = ({ children }) => {
         email: user.email,
         ...userData, // Add any extra data you want to save (e.g., name, role)
         createdAt: new Date().toISOString(), // Optional: Add a timestamp
+        balance: 50,
         verified: false,
-        verifiedBy: "",
-        updatedAt: "",
-        accountStatus: "",
-        accountType: "",
+        verifiedBy: "admin",
+        updatedAt: new Date().toISOString(),
+        address: "شارع التحرير، القاهرة، مصر",
+        profilePicture:Man,
+        bio: "",
+        dateOfBirth: "",
+        gender:"",
+        preferredLanguage: "Arabic",
+        lastLogin: "",
+        accountStatus: "Active",
+        referralCode: "0",
+        referredBy: "0",
+        permissions: [],
 
-       
       });
 
       // console.log("User successfully signed up and data saved!");
@@ -112,12 +100,12 @@ const AuthProvider = ({ children }) => {
     return currentUser.email;
   };
 
-const getUserData = async () => {
-  if (!currentUser) return null;
-  const userDocRef = doc(db, "users", currentUser.uid);
-  const userDoc = await getDoc(userDocRef); // Use 'getDoc' here instead of calling 'get' directly on doc
-  return userDoc.data();
-};
+  const getUserData = async () => {
+    if (!currentUser) return null;
+    const userDocRef = doc(db, "users", currentUser.uid);
+    const userDoc = await getDoc(userDocRef); // Use 'getDoc' here instead of calling 'get' directly on doc
+    return userDoc.data();
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -137,7 +125,7 @@ const getUserData = async () => {
         getUserId,
         getUserEmail,
         getUserFullEmail,
-        getUserData
+        getUserData,
       }}
     >
       {!loading && children}

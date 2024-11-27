@@ -11,6 +11,7 @@ const FormField = ({ id, label, type = "text", register }) => (
       {...register(id)}
     />
   </div>
+  
 );
 
 export default FormField;
