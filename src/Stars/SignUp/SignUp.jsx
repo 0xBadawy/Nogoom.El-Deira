@@ -7,6 +7,7 @@ import TierSelection from "./TierSelection";
 import Logo from "../../assets/Images/Logo/Deira-logo2.png";
 import { GovernmentData, TextData, Tiers } from "./data";
 import { useAuth } from "../../Context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignUpPage = () => {
   const { signUp } = useAuth();
@@ -36,30 +37,38 @@ const SignUpPage = () => {
     }
   };
   const onSubmit = async (data) => {
-    // try {
-    //   setError(null);
-    //   setLoading(true);
 
-    //   // Extract the necessary user data (e.g., name, role) excluding email and password
-    //   const { email, password, ...userData } = data;
+    if(!data.privacyPolicy){
+      toast.error("يجب الموافقة على سياسة الخصوصية");
+      return;
+    }
 
-    //   // Call the signUp function
-    //   const result = await signUp(email, password, userData);
 
-    //   // Check if there was an error during sign-up
-    //   if (!result.success) {
-    //     setError(handleFirebaseError(result.error)); // Set error state
-    //   } else {
-    //     console.log("User successfully signed up and data saved!");
-    //   }
-    // } catch (error) {
-    //   setError(handleFirebaseError(error.code));
-    //   console.error("Error during submission:", error.message);
-    // } finally {
-    //   setLoading(false);
-    // }
+    try {
+      setError(null);
+      setLoading(true);
 
-    console.log(data);  
+      // Extract the necessary user data (e.g., name, role) excluding email and password
+      const { email, password, ...userData } = data;
+
+      // Call the signUp function
+      const result = await signUp(email, password, userData);
+
+      // Check if there was an error during sign-up
+      if (!result.success) {
+        setError(handleFirebaseError(result.error)); // Set error state
+      } else {
+        toast.success("تم تسجيل الحساب بنجاح!");
+        navigate("/status")
+      }
+    } catch (error) {
+      setError(handleFirebaseError(error.code));
+      console.error("Error during submission:", error.message);
+    } finally {
+      setLoading(false);
+    }
+
+    // console.log(data);  
   };
 
   return (
@@ -175,6 +184,10 @@ const SignUpPage = () => {
           </button>
         </form>
       </div>
+      <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
     </div>
   );
 };

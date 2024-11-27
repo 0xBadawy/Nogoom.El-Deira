@@ -18,22 +18,6 @@ const AuthProvider = ({ children }) => {
     const Woman =
       "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FAvatar%2Fwoman.png?alt=media&token=635d37e3-f902-4abd-bc79-169d9d2bc2c7";
 
-  //     balance: 1500,
-  //     verified: true,
-  //     verifiedBy: "admin",
-  //     updatedAt: "2024-11-27T11:00:00Z",
-  //     address: "شارع التحرير، القاهرة، مصر",
-  //     profilePicture: "https://example.com/profile.jpg",
-  //     bio: "مبرمج ومطور ويب شغوف بالتقنية.",
-  //     dateOfBirth: "2000-05-15",
-  //     gender: "Male",
-  //     preferredLanguage: "Arabic",
-  //     lastLogin: "2024-11-26T20:30:00Z",
-  //     accountStatus: "Active",
-  //     referralCode: "REF12345",
-  //     referredBy: "REF54321",
-  //     permissions: ["User", "Editor"],
-
 
 
   const signUp = async (email, password, userData) => {
@@ -52,28 +36,25 @@ const AuthProvider = ({ children }) => {
         createdAt: new Date().toISOString(), // Optional: Add a timestamp
         balance: 50,
         verified: false,
-        verifiedBy: "admin",
+        verifiedBy: "",
         updatedAt: new Date().toISOString(),
-        address: "شارع التحرير، القاهرة، مصر",
+        address: "",
         profilePicture:Man,
         bio: "",
         dateOfBirth: "",
         gender:"",
-        preferredLanguage: "Arabic",
+        preferredLanguage: "",
         lastLogin: "",
-        accountStatus: "Active",
+        accountStatus: "",
         referralCode: "0",
         referredBy: "0",
         permissions: [],
-
       });
 
-      // console.log("User successfully signed up and data saved!");
-      return { success: true }; // Optionally return a success response
+       return { success: true };  
     } catch (error) {
-      // Return or throw the error to be handled in the onSubmit function
-      console.error("Error signing up or saving user data:", error.message);
-      return { success: false, error: error.message }; // Return the error message
+       console.error("Error signing up or saving user data:", error.message);
+      return { success: false, error: error.message }; 
     }
   };
 

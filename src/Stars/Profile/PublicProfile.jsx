@@ -18,6 +18,7 @@ const [userData, setUserData] = useState({
   email: "",
   phone: "",
   area: [],
+  govern: "",
   balance: 0,
   createdAt: "",
   facebook: "",
@@ -137,7 +138,7 @@ useEffect(() => {
       <div className="flex flex-col items-center sm:items-start">
         <img
           className="object-cover w-32 h-32 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+          src={userData?.profilePicture}
           alt="Profile"
         />
       </div>

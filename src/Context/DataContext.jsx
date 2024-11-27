@@ -1,8 +1,7 @@
 import { createContext, useContext } from "react";
 const DataContext = createContext();
 const DataProvider = ({ children }) => {
-  // const [currentUser, setcurrentUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
+
   const users = [
     {
       name: "John Doe",
@@ -13,6 +12,9 @@ const DataProvider = ({ children }) => {
       email: "test@test.com",
     },
   ];
+
+
+
   return (
     <DataContext.Provider value={{ users }}>{children}</DataContext.Provider>
   );
