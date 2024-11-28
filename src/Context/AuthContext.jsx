@@ -20,6 +20,8 @@ const AuthProvider = ({ children }) => {
 
 
 
+
+
   const signUp = async (email, password, userData) => {
     try {
       // Step 1: Create the user in Firebase Authentication
