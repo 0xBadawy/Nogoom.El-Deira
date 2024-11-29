@@ -7,9 +7,12 @@ import {
   FaInstagram,
   FaSnapchatGhost,
   FaTiktok,
+  FaPhoneAlt,
 } from "react-icons/fa";
-
+import { MdMarkEmailRead } from "react-icons/md";
 import image from "../../assets/img1.png";
+import { ImPhone } from "react-icons/im";
+import { SiWhatsapp } from "react-icons/si";
 const HeroSection = () => {
   const { t } = useTranslation();
 
@@ -51,17 +54,30 @@ const HeroSection = () => {
     },
   ]);
 
-  const [contact,setContact ] =useState(
+  const [contact, setContact] = useState([
     {
-      Email:{
-        
-      }
-    }
-  )
+      id: 1,
+      name: "الهاتف",
+      value: "01000000000",
+      icon: <ImPhone size={18}  />,
+    },
+    {
+      id: 2,
+      name: "البريد الالكتروني",
+      value: "email.com",
+      icon: <MdMarkEmailRead size={18} color="blue" />,
+    },
+    {
+      id: 3,
+      name: "واتساب",
+      value: "01000000000",
+      icon: <SiWhatsapp size={18} color="#18980e" />,
+    },
+  ]);
 
   return (
     <div
-      className="bg-gradient-to-tr relative from-purple-800 to-purple-500 w-[95%] h-[90vh] pt-4 px-14 rounded-b-3xl mx-auto "
+      className="bg-gradient-to-tr relative from-purple-800 to-purple-500 w-[95%] h-[86vh] pt-4 px-14 rounded-b-3xl mx-auto "
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
       <div className="flex flex-col items-center justify-center  text-white text-right">
@@ -85,7 +101,7 @@ const HeroSection = () => {
       </div>
       <div className="absolute bottom-10 right-0 w-32 rounded-l-3xl h-10 bg-black"></div>
       <div
-        className="absolute top-[40%] left-5 rounded-l-3xl  flex flex-col gap-2"
+        className="absolute top-[33%] left-5 rounded-l-3xl  flex flex-col gap-2"
         style={{ direction: "ltr" }}
       >
         
@@ -102,6 +118,28 @@ const HeroSection = () => {
           </a>
         ))}
       </div>
+
+
+       <div
+        className="absolute top-[40%] right-5 rounded-l-3xl  flex flex-col gap-2"
+        
+      >
+        
+        {contact.map((link) => (
+          <a
+            key={link.id}
+            href={link.link}
+            className={`group flex items-center justify-center w-10 h-10 bg-white rounded-full mx-1 hover:w-fit hover:px-4 ${link.color} transition-all ease-in-out duration-500`}
+          >
+            {link.icon}
+            <p className="hidden group-hover:inline-block ml-2 text-sm font-bold text-gray-700 transition-all ease-in-out duration-500">
+              {link.name}
+            </p>
+          </a>
+        ))}
+      </div>
+
+
     </div>
   );
 };
