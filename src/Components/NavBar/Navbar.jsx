@@ -9,6 +9,7 @@ import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 const Navbar = ({ Type }) => {
   const { t } = useTranslation();
+  
 
   console.log(Type);
 
@@ -38,6 +39,7 @@ const Navbar = ({ Type }) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
   const NotificationsMenu = () => {
     return (
       <div className="absolute top-12 left-0 md:right-0 bg-white shadow-lg rounded-lg w-64 z-50 overflow-hidden">
@@ -74,20 +76,10 @@ const Navbar = ({ Type }) => {
       </div>
     );
   };
-  /*const handleLogout = async () => {
-    try {
-      await logOut();
-      toast.success("تم تسجيل الخروج بنجاح");
-      navigate("/login");
-    } catch (error) {
-      toast.error("خطأ في تسجيل الخروج");
-      console.error("Failed to log out:", error);
-    }
-  };*/
-
+  
   return (
     <nav
-      className="bg-wh ite shad ow-lg z-50 py-2 fixed top-0 left-0 w-full block text-white"
+      className={` ite shad ow-lg z-50 py-2 fixed top-0 left-0 w-full block text-white`}
       style={{ direction: "ltr", fontFamily: "Alexandria" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

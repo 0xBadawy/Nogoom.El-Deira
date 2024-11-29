@@ -11,14 +11,13 @@ import { setDoc, doc, getDoc } from "firebase/firestore";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  
   const [currentUser, setcurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const Man =
     "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FAvatar%2Fman.png?alt=media&token=dc8c1abd-015b-4ead-8d43-aa6abf80a5e9";
     const Woman =
       "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FAvatar%2Fwoman.png?alt=media&token=635d37e3-f902-4abd-bc79-169d9d2bc2c7";
-
-
 
 
 
@@ -35,8 +34,8 @@ const AuthProvider = ({ children }) => {
       // Step 2: Save additional user data in Firestore
       await setDoc(doc(db, "users", user.uid), {
         email: user.email,
-        ...userData, // Add any extra data you want to save (e.g., name, role)
-        createdAt: new Date().toISOString(), // Optional: Add a timestamp
+        ...userData, 
+        createdAt: new Date().toISOString(), 
         balance: 50,
         verified: false,
         verifiedBy: "",

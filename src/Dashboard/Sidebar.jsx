@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const Sidebar = () => {
 	return (
-    <div className="bg-gray-100 text-gray-900 h-screen px-4 fixed w-16 md:w-64 border-r border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
+    <div className="bg-gray-200 rounded-xl text-gray-900 h-screen px-4 fixed w-16 md:w-64 border-r border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white">
       <h1 className="text-2xl font-bold hidden md:block mt-4 text-center italic">
         {"نجوم الديرة"}
       </h1>
@@ -15,7 +15,6 @@ const Sidebar = () => {
             <span className="hidden md:inline">لوحة التحكم</span>
           </Link>
         </li>
-
         <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
           <Link
             to="/dashboard/customers"
@@ -46,6 +45,15 @@ const Sidebar = () => {
             className="flex items-center space-x-4  gap-3"
           >
             <FaCog /> <span className="hidden md:inline">Settings</span>
+          </Link>
+        </li>
+
+        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
+          <Link
+            to="/dashboard/website_data"
+            className="flex items-center space-x-4  gap-3"
+          >
+            <FaCog /> <span className="hidden md:inline">بيانات الموقع</span>
           </Link>
         </li>
       </ul>
