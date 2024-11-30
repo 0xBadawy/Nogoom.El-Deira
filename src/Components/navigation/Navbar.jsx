@@ -7,6 +7,7 @@ import { useScrollPosition } from "../../hooks/useScrollPosition";
 import LogoWhite from "../../assets/Images/Logo/Deira-logo.png";
 import LogoPrimary from "../../assets/Images/Logo/Deira-logo_colored.png";
 import Image from "../../assets/Images/LoginStar.jpg";
+import { useLocation } from "react-router-dom";
 
 const pages = [
   { path: "/", label: "الرئيسية" },
@@ -22,7 +23,14 @@ const mockUser = {
 };
 
 const Navbar = () => {
-  const isScrolled = useScrollPosition();
+  let isScrolled = useScrollPosition();
+    const location = useLocation();
+    if (location.pathname === "/privacy-policy") {
+      isScrolled= true;
+    }
+
+
+  
 
   const handleLogout = () => {
     // Implement logout logic here
