@@ -38,9 +38,9 @@ const Users = () => {
 
   return (
     <div className="grow p-8 dark:bg-gray-800 h-full">
-      <h2 className="text-2xl mb-4">Users</h2>
+      <h2 className="text-2xl mb-4">النجوم</h2>
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 className="text-lg font-semibold mb-4">Users List</h3>
+        <h3 className="text-lg font-semibold mb-4">بيانات النجوم </h3>
         <table className="min-w-full table-auto">
           <thead>
             <tr className="border-b">
@@ -67,23 +67,25 @@ const Users = () => {
                   setSelectedUser(row.Uid);
                 }}
                 className={`border-b ${
-                  row.Uid === selectedUser ? "bg-gray-900" : ""
+                  row.Uid === selectedUser ? "bg-gray-200" : ""
                 }`}
-              >
+                >
                 <td className="py-2 px-4">{row.name}</td>
-                <td className="py-2 px-4">{row.createdAt}</td>
+                <td className="py-2 px-4">
+                  {new Date(row.createdAt).toLocaleDateString("en-GB")}
+                </td>
                 <td className="py-2 px-4">{row.email}</td>
                 <td className="py-2 px-4">{row.phone}</td>
                 <td className="py-2 px-4">{row.iban}</td>
                 <td className="py-2 px-4">{row.govern}</td>
                 <td className="py-2 px-4">{Area(row.area)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                </tr>
+              ))}
+              </tbody>
+            </table>
+            </div>
 
-      {/* عرض وتعديل بيانات المستخدم */}
+            {/* عرض وتعديل بيانات المستخدم */}
       {selectedUser && (
         <UserDetails
           selectedUserUid={selectedUser}

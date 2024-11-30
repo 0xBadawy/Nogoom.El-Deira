@@ -1,14 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaSnapchat,
-  FaTiktok,
-  FaTwitter,
-  FaLink,
-  FaRegAddressCard,
-} from "react-icons/fa";
+
 import { useDashboard } from "../../Context/DashboardContext";
 import { Tiers } from "../../Stars/SignUp/data";
 import toast, { Toaster } from "react-hot-toast";
@@ -31,16 +23,6 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
       reset(user);
     }
   }, [selectedUserUid, usersData, reset]);
-
-  //   useEffect(() => {
-  //     const user = usersData.find((user) => user.Uid === selectedUserUid);
-  //     if (user) {
-  //       // Set form values based on the selected user data
-  //       setValue("name", user.name);
-  //       setValue("email", user.email);
-  //       setValue("phone", user.phone);
-  //     }
-  //   }, [selectedUserUid, usersData, setValue]);
 
   const onSubmit = (data) => {
    confirmAlert({

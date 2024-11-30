@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useDashboard } from "../../Context/DashboardContext";
 import { useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
+import toast, { Toaster } from "react-hot-toast";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const Contact = () => {
   const [data, setData] = useState({});
@@ -29,7 +32,26 @@ const Contact = () => {
   }, [contact]);
 
   const onSubmit = (data) => {
-     updateContact(data);
+     confirmAlert({
+       title: "تأكيد الحفظ",
+       message: "هل تريد بالتأكيد حفظ التعديلات؟",
+       buttons: [
+         {
+           label: "نعم",
+           onClick: () => {
+            
+              updateContact(data);
+             toast.success("تم حفظ التعديلات بنجاح");
+           },
+         },
+         {
+           label: "إلغاء",
+           onClick: () => {
+             toast.error("تم إلغاء العملية");
+           },
+         },
+       ],
+     });
   };
 
   return (
@@ -180,6 +202,7 @@ const Contact = () => {
           </div>
         </form>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

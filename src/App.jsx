@@ -29,12 +29,12 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <ThemeContextProvider>
-          <div className="flex">
-            <Sidebar />
-            <div className="grow mr-16 md:mr-64  h-full lg:h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
-              <Dashboard />
-            </div>
+        <div className="flex">
+          <Sidebar />
+          <div className="grow mr-16 md:mr-64  h-full lg:h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
+            <Dashboard />
           </div>
+        </div>
       </ThemeContextProvider>
     ),
     children: [
@@ -50,11 +50,9 @@ const App = () => {
   return (
     <AuthProvider>
       <DataProvider>
-                <DashboardProvider>
-
-        <RouterProvider router={router} />
-                </DashboardProvider>
-
+        <DashboardProvider>
+          <RouterProvider router={router} />
+        </DashboardProvider>
       </DataProvider>
     </AuthProvider>
   );
