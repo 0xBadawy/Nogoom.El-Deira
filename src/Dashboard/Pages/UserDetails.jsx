@@ -12,48 +12,56 @@ import {
 import { useDashboard } from "../../Context/DashboardContext";
 import { Tiers } from "../../Stars/SignUp/data";
 import toast, { Toaster } from "react-hot-toast";
-
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
-
-
   const {
     register,
     handleSubmit,
-    setValue,reset,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
- 
+  useEffect(() => {
+    const user = usersData.find((user) => user.Uid === selectedUserUid);
+    if (user) {
+      // Set default values using reset
+      reset(user);
+    }
+  }, [selectedUserUid, usersData, reset]);
 
-    useEffect(() => {
-      const user = usersData.find((user) => user.Uid === selectedUserUid);
-      if (user) {
-        // Set default values using reset
-        reset(user);
-      }
-    }, [selectedUserUid, usersData, reset]);
-
-
-    
-  
-
-//   useEffect(() => {
-//     const user = usersData.find((user) => user.Uid === selectedUserUid);
-//     if (user) {
-//       // Set form values based on the selected user data
-//       setValue("name", user.name);
-//       setValue("email", user.email);
-//       setValue("phone", user.phone);
-//     }
-//   }, [selectedUserUid, usersData, setValue]);
+  //   useEffect(() => {
+  //     const user = usersData.find((user) => user.Uid === selectedUserUid);
+  //     if (user) {
+  //       // Set form values based on the selected user data
+  //       setValue("name", user.name);
+  //       setValue("email", user.email);
+  //       setValue("phone", user.phone);
+  //     }
+  //   }, [selectedUserUid, usersData, setValue]);
 
   const onSubmit = (data) => {
-
-    onSave(data); 
-    // console.log(data);
-    toast.success("تم حفظ التعديلات بنجاح");
-
+   confirmAlert({
+     title: "تأكيد الحفظ",
+     message: "هل تريد بالتأكيد حفظ التعديلات؟",
+     buttons: [
+       {
+         label: "نعم",
+         onClick: () => {
+           onSave(data);
+           toast.success("تم حفظ التعديلات بنجاح");
+         },
+       },
+       {
+         label: "إلغاء",
+         onClick: () => {
+           toast.error("تم إلغاء العملية");
+         },
+       },      
+     ],
+   });
   };
 
   return (
