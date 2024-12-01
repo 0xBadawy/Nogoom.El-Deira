@@ -8,7 +8,9 @@ import {
   FaBox,
   FaCog,
 } from "react-icons/fa";
+import { IoNotificationsSharp } from "react-icons/io5";
 import { RiContactsBook3Line } from "react-icons/ri";
+import { TbSpeakerphone } from "react-icons/tb";
 import { Link } from "react-router-dom"; // Import Link from React Router
 
 const Sidebar = () => {
@@ -41,22 +43,6 @@ const Sidebar = () => {
             <FaUser /> <span className="hidden md:inline">النجوم</span>
           </Link>
         </li>
-        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
-          <Link
-            to="/dashboard/apartments"
-            className="flex items-center space-x-4  gap-3"
-          >
-            <FaBox /> <span className="hidden md:inline">Apartments</span>
-          </Link>
-        </li>
-        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
-          <Link
-            to="/dashboard/settings"
-            className="flex items-center space-x-4  gap-3"
-          >
-            <FaCog /> <span className="hidden md:inline">Settings</span>
-          </Link>
-        </li>
 
         <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
           <Link
@@ -74,6 +60,35 @@ const Sidebar = () => {
           >
             <RiContactsBook3Line />{" "}
             <span className="hidden md:inline">بيانات التواصل</span>
+          </Link>
+        </li>
+
+        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
+          <Link
+            to="/dashboard/notifications"
+            className="flex items-center space-x-4  gap-3"
+          >
+            <IoNotificationsSharp />
+            <span className="hidden md:inline"> الإشعارات </span>
+          </Link>
+        </li>
+
+        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
+          <Link
+            to="/dashboard/createAd"
+            className="flex items-center space-x-4  gap-3"
+          >
+            <TbSpeakerphone />
+            <span className="hidden md:inline"> انشاء اعلان </span>
+          </Link>
+        </li>
+
+        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:text-white hover:bg-blue-600">
+          <Link
+            to="/dashboard/settings"
+            className="flex items-center space-x-4  gap-3"
+          >
+            <FaCog /> <span className="hidden md:inline">Settings</span>
           </Link>
         </li>
       </ul>

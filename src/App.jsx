@@ -17,6 +17,8 @@ import DashboardProvider from "./Context/DashboardContext";
 import WebsiteData from "./Dashboard/Pages/WebsiteData";
 import Contact from "./Dashboard/Pages/Contact";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import NotificationsPanel from "./Dashboard/Pages/NotificationsPanel";
+import CreateAd from "./Dashboard/Pages/CreateAd";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -42,6 +44,8 @@ const router = createBrowserRouter([
       { path: "apartments", element: <Apartments /> },
       { path: "website_data", element: <WebsiteData /> },
       { path: "Contact", element: <Contact /> },
+      { path: "notifications", element: <NotificationsPanel /> },
+      { path: "createAd", element: <CreateAd /> },
     ],
   },
 ]);
