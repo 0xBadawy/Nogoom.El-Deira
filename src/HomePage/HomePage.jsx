@@ -6,6 +6,8 @@ import CurrentAdv from "./Landing/CurrentAdv";
 import CityAdv from "./Landing/CityAdv";
 import "../style/pattern.css";
 import SocialMediaInfluencers from "./Landing/SocialMediaInfluencers";
+import DownloadSection from "./Landing/DownloadSection";
+import CampaignStats from "./Landing/CampaignStats";
 const HomePage = () => {
 
 
@@ -18,6 +20,8 @@ const HomePage = () => {
       {/* <DownloadApp /> */}
       <CurrentAdv />
       <SocialMediaInfluencers/>
+      <DownloadSection/>
+      <CampaignStats/>
       <div className="h-[1000px]"></div>
     </div>
   );
