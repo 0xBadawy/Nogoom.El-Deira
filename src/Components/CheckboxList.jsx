@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CheckboxList = ({ items, selected, text }) => {
     const [checkedItems, setCheckedItems] = useState({});
@@ -10,6 +10,10 @@ const CheckboxList = ({ items, selected, text }) => {
             return newState;
         });
     };
+
+
+
+
 
     const handleSelectAllChange = () => {
         const allChecked = Object.keys(checkedItems).length === items.length && Object.values(checkedItems).every(Boolean);

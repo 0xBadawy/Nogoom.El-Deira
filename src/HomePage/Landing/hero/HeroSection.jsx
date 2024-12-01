@@ -124,11 +124,13 @@ const HeroSection = () => {
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
       <DecorativeShapes />
-      
+
       <HeroContent
-        title={t("heroSection.title")}
-        description={t("heroSection.description")}
-        buttonText={t("heroSection.button")}
+        title={"إعلانات تصل إلى جمهورك الحقيقي!"}
+        description={
+          "اختر المؤثرين المناسبين وحقق نتائج حقيقية بدون تكلفة حملات ضخمة."
+        }
+        buttonText={"ابدأ الآن"}
         image={image}
       />
 

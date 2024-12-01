@@ -4,9 +4,18 @@ import CheckboxList from "../../Components/CheckboxList";
 import ImageUploader from "../../Components/ImageUploader";
 import { storage } from "../../Configuration/Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { GovernmentData } from "../../Stars/SignUp/data";
+import { useDashboard } from "../../Context/DashboardContext";
+import CheckboxListName from "../../Components/CheckboxListName";
 
 const CreateAd = () => {
+  const { allUsers } = useDashboard();
+  const [GovernList, setGovernList] = useState([]);
   const [selectGovernorates, setSelectGovernorates] = useState([]);
+
+  const [selectStars, setSelectStars] = useState([]);
+  const [starsList, setStarsList] = useState([]);
+
   const {
     register,
     handleSubmit,
@@ -32,6 +41,43 @@ const CreateAd = () => {
       }
       return prevState;
     });
+  };
+
+  const handleStarSelection = (item, isSelected) => {
+    setSelectStars((prevState) => {
+      if (isSelected) {
+        if (!prevState.includes(item)) {
+          return [...prevState, item];
+        }
+      } else {
+        return prevState.filter((selectedItem) => selectedItem !== item);
+      }
+      return prevState;
+    });
+  };
+
+
+  useEffect(() => {
+    const stars = allUsers.filter((user) => user.referredBy === "star");
+    setStarsList(stars.map((star) => star.name));
+    setStarsList(stars.map((star) => ({ name: star.name, Uid: star.Uid })));
+  }, [allUsers]);
+
+  useEffect(() => {
+    console.log(starsList);
+  }, [starsList]);
+
+  const HandelRegionChange = (e) => {
+    setSelectGovernorates([]);
+    setGovernList([]);
+    const fun = () => {
+      const region = e.target.value;
+      const selectedRegion = GovernmentData.find(
+        (item) => item.name === region
+      );
+      setGovernList(selectedRegion.subGovernments);
+    };
+    fun();
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -66,7 +112,8 @@ const CreateAd = () => {
 
   useEffect(() => {
     console.log(selectGovernorates);
-  }, [selectGovernorates]);
+    console.log(selectStars);
+  }, [selectGovernorates, selectStars]);
 
   return (
     <div className="p-8 dark:bg-gray-800">
@@ -228,11 +275,13 @@ const CreateAd = () => {
                 id="region"
                 {...register("region", { required: "اختيار المنطقة مطلوب" })}
                 className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
+                onChange={HandelRegionChange}
               >
-                <option value="">اختر منطقة</option>
-                <option value="cairo">القاهرة</option>
-                <option value="giza">الجيزة</option>
-                <option value="alexandria">الإسكندرية</option>
+                {GovernmentData.map((item, index) => (
+                  <option key={index} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
               {errors.region && (
                 <p className="text-red-500 text-sm mt-1">
@@ -245,53 +294,15 @@ const CreateAd = () => {
               <CheckboxList
                 text="اختر المحافظات"
                 selected={handleGovernorateSelection}
-                items={[
-                  "item3",
-                  "item4",
-                  "item5",
-                  "item6",
-                  "item7",
-                  "item8",
-                  "item9",
-                  "item10",
-                  "item11",
-                  "item12",
-                  "item13",
-                  "item14",
-                  "item15",
-                  "item16",
-                  "item17",
-                  "item18",
-                  "item19",
-                  "item20",
-                ]}
+                items={GovernList}
               />
             </div>
 
             <div className="mb-4">
-              <CheckboxList
+              <CheckboxListName
                 text="اختر النجوم"
-                selected={handleGovernorateSelection}
-                items={[
-                  "item3",
-                  "item4",
-                  "item5",
-                  "item6",
-                  "item7",
-                  "item8",
-                  "item9",
-                  "item10",
-                  "item11",
-                  "item12",
-                  "item13",
-                  "item14",
-                  "item15",
-                  "item16",
-                  "item17",
-                  "item18",
-                  "item19",
-                  "item20",
-                ]}
+                selected={handleStarSelection}
+                items={starsList}
               />
             </div>
 

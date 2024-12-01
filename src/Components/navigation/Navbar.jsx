@@ -6,7 +6,7 @@ import { LoginButton } from "./LoginButton";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import LogoWhite from "../../assets/Images/Logo/Deira-logo.png";
 import LogoPrimary from "../../assets/Images/Logo/Deira-logo_colored.png";
-import Image from "../../assets/Images/LoginStar.jpg";
+import Image from "../../assets/Images/20240213103000.png";
 import { useLocation } from "react-router-dom";
 
 const pages = [
