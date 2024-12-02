@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
-import PropTypes from 'prop-types';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import React, { useState, useRef } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import PropTypes from "prop-types";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
-export const UserProfile = ({ user, onLogout }) => {
+export const UserProfile = ({ user, onLogout, isMobile = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -14,11 +14,14 @@ export const UserProfile = ({ user, onLogout }) => {
   }
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className={`relative ${isMobile ? "w-full" : ""}`} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full gap-2 flex items-center h-10 p-1 bg-white rounded-full 
-                 border-black border-2 hover:border-primary transition-colors duration-300"
+        className={`
+          flex items-center h-10 p-1 bg-white rounded-full 
+          border-black border-2 hover:border-primary transition-colors duration-300
+          ${isMobile ? "w-full justify-center" : "w-full gap-2"}
+        `}
       >
         <div className="w-8 h-8 rounded-full overflow-hidden">
           <img
@@ -30,13 +33,20 @@ export const UserProfile = ({ user, onLogout }) => {
         <span className="font-bold text-gray-800">{user.name}</span>
         <IoIosArrowDown
           size={25}
-          className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50
-                      border border-gray-200 transform origin-top scale-y-100 transition-transform">
+        <div
+          className={`
+          bg-white rounded-lg shadow-lg py-2 z-50
+          border border-gray-200 transform origin-top scale-y-100 transition-transform
+          ${isMobile ? "w-full mt-2" : "absolute right-0 mt-2 w-48"}
+        `}
+        >
           <button
             onClick={() => {
               setIsOpen(false);
@@ -57,7 +67,8 @@ UserProfile.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired,
   }).isRequired,
-  onLogout: PropTypes.func.isRequired
+  onLogout: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool,
 };

@@ -130,7 +130,7 @@ const HeroSection = () => {
         description={
           "اختر المؤثرين المناسبين وحقق نتائج حقيقية بدون تكلفة حملات ضخمة."
         }
-        buttonText={"ابدأ الآن"}
+        buttonText={"أبدأ حملتك التسويقية"}
         image={image}
       />
 

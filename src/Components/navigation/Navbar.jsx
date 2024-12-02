@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Logo } from "./Logo";
 import { NavLinks } from "./NavLinks";
 import { UserProfile } from "./UserProfile";
 import { LoginButton } from "./LoginButton";
+import MobileMenu from "./MobileMenu";
+import MobileMenuButton from "./MobileMenuButton";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import LogoWhite from "../../assets/Images/Logo/Deira-logo.png";
 import LogoPrimary from "../../assets/Images/Logo/Deira-logo_colored.png";
-import Image from "../../assets/Images/20240213103000.png";
-import { useLocation } from "react-router-dom";
+import Image from "../../assets/Images/LoginStar.jpg";
 
 const pages = [
   { path: "/", label: "الرئيسية" },
@@ -19,26 +20,23 @@ const pages = [
 const mockUser = {
   name: "Mohamed Badawy",
   image: Image,
-  isAuthenticated: false, // Changed to false to demonstrate login button
+  isAuthenticated: false,
 };
 
 const Navbar = () => {
-  let isScrolled = useScrollPosition();
-    const location = useLocation();
-    if (location.pathname === "/privacy-policy") {
-      isScrolled= true;
-    }
+  const isScrolled = useScrollPosition();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const onClose = () => {
+    setIsMobileMenuOpen(false);
+  }
 
-  
 
   const handleLogout = () => {
-    // Implement logout logic here
     console.log("Logging out...");
   };
 
   const handleLogin = () => {
-    // Implement login logic here
     console.log("Logging in...");
   };
 
@@ -59,20 +57,30 @@ const Navbar = () => {
             <NavLinks links={pages} isScrolled={isScrolled} />
           </div>
 
-          {mockUser.isAuthenticated ? (
-            <UserProfile user={mockUser} onLogout={handleLogout} />
-          ) : (
-            <LoginButton onLogin={handleLogin} isScrolled={isScrolled} />
-          )}
+          <div className="hidden md:block">
+            {mockUser.isAuthenticated ? (
+              <UserProfile user={mockUser} onLogout={handleLogout} />
+            ) : (
+              <LoginButton onLogin={handleLogin} isScrolled={isScrolled} />
+            )}
+          </div>
+
+          <MobileMenuButton
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            isOpen={isMobileMenuOpen}
+            isScrolled={isScrolled}
+          />
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className="md:hidden">
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          <NavLinks links={pages} />
-        </div>
-      </div>
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        links={pages}
+        user={mockUser}
+        onClose={onClose}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      />
     </nav>
   );
 };
