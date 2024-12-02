@@ -10,6 +10,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 
+
 const ContactSection = () => {
   return (
     <section className="relative py-12 overflow-hidden">
