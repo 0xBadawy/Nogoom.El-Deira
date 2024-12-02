@@ -8,6 +8,7 @@ import "../style/pattern.css";
 import SocialMediaInfluencers from "./Landing/SocialMediaInfluencers";
 import DownloadSection from "./Landing/DownloadSection";
 import CampaignStats from "./Landing/CampaignStats";
+import ContactSection from "./Landing/ContactSection";
 const HomePage = () => {
 
 
@@ -22,6 +23,7 @@ const HomePage = () => {
       <SocialMediaInfluencers/>
       <DownloadSection/>
       <CampaignStats/>
+      <ContactSection/>
       <div className="h-[1000px]"></div>
     </div>
   );
