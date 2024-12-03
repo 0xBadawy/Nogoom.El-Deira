@@ -15,7 +15,7 @@ const DecorativeShapes = () => {
       
       {/* Corner shapes */}
       <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/10 transform rotate-45 -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-10 right-0 w-32 rounded-l-3xl h-10 bg-black/80 backdrop-blur-sm"></div>
+      {/* <div className="absolute bottom-10 right-0 w-32 rounded-l-3xl h-10 bg-black/80 backdrop-blur-sm"></div> */}
     </>
   );
 };

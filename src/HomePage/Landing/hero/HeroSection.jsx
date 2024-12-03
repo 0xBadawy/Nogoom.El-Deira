@@ -136,8 +136,8 @@ const HeroSection = () => {
         image={image}
       />
 
-      <SocialLinks links={socialMediaLinks} />
-      <ContactLinks contacts={contacts} />
+      {/* <SocialLinks links={socialMediaLinks} /> */}
+      {/* <ContactLinks contacts={contacts} /> */}
     </div>
   );
 };

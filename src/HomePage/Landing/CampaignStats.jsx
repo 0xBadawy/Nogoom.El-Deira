@@ -1,5 +1,6 @@
 import React from "react";
 import { FaChartBar, FaUsers, FaBullhorn } from "react-icons/fa";
+import { MdOutlineMoreTime } from "react-icons/md";
 
 const CampaignStats = () => {
   return (
@@ -13,7 +14,7 @@ const CampaignStats = () => {
       </h2>
 
       {/* البطاقات الإحصائية */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
         {/* البطاقة الأولى */}
         <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transition-shadow duration-300">
           <FaChartBar className="text-5xl text-blue-500 mb-4 mx-auto" />
@@ -37,6 +38,17 @@ const CampaignStats = () => {
           <FaBullhorn className="text-5xl text-yellow-500 mb-4 mx-auto" />
           <h3 className="text-2xl font-semibold text-gray-800 mb-2">98% رضا</h3>
           <p className="text-gray-600">معدل رضا العملاء</p>
+        </div>
+
+        {/* البطاقة الرابعة */}
+        {/* عدد مشاهدات الحمالات الاعلانةي  */}
+
+        <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transition-shadow duration-300">
+          <MdOutlineMoreTime className="text-5xl text-blue-500 mb-4 mx-auto" />
+          <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+            + 1 مليون مشاهدة
+            </h3>
+          <p className="text-gray-600">عدد المشاهدات</p>
         </div>
       </div>
 

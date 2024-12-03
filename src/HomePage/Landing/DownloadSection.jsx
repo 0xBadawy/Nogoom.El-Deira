@@ -6,8 +6,8 @@ import Image2 from "../../assets/Images/Image1.png";
 const DownloadSection = () => {
   return (
     <div
-      className="bg-gradient-to-r from-blue-50 to-green-50 relative w-[95%] py-14 mt-10 px-32 rounded-3xl shadow-xl mx-auto flex flex-col md:flex-row items-center gap-10 overflow-hidden"
-      style={{  fontFamily: "Cairo" }}
+      className="bg-gradient-to-r from-blue-50 to-green-50 relative w-[95%] py-14 mt-10 md:px-32 px-10 rounded-3xl shadow-xl mx-auto flex flex-col md:flex-row items-center gap-10 overflow-hidden"
+      style={{ fontFamily: "Cairo" }}
     >
       {/* النصوص وروابط التحميل */}
       <div className="text-center md:text-right flex-1 z-10">
@@ -15,7 +15,10 @@ const DownloadSection = () => {
           حمل تطبيق الديرة للإعلانات
         </h2>
         <p className="text-2xl text-gray-600 mb-8">الديرة.. كل شيء بالديرة</p>
-        <div className="flex justify-center md:justify-start gap-6" style={{direction: "ltr"}}>
+        <div
+          className="flex justify-center flex-col md:flex-row md:justify-start gap-6"
+          style={{ direction: "ltr" }}
+        >
           <a
             href="#"
             className="flex items-center justify-center bg-black text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-900 transition-transform transform hover:scale-110"

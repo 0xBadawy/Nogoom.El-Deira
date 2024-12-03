@@ -29,7 +29,7 @@ const CurrentAdv = () => {
   ];
   return (
     <div
-      className="bg-[#fff] relative w-[95%] h-[vh] py-10 mt-5 px-14 rounded-3xl  mx-auto "
+      className="bg-[#fff] relative w-[95%] h-[vh] py-10 mt-5 md:px-14 px-4 rounded-3xl  mx-auto "
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
       <div className="flex justify-between items-center">
