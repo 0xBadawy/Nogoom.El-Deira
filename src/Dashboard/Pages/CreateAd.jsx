@@ -58,7 +58,7 @@ const CreateAd = () => {
 
 
   useEffect(() => {
-    const stars = allUsers.filter((user) => user.referredBy === "star");
+    const stars = allUsers.filter((user) => user.role === "star");
     setStarsList(stars.map((star) => star.name));
     setStarsList(stars.map((star) => ({ name: star.name, Uid: star.Uid })));
   }, [allUsers]);

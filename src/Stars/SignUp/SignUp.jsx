@@ -52,7 +52,7 @@ const SignUpPage = () => {
       const { email, password, ...userData } = data;
 
       // Call the signUp function
-      const result = await signUp(email, password, userData);
+      const result = await signUp(email, password, userData, "star");
 
       // Check if there was an error during sign-up
       if (!result.success) {

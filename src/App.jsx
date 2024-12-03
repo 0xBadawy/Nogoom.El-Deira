@@ -19,6 +19,7 @@ import Contact from "./Dashboard/Pages/Contact";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import NotificationsPanel from "./Dashboard/Pages/NotificationsPanel";
 import CreateAd from "./Dashboard/Pages/CreateAd";
+import Employees from "./Dashboard/Pages/Employees";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       { path: "Contact", element: <Contact /> },
       { path: "notifications", element: <NotificationsPanel /> },
       { path: "createAd", element: <CreateAd /> },
+      { path: "employees", element: <Employees /> },
     ],
   },
 ]);

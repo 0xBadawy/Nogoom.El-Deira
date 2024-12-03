@@ -15,8 +15,8 @@ const Users = () => {
   }, [allUsers]);
 
   const Area = (areas) => {
-    let A = "";
-    return areas ? areas.join(",") : A;
+    if (!areas) return "";
+    return Array.isArray(areas) ? areas.join(", ") : areas;
   };
 
   const [selectedUser, setSelectedUser] = useState(null);
@@ -68,6 +68,7 @@ const Users = () => {
           </thead>
           <tbody>
             {usersData.map((row, index) => (
+              row.role === "star" && (
               <tr
                 key={index}
                 onClick={() => setSelectedUser(row.Uid)}
@@ -87,6 +88,7 @@ const Users = () => {
                   {Area(row.area)}
                 </td>
               </tr>
+              )
             ))}
           </tbody>
         </table>

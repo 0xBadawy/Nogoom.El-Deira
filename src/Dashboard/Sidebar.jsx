@@ -7,6 +7,7 @@ import {
   FaUser,
   FaBox,
   FaCog,
+  FaRegGrinStars,
 } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoNotificationsSharp } from "react-icons/io5";
@@ -24,13 +25,14 @@ const Sidebar = () => {
     {
       icon: <FaUsers />,
       text: "المستخدمين",
-      link: "/dashboard/customers",
+      link: "/dashboard/employees",
     },
     {
-      icon: <FaUser />,
+      icon: <FaRegGrinStars />,
       text: "النجوم",
       link: "/dashboard/users",
     },
+
     {
       icon: <FaCog />,
       text: "بيانات الموقع",
@@ -51,6 +53,7 @@ const Sidebar = () => {
       text: "انشاء اعلان",
       link: "/dashboard/createAd",
     },
+
     {
       icon: <FaCog />,
       text: "Settings",
@@ -58,7 +61,7 @@ const Sidebar = () => {
     },
   ]);
 
-  const [phone,setPhone] = useState(true)
+  const [phone,setPhone] = useState(false)
 
   return (
     <div
