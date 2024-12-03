@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../Context/AuthContext";
+import { confirmAlert } from "react-confirm-alert";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddEmployees = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
   const { signUp } = useAuth();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const password = watch("password"); // لمراقبة قيمة كلمة المرور
 
   const handleFirebaseError = (errorCode) => {
     if (errorCode.includes("auth/email-already-in-use")) {
@@ -23,24 +28,50 @@ const AddEmployees = () => {
   };
 
   const onSubmit = async (formData) => {
-    setError(null); // Reset error state
-    setLoading(true); // Show loading state
+    confirmAlert({
+      title: "تأكيد الحفظ",
+      message: "هل انت متأكد من إضافة هذا المستخدم؟",
+      buttons: [
+        {
+          label: "نعم",
+          onClick: async () => {
+            handleUserSubmission(formData);
+          },
+        },
+        {
+          label: "إلغاء",
+          onClick: () => {
+            toast.error("تم إلغاء العملية");
+          },
+        },
+      ],
+    });
+  };
+
+  const handleUserSubmission = async (formData) => {
+    setError(null);
+    setLoading(true);
 
     try {
-      const { email, password,role, ...otherData } = formData;
+      const { email, password, role, ...otherData } = formData;
 
       const result = await signUp(email, password, otherData, role);
 
       if (!result.success) {
-        setError(handleFirebaseError(result.error)); // Handle Firebase error
-      } else {
-        alert("تم إضافة الموظف بنجاح!");
+        setError(handleFirebaseError(result.error));
+        return;
       }
+
+      toast.success("تم إضافة الموظف بنجاح!");
+      reset();
     } catch (error) {
-      setError(handleFirebaseError(error.code)); // Handle generic error
-      console.error("Error during submission:", error.message);
+      const errorMessage = error?.code
+        ? handleFirebaseError(error.code)
+        : "حدث خطأ غير متوقع!";
+      setError(errorMessage);
+      console.error("Error during submission:", error.message || error);
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -84,7 +115,7 @@ const AddEmployees = () => {
           )}
         </div>
 
-        {/* Password Field */}
+        {/* حقل كلمة المرور */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">
             كلمة المرور
@@ -106,6 +137,28 @@ const AddEmployees = () => {
           )}
         </div>
 
+        {/* حقل تأكيد كلمة المرور */}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            تأكيد كلمة المرور
+          </label>
+          <input
+            type="password"
+            {...register("confirmPassword", {
+              required: "تأكيد كلمة المرور مطلوب",
+              validate: (value) =>
+                value === password || "كلمة المرور غير متطابقة",
+            })}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="أدخل تأكيد كلمة المرور"
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm">
+              {errors.confirmPassword.message}
+            </p>
+          )}
+        </div>
+
         {/* Role Field */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">
@@ -116,9 +169,17 @@ const AddEmployees = () => {
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">اختر الصلاحيات</option>
-            <option value="admin">مدير</option>
-            <option value="editor">محرر</option>
-            <option value="viewer">مشاهد</option>
+            <option value="admin">
+              <span >مدير</span> (كل الصلاحيات)
+            </option>
+            <option value="editor">
+              <span>محرر</span>
+              (كل الصلاحيات عدا المديرين والمحفظة)
+            </option>
+            <option value="viewer">
+              {" "}
+              <span>مشاهد</span> (الدخول والمتابعة فقط)
+            </option>
           </select>
           {errors.role && (
             <p className="text-red-500 text-sm">{errors.role.message}</p>
@@ -135,6 +196,7 @@ const AddEmployees = () => {
         </button>
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };
