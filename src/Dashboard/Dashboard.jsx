@@ -9,7 +9,7 @@ ChartJS.register(LineElement, BarElement, CategoryScale, LinearScale, PointEleme
 
 const Dashboard = () => {
   return (
-    <div className="grow p-8 rounded-md min-h-screen">
+    <div className="grow rounded-md min-h-screen">
       <Outlet />
     </div>
   );

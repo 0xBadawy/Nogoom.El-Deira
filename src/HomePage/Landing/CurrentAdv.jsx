@@ -32,8 +32,10 @@ const CurrentAdv = () => {
       className="bg-[#fff] relative w-[95%] h-[vh] py-10 mt-5 md:px-14 px-4 rounded-3xl  mx-auto "
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
-      <div className="flex justify-between items-center">
-        <h1 className="text-4xl font-bold">{i18n.t("currentAdv.Title")} </h1>
+      <div className="flex justify-between flex-col items-center">
+        <h1 className="text-2xl font-bold">
+          {" الحملات الإعلانية المتوفرة حاليًا فى منطقة الرياض محافظة الخرج"}
+        </h1>
         <button className="text-[#FF6B6B] border-[#FF6B6B] border-2 px-4 py-1 rounded-full">
           المزيد
         </button>

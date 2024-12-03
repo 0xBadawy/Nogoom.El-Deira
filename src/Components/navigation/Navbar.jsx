@@ -23,14 +23,15 @@ const mockUser = {
   isAuthenticated: false,
 };
 
-const Navbar = () => {
-  const isScrolled = useScrollPosition();
+const Navbar = ({ color }) => {
+  const scrollPosition = useScrollPosition();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const isScrolled = color === "black" ? true : scrollPosition;
 
   const onClose = () => {
     setIsMobileMenuOpen(false);
-  }
-
+  };
 
   const handleLogout = () => {
     console.log("Logging out...");

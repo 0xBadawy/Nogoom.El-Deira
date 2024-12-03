@@ -9,14 +9,13 @@ import { privacyContent } from "../data/privacyContent";
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-gray-50" style={{ direction: "rtl" }}>
-      <Navbar />
+      <Navbar color={"black"} />
       <main className="max-w-4xl mx-auto py-32 px-6">
         <div className="bg-white rounded-2xl shadow-sm p-8">
           <PrivacyHeader
             title={privacyContent.header.title}
             description={privacyContent.header.description}
           />
-
 
           <PrivacySection title={privacyContent.dataCollection.title}>
             <PrivacyList items={privacyContent.dataCollection.items} />
