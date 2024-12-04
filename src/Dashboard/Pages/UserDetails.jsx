@@ -52,14 +52,26 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
 
 
   return (
-    <div className="w-full h-fit dark:bg-gray-900 p-5 rounded-lg">
-      <h3>بيانات المستخدم</h3>
+    <div className=" h-fit dark:bg-gray-900 p-5 rounded-lg">
+      <h3 className="font-bold">بيانات المستخدم</h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mb-4 grid grid-cols-6 gap-3"
       >
+        <div className="mb-4 grid md:col-span-2 col-span-6">
+          <label className="block mb-2 text-right">
+            حالة المستخدم<select
+              {...register("verified")}
+              className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
+            >
+              <option value="true">تم القبول</option>
+              <option value="false">قيد المراجعة</option>
+            </select>
+          </label>
+        </div>
+
         {/* Name */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             الاسم
             <input
@@ -70,7 +82,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Email */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             البريد الإلكتروني
             <input
@@ -81,7 +93,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Phone */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             الهاتف
             <input
@@ -92,7 +104,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Iban */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             الآيبان
             <input
@@ -103,7 +115,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Area */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             المنطقة
             <input
@@ -114,7 +126,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Govern */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             المحافظة
             <input
@@ -125,7 +137,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Balance */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             الرصيد
             <input
@@ -136,7 +148,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Created At */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             تاريخ الإنشاء
             <input
@@ -147,7 +159,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Facebook */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Facebook
             <input
@@ -158,7 +170,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Facebook Link */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Facebook Link
             <input
@@ -169,7 +181,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Instagram */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Instagram
             <input
@@ -180,7 +192,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Instagram Link */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Instagram Link
             <input
@@ -191,7 +203,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Snapchat */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Snapchat
             <input
@@ -202,7 +214,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Snapchat Link */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Snapchat Link
             <input
@@ -213,7 +225,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Tiktok */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Tiktok
             <input
@@ -224,7 +236,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Tiktok Link */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Tiktok Link
             <input
@@ -235,7 +247,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Twitter */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Twitter
             <input
@@ -246,7 +258,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Twitter Link */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Twitter Link
             <input
@@ -257,7 +269,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
 
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Verified By
             <input
@@ -268,7 +280,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Updated At */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Updated At
             <input
@@ -279,7 +291,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Address */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Address
             <input
@@ -290,7 +302,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Profile Picture */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Profile Picture
             <input
@@ -301,7 +313,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Bio */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Bio
             <input
@@ -312,7 +324,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Date Of Birth */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Date Of Birth
             <input
@@ -323,7 +335,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Gender */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Gender
             <input
@@ -334,7 +346,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Preferred Language */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Preferred Language
             <input
@@ -345,7 +357,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Last Login */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Last Login
             <input
@@ -356,7 +368,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Account Status */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Account Status
             <input
@@ -368,7 +380,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         </div>
 
         {/* Account Type */}
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             permissions
             <select
@@ -390,7 +402,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
 
         {/* permissions */}
 
-        <div className="mb-4 grid col-span-2 ">
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             permissions
             <input
@@ -400,13 +412,14 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
             />
           </label>
         </div>
-
-        <button
-          type="submit"
-          className="px-6 py-2 mt-4 bg-blue-500 text-white rounded-lg"
-        >
-          حفظ التعديلات
-        </button>
+        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
+          <button
+            type="submit"
+            className="px-6 py-2 mt-4 bg-blue-500 text-white rounded-lg"
+          >
+            حفظ التعديلات
+          </button>
+        </div>
       </form>
       <Toaster position="top-center" reverseOrder={false} />
     </div>

@@ -62,7 +62,7 @@ const Contact = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-6 gap-3">
             {/* Phone */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label htmlFor="phone" className="text-gray-900 dark:text-white ">
                 رقم الهاتف
                 <input
@@ -74,7 +74,7 @@ const Contact = () => {
             </div>
 
             {/* Email */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label htmlFor="email" className="text-gray-900 dark:text-white ">
                 البريد الإلكترونى
                 <input
@@ -87,7 +87,7 @@ const Contact = () => {
 
             {/* WhatsApp */}
 
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="whatsapp"
                 className="text-gray-900 dark:text-white "
@@ -102,7 +102,7 @@ const Contact = () => {
             </div>
 
             {/* Facebook */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="facebook"
                 className="text-gray-900 dark:text-white "
@@ -117,7 +117,7 @@ const Contact = () => {
             </div>
 
             {/* Twitter */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="twitter"
                 className="text-gray-900 dark:text-white "
@@ -132,7 +132,7 @@ const Contact = () => {
             </div>
 
             {/* Instagram */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="instagram"
                 className="text-gray-900 dark:text-white "
@@ -147,7 +147,7 @@ const Contact = () => {
             </div>
 
             {/* LinkedIn */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="linkedin"
                 className="text-gray-900 dark:text-white "
@@ -162,7 +162,7 @@ const Contact = () => {
             </div>
 
             {/* Snapchat */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="snapchat"
                 className="text-gray-900 dark:text-white "
@@ -177,7 +177,7 @@ const Contact = () => {
             </div>
 
             {/* TikTok */}
-            <div className="col-span-2">
+            <div className="col-span-6 md:col-span-2">
               <label
                 htmlFor="tiktok"
                 className="text-gray-900 dark:text-white "

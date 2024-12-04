@@ -21,6 +21,7 @@ import NotificationsPanel from "./Dashboard/Pages/NotificationsPanel";
 import CreateAd from "./Dashboard/Pages/CreateAd";
 import Employees from "./Dashboard/Pages/Employees";
 import AdsList from "./Dashboard/Pages/AdsList";
+import DashboardHome from "./Dashboard/Pages/DashboardHome";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },

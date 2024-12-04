@@ -73,7 +73,6 @@ const Employees = () => {
             </table>
           </div>
         </div>
-      </div>
     </div>
   );
 };
