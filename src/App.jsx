@@ -22,6 +22,7 @@ import CreateAd from "./Dashboard/Pages/CreateAd";
 import Employees from "./Dashboard/Pages/Employees";
 import AdsList from "./Dashboard/Pages/AdsList";
 import DashboardHome from "./Dashboard/Pages/DashboardHome";
+import Privacy from "./Dashboard/Pages/Privacy";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
       { path: "createAd", element: <CreateAd /> },
       { path: "employees", element: <Employees /> },
       { path: "ads-list", element: <AdsList /> },
+      { path: "privacy", element: <Privacy /> },
     ],
   },
 ]);

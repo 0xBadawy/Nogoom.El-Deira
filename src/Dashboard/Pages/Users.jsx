@@ -10,6 +10,8 @@ const Users = () => {
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedGovern, setSelectedGovern] = useState("all");
 
+ 
+
   const filteredUsers = usersData.filter((user) => {
     const regionMatch =
       selectedRegion === "all" || user.govern === selectedRegion;
@@ -18,6 +20,19 @@ const Users = () => {
 
     return regionMatch && governMatch;
   });
+
+
+   const [currentPage, setCurrentPage] = useState(1);
+   const itemsPerPage = 20; 
+
+   const indexOfLastItem = currentPage * itemsPerPage;
+   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+   const currentItems = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+
+
+
 
   const [area, setArea] = useState("");
 
@@ -103,7 +118,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map(
+            {currentItems.map(
               (row, index) =>
                 row.role === "star" && (
                   <tr
@@ -136,6 +151,38 @@ const Users = () => {
             )}
           </tbody>
         </table>
+
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 mx-1 bg-gray-200 rounded-lg dark:bg-gray-700 disabled:opacity-50"
+          >
+            السابق
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`px-4 py-2 mx-1 rounded-lg ${
+                currentPage === index + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 dark:bg-gray-700"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 mx-1 bg-gray-200 rounded-lg dark:bg-gray-700 disabled:opacity-50"
+          >
+            التالي
+          </button>
+        </div>
       </div>
 
       {/* عرض وتعديل بيانات المستخدم */}

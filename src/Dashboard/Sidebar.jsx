@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoNotificationsSharp } from "react-icons/io5";
-import { MdVideoSettings } from "react-icons/md";
+import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
 import { RiContactsBook3Line } from "react-icons/ri";
 import { TbSpeakerphone } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -58,6 +58,11 @@ const Sidebar = () => {
       icon: <MdVideoSettings />,
       text: "الحملات الاعلانية",
       link: "/dashboard/ads-list",
+    },
+    {
+      icon: <MdOutlinePrivacyTip />,
+      text: "الشروط والخصوصية",
+      link: "/dashboard/privacy",
     },
 
     {
