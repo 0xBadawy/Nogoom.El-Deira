@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Navbar from "./Components/NavBar/Navbar";
+// import Navbar from "./Components/NavBar/Navbar";
 import Sidebar from "./Dashboard/Sidebar"; // Assuming Sidebar is a global component
 import Dashboard from "./Dashboard/Dashboard";
 import Apartments from "./Dashboard/Pages/Apartments";
@@ -20,6 +20,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import NotificationsPanel from "./Dashboard/Pages/NotificationsPanel";
 import CreateAd from "./Dashboard/Pages/CreateAd";
 import Employees from "./Dashboard/Pages/Employees";
+import AdsList from "./Dashboard/Pages/AdsList";
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: "notifications", element: <NotificationsPanel /> },
       { path: "createAd", element: <CreateAd /> },
       { path: "employees", element: <Employees /> },
+      { path: "ads-list", element: <AdsList /> },
     ],
   },
 ]);

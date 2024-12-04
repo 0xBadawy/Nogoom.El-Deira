@@ -47,49 +47,58 @@ const Users = () => {
             <tr className="border-b">
               <th className="py-2 px-4 text-right">الاسم</th>
               <th className="py-2 px-4 text-right hidden md:table-cell">
-                البريد الإلكتروني
-              </th>
-              <th className="py-2 px-4 text-right hidden md:table-cell">
-                تاريخ الإنشاء
-              </th>
-              <th className="py-2 px-4 text-right hidden md:table-cell">
-                الهاتف
-              </th>
-              <th className="py-2 px-4 text-right hidden md:table-cell">
-                الآيبان
-              </th>
-              <th className="py-2 px-4 text-right hidden md:table-cell">
                 المنطقة
               </th>
               <th className="py-2 px-4 text-right hidden md:table-cell">
                 المحافظة
               </th>
+              <th className="py-2 px-4 text-right hidden md:table-cell">
+                عدد الحملات
+              </th>
+              <th className="py-2 px-4 text-right hidden md:table-cell">
+                القبول
+              </th>
+              <th className="py-2 px-4 text-right hidden md:table-cell">
+                فئة النجم
+              </th>
+              <th className="py-2 px-4 text-right hidden md:table-cell">
+                الآيبان
+              </th>
             </tr>
           </thead>
           <tbody>
-            {usersData.map((row, index) => (
-              row.role === "star" && (
-              <tr
-                key={index}
-                onClick={() => setSelectedUser(row.Uid)}
-                className={`border-b ${
-                  row.Uid === selectedUser ? "bg-gray-200" : ""
-                }`}
-              >
-                <td className="py-2 px-4">{row.name}</td>
-                <td className="py-2 px-4 hidden md:table-cell">{row.email}</td>
-                <td className="py-2 px-4 hidden md:table-cell">
-                  {new Date(row.createdAt).toLocaleDateString("en-GB")}
-                </td>
-                <td className="py-2 px-4 hidden md:table-cell">{row.phone}</td>
-                <td className="py-2 px-4 hidden md:table-cell">{row.iban}</td>
-                <td className="py-2 px-4 hidden md:table-cell">{row.govern}</td>
-                <td className="py-2 px-4 hidden md:table-cell">
-                  {Area(row.area)}
-                </td>
-              </tr>
-              )
-            ))}
+            {usersData.map(
+              (row, index) =>
+                row.role === "star" && (
+                  <tr
+                    key={index}
+                    onClick={() => setSelectedUser(row.Uid)}
+                    className={`border-b ${
+                      row.Uid === selectedUser ? "bg-gray-200" : ""
+                    }`}
+                  >
+                    <td className="py-2 px-4">{row.name}</td>
+                    <td className="py-2 px-4 hidden md:table-cell">
+                      {row.govern}
+                    </td>
+                    <td className="py-2 px-4 hidden md:table-cell">
+                      {Area(row.area)}
+                    </td>
+                    <td className="py-2 px-4 hidden md:table-cell">
+                      {row.email}
+                    </td>
+                    <td className="py-2 px-4 hidden md:table-cell">
+                      {new Date(row.createdAt).toLocaleDateString("en-GB")}
+                    </td>
+                    <td className="py-2 px-4 hidden md:table-cell">
+                      {row.phone}
+                    </td>
+                    <td className="py-2 px-4 hidden md:table-cell">
+                      {row.iban}
+                    </td>
+                  </tr>
+                )
+            )}
           </tbody>
         </table>
       </div>

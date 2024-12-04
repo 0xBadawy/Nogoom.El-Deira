@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import {  useFieldArray, useForm } from "react-hook-form";
 import CheckboxList from "../../Components/CheckboxList";
 import ImageUploader from "../../Components/ImageUploader";
 import { storage } from "../../Configuration/Firebase";
@@ -7,12 +7,13 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { GovernmentData } from "../../Stars/SignUp/data";
 import { useDashboard } from "../../Context/DashboardContext";
 import CheckboxListName from "../../Components/CheckboxListName";
+import toast, { Toaster } from "react-hot-toast";
 
 const CreateAd = () => {
-  const { allUsers } = useDashboard();
+  const { allUsers, addADs } = useDashboard();
   const [GovernList, setGovernList] = useState([]);
   const [selectGovernorates, setSelectGovernorates] = useState([]);
-
+  const [data, setData] = useState(null);
   const [selectStars, setSelectStars] = useState([]);
   const [starsList, setStarsList] = useState([]);
 
@@ -20,6 +21,7 @@ const CreateAd = () => {
     register,
     handleSubmit,
     control,
+    reset,
     setValue,
     formState: { errors },
   } = useForm();
@@ -27,7 +29,17 @@ const CreateAd = () => {
   const [imageURL, setImageURL] = useState("");
 
   const onSubmit = (data) => {
-    console.log("Ad Data:", data);
+    const adData = {
+      ...data,
+      governorates: selectGovernorates,
+      stars: selectStars,
+      images: imageURL,
+    };
+    console.log(adData);
+    addADs(adData);
+    reset();
+    toast.success("تم إضافة الاعلان بنجاح!");
+
   };
 
   const handleGovernorateSelection = (item, isSelected) => {
@@ -55,7 +67,6 @@ const CreateAd = () => {
       return prevState;
     });
   };
-
 
   useEffect(() => {
     const stars = allUsers.filter((user) => user.role === "star");
@@ -116,7 +127,7 @@ const CreateAd = () => {
   }, [selectGovernorates, selectStars]);
 
   return (
-    <div className="p-8 dark:bg-gray-800">
+    <div className="p-2 md:p-8 dark:bg-gray-800">
       <h2 className="text-2xl mb-4 text-gray-800  font-bold">
         إضافة إعلان جديد
       </h2>
@@ -125,7 +136,7 @@ const CreateAd = () => {
         className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md"
       >
         <div className="grid grid-cols-6 gap-3 ">
-          <div className="col-span-4 grid grid-cols-6 gap-3">
+          <div className="md:col-span-3 col-span-6 grid grid-cols-6 gap-3">
             {/* عنوان الإعلان */}
             <div className="mb-4 col-span-6">
               <label
@@ -168,7 +179,7 @@ const CreateAd = () => {
             </div>
 
             {/* اختيار نوع الإعلان */}
-            <div className="mb-4 col-span-2">
+            <div className="mb-4 md:col-span-2 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="category"
@@ -198,7 +209,7 @@ const CreateAd = () => {
             </div>
 
             {/* تاريخ البداية */}
-            <div className="mb-4 col-span-2">
+            <div className="mb-4 md:col-span-2 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="startDate"
@@ -219,7 +230,7 @@ const CreateAd = () => {
             </div>
 
             {/* تاريخ النهاية */}
-            <div className="mb-4 col-span-2">
+            <div className="mb-4 md:col-span-2 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="endDate"
@@ -240,7 +251,7 @@ const CreateAd = () => {
             </div>
 
             {/* رفع الصور */}
-            <div className="mb-4">
+            <div className="mb-4 md:col-span-2 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="images"
@@ -262,7 +273,7 @@ const CreateAd = () => {
             </div>
           </div>
 
-          <div className="col-span-2 ">
+          <div className="md:col-span-2 col-span-6 ">
             {/* اختيار المنطقة */}
             <div className="mb-4">
               <label
@@ -343,10 +354,6 @@ const CreateAd = () => {
           </div>
         </div>
 
-        <div className="mb-4">
-          <input type="file" onChange={UploadImage} />
-        </div>
-
         <button
           type="submit"
           className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
@@ -354,6 +361,7 @@ const CreateAd = () => {
           إضافة الإعلان
         </button>
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

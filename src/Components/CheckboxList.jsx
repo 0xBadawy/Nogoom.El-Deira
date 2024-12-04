@@ -11,6 +11,11 @@ const CheckboxList = ({ items, selected, text }) => {
         });
     };
 
+    useEffect(() => {
+      setCheckedItems({});
+
+    },[items]);
+
 
 
 

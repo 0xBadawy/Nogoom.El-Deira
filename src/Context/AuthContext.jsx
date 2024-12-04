@@ -38,6 +38,7 @@ const AuthProvider = ({ children }) => {
           role: role,
           verified: false,
           verifiedBy: "",
+          ads: [],
           updatedAt: new Date().toISOString(),
           address: "",
           profilePicture: Man,

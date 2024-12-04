@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { MdVideoSettings } from "react-icons/md";
 import { RiContactsBook3Line } from "react-icons/ri";
 import { TbSpeakerphone } from "react-icons/tb";
 import { Link } from "react-router-dom";
@@ -52,6 +53,11 @@ const Sidebar = () => {
       icon: <TbSpeakerphone />,
       text: "انشاء اعلان",
       link: "/dashboard/createAd",
+    },
+    {
+      icon: <MdVideoSettings />,
+      text: "الحملات الاعلانية",
+      link: "/dashboard/ads-list",
     },
 
     {

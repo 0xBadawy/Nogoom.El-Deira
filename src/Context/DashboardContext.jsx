@@ -62,6 +62,50 @@ const DashboardProvider = ({ children }) => {
     fetchContact();
   };
 
+  const updateUserAds = async (users,adId) => {
+    const user = users.stars;
+    user.forEach(async (star) => {
+      const userDocRef = doc(db, "users", star.Uid);
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
+      const ads = userData.ads;
+      ads.push(adId);
+      await setDoc(userDocRef, { ...userData, ads
+      });
+
+    });    
+  };
+
+
+
+
+
+
+  const addADs = async (ad) => {
+    try {
+      const adsCollectionRef = collection(db, "advertisement");
+      const querySnapshot = await getDocs(adsCollectionRef);
+      const adCount = querySnapshot.size;
+      const newAdId = adCount + 1;
+      const adDocRef = doc(db, "advertisement", newAdId.toString());
+      await setDoc(adDocRef, { ...ad, id: newAdId });
+      updateUserAds(ad,newAdId);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const getAllAds = async () => {
+    const ads = [];
+    const querySnapshot = await getDocs(collection(db, "advertisement"));
+    querySnapshot.forEach((doc) => {
+      ads.push(doc.data());
+    });
+    return ads;
+  };
+
+
+
 
   
  
@@ -83,10 +127,13 @@ const DashboardProvider = ({ children }) => {
     <DashboardContext.Provider
       value={{
         currentUser,
-        allUsers,
+        addADs,    
+        allUsers,  
         updateUser,
         contact,
         updateContact,
+        error,
+        getAllAds,
       }}
     >
       {!loading && children}

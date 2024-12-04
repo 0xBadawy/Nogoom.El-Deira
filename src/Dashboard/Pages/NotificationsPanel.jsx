@@ -51,20 +51,7 @@ const NotificationsPanel = () => {
     <div className="grow p-8 dark:bg-gray-800">
       <h2 className="text-2xl mb-4 text-gray-800 font-bold">لوحة الإشعارات</h2>
 
-      {/* الفلتر */}
-      <div className="flex gap-4 mb-6">
-        <select
-          value={filterType}
-          onChange={(e) => setFilterType(e.target.value)}
-          className="p-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-        >
-          <option value="all">جميع الإشعارات</option>
-          <option value="success">الإشعارات الناجحة</option>
-          <option value="error">الإشعارات الفاشلة</option>
-          <option value="info">إشعارات المعلومات</option>
-        </select>
-      </div>
-
+    
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
         <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
           الإشعارات
