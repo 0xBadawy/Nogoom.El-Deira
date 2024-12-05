@@ -25,7 +25,7 @@ const Sidebar = () => {
     },
     {
       icon: <FaUsers />,
-      text: "المستخدمين",
+      text: "الموظفين",
       link: "/dashboard/employees",
     },
     {
@@ -51,12 +51,12 @@ const Sidebar = () => {
     },
     {
       icon: <TbSpeakerphone />,
-      text: "انشاء اعلان",
+      text: " اضافة حملة ",
       link: "/dashboard/createAd",
     },
     {
       icon: <MdVideoSettings />,
-      text: "الحملات الاعلانية",
+      text: "عرض الحملات",
       link: "/dashboard/ads-list",
     },
     {
@@ -93,7 +93,7 @@ const Sidebar = () => {
             {phone ? (
               <Link
                 to={item.link}
-                className="flex items-center text-center md:space-x-4 gap-3 flex-col justify-center"
+                className="flex items-center text-center md:space-x-4 gap-3  justify-c enter"
               >
                 {item.icon}
                 <span className="text-xs md:inline text-center">

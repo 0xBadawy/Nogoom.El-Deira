@@ -38,7 +38,7 @@ const CreateAd = () => {
     console.log(adData);
     addADs(adData);
     reset();
-    toast.success("تم إضافة الاعلان بنجاح!");
+    toast.success("تم إضافة  حملة بنجاح!");
 
   };
 
@@ -128,9 +128,7 @@ const CreateAd = () => {
 
   return (
     <div className="p-2 md:p-8 dark:bg-gray-800">
-      <h2 className="text-2xl mb-4 text-gray-800  font-bold">
-        إضافة إعلان جديد
-      </h2>
+      <h2 className="text-2xl mb-4 text-gray-800  font-bold">اضافة حملة جديدة </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md"

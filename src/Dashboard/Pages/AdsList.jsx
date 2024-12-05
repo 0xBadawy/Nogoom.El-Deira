@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDashboard } from "../../Context/DashboardContext";
+import { GovernmentData } from "../../Stars/SignUp/data";
 
 const AdsList = () => {
   const { getAllAds } = useDashboard();
@@ -7,7 +8,10 @@ const AdsList = () => {
   const [ads, setAds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20; // عدد العناصر لكل صفحة
+const [selectedRegion, setSelectedRegion] = useState("الكل");
+const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
 
+  
   useEffect(() => {
     getAllAds().then((data) => {
       setAds(data);
@@ -18,6 +22,19 @@ const AdsList = () => {
     if (!areas) return "";
     return Array.isArray(areas) ? areas.join(", ") : areas;
   };
+
+
+  const filteredAds = ads.filter((ad) => {
+  const regionMatch = selectedRegion === "الكل" || ad.region === selectedRegion;
+  const governorateMatch =
+    selectedGovernorate === "الكل" ||
+    (ad.governorates &&
+      Array.isArray(ad.governorates) &&
+      ad.governorates.includes(selectedGovernorate));
+  return regionMatch && governorateMatch;
+});
+
+
 
   // حساب العناصر المعروضة في الصفحة الحالية
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -30,6 +47,42 @@ const AdsList = () => {
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">الحملات الاعلانية</h2>
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+        <div className="flex gap-4 mb-4">
+          {/* قائمة المنطقة */}
+          <select
+            value={selectedRegion}
+            onChange={(e) => {
+              setSelectedRegion(e.target.value);
+              setSelectedGovernorate("الكل"); // إعادة تعيين المحافظة عند تغيير المنطقة
+            }}
+            className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
+          >
+            <option value="الكل">كل المناطق</option>
+            {GovernmentData.map((region, index) => (
+              <option key={index} value={region.name}>
+                {region.name}
+              </option>
+            ))}
+          </select>
+
+          {/* قائمة المحافظة */}
+          <select
+            value={selectedGovernorate}
+            onChange={(e) => setSelectedGovernorate(e.target.value)}
+            className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
+            disabled={selectedRegion === "الكل"} // تعطيل إذا لم يتم اختيار منطقة
+          >
+            <option value="الكل">كل المحافظات</option>
+            {GovernmentData.filter((region) => region.name === selectedRegion)
+              .flatMap((region) => region.subGovernments)
+              .map((gov, index) => (
+                <option key={index} value={gov}>
+                  {gov}
+                </option>
+              ))}
+          </select>
+        </div>
+
         <table className="min-w-full table-auto">
           <thead>
             <tr className="border-b">
@@ -41,7 +94,7 @@ const AdsList = () => {
             </tr>
           </thead>
           <tbody>
-            {currentAds.map((row, index) => (
+            {filteredAds.map((row, index) => (
               <tr
                 key={index}
                 onClick={() => setSelected(row.id)}

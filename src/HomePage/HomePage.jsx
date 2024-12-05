@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeroSection from "./Landing/hero/HeroSection";
 import Navbar from "../Components/navigation/Navbar";
 import DownloadApp from "./Landing/DownloadApp";
@@ -10,7 +10,17 @@ import DownloadSection from "./Landing/DownloadSection";
 import CampaignStats from "./Landing/CampaignStats";
 import ContactSection from "./Landing/ContactSection";
 const HomePage = () => {
+ 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     window.scrollBy({
+  //       top: 1, // Adjust the speed of scrolling
+  //       behavior: "smooth",
+  //     });
+  //   }, 20); // Adjust the interval time (in ms)
 
+  //   return () => clearInterval(interval); // Cleanup interval on component unmount
+  // }, []);
 
 
   return (
@@ -24,7 +34,7 @@ const HomePage = () => {
       <DownloadSection/>
       <CampaignStats/>
       <ContactSection/>
-      <div className="h-[1000px]"></div>
+      <div className="h-[100px]"></div>
     </div>
   );
 };

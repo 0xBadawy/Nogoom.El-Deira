@@ -104,6 +104,17 @@ const DashboardProvider = ({ children }) => {
     return ads;
   };
 
+  const updatePrivacy = async (privacy) => {
+    const privacyDocRef = doc(db, "websiteData", "privacy");
+    await setDoc(privacyDocRef, { ...privacy, updatedAt: new Date() });
+  };
+
+  const getPrivacy = async () => {
+    const privacyDocRef = doc(db, "websiteData", "privacy");
+    const privacyDoc = await getDoc(privacyDocRef);
+    return privacyDoc.data();
+  };
+
 
 
 
@@ -134,6 +145,8 @@ const DashboardProvider = ({ children }) => {
         updateContact,
         error,
         getAllAds,
+        updatePrivacy,
+        getPrivacy,
       }}
     >
       {!loading && children}

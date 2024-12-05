@@ -53,6 +53,7 @@ const router = createBrowserRouter([
       { path: "employees", element: <Employees /> },
       { path: "ads-list", element: <AdsList /> },
       { path: "privacy", element: <Privacy /> },
+      { index: true, element: <DashboardHome /> },
     ],
   },
 ]);
