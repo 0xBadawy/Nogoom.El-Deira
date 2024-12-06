@@ -13,11 +13,11 @@ const SignUpStatus = () => {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-center h-screen bg-gradient-to-r from-blue-100 to-indigo-200">
+    <div className="relative flex items-center justify-center p- h-screen bg-gradient-to-r from-blue-100 to-indigo-200">
       {/* Confetti effect */}
       <Confetti />
 
-      <div className="bg-white p-10 rounded-lg shadow-xl max-w-lg w-full relative z-10">
+      <div className="bg-white p-3 rounded-lg shadow-xl max-w-lg w-full relative z-10">
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-indigo-600 mb-2">
             🎉 مرحباً بك في منصتنا! 🎉
