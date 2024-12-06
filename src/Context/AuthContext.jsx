@@ -76,6 +76,15 @@ const AuthProvider = ({ children }) => {
     }
   };
   
+  const updateUser = async (userId, data) => {
+    try {
+      await setDoc(doc(db, "users", userId), data, { merge: true });
+      return { success: true };
+    } catch (error) {
+      console.error("Error updating user data:", error.message);
+      return { success: false, error: error.message };
+    }
+  }
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -121,6 +130,7 @@ const AuthProvider = ({ children }) => {
         currentUser,
         signUp,
         logOut,
+        updateUser,
         login,
         getUserId,
         getUserEmail,

@@ -3,34 +3,45 @@ import AddEmployees from "./AddEmployees";
 import { useDashboard } from "../../Context/DashboardContext";
 import { confirmAlert } from "react-confirm-alert";
 import toast, { Toaster } from "react-hot-toast";
+import EditEmployees from "./EditEmployees";
 
 const Employees = () => {
   const [usersData, setUsersData] = useState([]);
   const { allUsers, updateUser, deleteUserFromDB } = useDashboard();
-  const [area, setArea] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
-
-  async function getlastSeen(lastSeen) {
-    // Check if lastSeen exists and handle appropriately
-    if (lastSeen) {
-      const lastSeenDate = lastSeen.toDate(); // Convert Firebase Timestamp to Date
-      return lastSeenDate.toLocaleString(); // Format the date
-    } else {
-      return "Not available"; // Fallback for missing lastSeen
-    }
-  }
+  const [selectedUserData, setSelectedUserData] = useState({});
+  const [displayEditForm, setDisplayEditForm] = useState(false);
+  
+  
 
   useEffect(() => {
     const users = allUsers;
-    console.log("usAers", users);
-
-    // sort user by lastSeen
-    users.sort((a, b) => {
-      return new Date(b.lastSeen) - new Date(a.lastSeen);
-    });
-
     setUsersData(users);
+    sortData();
   }, [allUsers]);
+
+  const sortData = () => {
+    setUsersData((prev) =>
+      prev.sort((a, b) => {
+        return b.lastSeen - a.lastSeen;
+      })
+    );
+  };
+
+  const afterUpdate =()=>{
+    setDisplayEditForm(false);
+    setSelectedUser(null);
+    
+    
+  }
+
+
+  const HandelUserUpdateData = () => {
+    const user = usersData.find((user) => user.Uid === selectedUser);
+    setSelectedUserData(user);
+    setDisplayEditForm(true);  
+  }
+
 
   const HandelUserDelete = () => {
     confirmAlert({
@@ -42,7 +53,7 @@ const Employees = () => {
           onClick: () => {
             deleteUserFromDB(selectedUser);
             setSelectedUser(null);
-
+            sortData();
             toast.success("تم حذف الموظف بنجاح");
           },
         },
@@ -165,24 +176,28 @@ const Employees = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2">
-                 <div className="flex items-center mb-4">
-  <span className="w-32">تاريخ أخر ظهور</span>
-  <span>
-    {(() => {
-      const user = usersData.find((user) => user.Uid === selectedUser);
-      const lastSeen = user?.lastSeen;
+                  <div className="flex items-center mb-4">
+                    <span className="w-32">تاريخ أخر ظهور</span>
+                    <span>
+                      {(() => {
+                        const user = usersData.find(
+                          (user) => user.Uid === selectedUser
+                        );
+                        const lastSeen = user?.lastSeen;
 
-      if (!lastSeen) return "غير متاح";
+                        if (!lastSeen) return "غير متاح";
 
-      // Handle Firebase Timestamp, raw number, or Date
-      const date =
-        lastSeen.toDate?.() || // If it's a Firebase Timestamp
-        (typeof lastSeen === "number" ? new Date(lastSeen) : lastSeen); // If it's a raw number or already a Date
+                        // Handle Firebase Timestamp, raw number, or Date
+                        const date =
+                          lastSeen.toDate?.() || // If it's a Firebase Timestamp
+                          (typeof lastSeen === "number"
+                            ? new Date(lastSeen)
+                            : lastSeen); // If it's a raw number or already a Date
 
-      return date.toLocaleString();
-    })()}
-  </span>
-</div>
+                        return date.toLocaleString();
+                      })()}
+                    </span>
+                  </div>
 
                   <div className="flex items-center mb-4">
                     <span className="w-32">تاريخ انشاء الحساب</span>
@@ -208,18 +223,33 @@ const Employees = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-3">
                 <button
                   className="bg-red-500 text-white px-4 py-2 rounded-lg"
                   onClick={HandelUserDelete}
                 >
                   حذف المستخدم
                 </button>
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                  onClick={HandelUserUpdateData}
+                >
+                  تعديل المستخدم
+                </button>
               </div>
+             
             </div>
           </div>
         )}
       </div>
+      <div className={`${displayEditForm?"":"hidden"}`}>
+        <EditEmployees
+          userData={selectedUserData}
+          onUserUpdated={afterUpdate}
+        />
+        ;
+      </div>
+
       <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
