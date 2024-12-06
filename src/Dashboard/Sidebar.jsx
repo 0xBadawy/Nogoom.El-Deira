@@ -51,12 +51,12 @@ const Sidebar = () => {
     },
     {
       icon: <TbSpeakerphone />,
-      text: " اضافة حملة ",
+      text: " إنشاء حملة ",
       link: "/dashboard/createAd",
     },
     {
       icon: <MdVideoSettings />,
-      text: "عرض الحملات",
+      text: " الحملات",
       link: "/dashboard/ads-list",
     },
     {

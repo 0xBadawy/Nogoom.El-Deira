@@ -114,6 +114,40 @@ const AddEmployees = () => {
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
         </div>
+        {/* اسم المستخدم */}
+
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            اسم المستخدم
+          </label>
+          <input
+            type="text"
+            {...register("username", { required: "اسم المستخدم مطلوب" })}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="أدخل اسم المستخدم"
+          />
+          {errors.username && (
+            <p className="text-red-500 text-sm">{errors.username.message}</p>
+          )}
+        </div>
+
+        {/* الهاتف */}
+
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            {" "}
+            رقم الهاتف
+          </label>
+          <input
+            type="text"
+            {...register("phone", { required: "رقم الهاتف مطلوب" })}
+            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="أدخل رقم الهاتف"
+          />
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone.message}</p>
+          )}
+        </div>
 
         {/* حقل كلمة المرور */}
         <div>
@@ -159,6 +193,12 @@ const AddEmployees = () => {
           )}
         </div>
 
+        <input
+          type="hidden"
+          {...register("lastSeen")}
+          value=""
+        />
+
         {/* Role Field */}
         <div>
           <label className="block text-gray-700 font-medium mb-1">
@@ -170,7 +210,7 @@ const AddEmployees = () => {
           >
             <option value="">اختر الصلاحيات</option>
             <option value="admin">
-              <span >مدير</span> (كل الصلاحيات)
+              <span>مدير</span> (كل الصلاحيات)
             </option>
             <option value="editor">
               <span>محرر</span>

@@ -14,7 +14,7 @@ const DashboardHome = () => {
   const data = [
     {
       icon: <FaBullhorn className="text-3xl text-blue-500" />,
-      title: "إجمالي الإعلانات",
+      title: "إجمالي الحملات",
       value: "1,250",
       color: "text-blue-500",
     },
