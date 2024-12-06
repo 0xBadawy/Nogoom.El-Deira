@@ -58,13 +58,14 @@ const AuthProvider = ({ children }) => {
           email: user.email,
           Uid: Uid,
           ...userData,
-          createdAt: new Date().toISOString(),
+          createdAt: new Date(),
           role: role,
           verified: false,
           verifiedBy: "",
           profilePicture: Man,
           bio: "",
           permissions: [],
+          lastSeen: new Date(),
         });
       }
 

@@ -6,43 +6,55 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Employees = () => {
   const [usersData, setUsersData] = useState([]);
-  const { allUsers, updateUser,deleteUserFromDB } = useDashboard();
+  const { allUsers, updateUser, deleteUserFromDB } = useDashboard();
   const [area, setArea] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
+
+  async function getlastSeen(lastSeen) {
+    // Check if lastSeen exists and handle appropriately
+    if (lastSeen) {
+      const lastSeenDate = lastSeen.toDate(); // Convert Firebase Timestamp to Date
+      return lastSeenDate.toLocaleString(); // Format the date
+    } else {
+      return "Not available"; // Fallback for missing lastSeen
+    }
+  }
 
   useEffect(() => {
     const users = allUsers;
     console.log("usAers", users);
+
+    // sort user by lastSeen
+    users.sort((a, b) => {
+      return new Date(b.lastSeen) - new Date(a.lastSeen);
+    });
+
     setUsersData(users);
   }, [allUsers]);
 
   const HandelUserDelete = () => {
- 
+    confirmAlert({
+      title: "تأكيد الحذف",
+      message: "هل متأكد من حذف هذا المستخدم؟",
+      buttons: [
+        {
+          label: "نعم",
+          onClick: () => {
+            deleteUserFromDB(selectedUser);
+            setSelectedUser(null);
 
-     confirmAlert({
-     title: "تأكيد الحذف",
-     message: "هل متأكد من حذف هذا المستخدم؟",
-     buttons: [
-       {
-         label: "نعم",
-         onClick: () => {
-             deleteUserFromDB(selectedUser);
-    setSelectedUser(null);
-
-           toast.success("تم حذف الموظف بنجاح");
-         },
-       },
-       {
-         label: "إلغاء",
-         onClick: () => {
-           toast.error("تم إلغاء العملية");
-         },
-       },      
-     ],
-   });
-
-
-  }
+            toast.success("تم حذف الموظف بنجاح");
+          },
+        },
+        {
+          label: "إلغاء",
+          onClick: () => {
+            toast.error("تم إلغاء العملية");
+          },
+        },
+      ],
+    });
+  };
 
   return (
     <div className="grow md:p-8 p-3 dark:bg-gray-800">
@@ -60,16 +72,18 @@ const Employees = () => {
                 <th className="py-2 px-4 text-right hidden md:table-cell">
                   البريد الإلكتروني
                 </th>
-                <th className="py-2 px-4 text-right hidden md:table-cell">
-                  تاريخ الإنشاء
+                <th className="py-2 px-4 text-right  md:table-cell">
+                  اخر ظهور{" "}
                 </th>
+
                 <th className="py-2 px-4 text-right ">الوظيفية</th>
               </tr>
             </thead>
             <tbody>
               {usersData.map(
                 (row, index) =>
-                  (row.role != "star" && !row.isDeleted) && (
+                  row.role != "star" &&
+                  !row.isDeleted && (
                     <tr
                       key={index}
                       onClick={() => setSelectedUser(row.Uid)}
@@ -81,8 +95,8 @@ const Employees = () => {
                       <td className="py-2 px-4 hidden md:table-cell">
                         {row.email}
                       </td>
-                      <td className="py-2 px-4 hidden md:table-cell">
-                        {new Date(row.createdAt).toLocaleDateString("en-GB")}
+                      <td className="py-2 px-4  md:table-cell">
+                        <p>{row?.lastSeen.toDate().toLocaleString()}</p>
                       </td>
 
                       <td className="py-2 px-4 ">
@@ -98,8 +112,8 @@ const Employees = () => {
             </tbody>
           </table>
         </div>
-          {selectedUser && (
-        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+        {selectedUser && (
+          <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
             <div>
               <h3 className="text-lg font-semibold mb-4">بيانات المستخدم</h3>
               <div className="flex flex-col md:flex-row">
@@ -151,24 +165,45 @@ const Employees = () => {
                   </div>
                 </div>
                 <div className="md:w-1/2">
+                 <div className="flex items-center mb-4">
+  <span className="w-32">تاريخ أخر ظهور</span>
+  <span>
+    {(() => {
+      const user = usersData.find((user) => user.Uid === selectedUser);
+      const lastSeen = user?.lastSeen;
+
+      if (!lastSeen) return "غير متاح";
+
+      // Handle Firebase Timestamp, raw number, or Date
+      const date =
+        lastSeen.toDate?.() || // If it's a Firebase Timestamp
+        (typeof lastSeen === "number" ? new Date(lastSeen) : lastSeen); // If it's a raw number or already a Date
+
+      return date.toLocaleString();
+    })()}
+  </span>
+</div>
+
                   <div className="flex items-center mb-4">
-                    <span className="w-32"> تاريخ انشاء الحساب </span>
+                    <span className="w-32">تاريخ انشاء الحساب</span>
                     <span>
-                      {new Date(
-                        usersData.find(
+                      {(() => {
+                        const user = usersData.find(
                           (user) => user.Uid === selectedUser
-                        ).createdAt
-                      ).toLocaleDateString("en-GB")}
-                    </span>
-                  </div>
-                  <div className="flex items-center mb-4">
-                    <span className="w-32"> تاريخ أخر ظهور </span>
-                    <span>
-                      {new Date(
-                        usersData.find(
-                          (user) => user.Uid === selectedUser
-                        ).lastSeen
-                      ).toLocaleDateString("en-GB")}
+                        );
+                        const createdAt = user?.createdAt;
+
+                        if (!createdAt) return "غير متاح";
+
+                        // Handle Firebase Timestamp, raw number, or Date
+                        const date =
+                          createdAt.toDate?.() || // If it's a Firebase Timestamp
+                          (typeof createdAt === "number"
+                            ? new Date(createdAt)
+                            : createdAt); // If it's a raw number or already a Date
+
+                        return date.toLocaleString();
+                      })()}
                     </span>
                   </div>
                 </div>
@@ -182,11 +217,10 @@ const Employees = () => {
                 </button>
               </div>
             </div>
-        </div>
-          )}
+          </div>
+        )}
       </div>
-            <Toaster position="top-center" reverseOrder={false} />
-
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };
