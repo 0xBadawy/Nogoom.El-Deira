@@ -172,7 +172,7 @@ const AddEmployees = () => {
         </div>
 
         {/* حقل تأكيد كلمة المرور */}
-        <div>
+        {/* <div>
           <label className="block text-gray-700 font-medium mb-1">
             تأكيد كلمة المرور
           </label>
@@ -197,7 +197,7 @@ const AddEmployees = () => {
           type="hidden"
           {...register("lastSeen")}
           value=""
-        />
+        /> */}
 
         {/* Role Field */}
         <div>

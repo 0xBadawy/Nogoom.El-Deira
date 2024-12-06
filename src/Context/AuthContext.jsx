@@ -74,6 +74,7 @@ const AuthProvider = ({ children }) => {
       return { success: false, error: error.message };
     }
   };
+  
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);

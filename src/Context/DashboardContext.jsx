@@ -131,6 +131,15 @@ const DashboardProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  const deleteUserFromDB =  async  (Uid)=>{
+    const userDocRef = doc(db, "users", Uid);
+    await setDoc(userDocRef, {isDeleted:true});
+    getAllUsers();
+  }
+
+     
+    
+
 
 
 
@@ -147,6 +156,7 @@ const DashboardProvider = ({ children }) => {
         getAllAds,
         updatePrivacy,
         getPrivacy,
+        deleteUserFromDB
       }}
     >
       {!loading && children}
