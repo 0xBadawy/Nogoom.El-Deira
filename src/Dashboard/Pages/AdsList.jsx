@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDashboard } from "../../Context/DashboardContext";
 import { GovernmentData } from "../../Stars/SignUp/data";
+import AdDetails from "./AdDetails";
 
 const AdsList = () => {
   const { getAllAds } = useDashboard();
@@ -15,6 +16,7 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
   useEffect(() => {
     getAllAds().then((data) => {
       setAds(data);
+      console.log(data);
     });
   }, []);
 
@@ -146,6 +148,10 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
             التالي
           </button>
         </div>
+      </div>
+      <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 max-w-screen">
+        <h2 className="text-2xl mb-4">تفاصيل الحملة</h2>
+        {selected && <AdDetails ads={ads} selected={selected} />}
       </div>
     </div>
   );

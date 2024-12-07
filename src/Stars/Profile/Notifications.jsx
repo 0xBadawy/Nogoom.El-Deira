@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import { Card, CardHeader, CardTitle, CardContent } from "@shadcn/ui";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([

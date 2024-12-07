@@ -5,10 +5,13 @@ import Notifications from "./Notifications";
 import ProAccount from "./ProAccount";
 import { MdPreview, MdVerified, MdPublic, MdSettings, MdNotifications, MdStar } from "react-icons/md";
 import { useAuth } from "../../Context/AuthContext";
+import { IoMdHome } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
   const { getUserData } = useAuth();
+  const  navigate =useNavigate();
   const [verified, setVerified] = useState(true);
   const [userData, setUserData] = useState(null);
 
@@ -29,7 +32,7 @@ const Profile = () => {
     { id: "publicProfile", label: "الصفحة الشخصية", icon: MdPublic },
     { id: "accountSettings", label: "إعدادات الحساب", icon: MdSettings },
     { id: "notifications", label: "الإشعارات", icon: MdNotifications },
-    { id: "proAccount", label: "PRO Account", icon: MdStar },
+    // { id: "proAccount", label: "PRO Account", icon: MdStar },
   ];
 
   return (
@@ -40,14 +43,25 @@ const Profile = () => {
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="flex flex-col items-center mb-6">
                 <img
-                  src={userData?.profilePicture || "https://via.placeholder.com/150"}
+                  src={
+                    userData?.profilePicture ||
+                    "https://via.placeholder.com/150"
+                  }
                   alt="Profile"
                   className="w-32 h-32 rounded-full border-4 border-indigo-300 mb-4"
                 />
-                <h2 className="text-2xl font-bold text-indigo-900">{userData?.name || "User Name"}</h2>
-                <p className="text-indigo-600">{userData?.email || "user@example.com"}</p>
+                <h2 className="text-2xl font-bold text-indigo-900">
+                  {userData?.name || "User Name"}
+                </h2>
+                <p className="text-indigo-600">
+                  {userData?.email || "user@example.com"}
+                </p>
               </div>
-              <div className={`mb-6 p-3 rounded-lg text-center ${verified ? "bg-green-100" : "bg-red-100"}`}>
+              <div
+                className={`mb-6 p-3 rounded-lg text-center ${
+                  verified ? "bg-green-100" : "bg-red-100"
+                }`}
+              >
                 <p className="flex items-center justify-center gap-2 font-semibold text-indigo-900">
                   {verified ? (
                     <>
@@ -77,6 +91,13 @@ const Profile = () => {
                     {item.label}
                   </button>
                 ))}
+                <button
+                  className="w-full mb-2 px-4 text-indigo-700 hover:bg-indigo-100 py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center"
+                  onClick={() => navigate("/")}
+                >
+                  <IoMdHome className="mr-2" size={20} />
+                  الصفحة الرئيسية
+                </button>
               </nav>
             </div>
           </aside>
@@ -86,6 +107,8 @@ const Profile = () => {
               {activePage === "accountSettings" && <AccountSettings />}
               {activePage === "notifications" && <Notifications />}
               {activePage === "proAccount" && <ProAccount />}
+
+              {/* button to home page */}
             </div>
           </main>
         </div>

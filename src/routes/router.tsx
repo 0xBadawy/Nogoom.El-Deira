@@ -27,6 +27,8 @@ const Privacy = React.lazy(() => import('../Dashboard/Pages/Privacy'));
 const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
 const Contact = React.lazy(() => import('../Dashboard/Pages/Contact'));
 const Unauthorized = React.lazy(() => import('../pages/Unauthorized'));
+const AdListPage  = React.lazy(() => import('../Pages/ads/AdListPage'));
+const AdDetailPage = React.lazy(() => import("../Pages/ads/AdDetailPage"));
 
 const withSuspense = (Component: React.ComponentType) => (
   <Suspense fallback={<LoadingSpinner />}>
@@ -46,6 +48,19 @@ export const router = createBrowserRouter([
     element: withSuspense(HomePage),
     errorElement: <ErrorBoundary />,
   },
+  {
+    path: "/ads",
+    element: withSuspense(AdListPage),
+    errorElement: <ErrorBoundary />,
+  },
+{
+  path: "/ads",
+  children: [
+    { index: true, element: <AdListPage /> },
+    { path: ":id", element: <AdDetailPage /> },
+  ],
+},
+
   {
     path: "/login",
     element: withSuspense(LoginPage),

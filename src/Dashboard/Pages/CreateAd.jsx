@@ -21,6 +21,7 @@ const CreateAd = () => {
   const [uploadImageProgress, setuploadImageProgress] = useState(0); // حالة لنسبة الرفع
   const [uploadVideoProgress, setuploadVideoProgress] = useState(0); // حالة لنسبة الرفع
 
+  const [loading,setLoading]= useState(false);
   const {
     register,
     handleSubmit,
@@ -39,7 +40,9 @@ const CreateAd = () => {
       governorates: selectGovernorates,
       stars: selectStars,
       images: imageURL,
-      video: videoURL
+      video: videoURL,
+      views:0
+
     };
     console.log(adData);
     addADs(adData);
@@ -102,6 +105,8 @@ const CreateAd = () => {
   });
 
  const handleUpload = (e) => {
+          setLoading(true)
+
    setuploadImageProgress(0); // تحديث الحالة
 
    const files = e.target.files; // الحصول على قائمة الملفات
@@ -158,6 +163,8 @@ const CreateAd = () => {
            default:
              break;
          }
+                 setLoading(false)
+
        },
        async () => {
          // عند إكمال الرفع بنجاح
@@ -170,6 +177,9 @@ const CreateAd = () => {
          } catch (err) {
            console.error("Error getting download URL:", err);
          }
+
+                 setLoading(false)
+
        }
      );
    });
@@ -177,6 +187,7 @@ const CreateAd = () => {
 
 
  const handleVideoUpload = (e) => {
+  setLoading(true)
   const file = e.target.files[0]; // الحصول على الفيديو
   if (!file) {
     console.error("No video selected");
@@ -225,6 +236,8 @@ const CreateAd = () => {
         default:
           break;
       }
+        setLoading(false)
+
     },
     async () => {
       // عند إكمال الرفع بنجاح
@@ -236,6 +249,8 @@ const CreateAd = () => {
       } catch (err) {
         console.error("Error getting download URL:", err);
       }
+              setLoading(false)
+
     }
   );
 };
@@ -505,13 +520,25 @@ const CreateAd = () => {
             </div>
           </div>
         </div>
+        {
+        loading ? (
+          <button
+            type="submit"
+            className="w-full p-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700"
+            disabled
+          >
+            جاري الإضافة...
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="w-full p-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700"
+          >
+            إضافة الإعلان
+          </button>
+        )}
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
-        >
-          إضافة الإعلان
-        </button>
+       
       </form>
       <Toaster position="top-center" reverseOrder={false} />
     </div>
