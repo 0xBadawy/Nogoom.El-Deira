@@ -1,15 +1,34 @@
-import {
-  FaUser,
-  FaBullhorn,
-  FaChartLine,
-  FaEye,
-} from "react-icons/fa";
+import { FaUser, FaBullhorn, FaChartLine, FaEye } from "react-icons/fa";
+import { useAuth } from "../../Context/AuthContext";
+import { useEffect, useState } from "react";
 
 const DashboardHome = () => {
-  const user = {
+  const { getUserData } = useAuth();
+  const [UserData, setUserData] = useState({
     name: "أحمد علي",
-    jobTitle: "مدير ",
-  };
+    role: "مدير ",
+  });
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserData();
+        setUserData(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [getUserData]);
+
+  const dataText =(name)=>{
+    if(name=="admin") return "مدير";
+    if(name=="editor") return "محرر";
+    if (name == "viewer") return "مشرف";
+
+
+
+  }
 
   const data = [
     {
@@ -47,7 +66,6 @@ const DashboardHome = () => {
   return (
     <div className="p- bg-gradient-to-br from-gray-100 to-gray-50 min-h-screen">
       {/* شريط جانبي */}
-    
 
       {/* محتوى الصفحة */}
       <div className=" p-6">
@@ -56,9 +74,9 @@ const DashboardHome = () => {
           <FaUser className="text-4xl text-gray-700" />
           <div>
             <h2 className="text-2xl font-bold text-gray-700">
-              مرحباً، {user.name}
+              مرحباً، {UserData.name}
             </h2>
-            <p className="text-gray-500">الوظيفة: {user.jobTitle}</p>
+            <p className="text-gray-500">الوظيفة: {dataText(UserData.role)}</p>
           </div>
         </div>
 

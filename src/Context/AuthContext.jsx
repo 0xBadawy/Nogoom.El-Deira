@@ -7,10 +7,12 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../Configuration/Firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
+import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+
   const [currentUser, setcurrentUser] = useState(null);
   const [currentUserData, setcurrentUserData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -69,6 +71,8 @@ const AuthProvider = ({ children }) => {
           lastSeen: new Date(),
         });
       }
+      await auth.signOut();
+      window.location.href = "/login";
 
       return { success: true };
     } catch (error) {

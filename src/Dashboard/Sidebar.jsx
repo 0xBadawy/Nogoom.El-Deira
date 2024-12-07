@@ -14,9 +14,19 @@ import { IoNotificationsSharp } from "react-icons/io5";
 import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
 import { RiContactsBook3Line } from "react-icons/ri";
 import { TbSpeakerphone } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const {logOut} = useAuth();
+  const handelLogOut = async () => {
+    await logOut();
+    navigate("/login");
+  }
+
+
   const [menuItems] = useState([
     {
       icon: <FaTachometerAlt />,
@@ -133,6 +143,7 @@ const Sidebar = () => {
         <button
           type="button"
           className="flex items-center space-x-4 pb-5 gap-3 hover:bg-gray-300"
+          onClick={handelLogOut}
         >
           <BiLogOut size={28} />
           <span className="hidden md:inline text-lg">تسجيل الخروج</span>

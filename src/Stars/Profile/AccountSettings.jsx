@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const AccountSettings = () => {
   const { getUserData } = useAuth();
@@ -26,32 +31,29 @@ const AccountSettings = () => {
     privacyPolicy: false,
     verified: false,
     verifiedBy: "",
-    // بيانات إضافية
-    updatedAt: "", // تاريخ آخر تحديث للبيانات
-    address: "", // العنوان
-    profilePicture: "", // رابط صورة الملف الشخصي
-    bio: "", // نبذة عن المستخدم
-    dateOfBirth: "", // تاريخ الميلاد
-    gender: "", // الجنس (ذكر/أنثى)
-    preferredLanguage: "", // اللغة المفضلة
-    lastLogin: "", // تاريخ آخر تسجيل دخول
-    accountStatus: "", // حالة الحساب (نشط، معلق، إلخ)
-    accountType: "", // نوع الحساب (عادي، بريميوم)
+    updatedAt: "",
+    address: "",
+    profilePicture: "",
+    bio: "",
+    dateOfBirth: "",
+    gender: "",
+    preferredLanguage: "",
+    lastLogin: "",
+    accountStatus: "",
+    accountType: "",
     notificationSettings: {
-      // إعدادات الإشعارات
       email: true,
       sms: false,
       push: true,
     },
-    referralCode: "", // كود الإحالة
-    referredBy: "", // المستخدم الذي قام بالإحالة
-    permissions: [], // صلاحيات المستخدم
+    referralCode: "",
+    referredBy: "",
+    permissions: [],
   });
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUserData();
-      console.log(data);
       setUserData(data);
     };
     fetchData();
@@ -79,140 +81,109 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-3xl font-bold text-indigo-900">إعدادات الحساب</h2>
-      <p className="mt-4 text-gray-600">
-        يمكنك هنا تحديث بيانات حسابك بما في ذلك التفاصيل الشخصية وصورتك الشخصية.
-      </p>
-
-      {/* صورة الملف الشخصي */}
-      <div className="mt-6 flex flex-col items-center">
-        <img
-          className="object-cover w-32 h-32 p-1 rounded-full ring-2 ring-indigo-300 mb-4"
-          src={userData.profilePicture}
-          alt="Profile"
-        />
-        <label className="block text-sm font-medium text-indigo-900 mb-2">
-          تغيير الصورة الشخصية
-        </label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleProfilePictureChange}
-          className="block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-        />
-      </div>
-
-      <form
-        onSubmit={handleSubmit}
-        className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6"
-      >
-        {/* باقي الحقول */}
-        <div>
-          <label className="block text-sm font-medium text-indigo-900">
-            الاسم الكامل
-          </label>
-          <input
-            type="text"
-            value={userData.name}
-            onChange={(e) => handleInputChange("name", e.target.value)}
-            className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-indigo-900">
-            البريد الإلكتروني
-          </label>
-          <input
-            type="email"
-            value={userData.email}
-            onChange={(e) => handleInputChange("email", e.target.value)}
-            className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
-          />
-        </div>
-
-        {/* Phone */}
-        <div>
-          <label className="block text-sm font-medium text-indigo-900">
-            رقم الهاتف
-          </label>
-          <input
-            type="tel"
-            value={userData.phone}
-            onChange={(e) => handleInputChange("phone", e.target.value)}
-            className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
-          />
-        </div>
-
-        {/* Area */}
-        <div>
-          <label className="block text-sm font-medium text-indigo-900">
-            المنطقة
-          </label>
-          <input
-            type="text"
-            value={userData.area.join(", ")}
-            onChange={(e) =>
-              handleInputChange(
-                "area",
-                e.target.value.split(",").map((item) => item.trim())
-              )
-            }
-            className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
-          />
-        </div>
-
-        {/* Social Media */}
-        {["facebook", "instagram", "snapchat", "tiktok", "twitter"].map(
-          (platform) => (
-            <div key={platform}>
-              <label className="block text-sm font-medium text-indigo-900">
-                {platform.charAt(0).toUpperCase() + platform.slice(1)}
-              </label>
-              <input
-                type="text"
-                value={userData[platform]}
-                onChange={(e) => handleInputChange(platform, e.target.value)}
-                className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-3xl font-bold text-indigo-900">إعدادات الحساب</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="mb-6 text-gray-600">
+          يمكنك هنا تحديث بيانات حسابك بما في ذلك التفاصيل الشخصية وصورتك الشخصية.
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex flex-col items-center mb-6">
+            <img
+              className="object-cover w-32 h-32 rounded-full ring-4 ring-indigo-300 mb-4"
+              src={userData.profilePicture || "https://via.placeholder.com/150"}
+              alt="Profile"
+            />
+            <Label htmlFor="profilePicture" className="cursor-pointer">
+              <span className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300">
+                تغيير الصورة الشخصية
+              </span>
+              <Input
+                id="profilePicture"
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePictureChange}
+                className="hidden"
+              />
+            </Label>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="name">الاسم الكامل</Label>
+              <Input
+                id="name"
+                value={userData.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
               />
             </div>
-          )
-        )}
-
-        {/* Social Links */}
-        {[
-          "facebookLink",
-          "instagramLink",
-          "snapchatLink",
-          "tiktokLink",
-          "twitterLink",
-        ].map((link) => (
-          <div key={link}>
-            <label className="block text-sm font-medium text-indigo-900">
-              {link.replace("Link", " رابط")}
-            </label>
-            <input
-              type="url"
-              value={userData[link]}
-              onChange={(e) => handleInputChange(link, e.target.value)}
-              className="mt-2 p-2 w-full border border-indigo-300 rounded-lg"
+            <div className="space-y-2">
+              <Label htmlFor="email">البريد الإلكتروني</Label>
+              <Input
+                id="email"
+                type="email"
+                value={userData.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">رقم الهاتف</Label>
+              <Input
+                id="phone"
+                value={userData.phone}
+                onChange={(e) => handleInputChange("phone", e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="area">المنطقة</Label>
+              <Input
+                id="area"
+                value={userData.area.join(", ")}
+                onChange={(e) => handleInputChange("area", e.target.value.split(",").map(item => item.trim()))}
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="bio">نبذة عنك</Label>
+            <Textarea
+              id="bio"
+              value={userData.bio}
+              onChange={(e) => handleInputChange("bio", e.target.value)}
+              rows={4}
             />
           </div>
-        ))}
-
-        {/* باقي الكود نفسه */}
-        <div className="col-span-2">
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700"
-          >
-            حفظ التغييرات
-          </button>
-        </div>
-      </form>
-    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {["facebook", "instagram", "snapchat", "tiktok", "twitter"].map((platform) => (
+              <div key={platform} className="space-y-2">
+                <Label htmlFor={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</Label>
+                <Input
+                  id={platform}
+                  value={userData[platform]}
+                  onChange={(e) => handleInputChange(platform, e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {["facebookLink", "instagramLink", "snapchatLink", "tiktokLink", "twitterLink"].map((link) => (
+              <div key={link} className="space-y-2">
+                <Label htmlFor={link}>{link.replace("Link", " رابط")}</Label>
+                <Input
+                  id={link}
+                  type="url"
+                  value={userData[link]}
+                  onChange={(e) => handleInputChange(link, e.target.value)}
+                />
+              </div>
+            ))}
+          </div>
+          <Button type="submit" className="w-full">حفظ التغييرات</Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 
 export default AccountSettings;
+

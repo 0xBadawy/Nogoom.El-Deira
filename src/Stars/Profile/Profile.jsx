@@ -3,20 +3,19 @@ import PublicProfile from "./PublicProfile";
 import AccountSettings from "./AccountSettings";
 import Notifications from "./Notifications";
 import ProAccount from "./ProAccount";
-import { MdPreview } from "react-icons/md";
-import { MdVerified } from "react-icons/md";
-import Navbar from "../../Components/NavBar/Navbar";
+import { MdPreview, MdVerified, MdPublic, MdSettings, MdNotifications, MdStar } from "react-icons/md";
 import { useAuth } from "../../Context/AuthContext";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
   const { getUserData } = useAuth();
-
   const [verified, setVerified] = useState(true);
+  const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUserData();
-      console.log(data.verified);
+      setUserData(data);
       setVerified(data.verified);
     };
     fetchData();
@@ -26,80 +25,74 @@ const Profile = () => {
     setActivePage(page);
   };
 
+  const menuItems = [
+    { id: "publicProfile", label: "الصفحة الشخصية", icon: MdPublic },
+    { id: "accountSettings", label: "إعدادات الحساب", icon: MdSettings },
+    { id: "notifications", label: "الإشعارات", icon: MdNotifications },
+    { id: "proAccount", label: "PRO Account", icon: MdStar },
+  ];
+
   return (
-    <>
-      <div className="bg-gradient-to-r pt-10 from-indigo-50 via-indigo-100 to-indigo-200 w-full flex flex-col gap-5 px-4 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-        <aside className="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
-          <div className="sticky flex flex-col gap-4 p-6 text-sm border-r border-indigo-300 top-12 bg-white rounded-lg shadow-lg">
-            <h2 className="pl-3 mb-4 text-2xl font-semibold text-indigo-900">
-              {"القائمة"}
-            </h2>
-
-            {!verified ? (
-              <h3 className="pl-3 mb-2 text-lg flex items-center justify-center gap-2 font-semibold text-indigo-900 bg-red-200 rounded-lg h-12 text-center p-2">
-                <p>حسابك قيد المراجعة</p>
-                <MdPreview size={26} />
-              </h3>
-            ) : (
-              <h3 className="pl-3 mb-2 text-lg flex items-center justify-center gap-2 font-semibold text-indigo-900 bg-[#12b0714d] rounded-lg h-12 text-center p-2">
-                <p> تم توثيق حسابك</p>
-                <MdVerified size={26} />
-              </h3>
-            )}
-
-            <button
-              className={`px-4 py-3 font-bold rounded-full ${
-                activePage === "publicProfile"
-                  ? "bg-indigo-900 text-white"
-                  : "text-indigo-700 hover:text-indigo-900 hover:border hover:border-indigo-300"
-              }`}
-              onClick={() => handleTabChange("publicProfile")}
-            >
-              {"الصفحة الشخصية"}
-            </button>
-            <button
-              className={`px-4 py-3 font-bold rounded-full ${
-                activePage === "accountSettings"
-                  ? "bg-indigo-900 text-white"
-                  : "text-indigo-700 hover:text-indigo-900 hover:border hover:border-indigo-300"
-              }`}
-              onClick={() => handleTabChange("accountSettings")}
-            >
-              {"إعدادات الحساب"}
-            </button>
-            <button
-              className={`px-4 py-3 font-bold rounded-full ${
-                activePage === "notifications"
-                  ? "bg-indigo-900 text-white"
-                  : "text-indigo-700 hover:text-indigo-900 hover:border hover:border-indigo-300"
-              }`}
-              onClick={() => handleTabChange("notifications")}
-            >
-              {"الإشعارات"}
-            </button>
-            <button
-              className={`px-4 py-3 font-bold rounded-full ${
-                activePage === "proAccount"
-                  ? "bg-indigo-900 text-white"
-                  : "text-indigo-700 hover:text-indigo-900 hover:border hover:border-indigo-300"
-              }`}
-              onClick={() => handleTabChange("proAccount")}
-            >
-              PRO Account
-            </button>
-          </div>
-        </aside>
-        <main className="w-full min-h-screen py-6 md:w-2/3 lg:w-3/4">
-          <div className="p-6 md:p-8 bg-white shadow-lg rounded-lg">
-            {activePage === "publicProfile" && <PublicProfile />}
-            {activePage === "accountSettings" && <AccountSettings />}
-            {activePage === "notifications" && <Notifications />}
-            {activePage === "proAccount" && <ProAccount />}
-          </div>
-        </main>
+    <div className="min-h-screen bg-gradient-to-r from-indigo-50 via-indigo-100 to-indigo-200">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <aside className="lg:w-1/4">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <div className="flex flex-col items-center mb-6">
+                <img
+                  src={userData?.profilePicture || "https://via.placeholder.com/150"}
+                  alt="Profile"
+                  className="w-32 h-32 rounded-full border-4 border-indigo-300 mb-4"
+                />
+                <h2 className="text-2xl font-bold text-indigo-900">{userData?.name || "User Name"}</h2>
+                <p className="text-indigo-600">{userData?.email || "user@example.com"}</p>
+              </div>
+              <div className={`mb-6 p-3 rounded-lg text-center ${verified ? "bg-green-100" : "bg-red-100"}`}>
+                <p className="flex items-center justify-center gap-2 font-semibold text-indigo-900">
+                  {verified ? (
+                    <>
+                      <MdVerified className="text-green-500" size={24} />
+                      تم توثيق حسابك
+                    </>
+                  ) : (
+                    <>
+                      <MdPreview className="text-red-500" size={24} />
+                      حسابك قيد المراجعة
+                    </>
+                  )}
+                </p>
+              </div>
+              <nav>
+                {menuItems.map((item) => (
+                  <button
+                    key={item.id}
+                    className={`w-full mb-2 px-4 py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center ${
+                      activePage === item.id
+                        ? "bg-indigo-900 text-white"
+                        : "text-indigo-700 hover:bg-indigo-100"
+                    }`}
+                    onClick={() => handleTabChange(item.id)}
+                  >
+                    <item.icon className="mr-2" size={20} />
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+          <main className="lg:w-3/4">
+            <div className="bg-white shadow-lg rounded-lg p-6 md:p-8">
+              {activePage === "publicProfile" && <PublicProfile />}
+              {activePage === "accountSettings" && <AccountSettings />}
+              {activePage === "notifications" && <Notifications />}
+              {activePage === "proAccount" && <ProAccount />}
+            </div>
+          </main>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default Profile;
+

@@ -13,7 +13,7 @@ import { useAuth } from "../Context/AuthContext";
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {login} =useAuth();
+  const {login,logOut} =useAuth();
   const redirectPath = location.state?.path || "/";
 
   const [error, setError] = useState(null);
@@ -34,7 +34,9 @@ const LoginPage = () => {
   const onFormSubmit = async (data) => {
     // console.log(data);
     login(data.email,data.password)
-    alert("done")
+    .then(()=>{
+      navigate(redirectPath);
+    })
    
   };
 
@@ -126,7 +128,7 @@ const LoginPage = () => {
 
             <div className="text-center">
               <Link to="/" className="text-blue-500 hover:underline">
-                {" تصفح الشقق كزائر بدون تسجيل الدخول"}
+                {" تصفح الموقع كزائر بدون تسجيل الدخول"}
               </Link>
             </div>
           </div>

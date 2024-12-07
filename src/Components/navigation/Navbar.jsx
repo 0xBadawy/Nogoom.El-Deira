@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { NavLinks } from "./NavLinks";
 import { UserProfile } from "./UserProfile";
@@ -9,6 +9,8 @@ import { useScrollPosition } from "../../hooks/useScrollPosition";
 import LogoWhite from "../../assets/Images/Logo/Deira-logo.png";
 import LogoPrimary from "../../assets/Images/Logo/Deira-logo_colored.png";
 import Image from "../../assets/Images/LoginStar.jpg";
+import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const pages = [
   { path: "/", label: "الرئيسية" },
@@ -17,13 +19,41 @@ const pages = [
   { path: "/stars", label: "النجوم" },
 ];
 
-const mockUser = {
-  name: "Mohamed Badawy",
-  image: Image,
-  isAuthenticated: false,
-};
-
 const Navbar = ({ color }) => {
+
+  const navigate = useNavigate();
+  const [mockUser, setMockUser] = useState({
+    name: "",
+    image: Image,
+    isAuthenticated: false,
+    role:"star"
+
+  });
+
+
+    const { getUserData, logOut } = useAuth();
+  
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserData();
+        setMockUser({
+          name: userData.name,
+          image: userData.profilePicture,
+          isAuthenticated: true,
+          role: userData.role,
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [getUserData]);
+
+
+
+
   const scrollPosition = useScrollPosition();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -34,11 +64,23 @@ const Navbar = ({ color }) => {
   };
 
   const handleLogout = () => {
-    console.log("Logging out...");
-  };
+    
+    logOut();
+    setMockUser({
+      name: "",
+      image: Image,
+      isAuthenticated:false,
+      role:"star"
+    });
+
+    navigate("/login");
+    
+  }
 
   const handleLogin = () => {
     console.log("Logging in...");
+    navigate("/login");
+
   };
 
   return (

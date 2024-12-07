@@ -46,11 +46,11 @@ export const router = createBrowserRouter([
     element: withSuspense(HomePage),
     errorElement: <ErrorBoundary />,
   },
-    {
-      path: '/login',
-      element: withSuspense(LoginPage),
-      errorElement: <ErrorBoundary />,
-    },
+  {
+    path: "/login",
+    element: withSuspense(LoginPage),
+    errorElement: <ErrorBoundary />,
+  },
   {
     path: "/signup",
     element: withSuspense(SignUp),
@@ -58,17 +58,17 @@ export const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: withProtection(Profile, ["user"]),
+    element: withProtection(Profile, ["star"]),
     errorElement: <ErrorBoundary />,
   },
   {
     path: "/dashboard",
-    element: withProtection(DashboardLayout, ["admin", "manager", "watcher"]),
+    element: withProtection(DashboardLayout, ["admin", "editor", "viewer"]),
     errorElement: <ErrorBoundary />,
     children: [
       {
         index: true,
-        element: withProtection(DashboardHome, ["admin", "manager"]),
+        element: withProtection(DashboardHome, ["admin", "editor", "viewer"]),
       },
       {
         path: "users",
@@ -76,15 +76,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "apartments",
-        element: withProtection(Apartments, ["admin", "manager"]),
+        element: withProtection(Apartments, ["admin", "editor"]),
       },
       {
         path: "notifications",
-        element: withProtection(NotificationsPanel, ["admin", "manager"]),
+        element: withProtection(NotificationsPanel, ["admin", "editor"]),
       },
       {
         path: "createAd",
-        element: withProtection(CreateAd, ["admin", "watcher"]),
+        element: withProtection(CreateAd, ["admin", "viewer"]),
       },
       {
         path: "employees",
@@ -92,19 +92,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "ads-list",
-        element: withProtection(AdsList, ["admin", "manager"]),
+        element: withProtection(AdsList, ["admin", "editor"]),
       },
       {
         path: "privacy",
-        element: withProtection(Privacy, ["admin", "manager"]),
+        element: withProtection(Privacy, ["admin", "editor"]),
       },
       {
         path: "contact",
-        element: withProtection(Contact, ["admin", "manager"]),
+        element: withProtection(Contact, ["admin", "editor"]),
       },
       {
         path: "website_data",
-        element: withProtection(WebsiteData, ["admin", "manager"]),
+        element: withProtection(WebsiteData, ["admin", "editor"]),
       },
       {
         path: "unauthorized",

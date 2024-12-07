@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../Context/AuthContext";
 import { confirmAlert } from "react-confirm-alert";
 import toast, { Toaster } from "react-hot-toast";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddEmployees = () => {
   const {
@@ -27,26 +28,32 @@ const AddEmployees = () => {
     }
   };
 
-  const onSubmit = async (formData) => {
-    confirmAlert({
-      title: "تأكيد الحفظ",
-      message: "هل انت متأكد من إضافة هذا المستخدم؟",
-      buttons: [
-        {
-          label: "نعم",
-          onClick: async () => {
-            handleUserSubmission(formData);
-          },
-        },
-        {
-          label: "إلغاء",
-          onClick: () => {
-            toast.error("تم إلغاء العملية");
-          },
-        },
-      ],
-    });
-  };
+ const onSubmit = async (formData) => {
+   confirmAlert({
+     title: "تأكيد الحفظ",
+     message: "هل انت متأكد من إضافة هذا المستخدم؟",
+     buttons: [
+       {
+         label: "نعم",
+         onClick: async () => {
+           try {
+             await handleUserSubmission(formData);
+             toast.success("تم إضافة المستخدم بنجاح!");
+           } catch (error) {
+             toast.error("حدث خطأ أثناء إضافة المستخدم.");
+           }
+         },
+       },
+       {
+         label: "إلغاء",
+         onClick: () => {
+           toast.error("تم إلغاء العملية");
+         },
+       },
+     ],
+   });
+ };
+
 
   const handleUserSubmission = async (formData) => {
     setError(null);
@@ -200,6 +207,7 @@ const AddEmployees = () => {
         </div>
 
         {/* Submit Button */}
+        <Toaster position="top-center" reverseOrder={false} />
         <button
           type="submit"
           disabled={loading}
@@ -209,7 +217,6 @@ const AddEmployees = () => {
         </button>
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </form>
-      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

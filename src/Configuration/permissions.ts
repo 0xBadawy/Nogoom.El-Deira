@@ -1,22 +1,22 @@
 // Define roles and their hierarchical relationships
 export const ROLES = {
-  admin: ["admin", "manager", "user"],
-  manager: ["manager", "user"],
-  user: ["user"],
-  watcher: ["watcher"],
+  admin: ["admin", "editor", "star"],
+  editor: ["editor", "star"],
+  star: ["star"],
+  viewer: ["viewer"],
 };
 
 // Define route permissions
 export const ROUTE_PERMISSIONS = [
-  { path: "/dashboard", requiredRoles: ["admin", "manager"] },
-  { path: "/dashboard/home", requiredRoles: ["admin", "manager"] },
-  { path: "/dashboard/users", requiredRoles: ["admin", "manager"] },
-  { path: "/dashboard/apartments", requiredRoles: ["admin", "manager"] },
-  { path: "/dashboard/notifications", requiredRoles: ["admin", "manager"] },
-  { path: "/dashboard/createAd", requiredRoles: ["admin","watcher"] },
-  { path: "/dashboard/website_data", requiredRoles: ["admin", "manager"] },
+  { path: "/dashboard", requiredRoles: ["admin", "editor","viewer"] },
+  { path: "/dashboard/home", requiredRoles: ["admin", "editor"] },
+  { path: "/dashboard/users", requiredRoles: ["admin", "editor"] },
+  { path: "/dashboard/apartments", requiredRoles: ["admin", "editor"] },
+  { path: "/dashboard/notifications", requiredRoles: ["admin", "editor"] },
+  { path: "/dashboard/createAd", requiredRoles: ["admin","viewer"] },
+  { path: "/dashboard/website_data", requiredRoles: ["admin", "editor"] },
   { path: "/dashboard/employees", requiredRoles: ["admin"] },
-  { path: "/dashboard/ads-list", requiredRoles: ["admin", "manager"] },
+  { path: "/dashboard/ads-list", requiredRoles: ["admin", "editor"] },
   { path: "/dashboard/privacy", requiredRoles: ["admin"] },
-  { path: "/dashboard/contact", requiredRoles: ["admin", "manager"] },
+  { path: "/dashboard/contact", requiredRoles: ["admin", "editor"] },
 ];

@@ -2,10 +2,12 @@ import React, { useState, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import PropTypes from "prop-types";
 import { useClickOutside } from "../../hooks/useClickOutside";
+import { useNavigate } from "react-router-dom";
 
 export const UserProfile = ({ user, onLogout, isMobile = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useClickOutside(dropdownRef, () => setIsOpen(false));
 
@@ -57,6 +59,33 @@ export const UserProfile = ({ user, onLogout, isMobile = false }) => {
           >
             تسجيل الخروج
           </button>
+
+          <button
+            onClick={() => {
+              setIsOpen(false);
+             navigate("/profile");
+            }}
+            className="w-full text-right px-4 py-2 text-gray-700 hover:bg-gray-100 
+                     transition-colors duration-200"
+          >
+            الملف الشخصي
+          </button>
+
+        {
+          user.role!=="star" && (
+            <button
+              onClick={() => {
+                setIsOpen(false);
+               navigate("/dashboard");
+              }}
+              className="w-full text-right px-4 py-2 text-gray-700 hover:bg-gray-100 
+                       transition-colors duration-200"
+            >
+              لوحة التحكم للمشرف
+            </button>
+          )
+        }
+          
         </div>
       )}
     </div>
