@@ -17,12 +17,17 @@ import DashboardProvider from "./Context/DashboardContext";
 import WebsiteData from "./Dashboard/Pages/WebsiteData";
 import Contact from "./Dashboard/Pages/Contact";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import Unauthorized from "./Pages/Unauthorized";
 import NotificationsPanel from "./Dashboard/Pages/NotificationsPanel";
 import CreateAd from "./Dashboard/Pages/CreateAd";
 import Employees from "./Dashboard/Pages/Employees";
 import AdsList from "./Dashboard/Pages/AdsList";
 import DashboardHome from "./Dashboard/Pages/DashboardHome";
 import Privacy from "./Dashboard/Pages/Privacy";
+import ProtectedRoute from "./Configuration/ProtectedRoute";
+
+const userRole = ""; // مثال: يمكن استبدالها ببيانات جلب حقيقية.
+
 
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
@@ -44,19 +49,106 @@ const router = createBrowserRouter([
       </ThemeContextProvider>
     ),
     children: [
-      { path: "users", element: <Users /> },
-      { path: "apartments", element: <Apartments /> },
-      { path: "website_data", element: <WebsiteData /> },
-      { path: "Contact", element: <Contact /> },
-      { path: "notifications", element: <NotificationsPanel /> },
-      { path: "createAd", element: <CreateAd /> },
-      { path: "employees", element: <Employees /> },
-      { path: "ads-list", element: <AdsList /> },
-      { path: "privacy", element: <Privacy /> },
-      { index: true, element: <DashboardHome /> },
+      {
+        path: "users",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]} userRole={userRole}>
+            <Users />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "apartments",
+        element: (
+          <ProtectedRoute
+            allowedRoles={["admin", "premium"]}
+            userRole={userRole}
+          >
+            <Apartments />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "website_data",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]} userRole={userRole}>
+            <WebsiteData />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "Contact",
+        element: (
+          <ProtectedRoute
+            allowedRoles={["normal", "premium", "admin"]}
+            userRole={userRole}
+          >
+            <Contact />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "notifications",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]} userRole={userRole}>
+            <NotificationsPanel />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "createAd",
+        element: (
+          <ProtectedRoute
+            allowedRoles={["premium", "admin"]}
+            userRole={userRole}
+          >
+            <CreateAd />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "employees",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]} userRole={userRole}>
+            <Employees />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "ads-list",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]} userRole={userRole}>
+            <AdsList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "privacy",
+        element: (
+          <ProtectedRoute
+            allowedRoles={["normal", "premium", "admin"]}
+            userRole={userRole}
+          >
+            <Privacy />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        index: true,
+        element: (
+          <ProtectedRoute
+            allowedRoles={["admin", "premium"]}
+            userRole={userRole}
+          >
+            <DashboardHome />
+          </ProtectedRoute>
+        ),
+      },
+      { path: "unauthorized", element: <Unauthorized /> },
     ],
   },
 ]);
+
 
 const App = () => {
   return (
