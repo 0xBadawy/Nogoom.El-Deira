@@ -1,0 +1,120 @@
+import React, { Suspense } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import { LoadingSpinner } from '../components/LoadingSpinner';
+import { ErrorBoundary } from '../components/ErrorBoundary';
+import { ProtectedRoute } from './ProtectedRoute';
+
+// Lazy load components
+const HomePage = React.lazy(() => import('../HomePage/HomePage'));
+const LoginPage = React.lazy(() => import('../Stars/LoginPage'));
+const SignUp = React.lazy(() => import('../Stars/SignUp/SignUp'));
+const Profile = React.lazy(() => import("../Stars/Profile/Profile"));
+const DashboardHome = React.lazy(
+  () => import("../Dashboard/Pages/DashboardHome")
+);
+const DashboardLayout = React.lazy(
+  () => import("../Dashboard/DashboardLayout")
+);
+
+// Lazy load dashboard pages
+const Users = React.lazy(() => import('../Dashboard/Pages/Users'));
+const Apartments = React.lazy(() => import('../Dashboard/Pages/Apartments'));
+const NotificationsPanel = React.lazy(() => import('../Dashboard/Pages/NotificationsPanel'));
+const CreateAd = React.lazy(() => import('../Dashboard/Pages/CreateAd'));
+const Employees = React.lazy(() => import('../Dashboard/Pages/Employees'));
+const AdsList = React.lazy(() => import('../Dashboard/Pages/AdsList'));
+const Privacy = React.lazy(() => import('../Dashboard/Pages/Privacy'));
+const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
+const Contact = React.lazy(() => import('../Dashboard/Pages/Contact'));
+const Unauthorized = React.lazy(() => import('../pages/Unauthorized'));
+
+const withSuspense = (Component: React.ComponentType) => (
+  <Suspense fallback={<LoadingSpinner />}>
+    <Component />
+  </Suspense>
+);
+
+const withProtection = (Component: React.ComponentType, roles?: UserRole[]) => (
+  <ProtectedRoute requiredRoles={roles}>
+    {withSuspense(Component)}
+  </ProtectedRoute>
+);
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: withSuspense(HomePage),
+    errorElement: <ErrorBoundary />,
+  },
+    {
+      path: '/login',
+      element: withSuspense(LoginPage),
+      errorElement: <ErrorBoundary />,
+    },
+  {
+    path: "/signup",
+    element: withSuspense(SignUp),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/profile",
+    element: withProtection(Profile, ["user"]),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/dashboard",
+    element: withProtection(DashboardLayout, ["admin", "manager", "watcher"]),
+    errorElement: <ErrorBoundary />,
+    children: [
+      {
+        index: true,
+        element: withProtection(DashboardHome, ["admin", "manager"]),
+      },
+      {
+        path: "users",
+        element: withProtection(Users, ["admin"]),
+      },
+      {
+        path: "apartments",
+        element: withProtection(Apartments, ["admin", "manager"]),
+      },
+      {
+        path: "notifications",
+        element: withProtection(NotificationsPanel, ["admin", "manager"]),
+      },
+      {
+        path: "createAd",
+        element: withProtection(CreateAd, ["admin", "watcher"]),
+      },
+      {
+        path: "employees",
+        element: withProtection(Employees, ["admin"]),
+      },
+      {
+        path: "ads-list",
+        element: withProtection(AdsList, ["admin", "manager"]),
+      },
+      {
+        path: "privacy",
+        element: withProtection(Privacy, ["admin", "manager"]),
+      },
+      {
+        path: "contact",
+        element: withProtection(Contact, ["admin", "manager"]),
+      },
+      {
+        path: "website_data",
+        element: withProtection(WebsiteData, ["admin", "manager"]),
+      },
+      {
+        path: "unauthorized",
+        element: <Unauthorized />,
+      },
+    ],
+  },
+  //   {
+  //     path: '/unauthorized',
+  //     element: withSuspense(Unauthorized),
+  //     errorElement: <ErrorBoundary />,
+  //   },
+]);

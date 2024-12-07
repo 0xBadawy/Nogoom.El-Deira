@@ -1,15 +1,15 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useAuthContext } from "./Context/AuthContext"; // Assuming your AuthContext has a user role
 
-const ProtectedRoute = ({ allowedRoles, userRole }) => {
-  if (!userRole) {
-    return <Navigate to="/login" replace />;
+const ProtectedRoute = ({ children, requiredRole }) => {
+  const { user } = useAuthContext();
+
+  if (!user || (requiredRole && user.role !== requiredRole)) {
+    // Redirect to login page if not authenticated or role doesn't match
+    return <Navigate to="/login" />;
   }
 
-  if (!allowedRoles.includes(userRole)) {
-    return <Navigate to="/Dashboard/unauthorized" replace />;
-  }
-
-  return <Outlet />;
+  return children;
 };
 
-export default ProtectedRoute; // تأكد من أنك تصدّر كمكون افتراضي
+export default ProtectedRoute;

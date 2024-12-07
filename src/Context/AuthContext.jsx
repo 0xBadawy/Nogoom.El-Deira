@@ -12,6 +12,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setcurrentUser] = useState(null);
+  const [currentUserData, setcurrentUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const Man =
     "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FAvatar%2Fman.png?alt=media&token=dc8c1abd-015b-4ead-8d43-aa6abf80a5e9";
@@ -113,6 +114,7 @@ const AuthProvider = ({ children }) => {
     if (!currentUser) return null;
     const userDocRef = doc(db, "users", currentUser.uid);
     const userDoc = await getDoc(userDocRef); // Use 'getDoc' here instead of calling 'get' directly on doc
+    // console.log(userDoc)
     return userDoc.data();
   };
 
@@ -120,6 +122,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setcurrentUser(user);
       setLoading(false);
+      // getUserData();
     });
     return unsubscribe;
   }, []);
