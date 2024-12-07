@@ -8,14 +8,18 @@ import { GovernmentData } from "../../Stars/SignUp/data";
 import { useDashboard } from "../../Context/DashboardContext";
 import CheckboxListName from "../../Components/CheckboxListName";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../../Context/AuthContext";
 
 const CreateAd = () => {
   const { allUsers, addADs } = useDashboard();
   const [GovernList, setGovernList] = useState([]);
+  const {getUserEmail} = useAuth();
   const [selectGovernorates, setSelectGovernorates] = useState([]);
   const [data, setData] = useState(null);
   const [selectStars, setSelectStars] = useState([]);
   const [starsList, setStarsList] = useState([]);
+  const [uploadImageProgress, setuploadImageProgress] = useState(0); // حالة لنسبة الرفع
+  const [uploadVideoProgress, setuploadVideoProgress] = useState(0); // حالة لنسبة الرفع
 
   const {
     register,
@@ -26,7 +30,8 @@ const CreateAd = () => {
     formState: { errors },
   } = useForm();
 
-  const [imageURL, setImageURL] = useState("");
+  const [imageURL, setImageURL] = useState([]);
+  const [videoURL,setVideoURL] = useState("");
 
   const onSubmit = (data) => {
     const adData = {
@@ -34,12 +39,12 @@ const CreateAd = () => {
       governorates: selectGovernorates,
       stars: selectStars,
       images: imageURL,
+      video: videoURL
     };
     console.log(adData);
     addADs(adData);
     reset();
     toast.success("تم إضافة  حملة بنجاح!");
-
   };
 
   const handleGovernorateSelection = (item, isSelected) => {
@@ -96,30 +101,144 @@ const CreateAd = () => {
     name: "links", // اسم الحقل في الفورم
   });
 
-  const UploadImage = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+ const handleUpload = (e) => {
+   setuploadImageProgress(0); // تحديث الحالة
 
-    const storageRef = ref(storage, file.name); // إنشاء مرجع للملف
-    const uploadTask = uploadBytesResumable(storageRef, file); // رفع الملف
-    console.log("uploadTask");
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-      },
-      (error) => {
-        console.error("Upload failed:", error);
-      },
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        setImageURL(downloadURL); // تحديث الرابط في الحالة
-        console.log("File available at", downloadURL);
+   const files = e.target.files; // الحصول على قائمة الملفات
+   if (!files.length) {
+    //  console.error("No files selected");
+     return;
+   }
+
+   Array.from(files).forEach((file) => {
+    let fileName = "noUser";
+    const userEmail = getUserEmail();
+    if (userEmail) fileName = userEmail;
+    const storageRef = ref(storage, `${fileName}/images/${file.name}`); // مرجع لكل ملف
+     const uploadTask = uploadBytesResumable(storageRef, file); // بدء رفع الملف
+
+     uploadTask.on(
+       "state_changed",
+       (snapshot) => {
+         // تحديث نسبة الرفع
+         const progress =
+           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+         console.log(
+           `Upload progress for ${file.name}: ${progress.toFixed(2)}%`
+         );
+
+         setuploadImageProgress(progress); // تحديث الحالة
+
+         switch (snapshot.state) {
+           case "paused":
+             console.log(`Upload for ${file.name} is paused`);
+             break;
+           case "running":
+             console.log(`Upload for ${file.name} is running`);
+             break;
+           default:
+             break;
+         }
+       },
+       (error) => {
+         // التعامل مع الأخطاء أثناء الرفع
+         console.error(`Upload failed for ${file.name}:`, error.message);
+         switch (error.code) {
+           case "storage/unauthorized":
+             console.error(
+               "User does not have permission to access the object"
+             );
+             break;
+           case "storage/canceled":
+             console.error("User canceled the upload");
+             break;
+           case "storage/unknown":
+             console.error("Unknown error occurred", error.serverResponse);
+             break;
+           default:
+             break;
+         }
+       },
+       async () => {
+         // عند إكمال الرفع بنجاح
+         try {
+           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+           console.log(`File available at ${downloadURL}`);
+            setImageURL((prevState) => [...prevState, downloadURL]);
+
+           // هنا يمكنك تخزين الروابط في مصفوفة أو إضافتها إلى حالة
+         } catch (err) {
+           console.error("Error getting download URL:", err);
+         }
+       }
+     );
+   });
+ };
+
+
+ const handleVideoUpload = (e) => {
+  const file = e.target.files[0]; // الحصول على الفيديو
+  if (!file) {
+    console.error("No video selected");
+    return;
+  }
+
+
+  let fileName = "noUser";
+  const userEmail = getUserEmail();
+  if (userEmail) fileName = userEmail;
+  const storageRef = ref(storage, `${fileName}/videos/${file.name}`); // مرجع الفيديو في التخزين
+  const uploadTask = uploadBytesResumable(storageRef, file); // بدء رفع الفيديو
+
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      // تحديث نسبة الرفع
+      const progress =
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log(`Upload progress: ${progress.toFixed(2)}%`);
+      setuploadVideoProgress(progress);
+      switch (snapshot.state) {
+        case "paused":
+          console.log("Upload is paused");
+          break;
+        case "running":
+          console.log("Upload is running");
+          break;
+        default:
+          break;
       }
-    );
-  };
+    },
+    (error) => {
+      // التعامل مع الأخطاء أثناء الرفع
+      console.error("Upload failed:", error.message);
+      switch (error.code) {
+        case "storage/unauthorized":
+          console.error("User does not have permission to access the object");
+          break;
+        case "storage/canceled":
+          console.error("User canceled the upload");
+          break;
+        case "storage/unknown":
+          console.error("Unknown error occurred", error.serverResponse);
+          break;
+        default:
+          break;
+      }
+    },
+    async () => {
+      // عند إكمال الرفع بنجاح
+      try {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        console.log("Video available at", downloadURL);
+        setVideoURL(downloadURL);
+        // يمكنك تخزين الرابط في حالة أو إظهاره في الواجهة
+      } catch (err) {
+        console.error("Error getting download URL:", err);
+      }
+    }
+  );
+};
 
   useEffect(() => {
     console.log(selectGovernorates);
@@ -128,7 +247,9 @@ const CreateAd = () => {
 
   return (
     <div className="p-2 md:p-8 dark:bg-gray-800">
-      <h2 className="text-2xl mb-4 text-gray-800  font-bold">اضافة حملة جديدة </h2>
+      <h2 className="text-2xl mb-4 text-gray-800  font-bold">
+        اضافة حملة جديدة{" "}
+      </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md"
@@ -249,25 +370,58 @@ const CreateAd = () => {
             </div>
 
             {/* رفع الصور */}
-            <div className="mb-4 md:col-span-2 col-span-6">
+            <div className="mb-6 md:col-span-2 col-span-6">
               <label
-                className="block text-gray-800 dark:text-white mb-2"
+                className="block text-lg font-medium text-gray-800 dark:text-white mb-3 flex items-center gap-2"
                 htmlFor="images"
               >
-                صور الإعلان
+                <span className="material-icons"> </span> صور
+                الإعلان
               </label>
               <input
                 type="file"
                 id="images"
-                {...register("images", { required: "رفع الصور مطلوب" })}
+                onChange={handleUpload}
                 multiple
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
+                className="w-full p-3 border-2 border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
               {errors.images && (
-                <p className="text-red-500 text-sm mt-1">
+                <p className="text-red-500 text-sm mt-2">
                   {errors.images.message}
                 </p>
               )}
+              <div className="relative w-full mt-2 h-2 bg-gray-200 rounded-lg dark:bg-gray-700">
+                <div
+                  className="absolute top-0 left-0 h-2 rounded-lg bg-blue-500"
+                  style={{ width: `${uploadImageProgress}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <div className="mb-6 md:col-span-2 col-span-6">
+              <label
+                className="block text-lg font-medium text-gray-800 dark:text-white mb-3 flex items-center gap-2"
+                htmlFor="video"
+              >
+                <span className="material-icons"></span> فيديو الإعلان
+              </label>
+              <input
+                type="file"
+                id="video"
+                onChange={handleVideoUpload}
+                className="w-full p-3 border-2 border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              />
+              {errors.video && (
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.video.message}
+                </p>
+              )}
+              <div className="relative w-full mt-2 h-2 bg-gray-200 rounded-lg dark:bg-gray-700">
+                <div
+                  className="absolute top-0 left-0 h-2 rounded-lg bg-blue-500"
+                  style={{ width: `${uploadVideoProgress}%` }}
+                ></div>
+              </div>
             </div>
           </div>
 

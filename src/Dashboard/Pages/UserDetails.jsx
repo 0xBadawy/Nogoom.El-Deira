@@ -60,7 +60,8 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
       >
         <div className="mb-4 grid md:col-span-2 col-span-6">
           <label className="block mb-2 text-right">
-            حالة المستخدم<select
+            حالة المستخدم
+            <select
               {...register("verified")}
               className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
             >
@@ -346,7 +347,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Preferred Language */}
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
+        {/* <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             Preferred Language
             <input
@@ -355,11 +356,11 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
               className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
             />
           </label>
-        </div>
+        </div> */}
         {/* Last Login */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            Last Login
+            اخر تسجيل دخول
             <input
               type="date"
               {...register("lastLogin")}
@@ -382,7 +383,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         {/* Account Type */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            permissions
+            فئة النجم
             <select
               {...register("accountType")}
               className="block w-full p-2 border rounded-lg dark:bg-gray-800"
@@ -402,7 +403,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
 
         {/* permissions */}
 
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
+        {/* <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             permissions
             <input
@@ -411,7 +412,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
               className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
             />
           </label>
-        </div>
+        </div> */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <button
             type="submit"
