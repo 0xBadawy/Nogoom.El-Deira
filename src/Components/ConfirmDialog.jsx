@@ -1,0 +1,67 @@
+import React from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+const VisuallyHidden = ({ children }) => {
+  return (
+    <span
+      style={{
+        position: "absolute",
+        width: "1px",
+        height: "1px",
+        padding: 0,
+        margin: "-1px",
+        overflow: "hidden",
+        clip: "rect(0, 0, 0, 0)",
+        whiteSpace: "nowrap",
+        border: 0,
+      }}
+    >
+      {children}
+    </span>
+  );
+};
+
+
+const ConfirmDialog = ({
+  title = "تأكيد العملية",
+  message = "هل أنت متأكد من الاستمرار؟",
+  isOpen,
+  onClose,
+  onConfirm,
+  onCancel,
+}) => {
+  return (
+    <div >
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent>
+
+          <DialogHeader>
+             <VisuallyHidden>
+            <DialogTitle>{title}</DialogTitle>
+          </VisuallyHidden>
+           
+            <p>{message}</p>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="ghost" onClick={onCancel}>
+              إلغاء
+            </Button>
+            <Button onClick={onConfirm}>نعم</Button>
+          </DialogFooter>
+        </DialogContent>
+
+      </Dialog>
+    </div>
+  );
+};
+
+export default ConfirmDialog;

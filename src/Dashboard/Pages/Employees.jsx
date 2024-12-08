@@ -4,6 +4,7 @@ import { useDashboard } from "../../Context/DashboardContext";
 import { confirmAlert } from "react-confirm-alert";
 import toast, { Toaster } from "react-hot-toast";
 import EditEmployees from "./EditEmployees";
+import ConfirmDialog from "../../Components/ConfirmDialog";
 
 const Employees = () => {
   const [usersData, setUsersData] = useState([]);
@@ -43,29 +44,32 @@ const Employees = () => {
   }
 
 
-  const HandelUserDelete = () => {
-    confirmAlert({
-      title: "تأكيد الحذف",
-      message: "هل متأكد من حذف هذا المستخدم؟",
-      buttons: [
-        {
-          label: "نعم",
-          onClick: () => {
-            deleteUserFromDB(selectedUser);
-            setSelectedUser(null);
-            sortData();
-            toast.success("تم حذف الموظف بنجاح");
-          },
-        },
-        {
-          label: "إلغاء",
-          onClick: () => {
-            toast.error("تم إلغاء العملية");
-          },
-        },
-      ],
-    });
+  
+
+
+
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
+  const handleDeleteUser = (user) => {
+    setIsDialogOpen(true); // Open the dialog
   };
+  const confirmDelete = () => {
+    deleteUserFromDB(selectedUser); // Perform the deletion
+    setSelectedUser(null);
+    sortData(); // Refresh data
+    toast.success("تم حذف الموظف بنجاح");
+    setIsDialogOpen(false); // Close the dialog
+  };
+  const cancelDelete = () => {
+    toast.error("تم إلغاء العملية");
+    setIsDialogOpen(false); // Close the dialog
+  };
+
+
+
+
+
 
   return (
     <div className="grow md:p-8 p-3 dark:bg-gray-800">
@@ -226,10 +230,22 @@ const Employees = () => {
               <div className="flex items-center gap-3">
                 <button
                   className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                  onClick={HandelUserDelete}
+                  onClick={() => handleDeleteUser(selectedUser)}
                 >
                   حذف المستخدم
                 </button>
+
+                <ConfirmDialog
+                  title="تأكيد الحذف"
+                  message="هل متأكد من حذف هذا المستخدم؟"
+                  isOpen={isDialogOpen}
+                  onClose={() => setIsDialogOpen(false)} // To close the dialog directly
+                  onConfirm={confirmDelete} // On confirm action
+                  onCancel={cancelDelete} // On cancel action
+                />
+
+
+
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                   onClick={HandelUserUpdateData}
@@ -237,12 +253,11 @@ const Employees = () => {
                   تعديل المستخدم
                 </button>
               </div>
-             
             </div>
           </div>
         )}
       </div>
-      <div className={`${displayEditForm?"":"hidden"}`}>
+      <div className={`${displayEditForm ? "" : "hidden"}`}>
         <EditEmployees
           userData={selectedUserData}
           onUserUpdated={afterUpdate}

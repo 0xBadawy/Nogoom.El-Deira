@@ -26,15 +26,17 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
   };
 
 
-  const filteredAds = ads.filter((ad) => {
-  const regionMatch = selectedRegion === "الكل" || ad.region === selectedRegion;
-  const governorateMatch =
-    selectedGovernorate === "الكل" ||
-    (ad.governorates &&
-      Array.isArray(ad.governorates) &&
-      ad.governorates.includes(selectedGovernorate));
-  return regionMatch && governorateMatch;
-});
+  const filteredAds = ads
+    .filter((ad) => {
+      const regionMatch = selectedRegion === "الكل" || ad.region === selectedRegion;
+      const governorateMatch =
+        selectedGovernorate === "الكل" ||
+        (ad.governorates &&
+          Array.isArray(ad.governorates) &&
+          ad.governorates.includes(selectedGovernorate));
+      return regionMatch && governorateMatch;
+    })
+    .sort((a, b) => b.id - a.id);
 
 
 

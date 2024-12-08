@@ -97,6 +97,23 @@ const AdDetails = ({ ads, selected }) => {
             <FaRegStar className="text-gray-400 text-lg sm:text-xl" />
           )}
         </li>
+        <li className="flex items-center space-x-2">
+          <strong className="text-gray-800 dark:text-gray-200 text-sm sm:text-base">
+            اسماء النجوم : 
+          </strong>
+          {ad.stars.length > 0 ? (
+            ad.stars.map((star, index) => (
+              <span
+                key={index}
+                className="text-gray-700 dark:text-gray-300 text-sm sm:text-base"
+              >
+                {star.name}{index < ad.stars.length - 1 ? ', ' : ''}
+              </span>
+            ))
+          ) : (
+            <FaRegStar className="text-gray-400 text-lg sm:text-xl" />
+          )}
+        </li>
         <li>
           <strong className="block text-gray-800 dark:text-gray-200 mb-3 text-sm sm:text-base">
             الصور:
@@ -139,17 +156,15 @@ const AdDetails = ({ ads, selected }) => {
       </ul>
       <div>
         {/* delete */}
-     <div className="flex gap-3">
-  <button  className="bg-red-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-red-600 transition-colors">
+        <div className="flex gap-3">
+          <button className="bg-red-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-red-600 transition-colors">
             حذف الإعلان
-            </button>
-            {/* edit */}
-            <button  className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-600 transition-colors">
+          </button>
+          {/* edit */}
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-600 transition-colors">
             تعديل الإعلان
-            </button>
-            
-
-      </div>
+          </button>
+        </div>
       </div>
     </div>
   );
