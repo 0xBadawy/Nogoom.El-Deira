@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import AddEmployees from "./AddEmployees";
 import { useDashboard } from "../../Context/DashboardContext";
 import { confirmAlert } from "react-confirm-alert";
-import toast, { Toaster } from "react-hot-toast";
+// import toast, { Toaster } from "react-hot-toast";
 import EditEmployees from "./EditEmployees";
 import ConfirmDialog from "../../Components/ConfirmDialog";
+import { toast } from "sonner";
 
 const Employees = () => {
   const [usersData, setUsersData] = useState([]);
@@ -12,8 +13,6 @@ const Employees = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserData, setSelectedUserData] = useState({});
   const [displayEditForm, setDisplayEditForm] = useState(false);
-  
-  
 
   useEffect(() => {
     const users = allUsers;
@@ -29,47 +28,38 @@ const Employees = () => {
     );
   };
 
-  const afterUpdate =()=>{
+  const afterUpdate = () => {
     setDisplayEditForm(false);
     setSelectedUser(null);
-    
-    
-  }
-
+  };
 
   const HandelUserUpdateData = () => {
     const user = usersData.find((user) => user.Uid === selectedUser);
     setSelectedUserData(user);
-    setDisplayEditForm(true);  
-  }
-
-
-  
-
-
-
+    setDisplayEditForm(true);
+  };
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  
+
   const handleDeleteUser = (user) => {
     setIsDialogOpen(true); // Open the dialog
   };
   const confirmDelete = () => {
     deleteUserFromDB(selectedUser); // Perform the deletion
     setSelectedUser(null);
-    sortData(); // Refresh data
-    toast.success("تم حذف الموظف بنجاح");
+    sortData(); 
+    toast.success("تم حذف الموظف بنجاح", {
+      description: new Date().toLocaleString(),
+    });
+
     setIsDialogOpen(false); // Close the dialog
   };
   const cancelDelete = () => {
-    toast.error("تم إلغاء العملية");
     setIsDialogOpen(false); // Close the dialog
+    toast.error("تم إلغاء العملية", {
+      description: new Date().toLocaleString(),     
+    });
   };
-
-
-
-
-
 
   return (
     <div className="grow md:p-8 p-3 dark:bg-gray-800">
@@ -244,8 +234,6 @@ const Employees = () => {
                   onCancel={cancelDelete} // On cancel action
                 />
 
-
-
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                   onClick={HandelUserUpdateData}
@@ -265,7 +253,7 @@ const Employees = () => {
         ;
       </div>
 
-      <Toaster position="top-center" reverseOrder={false} />
+      {/* <Toaster position="top-center" reverseOrder={false} /> */}
     </div>
   );
 };

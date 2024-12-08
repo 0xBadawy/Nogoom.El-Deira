@@ -2,10 +2,11 @@ import React from "react";
 import { RouterProvider } from "react-router-dom";
 // import { router } from "./routes/routes";
 import { router } from "./routes/router";
-import  AuthProvider  from "./context/AuthContext";
-import  DataProvider  from "./context/DataContext";
-import  ThemeProvider  from "./context/ThemeContextProvider";
-import  DashboardProvider  from "./context/DashboardContext";
+import AuthProvider from "./context/AuthContext";
+import DataProvider from "./context/DataContext";
+import ThemeProvider from "./context/ThemeContextProvider";
+import DashboardProvider from "./context/DashboardContext";
+import { Toaster } from "@/components/ui/sonner";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <ThemeProvider>
           <DashboardProvider>
             <RouterProvider router={router} />
+            <Toaster position="top-center" />
           </DashboardProvider>
         </ThemeProvider>
       </DataProvider>
