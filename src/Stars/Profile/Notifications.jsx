@@ -6,16 +6,26 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([
-    { id: 1, message: "تم تحديث بياناتك - وفى انتظار الموافقة على التحديثات", readed: false },
+    {
+      id: 1,
+      message: "تم تحديث بياناتك - وفى انتظار الموافقة على التحديثات",
+      readed: false,
+    },
     { id: 4, message: "تم تحديث سياسة الخصوصية الخاصة بنا.", readed: false },
-    { id: 2, message: "لقد قمت بإضافة صورة جديدة للملف الشخصي.", readed: false },
+    {
+      id: 2,
+      message: "لقد قمت بإضافة صورة جديدة للملف الشخصي.",
+      readed: false,
+    },
     { id: 3, message: "تم تسجيل الدخول بنجاح من جهاز جديد.", readed: true },
   ]);
 
   const handleReadNotification = (id) => {
     setNotifications(
       notifications.map((notification) =>
-        notification.id === id ? { ...notification, readed: true } : notification
+        notification.id === id
+          ? { ...notification, readed: true }
+          : notification
       )
     );
   };
@@ -23,7 +33,9 @@ const Notifications = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-3xl font-bold text-indigo-900">الإشعارات</CardTitle>
+        <CardTitle className="text-3xl font-bold text-indigo-900">
+          الإشعارات
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <p className="mb-6 text-gray-600">
@@ -39,7 +51,9 @@ const Notifications = () => {
                 }`}
               >
                 <div className="flex justify-between items-center">
-                  <p className="text-sm text-indigo-900">{notification.message}</p>
+                  <p className="text-sm text-indigo-900">
+                    {notification.message}
+                  </p>
                   <div className="flex items-center space-x-2">
                     {!notification.readed && (
                       <Button
@@ -50,7 +64,9 @@ const Notifications = () => {
                         تم القراءة
                       </Button>
                     )}
-                    <Badge variant={notification.readed ? "secondary" : "default"}>
+                    <Badge
+                      variant={notification.readed ? "secondary" : "default"}
+                    >
                       {notification.readed ? "مقروءة" : "جديدة"}
                     </Badge>
                   </div>
@@ -67,4 +83,3 @@ const Notifications = () => {
 };
 
 export default Notifications;
-

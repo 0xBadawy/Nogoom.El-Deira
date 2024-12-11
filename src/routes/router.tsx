@@ -1,13 +1,13 @@
-import React, { Suspense } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
-import { LoadingSpinner } from '../components/LoadingSpinner';
-import { ErrorBoundary } from '../components/ErrorBoundary';
-import { ProtectedRoute } from './ProtectedRoute';
+import React, { Suspense } from "react";
+import { createBrowserRouter } from "react-router-dom";
+import { LoadingSpinner } from "../components/LoadingSpinner";
+import { ErrorBoundary } from "../components/ErrorBoundary";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 // Lazy load components
-const HomePage = React.lazy(() => import('../HomePage/HomePage'));
-const LoginPage = React.lazy(() => import('../Stars/LoginPage'));
-const SignUp = React.lazy(() => import('../Stars/SignUp/SignUp'));
+const HomePage = React.lazy(() => import("../HomePage/HomePage"));
+const LoginPage = React.lazy(() => import("../Stars/LoginPage"));
+const SignUp = React.lazy(() => import("../Stars/SignUp/SignUp"));
 const Profile = React.lazy(() => import("../Stars/Profile/Profile"));
 const DashboardHome = React.lazy(
   () => import("../Dashboard/Pages/DashboardHome")
@@ -17,18 +17,23 @@ const DashboardLayout = React.lazy(
 );
 
 // Lazy load dashboard pages
-const Users = React.lazy(() => import('../Dashboard/Pages/Users'));
-const Apartments = React.lazy(() => import('../Dashboard/Pages/Apartments'));
-const NotificationsPanel = React.lazy(() => import('../Dashboard/Pages/NotificationsPanel'));
-const CreateAd = React.lazy(() => import('../Dashboard/Pages/CreateAd'));
-const Employees = React.lazy(() => import('../Dashboard/Pages/Employees'));
-const AdsList = React.lazy(() => import('../Dashboard/Pages/AdsList'));
-const Privacy = React.lazy(() => import('../Dashboard/Pages/Privacy'));
+const Users = React.lazy(() => import("../Dashboard/Pages/Users"));
+const Apartments = React.lazy(() => import("../Dashboard/Pages/Apartments"));
+const NotificationsPanel = React.lazy(
+  () => import("../Dashboard/Pages/NotificationsPanel")
+);
+const SendNotification = React.lazy(
+  () => import("../Dashboard/Pages/SendNotification")
+);
+const CreateAd = React.lazy(() => import("../Dashboard/Pages/CreateAd"));
+const Employees = React.lazy(() => import("../Dashboard/Pages/Employees"));
+const AdsList = React.lazy(() => import("../Dashboard/Pages/AdsList"));
+const Privacy = React.lazy(() => import("../Dashboard/Pages/Privacy"));
 const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
-const Contact = React.lazy(() => import('../Dashboard/Pages/Contact'));
-const Unauthorized = React.lazy(() => import('../pages/Unauthorized'));
+const Contact = React.lazy(() => import("../Dashboard/Pages/Contact"));
+const Unauthorized = React.lazy(() => import("../pages/Unauthorized"));
 const ContactPage = React.lazy(() => import("../pages/ContactPage"));
-const AdListPage  = React.lazy(() => import('../Pages/ads/AdListPage'));
+const AdListPage = React.lazy(() => import("../Pages/ads/AdListPage"));
 const AdDetailPage = React.lazy(() => import("../Pages/ads/AdDetailPage"));
 
 const withSuspense = (Component: React.ComponentType) => (
@@ -98,6 +103,10 @@ export const router = createBrowserRouter([
       {
         path: "notifications",
         element: withProtection(NotificationsPanel, ["admin", "editor"]),
+      },
+      {
+        path: "Send_Notification",
+        element: withProtection(SendNotification, ["admin", "editor"]),
       },
       {
         path: "createAd",

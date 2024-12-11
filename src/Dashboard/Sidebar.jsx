@@ -70,6 +70,11 @@ const Sidebar = () => {
       link: "/dashboard/ads-list",
     },
     {
+      icon: <MdVideoSettings />,
+      text: " ارسال اشعار",
+      link: "/dashboard/Send_Notification",
+    },
+    {
       icon: <MdOutlinePrivacyTip />,
       text: "الشروط والخصوصية",
       link: "/dashboard/privacy",

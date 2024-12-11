@@ -12,6 +12,12 @@ const CheckboxListName = ({ items, selected, text }) => {
     });
   };
 
+  useEffect(() => {
+    setCheckedItems({});
+  },[items])
+
+
+
   const handleSelectAllChange = () => {
     const allChecked =
       Object.keys(checkedItems).length === items.length &&
@@ -29,7 +35,7 @@ const CheckboxListName = ({ items, selected, text }) => {
     Object.values(checkedItems).every(Boolean);
 
   return (
-    <div className="p-4">
+    <div className="md:p-4">
       <h2 className="text-lg font-bold mb-4">{text}</h2>
       <div className="space-y-2 max-h-60 overflow-y-auto">
         <label className="flex items-center space-x-2 p-2 border rounded-lg hover:bg-gray-100">

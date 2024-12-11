@@ -13,6 +13,7 @@ export const ROUTE_PERMISSIONS = [
   { path: "/dashboard/users", requiredRoles: ["admin", "editor"] },
   { path: "/dashboard/apartments", requiredRoles: ["admin", "editor"] },
   { path: "/dashboard/notifications", requiredRoles: ["admin", "editor"] },
+  { path: "/dashboard/Send_Notification", requiredRoles: ["admin", "editor"] },
   { path: "/dashboard/createAd", requiredRoles: ["admin","viewer"] },
   { path: "/dashboard/website_data", requiredRoles: ["admin", "editor"] },
   { path: "/dashboard/employees", requiredRoles: ["admin"] },
