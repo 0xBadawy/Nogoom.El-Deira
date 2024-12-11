@@ -9,6 +9,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
   const {
+    
     register,
     handleSubmit,
     setValue,

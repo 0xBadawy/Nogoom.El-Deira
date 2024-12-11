@@ -22,8 +22,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const UserAds = () => {
-  const { UpdateCurrentUserAds, getUserAds } = useDashboard();
   const { getUserId } = useAuth();
+  const { UpdateCurrentUserAds, getUserAds } = useDashboard();
   const [Ads, setAds] = useState(null);
   const [userId, setUserId] = useState(null);
   const [AdID, setAdId] = useState(null);
@@ -90,7 +90,7 @@ const UserAds = () => {
                       {ad.title}
                     </h4>
                     <p className="text-sm text-gray-500 mt-2">
-                      {ad.updatedAt.toDate().toLocaleString()}
+                      {/* {ad?.updatedAt.toDate().toLocaleString()} */}
                     </p>
                   </div>
                   <div className="mt-4 flex justify-between items-center">

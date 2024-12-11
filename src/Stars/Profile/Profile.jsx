@@ -20,6 +20,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getUserData();
+      console.log(data)
       setUserData(data);
       setVerified(data.verified);
     };
@@ -60,7 +61,10 @@ const Profile = () => {
                 </p>
               </div>
               <div>
-                <UserStatus verified={true} accountType={"فضي"} />
+                <UserStatus
+                  verified={userData?.verified}
+                  accountType={userData?.accountType}
+                />
               </div>
               <nav>
                 {menuItems.map((item) => (

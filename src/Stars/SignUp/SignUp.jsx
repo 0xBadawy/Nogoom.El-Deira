@@ -151,6 +151,7 @@ const SignUpPage = () => {
                 // selectedCategory={watch("category")}
                 // setValue={setValue}
               /> */}
+              <input type="hidden" {...register("accountType")} value="عادي" />
               <FormField id="iban" label={TextData.iban} register={register} />
             </div>
 

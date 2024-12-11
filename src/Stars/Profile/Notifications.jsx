@@ -33,10 +33,19 @@ const Notifications = () => {
   };
 
   const fetchData = async () => {
-    const data = await getUserData();
-    setNotifications(data.notifications);
-    console.log(data.notifications);
+    try {
+      const data = await getUserData();
+      const sortedNotifications = data.notifications.sort(
+        (a, b) =>
+          new Date(b.time.seconds * 1000) - new Date(a.time.seconds * 1000)
+      );
+      setNotifications(sortedNotifications);
+      // console.log(sortedNotifications);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
+
   useEffect(() => {
     fetchData();
   }, [getUserData, updateNotificationReaded]);
@@ -70,9 +79,18 @@ const Notifications = () => {
                 }`}
               >
                 <div className="flex justify-between items-center">
-                  <p className="text-sm text-indigo-900">
-                    {notification?.message}
-                  </p>
+                  <div>
+                    <p className="text-sm text-indigo-900">
+                      {notification?.message}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {notification?.time
+                        ? new Date(
+                            notification.time.seconds * 1000
+                          ).toLocaleString()
+                        : "Invalid date"}
+                    </p>
+                  </div>
                   <div className="flex items-center space-x-2">
                     {!notification?.readed && (
                       <Button

@@ -55,6 +55,64 @@ const DashboardProvider = ({ children }) => {
       const userDocRef = doc(db, "users", user.Uid);
       await setDoc(userDocRef, user);
       await getAllUsers();
+      const message = "✅ تمت مراجعة و تحديث بياناتك - من خلال الادراة";
+      const time = new Date();
+      addUserNotification({ message, readed: false, time }, user.Uid);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const updateUserAds = async (ad, adId) => {
+    const user = ad.stars;
+    const message = `⭐ تمت اضافة اعلان جديد -  ${ad.title}`;
+    const time = new Date();
+    user.forEach(async (star) => {
+      const userDocRef = doc(db, "users", star.Uid);
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
+      const ads = userData.ads;
+      ads.push({
+        adId,
+        title: ad.title,
+        category: ad.category,
+        links:{},
+      });
+      await setDoc(userDocRef, { ...userData, ads });
+      addUserNotification({ message, readed: false, time }, star.Uid);
+    });
+  };
+
+  const getUserAds = async (Uid) => {
+    try {
+      const userDocRef = doc(db, "users", Uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        return userData.ads;
+      }
+      return [];
+    } catch (error) {
+      setError(error.message);
+      return [];
+    }
+  };
+
+  const UpdateCurrentUserAds = async (Uid, data) => {
+    try {
+      const userDocRef = doc(db, "users", Uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const ads = userData.ads;
+        const updatedAds = ads.map((ad) => {
+          if (ad.adId === data.adId) {
+            return { ...ad, links: data.links };
+          }
+          return ad;
+        });
+        await setDoc(userDocRef, { ...userData, ads: updatedAds });
+      }
     } catch (error) {
       setError(error.message);
     }
@@ -68,7 +126,8 @@ const DashboardProvider = ({ children }) => {
       const newAdId = adCount + 1;
       const adDocRef = doc(db, "advertisement", newAdId.toString());
       await setDoc(adDocRef, { ...ad, id: newAdId });
-      // Add logic to update user ads here if necessary
+
+      await updateUserAds(ad, newAdId);
     } catch (error) {
       setError(error.message);
     }
@@ -151,42 +210,41 @@ const DashboardProvider = ({ children }) => {
         await setDoc(userDocRef, { ...user, notifications });
       }
     } catch (error) {
-      setError(error.message); 
+      setError(error.message);
     }
   };
 
-
-
   const updateNotificationReaded = async (Uid, notificationId) => {
-  try {
-    // Reference the user's document in the database
-    const userDocRef = doc(db, "users", Uid);
-    const userDoc = await getDoc(userDocRef);
+    try {
+      // Reference the user's document in the database
+      const userDocRef = doc(db, "users", Uid);
+      const userDoc = await getDoc(userDocRef);
 
-    if (userDoc.exists()) {
-      const user = userDoc.data();
-      const notifications = user.notifications || [];
+      if (userDoc.exists()) {
+        const user = userDoc.data();
+        const notifications = user.notifications || [];
 
-      // Find and update the notification
-      const updatedNotifications = notifications.map((notification) => {
-        if (notification.id === notificationId) {
-          return { ...notification, readed: true };
-        }
-        return notification;
-      });
+        // Find and update the notification
+        const updatedNotifications = notifications.map((notification) => {
+          if (notification.id === notificationId) {
+            return { ...notification, readed: true };
+          }
+          return notification;
+        });
 
-      // Save the updated notifications back to the user's document
-      await setDoc(userDocRef, { ...user, notifications: updatedNotifications });
-      console.log("Notification marked as read.");
-    } else {
-      console.error("User document not found.");
+        // Save the updated notifications back to the user's document
+        await setDoc(userDocRef, {
+          ...user,
+          notifications: updatedNotifications,
+        });
+        console.log("Notification marked as read.");
+      } else {
+        console.error("User document not found.");
+      }
+    } catch (error) {
+      console.error("Error updating notification:", error.message);
     }
-  } catch (error) {
-    console.error("Error updating notification:", error.message);
-  }
-};
-
-
+  };
 
   const SendNotification = async (notification) => {
     const { message, readed, time, stars } = notification;
@@ -232,11 +290,11 @@ const DashboardProvider = ({ children }) => {
         addHomeData,
         getHomeData,
         currentUser,
+        getUserAds,
         addADs,
         allUsers,
         updateUser,
         contact,
-        error,
         getAllAds,
         updatePrivacy,
         getPrivacy,
@@ -244,6 +302,8 @@ const DashboardProvider = ({ children }) => {
         fetchContact,
         SendNotification,
         updateNotificationReaded,
+        UpdateCurrentUserAds,
+        error,
       }}
     >
       {!loading && children}

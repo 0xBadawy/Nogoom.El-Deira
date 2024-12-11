@@ -82,9 +82,7 @@ const CreateAd = () => {
     setStarsList(stars.map((star) => ({ name: star.name, Uid: star.Uid })));
   }, [allUsers]);
 
-  useEffect(() => {
-    console.log(starsList);
-  }, [starsList]);
+
 
   const HandelRegionChange = (e) => {
     setSelectGovernorates([]);
@@ -255,10 +253,10 @@ const CreateAd = () => {
   );
 };
 
-  useEffect(() => {
-    // console.log(selectGovernorates);
-    // console.log(selectStars);
-  }, [selectGovernorates, selectStars]);
+  // useEffect(() => {
+  //   // console.log(selectGovernorates);
+  //   // console.log(selectStars);
+  // }, [selectGovernorates, selectStars]);
 
   return (
     <div className="p-2 md:p-8 dark:bg-gray-800">
