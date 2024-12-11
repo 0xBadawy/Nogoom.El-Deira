@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import UserDetails from "./UserDetails"; // استيراد المكون الجديد
 import { useDashboard } from "../../Context/DashboardContext";
 import { GovernmentData } from "../../Stars/SignUp/data";
+import UserAdds from "./UserAdds";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
@@ -186,6 +187,13 @@ const Users = () => {
       </div>
 
       {/* عرض وتعديل بيانات المستخدم */}
+      {selectedUser && (
+        <UserAdds
+          selectedUserUid={selectedUser}
+          usersData={usersData}
+          onSave={handleSave}
+        />
+      )}
       {selectedUser && (
         <UserDetails
           selectedUserUid={selectedUser}
