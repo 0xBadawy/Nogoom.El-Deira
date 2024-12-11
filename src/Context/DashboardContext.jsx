@@ -135,6 +135,67 @@ const DashboardProvider = ({ children }) => {
     }
   }, []);
 
+  const addUserNotification = async (notification, Uid) => {
+    try {
+      const userDocRef = doc(db, "users", Uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        const user = userDoc.data();
+        const notifications = user.notifications || [];
+
+        const notificationWithId = { ...notification, id: crypto.randomUUID() };
+
+        notifications.push(notificationWithId);
+
+        await setDoc(userDocRef, { ...user, notifications });
+      }
+    } catch (error) {
+      setError(error.message); 
+    }
+  };
+
+
+
+  const updateNotificationReaded = async (Uid, notificationId) => {
+  try {
+    // Reference the user's document in the database
+    const userDocRef = doc(db, "users", Uid);
+    const userDoc = await getDoc(userDocRef);
+
+    if (userDoc.exists()) {
+      const user = userDoc.data();
+      const notifications = user.notifications || [];
+
+      // Find and update the notification
+      const updatedNotifications = notifications.map((notification) => {
+        if (notification.id === notificationId) {
+          return { ...notification, readed: true };
+        }
+        return notification;
+      });
+
+      // Save the updated notifications back to the user's document
+      await setDoc(userDocRef, { ...user, notifications: updatedNotifications });
+      console.log("Notification marked as read.");
+    } else {
+      console.error("User document not found.");
+    }
+  } catch (error) {
+    console.error("Error updating notification:", error.message);
+  }
+};
+
+
+
+  const SendNotification = async (notification) => {
+    const { message, readed, time, stars } = notification;
+    console.log(stars);
+    stars.forEach(async (user) => {
+      await addUserNotification({ message, readed, time }, user.Uid);
+    });
+  };
+
   const deleteUserFromDB = async (Uid) => {
     try {
       const userDocRef = doc(db, "users", Uid);
@@ -180,7 +241,9 @@ const DashboardProvider = ({ children }) => {
         updatePrivacy,
         getPrivacy,
         deleteUserFromDB,
-    fetchContact,
+        fetchContact,
+        SendNotification,
+        updateNotificationReaded,
       }}
     >
       {!loading && children}

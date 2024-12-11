@@ -12,7 +12,6 @@ import { Navigate } from "react-router-dom";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
   const [currentUser, setcurrentUser] = useState(null);
   const [currentUserData, setcurrentUserData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -56,6 +55,9 @@ const AuthProvider = ({ children }) => {
           permissions: [],
           Uid: Uid,
         });
+        await auth.signOut();
+        window.location.href = "/status";
+        return { success: true };
       } else {
         await setDoc(doc(db, "users", user.uid), {
           email: user.email,
@@ -70,17 +72,17 @@ const AuthProvider = ({ children }) => {
           permissions: [],
           lastSeen: new Date(),
         });
-      }
-      await auth.signOut();
-      window.location.href = "/login";
 
-      return { success: true };
+        await auth.signOut();
+        window.location.href = "/login";
+        return { success: true };
+      }
     } catch (error) {
       console.error("Error signing up or saving user data:", error.message);
       return { success: false, error: error.message };
     }
   };
-  
+
   const updateUser = async (userId, data) => {
     try {
       await setDoc(doc(db, "users", userId), data, { merge: true });
@@ -89,7 +91,7 @@ const AuthProvider = ({ children }) => {
       console.error("Error updating user data:", error.message);
       return { success: false, error: error.message };
     }
-  }
+  };
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);

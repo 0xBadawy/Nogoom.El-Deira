@@ -8,6 +8,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 const HomePage = React.lazy(() => import("../HomePage/HomePage"));
 const LoginPage = React.lazy(() => import("../Stars/LoginPage"));
 const SignUp = React.lazy(() => import("../Stars/SignUp/SignUp"));
+const SignUpStatus = React.lazy(() => import("../Stars/SignUp/SignUpStatus"));
 const Profile = React.lazy(() => import("../Stars/Profile/Profile"));
 const DashboardHome = React.lazy(
   () => import("../Dashboard/Pages/DashboardHome")
@@ -76,6 +77,11 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: withSuspense(SignUp),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/Status",
+    element: withSuspense(SignUpStatus),
     errorElement: <ErrorBoundary />,
   },
   {

@@ -1,34 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useDashboard } from "../../Context/DashboardContext";
+import { useAuth } from "../../Context/AuthContext";
 
 const Notifications = () => {
+  const { getUserData, getUserId } = useAuth();
+  const [UserId, setUserId] = useState();
+
+  const { updateNotificationReaded } = useDashboard();
+
   const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      message: "تم تحديث بياناتك - وفى انتظار الموافقة على التحديثات",
-      readed: false,
-    },
-    { id: 4, message: "تم تحديث سياسة الخصوصية الخاصة بنا.", readed: false },
-    {
-      id: 2,
-      message: "لقد قمت بإضافة صورة جديدة للملف الشخصي.",
-      readed: false,
-    },
-    { id: 3, message: "تم تسجيل الدخول بنجاح من جهاز جديد.", readed: true },
+    // {
+    //   id: 1,
+    //   message: "تم تحديث بياناتك - وفى انتظار الموافقة على التحديثات",
+    //   readed: false,
+    // },
+    // { id: 4, message: "تم تحديث سياسة الخصوصية الخاصة بنا.", readed: false },
+    // {
+    //   id: 2,
+    //   message: "لقد قمت بإضافة صورة جديدة للملف الشخصي.",
+    //   readed: false,
+    // },
+    // { id: 3, message: "تم تسجيل الدخول بنجاح من جهاز جديد.", readed: true },
   ]);
 
   const handleReadNotification = (id) => {
-    setNotifications(
-      notifications.map((notification) =>
-        notification.id === id
-          ? { ...notification, readed: true }
-          : notification
-      )
-    );
+    updateNotificationReaded(UserId, id);
+    fetchData();
   };
+
+  const fetchData = async () => {
+    const data = await getUserData();
+    setNotifications(data.notifications);
+    console.log(data.notifications);
+  };
+  useEffect(() => {
+    fetchData();
+  }, [getUserData, updateNotificationReaded]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUserId();
+      setUserId(data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <Card>
@@ -42,20 +61,20 @@ const Notifications = () => {
           إدارة تفضيلات الإشعارات الخاصة بك هنا.
         </p>
         <div className="space-y-4">
-          {notifications.length > 0 ? (
-            notifications.map((notification) => (
+          {notifications?.length > 0 ? (
+            notifications.map((notification, id) => (
               <div
-                key={notification.id}
+                key={id}
                 className={`p-4 rounded-lg shadow-sm ${
-                  notification.readed ? "bg-gray-100" : "bg-indigo-50"
+                  notification?.readed ? "bg-gray-100" : "bg-indigo-50"
                 }`}
               >
                 <div className="flex justify-between items-center">
                   <p className="text-sm text-indigo-900">
-                    {notification.message}
+                    {notification?.message}
                   </p>
                   <div className="flex items-center space-x-2">
-                    {!notification.readed && (
+                    {!notification?.readed && (
                       <Button
                         onClick={() => handleReadNotification(notification.id)}
                         variant="outline"
@@ -65,9 +84,9 @@ const Notifications = () => {
                       </Button>
                     )}
                     <Badge
-                      variant={notification.readed ? "secondary" : "default"}
+                      variant={notification?.readed ? "secondary" : "default"}
                     >
-                      {notification.readed ? "مقروءة" : "جديدة"}
+                      {notification?.readed ? "مقروءة" : "جديدة"}
                     </Badge>
                   </div>
                 </div>

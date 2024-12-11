@@ -7,7 +7,7 @@ import { toast } from "sonner";
 const SendNotification = () => {
   const [selectStars, setSelectStars] = useState([]);
   const [starsList, setStarsList] = useState([]);
-  const { allUsers } = useDashboard();
+  const { allUsers, SendNotification } = useDashboard();
 
   useEffect(() => {
     const stars = allUsers.filter((user) => user.role === "star");
@@ -31,10 +31,14 @@ const SendNotification = () => {
     const adData = {
       ...data,
       stars: selectStars,
-      readed:false,
+      readed: false,
       time: new Date(),
     };
-    console.log(adData);
+    // console.log(adData);
+    // console.log(message, readed, time);
+
+    
+    SendNotification(adData);
     reset();
     toast.success("تم ارسال اشعار بنجاح!");
   };
