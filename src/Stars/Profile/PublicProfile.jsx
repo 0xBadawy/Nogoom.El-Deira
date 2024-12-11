@@ -69,13 +69,13 @@ const PublicProfile = () => {
       icon: FaFacebook,
       label: "Facebook",
       value: userData.facebook,
-      link: userData.facebookLink,
+      link: userData.facebook,
     },
     {
       icon: FaInstagram,
       label: "Instagram",
       value: userData.instagram,
-      link: userData.instagramLink,
+      link: userData.instagram,
     },
     {
       icon: FaSnapchat,
@@ -87,13 +87,13 @@ const PublicProfile = () => {
       icon: FaTiktok,
       label: "Tiktok",
       value: userData.tiktok,
-      link: userData.tiktokLink,
+      link: userData.tiktok,
     },
     {
       icon: FaTwitter,
       label: "Twitter",
       value: userData.twitter,
-      link: userData.twitterLink,
+      link: userData.twitter,
     },
   ];
 
@@ -105,9 +105,7 @@ const PublicProfile = () => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="mb-6 text-gray-600">
-          هذه هي صفحة الملف الشخصي العام الخاصة بك حيث يمكنك عرض تفاصيلك.
-        </p>
+       
         <div className="flex flex-col items-center sm:items-start mb-8">
           <img
             className="object-cover w-32 h-32 rounded-full ring-4 ring-indigo-300"

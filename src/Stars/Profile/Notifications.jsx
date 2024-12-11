@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([

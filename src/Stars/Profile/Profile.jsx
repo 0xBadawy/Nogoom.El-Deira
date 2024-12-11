@@ -7,6 +7,8 @@ import { MdPreview, MdVerified, MdPublic, MdSettings, MdNotifications, MdStar } 
 import { useAuth } from "../../Context/AuthContext";
 import { IoMdHome } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import UserAds from "./UserAds";
+import UserStatus from "./UserStatus";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
@@ -32,7 +34,7 @@ const Profile = () => {
     { id: "publicProfile", label: "الصفحة الشخصية", icon: MdPublic },
     { id: "accountSettings", label: "إعدادات الحساب", icon: MdSettings },
     { id: "notifications", label: "الإشعارات", icon: MdNotifications },
-    // { id: "proAccount", label: "PRO Account", icon: MdStar },
+    { id: "UserAds", label: "الحملات الاعلانية", icon: MdStar },
   ];
 
   return (
@@ -57,24 +59,8 @@ const Profile = () => {
                   {userData?.email || "user@example.com"}
                 </p>
               </div>
-              <div
-                className={`mb-6 p-3 rounded-lg text-center ${
-                  verified ? "bg-green-100" : "bg-red-100"
-                }`}
-              >
-                <p className="flex items-center justify-center gap-2 font-semibold text-indigo-900">
-                  {verified ? (
-                    <>
-                      <MdVerified className="text-green-500" size={24} />
-                      تم توثيق حسابك
-                    </>
-                  ) : (
-                    <>
-                      <MdPreview className="text-red-500" size={24} />
-                      حسابك قيد المراجعة
-                    </>
-                  )}
-                </p>
+              <div>
+                <UserStatus verified={true} accountType={"فضي"} />
               </div>
               <nav>
                 {menuItems.map((item) => (
@@ -106,7 +92,7 @@ const Profile = () => {
               {activePage === "publicProfile" && <PublicProfile />}
               {activePage === "accountSettings" && <AccountSettings />}
               {activePage === "notifications" && <Notifications />}
-              {activePage === "proAccount" && <ProAccount />}
+              {activePage === "UserAds" && <UserAds />}
 
               {/* button to home page */}
             </div>

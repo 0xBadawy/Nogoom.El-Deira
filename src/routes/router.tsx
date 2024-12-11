@@ -48,11 +48,7 @@ export const router = createBrowserRouter([
     element: withSuspense(HomePage),
     errorElement: <ErrorBoundary />,
   },
-  {
-    path: "/ads",
-    element: withSuspense(AdListPage),
-    errorElement: <ErrorBoundary />,
-  },
+ 
 {
   path: "/ads",
   children: [
@@ -127,9 +123,9 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  //   {
-  //     path: '/unauthorized',
-  //     element: withSuspense(Unauthorized),
-  //     errorElement: <ErrorBoundary />,
-  //   },
+    {
+      path: '/unauthorized',
+      element: withSuspense(Unauthorized),
+      errorElement: <ErrorBoundary />,
+    },
 ]);

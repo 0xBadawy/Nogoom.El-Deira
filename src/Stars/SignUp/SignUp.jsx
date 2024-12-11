@@ -93,7 +93,7 @@ const SignUpPage = () => {
         }
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Main Data Section */}
 
             <div>
@@ -144,37 +144,37 @@ const SignUpPage = () => {
                   ))}
                 </select>
               </div>
-              <TierSelection
+              {/* <TierSelection
                 id="accountType"
                 tiers={Tiers}
                 register={register}
                 // selectedCategory={watch("category")}
                 // setValue={setValue}
-              />
+              /> */}
               <FormField id="iban" label={TextData.iban} register={register} />
-              <div className="mb-4">
-                <label className="block text-gray-700">
-                  <input
-                    type="checkbox"
-                    className="mr-2"
-                    {...register("privacyPolicy")}
-                  />
-                  {TextData.privacyPolicy}
-                  <a
-                    href="/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-700 font-bold"
-                  >
-                    {" "}
-                    {TextData.privacyPolicyLink}
-                  </a>
-                </label>
-              </div>
             </div>
 
             {/* Social Media Data */}
             <SocialMediaInputs register={register} />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">
+              <input
+                type="checkbox"
+                className="mr-2"
+                {...register("privacyPolicy")}
+              />
+              {TextData.privacyPolicy}
+              <a
+                href="/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 font-bold"
+              >
+                {" "}
+                {TextData.privacyPolicyLink}
+              </a>
+            </label>
           </div>
           <button
             type="submit"
@@ -184,10 +184,7 @@ const SignUpPage = () => {
           </button>
         </form>
       </div>
-      <Toaster
-  position="top-center"
-  reverseOrder={false}
-/>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

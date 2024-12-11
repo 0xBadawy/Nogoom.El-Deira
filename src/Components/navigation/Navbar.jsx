@@ -16,7 +16,7 @@ const pages = [
   { path: "/", label: "الرئيسية" },
   { path: "/privacy-policy", label: "سياسة الخصوصية" },
   { path: "/contact", label: "تواصل معنا" },
-  { path: "/stars", label: "النجوم" },
+  { path: "/profile", label: "النجوم" },
 ];
 
 const Navbar = ({ color }) => {
@@ -44,7 +44,7 @@ const Navbar = ({ color }) => {
           role: userData.role,
         });
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        // console.error("Error fetching user data:", error);
       }
     };
 

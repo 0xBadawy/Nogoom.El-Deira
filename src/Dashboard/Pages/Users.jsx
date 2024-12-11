@@ -133,7 +133,7 @@ const Users = () => {
                     <td className="py-2 px-4">{row.name}</td>
                     <td className="py-2 px-4">{row.govern}</td>
                     <td className="py-2 px-4">{Area(row.area)}</td>
-                    <td className="py-2 px-4">{row.ads.length}</td>
+                    <td className="py-2 px-4">{row.ads?.length}</td>
                     <td className="py-2 px-4 text-center">
                       <span
                         className={`${

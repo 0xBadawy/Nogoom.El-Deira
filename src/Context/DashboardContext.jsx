@@ -4,21 +4,26 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import { setDoc, doc, getDoc, collection, getDocs } from "firebase/firestore";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
 import { auth, db } from "../Configuration/Firebase";
-import { setDoc, doc, getDoc } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
 
 const DashboardContext = createContext();
 
 const DashboardProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [currentUser, setcurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
-  const [contact,setContact] = useState({});
+  const [contact, setContact] = useState({});
   const [error, setError] = useState(null);
 
-  const HomePage = {   
+  const HomePage = {
     Herosection: {
       title: "إعلانات تصل إلى جمهورك الحقيقي!",
       subTitle:
@@ -34,52 +39,40 @@ const DashboardProvider = ({ children }) => {
     },
   };
 
-  const getAllUsers = async () => {
-    const users = [];
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-      users.push(doc.data());
-    });
-    setAllUsers(users);
-  };
-
- 
-  const updateUser = async (user) => {
-    const userDocRef = doc(db, "users", user.Uid);
-    await setDoc(userDocRef, user);
-    getAllUsers();
-  };
-
-  const fetchContact = async () => {
-    const contactDocRef = doc(db, "websiteData", "contact");
-    const contactDoc = await getDoc(contactDocRef);
-    setContact(contactDoc.data());
-  };
-
-  const updateContact = async (contact) => {
-    const contactDocRef = doc(db, "websiteData", "contact");
-    await setDoc(contactDocRef, contact);
-    fetchContact();
-  };
-
-  const updateUserAds = async (users,adId) => {
-    const user = users.stars;
-    user.forEach(async (star) => {
-      const userDocRef = doc(db, "users", star.Uid);
-      const userDoc = await getDoc(userDocRef);
-      const userData = userDoc.data();
-      const ads = userData.ads;
-      ads.push(adId);
-      await setDoc(userDocRef, { ...userData, ads
+  const getAllUsers = useCallback(async () => {
+    try {
+      const users = [];
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        users.push(doc.data());
       });
+      setAllUsers(users);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
 
-    });    
+  const fetchContact = useCallback(async () => {
+    try {
+      const contactDocRef = doc(db, "websiteData", "contact");
+      const contactDoc = await getDoc(contactDocRef);
+      if (contactDoc.exists()) {
+        setContact(contactDoc.data());
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
+
+  const updateUser = async (user) => {
+    try {
+      const userDocRef = doc(db, "users", user.Uid);
+      await setDoc(userDocRef, user);
+      await getAllUsers();
+    } catch (error) {
+      setError(error.message);
+    }
   };
-
-
-
-
-
 
   const addADs = async (ad) => {
     try {
@@ -89,57 +82,78 @@ const DashboardProvider = ({ children }) => {
       const newAdId = adCount + 1;
       const adDocRef = doc(db, "advertisement", newAdId.toString());
       await setDoc(adDocRef, { ...ad, id: newAdId });
-      updateUserAds(ad,newAdId);
+      // Add logic to update user ads here if necessary
     } catch (error) {
       setError(error.message);
     }
   };
 
-  const getAllAds = async () => {
-    const ads = [];
-    const querySnapshot = await getDocs(collection(db, "advertisement"));
-    querySnapshot.forEach((doc) => {
-      ads.push(doc.data());
-    });
-    return ads;
-  };
-
-  const updatePrivacy = async (privacy) => {
-    const privacyDocRef = doc(db, "websiteData", "privacy");
-    await setDoc(privacyDocRef, { ...privacy, updatedAt: new Date() });
-  };
-
-  const getPrivacy = async () => {
-    const privacyDocRef = doc(db, "websiteData", "privacy");
-    const privacyDoc = await getDoc(privacyDocRef);
-    return privacyDoc.data();
-  };
-
-
-
-
-  
- 
-
- useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setcurrentUser(user);
-      getAllUsers();
-      setLoading(false);
-      fetchContact();
-    });
-    return unsubscribe;
+  const getAllAds = useCallback(async () => {
+    try {
+      const ads = [];
+      const querySnapshot = await getDocs(collection(db, "advertisement"));
+      querySnapshot.forEach((doc) => {
+        ads.push(doc.data());
+      });
+      return ads;
+    } catch (error) {
+      setError(error.message);
+      return [];
+    }
   }, []);
 
-  const deleteUserFromDB =  async  (Uid)=>{
-    const userDocRef = doc(db, "users", Uid);
-    await setDoc(userDocRef, {isDeleted:true});
-    getAllUsers();
-  }
+  const updatePrivacy = async (privacy) => {
+    try {
+      const privacyDocRef = doc(db, "websiteData", "privacy");
+      await setDoc(privacyDocRef, { ...privacy, updatedAt: new Date() });
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-     
-    
+  const getPrivacy = useCallback(async () => {
+    try {
+      const privacyDocRef = doc(db, "websiteData", "privacy");
+      const privacyDoc = await getDoc(privacyDocRef);
+      if (privacyDoc.exists()) {
+        return privacyDoc.data();
+      }
+      return {};
+    } catch (error) {
+      setError(error.message);
+      return {};
+    }
+  }, []);
 
+  const deleteUserFromDB = async (Uid) => {
+    try {
+      const userDocRef = doc(db, "users", Uid);
+      await setDoc(userDocRef, { isDeleted: true }, { merge: true });
+      await getAllUsers();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setCurrentUser(user);
+      if (user) {
+        try {
+          await Promise.all([getAllUsers(), fetchContact()]);
+        } catch (error) {
+          setError(error.message);
+        }
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [auth, getAllUsers, fetchContact]); // Ensure dependencies are stable
+
+useEffect(() => {
+  console.log("Auth state changed", currentUser);
+}, [currentUser]);
 
 
 
@@ -147,16 +161,15 @@ const DashboardProvider = ({ children }) => {
     <DashboardContext.Provider
       value={{
         currentUser,
-        addADs,    
-        allUsers,  
+        addADs,
+        allUsers,
         updateUser,
         contact,
-        updateContact,
         error,
         getAllAds,
         updatePrivacy,
         getPrivacy,
-        deleteUserFromDB
+        deleteUserFromDB,
       }}
     >
       {!loading && children}
@@ -166,6 +179,4 @@ const DashboardProvider = ({ children }) => {
 
 export default DashboardProvider;
 
-export const useDashboard = () => {
-  return useContext(DashboardContext);
-};
+export const useDashboard = () => useContext(DashboardContext);

@@ -256,8 +256,8 @@ const CreateAd = () => {
 };
 
   useEffect(() => {
-    console.log(selectGovernorates);
-    console.log(selectStars);
+    // console.log(selectGovernorates);
+    // console.log(selectStars);
   }, [selectGovernorates, selectStars]);
 
   return (

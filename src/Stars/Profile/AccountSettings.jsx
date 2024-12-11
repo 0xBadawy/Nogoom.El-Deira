@@ -238,7 +238,7 @@ const handleImageUpload = (e) => {
               )
             )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               "facebookLink",
               "instagramLink",
@@ -255,7 +255,7 @@ const handleImageUpload = (e) => {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
           <Button type="submit" className="w-full">
             حفظ التغييرات
           </Button>
