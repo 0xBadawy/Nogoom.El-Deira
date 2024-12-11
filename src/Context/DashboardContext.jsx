@@ -23,22 +23,6 @@ const DashboardProvider = ({ children }) => {
   const [contact, setContact] = useState({});
   const [error, setError] = useState(null);
 
-  const HomePage = {
-    Herosection: {
-      title: "إعلانات تصل إلى جمهورك الحقيقي!",
-      subTitle:
-        "اختر المؤثرين المناسبين وحقق نتائج حقيقية بدون تكلفة حملات ضخمة.",
-      button: "إبدأ الآن",
-      buttonLink: "/signup",
-    },
-    SecondSection: {
-      title:
-        "ضاعف انتشارك! أعلن معنا مع أبرز مشاهير محافظة الحاجر وأوصل رسالتك إلى الجمهور المستهدف",
-      subTitle:
-        "أعلن معنا وكن جزءًا من عالم مشاهير محافظة الحاجر حيث يتصدر إعلانك المشهد ويصل إلى آلاف المتابعين في منطقتك. بفضل قاعدة جماهيرية واسعة وتأثير قوي، ستتمكن من تعزيز علامتك التجارية وتحقيق أهدافك التسويقية. انضم الآن واكتشف قوة الإعلان الموجه والمستهدف!",
-    },
-  };
-
   const getAllUsers = useCallback(async () => {
     try {
       const users = [];
@@ -58,9 +42,11 @@ const DashboardProvider = ({ children }) => {
       const contactDoc = await getDoc(contactDocRef);
       if (contactDoc.exists()) {
         setContact(contactDoc.data());
+        // console.log(contactDoc.data());
+        return contactDoc.data();
       }
     } catch (error) {
-      setError(error.message);
+      return;
     }
   }, []);
 
@@ -87,6 +73,30 @@ const DashboardProvider = ({ children }) => {
       setError(error.message);
     }
   };
+
+  const addHomeData = async (data) => {
+    try {
+      const websiteDataDocRef = doc(db, "websiteData", "HomePage");
+      await setDoc(websiteDataDocRef, { ...data, updatedAt: new Date() });
+    } catch (error) {
+      setError(error.message);
+    }
+    // console.log(data)
+  };
+
+  const getHomeData = useCallback(async () => {
+    try {
+      const websiteDataDocRef = doc(db, "websiteData", "HomePage");
+      const websiteDataDoc = await getDoc(websiteDataDocRef);
+      if (websiteDataDoc.exists()) {
+        return websiteDataDoc.data();
+      }
+      return {};
+    } catch (error) {
+      setError(error.message);
+      return {};
+    }
+  }, []);
 
   const getAllAds = useCallback(async () => {
     try {
@@ -151,15 +161,15 @@ const DashboardProvider = ({ children }) => {
     return () => unsubscribe();
   }, [auth, getAllUsers, fetchContact]); // Ensure dependencies are stable
 
-useEffect(() => {
-  console.log("Auth state changed", currentUser);
-}, [currentUser]);
-
-
+  useEffect(() => {
+    fetchContact();
+  }, []);
 
   return (
     <DashboardContext.Provider
       value={{
+        addHomeData,
+        getHomeData,
         currentUser,
         addADs,
         allUsers,
@@ -170,6 +180,7 @@ useEffect(() => {
         updatePrivacy,
         getPrivacy,
         deleteUserFromDB,
+    fetchContact,
       }}
     >
       {!loading && children}

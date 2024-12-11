@@ -19,7 +19,17 @@ import HeroContent from "./HeroContent";
 
 const HeroSection = () => {
   const { t } = useTranslation();
-  const { contact } = useDashboard();
+  const [contact,setContact] = useState()
+  const {  fetchContact } = useDashboard();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const Data = await fetchContact();
+      setContact(Data);
+    };
+    fetchData();
+  }, []);
+  
   const [socialMediaLinks, setSocialMediaLinks] = useState([
     {
       id: 1,
@@ -126,6 +136,7 @@ const HeroSection = () => {
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
       <DecorativeShapes />
+
 
       <HeroContent
         title={"إعلانات تصل إلى جمهورك الحقيقي!"}
