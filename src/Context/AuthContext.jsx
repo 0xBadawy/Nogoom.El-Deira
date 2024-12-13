@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
           Uid: Uid,
         });
         // await auth.signOut();
-         window.location.href = "/status";
+        // window.location.href = "/status";
         return { success: true };
 
         

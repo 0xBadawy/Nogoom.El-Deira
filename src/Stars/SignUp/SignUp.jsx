@@ -67,7 +67,7 @@ const SignUpPage = () => {
       } else {
         toast.success("تم تسجيل الحساب بنجاح!");
         SendSignupNotification({ message, readed, time },"allAdmin");
-         navigate("/status")
+        // navigate("/status")
       }
     } catch (error) {
       setError(handleFirebaseError(error.code));

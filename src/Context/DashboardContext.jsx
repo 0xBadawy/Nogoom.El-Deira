@@ -201,36 +201,78 @@ const DashboardProvider = ({ children }) => {
     }
   }, []);
 
+// const addUserNotification = async (notification, Uid) => {
+//   try {
+//     const userDocRef = doc(db, "users", Uid);
+
+//     let userDoc;
+//     try {
+//       userDoc = await getDoc(userDocRef);
+//     } catch (fetchError) {
+//       console.error("Error fetching document:", fetchError);
+//       return; // Stop further execution
+//     }
+
+//     if (userDoc.exists()) {
+//       const user = userDoc.data();
+//       const notifications = user.notifications || [];
+
+//       const notificationWithId = { ...notification, id: crypto.randomUUID() };
+
+//       notifications.push(notificationWithId);
+
+//       await setDoc(userDocRef, { ...user, notifications });
+//     } else {
+//       console.error("User document does not exist or cannot be accessed");
+//     }
+//   } catch (error) {
+//     console.error("Error in addUserNotification:", error);
+//     setError(error.message);
+//   }
+// };
+
+  
 const addUserNotification = async (notification, Uid) => {
   try {
+    console.log("Starting addUserNotification function");
+    console.log("Notification:", notification, "Uid:", Uid);
+
     const userDocRef = doc(db, "users", Uid);
+    console.log("Document reference created:", userDocRef);
 
     let userDoc;
     try {
       userDoc = await getDoc(userDocRef);
+      console.log("Fetched document:", userDoc);
     } catch (fetchError) {
       console.error("Error fetching document:", fetchError);
       return; // Stop further execution
     }
 
     if (userDoc.exists()) {
+      console.log("User document exists");
       const user = userDoc.data();
+      console.log("User data:", user);
+
       const notifications = user.notifications || [];
+      console.log("Existing notifications:", notifications);
 
       const notificationWithId = { ...notification, id: crypto.randomUUID() };
+      console.log("New notification with ID:", notificationWithId);
 
       notifications.push(notificationWithId);
+      console.log("Updated notifications:", notifications);
 
       await setDoc(userDocRef, { ...user, notifications });
+      console.log("Notification added successfully");
     } else {
-      console.error("User document does not exist or cannot be accessed");
+      console.log("User document does not exist or cannot be accessed");
     }
   } catch (error) {
     console.error("Error in addUserNotification:", error);
     setError(error.message);
   }
 };
-
 
 
   const updateNotificationReaded = async (Uid, notificationId) => {
