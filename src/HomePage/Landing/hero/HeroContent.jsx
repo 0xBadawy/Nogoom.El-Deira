@@ -29,6 +29,7 @@ const HeroContent = ({ title, description, buttonText, image }) => {
         <img
           src={image}
           alt="Hero illustration"
+          loading="lazy"
           className="h-full object-contain drop-shadow-2xl animate-float"
         />
       </div>

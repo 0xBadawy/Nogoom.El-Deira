@@ -138,13 +138,14 @@ const HeroSection = () => {
     >
       <DecorativeShapes />
 
-      <HeroContent
-        title={data?.main_title}
-        description={data?.subtitle}
-        buttonText={"أبدأ حملتك التسويقية"}
-        image={image}
-      />
-
+      {data?.main_title && data?.subtitle && image && (
+        <HeroContent
+          title={data?.main_title}
+          description={data?.subtitle}
+          buttonText={"أبدأ حملتك التسويقية"}
+          image={image}
+        />
+      )}
       {/* <SocialLinks links={socialMediaLinks} /> */}
       {/* <ContactLinks contacts={contacts} /> */}
     </div>

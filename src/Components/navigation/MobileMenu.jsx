@@ -1,9 +1,16 @@
-import PropTypes from 'prop-types';
-import { NavLinks } from './NavLinks';
-import { LoginButton } from './LoginButton';
-import { UserProfile } from './UserProfile';
+import PropTypes from "prop-types";
+import { NavLinks } from "./NavLinks";
+import { LoginButton } from "./LoginButton";
+import { UserProfile } from "./UserProfile";
 
-const MobileMenu = ({ isOpen, links, user, onLogin, onLogout, onClose }) => {
+const MobileMenu = ({
+  isOpen,
+  links,
+  user,
+  onLogin,
+  onLogout,
+  onClose = () => {},
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -27,10 +34,10 @@ const MobileMenu = ({ isOpen, links, user, onLogin, onLogout, onClose }) => {
             </svg>
           </button>
         </div>
-        
+
         <div className="flex flex-col items-center mt-8 space-y-6">
           <NavLinks links={links} isMobile={true} />
-          
+
           <div className="mt-auto">
             {user?.isAuthenticated ? (
               <UserProfile user={user} onLogout={onLogout} isMobile={true} />
@@ -42,10 +49,6 @@ const MobileMenu = ({ isOpen, links, user, onLogin, onLogout, onClose }) => {
       </div>
     </div>
   );
-};
-
-MobileMenu.defaultProps = {
-  onClose: () => {},
 };
 
 MobileMenu.propTypes = {
@@ -63,6 +66,7 @@ MobileMenu.propTypes = {
   }),
   onLogin: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default MobileMenu;

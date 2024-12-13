@@ -1,37 +1,49 @@
-import React, { useEffect } from "react";
-import HeroSection from "./Landing/hero/HeroSection";
+import React, { Suspense } from "react";
 import Navbar from "../Components/navigation/Navbar";
-import DownloadApp from "./Landing/DownloadApp";
-import CurrentAdv from "./Landing/CurrentAdv";
-import CityAdv from "./Landing/CityAdv";
 import "../style/pattern.css";
-import SocialMediaInfluencers from "./Landing/SocialMediaInfluencers";
-import DownloadSection from "./Landing/DownloadSection";
-import CampaignStats from "./Landing/CampaignStats";
-import ContactSection from "./Landing/ContactSection";
+import Loading from "../Components/Loading";
+
+const HeroSection = React.lazy(() => import("./Landing/hero/HeroSection"));
+const CurrentAdv = React.lazy(() => import("./Landing/CurrentAdv"));
+const CityAdv = React.lazy(() => import("./Landing/CityAdv"));
+const SocialMediaInfluencers = React.lazy(() =>
+  import("./Landing/SocialMediaInfluencers")
+);
+const DownloadSection = React.lazy(() => import("./Landing/DownloadSection"));
+const CampaignStats = React.lazy(() => import("./Landing/CampaignStats"));
+const ContactSection = React.lazy(() => import("./Landing/ContactSection"));
+
 const HomePage = () => {
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     window.scrollBy({
-  //       top: 1, // Adjust the speed of scrolling
-  //       behavior: "smooth",
-  //     });
-  //   }, 20); // Adjust the interval time (in ms)
-
-  //   return () => clearInterval(interval); // Cleanup interval on component unmount
-  // }, []);
-
   return (
     <div className="PatternBG" style={{ fontFamily: "Cairo" }}>
       <Navbar />
-      <HeroSection />
-      <CityAdv />
-      {/* <DownloadApp /> */}
-      <CurrentAdv />
-      <SocialMediaInfluencers />
-      <DownloadSection />
-      <CampaignStats />
-      <ContactSection />
+      <Suspense fallback={<Loading />}>
+        <HeroSection />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <CityAdv />
+      </Suspense>
+      {/* Uncomment when needed */}
+      {/* 
+      <Suspense fallback={<div>Loading Download App Section...</div>}>
+        <DownloadApp />
+      </Suspense> 
+      */}
+      <Suspense fallback={<Loading />}>
+        <CurrentAdv />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <SocialMediaInfluencers />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <DownloadSection />
+      </Suspense>
+      <Suspense fallback={<Loading/> }>
+        <CampaignStats />
+      </Suspense>
+      <Suspense fallback={<Loading/> }>
+        <ContactSection />
+      </Suspense>
       <div className="h-[100px]"></div>
     </div>
   );
