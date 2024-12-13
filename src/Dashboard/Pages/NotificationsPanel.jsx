@@ -12,20 +12,7 @@ const NotificationsPanel = () => {
 
   const { updateNotificationReaded } = useDashboard();
 
-  const [notifications, setNotifications] = useState([
-    // {
-    //   id: 1,
-    //   message: "تم تحديث بياناتك - وفى انتظار الموافقة على التحديثات",
-    //   readed: false,
-    // },
-    // { id: 4, message: "تم تحديث سياسة الخصوصية الخاصة بنا.", readed: false },
-    // {
-    //   id: 2,
-    //   message: "لقد قمت بإضافة صورة جديدة للملف الشخصي.",
-    //   readed: false,
-    // },
-    // { id: 3, message: "تم تسجيل الدخول بنجاح من جهاز جديد.", readed: true },
-  ]);
+  const [notifications, setNotifications] = useState([]);
 
   const handleReadNotification = (id) => {
     updateNotificationReaded(UserId, id);
