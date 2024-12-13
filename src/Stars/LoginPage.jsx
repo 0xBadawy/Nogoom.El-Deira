@@ -103,7 +103,7 @@ const LoginPage = () => {
               // disabled={loading}
               type="submit"
               // onClick={confirm}
-              className="w-full bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
+              className="w-full bg-indigo-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
             >
               {Text.login}
             </button>

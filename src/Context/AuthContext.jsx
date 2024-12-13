@@ -55,9 +55,11 @@ const AuthProvider = ({ children }) => {
           permissions: [],
           Uid: Uid,
         });
-        await auth.signOut();
-        window.location.href = "/status";
+        // await auth.signOut();
+         window.location.href = "/status";
         return { success: true };
+
+        
       } else {
         await setDoc(doc(db, "users", user.uid), {
           email: user.email,
@@ -76,6 +78,7 @@ const AuthProvider = ({ children }) => {
         await auth.signOut();
         window.location.href = "/login";
         return { success: true };
+
       }
     } catch (error) {
       console.error("Error signing up or saving user data:", error.message);

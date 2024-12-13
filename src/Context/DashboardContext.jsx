@@ -29,11 +29,18 @@ const DashboardProvider = ({ children }) => {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         users.push(doc.data());
+
       });
+      
       setAllUsers(users);
     } catch (error) {
       setError(error.message);
     }
+  }, []);
+
+  useEffect(() => {
+    getAllUsers();
+    console.log("all users", allUsers);
   }, []);
 
   const fetchContact = useCallback(async () => {
@@ -194,25 +201,37 @@ const DashboardProvider = ({ children }) => {
     }
   }, []);
 
-  const addUserNotification = async (notification, Uid) => {
+const addUserNotification = async (notification, Uid) => {
+  try {
+    const userDocRef = doc(db, "users", Uid);
+
+    let userDoc;
     try {
-      const userDocRef = doc(db, "users", Uid);
-      const userDoc = await getDoc(userDocRef);
-
-      if (userDoc.exists()) {
-        const user = userDoc.data();
-        const notifications = user.notifications || [];
-
-        const notificationWithId = { ...notification, id: crypto.randomUUID() };
-
-        notifications.push(notificationWithId);
-
-        await setDoc(userDocRef, { ...user, notifications });
-      }
-    } catch (error) {
-      setError(error.message);
+      userDoc = await getDoc(userDocRef);
+    } catch (fetchError) {
+      console.error("Error fetching document:", fetchError);
+      return; // Stop further execution
     }
-  };
+
+    if (userDoc.exists()) {
+      const user = userDoc.data();
+      const notifications = user.notifications || [];
+
+      const notificationWithId = { ...notification, id: crypto.randomUUID() };
+
+      notifications.push(notificationWithId);
+
+      await setDoc(userDocRef, { ...user, notifications });
+    } else {
+      console.error("User document does not exist or cannot be accessed");
+    }
+  } catch (error) {
+    console.error("Error in addUserNotification:", error);
+    setError(error.message);
+  }
+};
+
+
 
   const updateNotificationReaded = async (Uid, notificationId) => {
     try {
@@ -253,6 +272,41 @@ const DashboardProvider = ({ children }) => {
       await addUserNotification({ message, readed, time }, user.Uid);
     });
   };
+
+const SendSignupNotification = async (notification, type) => {
+ 
+  const { message, readed, time } = notification;
+
+  // Map the roles for filtering
+  const roleMap = {
+    admin: "admin",
+    user: "user",
+    allAdmin: ["admin", "editor", "viewer"],
+  };
+
+  // Filter users based on role type
+  const getUsersByRole = (type) => {
+    if (type === "allAdmin") {
+      return allUsers.filter((user) => roleMap.allAdmin.includes(user.role));
+    }
+    return allUsers.filter((user) => user.role === roleMap[type]);
+  };
+
+  // Get users based on the type of notification
+  const users = getUsersByRole(type);
+
+  
+
+  // Send notification to each user
+  for (const user of users) {
+    try {      
+      await addUserNotification({ message, readed, time }, user.Uid);
+    } catch (error) {
+      console.error(`Failed to add notification for user ${user.Uid}:`, error);
+    }
+  }
+};
+
 
   const deleteUserFromDB = async (Uid) => {
     try {
@@ -303,6 +357,8 @@ const DashboardProvider = ({ children }) => {
         SendNotification,
         updateNotificationReaded,
         UpdateCurrentUserAds,
+        SendSignupNotification,
+        
         error,
       }}
     >

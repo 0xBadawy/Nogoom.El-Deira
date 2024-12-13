@@ -8,15 +8,17 @@ import Logo from "../../assets/Images/Logo/Deira-logo2.png";
 import { GovernmentData, TextData, Tiers } from "./data";
 import { useAuth } from "../../Context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
+import { useDashboard } from "../../Context/DashboardContext";
 
 const SignUpPage = () => {
   const { signUp } = useAuth();
 
   const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState([]);
-  const { register,  handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const {SendSignupNotification} = useDashboard();
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -37,6 +39,11 @@ const SignUpPage = () => {
     }
   };
   const onSubmit = async (data) => {
+
+    const message = `تم تسجيل حساب جديد بواسطة ${data.name} - ${data.email} وبانتظار المراجعة`;
+    const time = new Date();
+    const readed = false;
+
 
     if(!data.privacyPolicy){
       toast.error("يجب الموافقة على سياسة الخصوصية");
@@ -59,7 +66,8 @@ const SignUpPage = () => {
         setError(handleFirebaseError(result.error)); // Set error state
       } else {
         toast.success("تم تسجيل الحساب بنجاح!");
-        navigate("/status")
+        SendSignupNotification({ message, readed, time },"allAdmin");
+         navigate("/status")
       }
     } catch (error) {
       setError(handleFirebaseError(error.code));
