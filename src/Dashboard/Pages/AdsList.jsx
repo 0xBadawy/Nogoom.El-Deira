@@ -48,9 +48,9 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
   const totalPages = Math.ceil(ads.length / itemsPerPage);
 
   return (
-    <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full">
+    <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full overflow-y-auto">
       <h2 className="text-2xl mb-4">الحملات الاعلانية</h2>
-      <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+      <div className="mt-6 bg-white w-fit dark:bg-gray-800 rounded-lg shadow-md p-4">
         <div className="flex gap-4 mb-4">
           {/* قائمة المنطقة */}
           <select

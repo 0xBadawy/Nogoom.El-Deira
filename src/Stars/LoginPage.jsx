@@ -9,6 +9,7 @@ import handleFirebaseError from "../Validations/Errors";
 import Logo from "../../src/assets/Images/Logo/Deira-logo2.png";
 import LoginImage from "../../src/assets/Images/LoginStar.jpg";
 import { useAuth } from "../Context/AuthContext";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -31,14 +32,28 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onFormSubmit = async (data) => {
-    // console.log(data);
-    login(data.email,data.password)
-    .then(()=>{
-      navigate(redirectPath);
-    })
-   
-  };
+
+
+const onFormSubmit = async (data) => {
+  try {
+    await login(data.email, data.password);
+    toast.success("تم تسجيل الدخول بنجاح");
+    navigate(redirectPath);
+  } catch (error) {
+    console.error("Error during login:", error);
+    setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+
+    // Handle specific Firebase error codes
+    if (error.code === "auth/user-not-found") {
+      toast.error("البريد الإلكتروني غير مسجل");
+    } else if (error.code === "auth/wrong-password") {
+      toast.error("كلمة المرور غير صحيحة");
+    } else {
+      toast.error("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+    }
+  }
+};
+
 
   return (
     <div
@@ -111,13 +126,7 @@ const LoginPage = () => {
 
           {/* Login using social media */}
           <div className="grid gap-3 mt-10">
-            {/* <GoogleButton onClick={HandelsignInWithGoogle} /> */}
-            <button className="bg-white hidden shadow-sm w-full border-gray-800 font-semibold h-10 hover:bg-gray-100 text-gray-800 border-[1px] rounded-xl">
-              <div className="flex flex-row-reverse mx-auto items-center justify-center gap-3">
-                <FcGoogle size={27} />
-                <span>Log in with Google</span>
-              </div>
-            </button>
+            
             {/*Create acount */}
             <div className="text-center">
               <span>ليس لديك حساب؟</span>

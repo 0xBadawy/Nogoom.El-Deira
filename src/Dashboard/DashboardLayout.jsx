@@ -6,7 +6,7 @@ const DashboardLayout = () => {
   const isDarkMode  =false;
 
   return (
-    <div className="flex">
+    <div className="flex flex-col ">
       <Sidebar />
       <div
         className={`grow mr-16 md:mr-64 min-h-screen ${

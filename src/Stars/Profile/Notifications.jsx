@@ -69,7 +69,7 @@ const Notifications = () => {
         <p className="mb-6 text-gray-600">
           إدارة تفضيلات الإشعارات الخاصة بك هنا.
         </p>
-        <div className="space-y-4">
+        <div className="space-y-4 ">
           {notifications?.length > 0 ? (
             notifications.map((notification, id) => (
               <div
@@ -78,7 +78,7 @@ const Notifications = () => {
                   notification?.readed ? "bg-gray-100" : "bg-indigo-50"
                 }`}
               >
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center flex-col gap-3 md:flex-row">
                   <div>
                     <p className="text-sm text-indigo-900">
                       {notification?.message}
@@ -91,7 +91,7 @@ const Notifications = () => {
                         : "Invalid date"}
                     </p>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center gap-2 ">
                     {!notification?.readed && (
                       <Button
                         onClick={() => handleReadNotification(notification.id)}

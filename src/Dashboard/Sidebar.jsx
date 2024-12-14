@@ -9,6 +9,8 @@ import {
   FaCog,
   FaRegGrinStars,
 } from "react-icons/fa";
+import { BsFillSendPlusFill } from "react-icons/bs";
+
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
@@ -55,11 +57,6 @@ const Sidebar = () => {
       link: "/dashboard/contact",
     },
     {
-      icon: <IoNotificationsSharp />,
-      text: "الإشعارات",
-      link: "/dashboard/notifications",
-    },
-    {
       icon: <TbSpeakerphone />,
       text: " إنشاء حملة ",
       link: "/dashboard/createAd",
@@ -70,7 +67,12 @@ const Sidebar = () => {
       link: "/dashboard/ads-list",
     },
     {
-      icon: <MdVideoSettings />,
+      icon: <IoNotificationsSharp />,
+      text: "الإشعارات",
+      link: "/dashboard/notifications",
+    },
+    {
+      icon: <BsFillSendPlusFill />,
       text: " ارسال اشعار",
       link: "/dashboard/Send_Notification",
     },

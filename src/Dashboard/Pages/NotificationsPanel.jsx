@@ -46,7 +46,7 @@ const NotificationsPanel = () => {
   }, []);
 
   return (
-    <Card className="p-4 m-6 bg-white rounded-lg shadow-md">
+    <Card className="p- m-6 bg-white rounded-lg shadow-md ">
       <CardHeader>
         <CardTitle className="text-3xl font-bold text-indigo-900">
           الإشعارات
@@ -61,16 +61,16 @@ const NotificationsPanel = () => {
             notifications.map((notification, id) => (
               <div
                 key={id}
-                className={`p-4 rounded-lg shadow-sm ${
+                className={`p-2 rounded-lg shadow-sm ${
                   notification?.readed ? "bg-gray-100" : "bg-indigo-50"
                 }`}
               >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-sm text-indigo-900">
+                <div className="flex justify-between items-start flex-col md:flex-row max-w-full overflow-hidden">
+                  <div className="w-full text-ellipsis overflow-hidden">
+                    <p className="text-sm text-indigo-900 whitespace-normal">
                       {notification?.message}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 whitespace-normal">
                       {notification?.time
                         ? new Date(
                             notification.time.seconds * 1000
