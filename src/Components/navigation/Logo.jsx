@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export const Logo = ({ primaryLogo, whiteLogo, isScrolled = false }) => {
   return (
     <Link
-      to="/home"
+      to="/"
       className="transition-transform duration-300 hover:scale-105"
     >
       <img

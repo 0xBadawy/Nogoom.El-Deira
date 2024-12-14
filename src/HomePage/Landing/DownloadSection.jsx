@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import Image from "../../assets/Image4.png";
 import Image2 from "../../assets/Images/Image1.png";
+import { useDashboard } from "../../Context/DashboardContext";
 
 const DownloadSection = () => {
+  const [contact, setContact] = useState();
+  const { fetchContact } = useDashboard();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchContact();
+      setContact(data);
+    };
+    fetchData();
+  }, []);
   return (
     <div
       className="bg-gradient-to-r from-blue-50 to-green-50 relative w-[95%] py-14 mt-10 md:px-32 px-10 rounded-3xl shadow-xl mx-auto flex flex-col md:flex-row items-center gap-10 overflow-hidden"
@@ -20,14 +31,14 @@ const DownloadSection = () => {
           style={{ direction: "ltr" }}
         >
           <a
-            href="#"
+            href={contact?.appStore}
             className="flex items-center justify-center bg-black text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-900 transition-transform transform hover:scale-110"
           >
             <FaApple className="text-3xl mr-3" />
             <span className="text-lg">تحميل من أبل ستور</span>
           </a>
           <a
-            href="#"
+            href={contact?.googlePlay}
             className="flex items-center justify-center bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-green-700 transition-transform transform hover:scale-110"
           >
             <FaGooglePlay className="text-3xl mr-3" />

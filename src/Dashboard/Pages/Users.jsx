@@ -39,7 +39,7 @@ const Users = () => {
 
   useEffect(() => {
     const users = allUsers;
-    console.log("users", users);
+    // console.log("users", users);
     setUsersData(users);
   }, [allUsers]);
 
@@ -59,7 +59,7 @@ const Users = () => {
 
     updateUser(updatedUser);
 
-    console.log(updatedUser);
+    // console.log(updatedUser);
   };
 
   return (

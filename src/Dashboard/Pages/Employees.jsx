@@ -85,7 +85,7 @@ const Employees = () => {
               </tr>
             </thead>
             <tbody>
-              {usersData.map(
+              {usersData?.map(
                 (row, index) =>
                   row.role != "star" &&
                   !row.isDeleted && (
@@ -101,7 +101,7 @@ const Employees = () => {
                         {row.email}
                       </td>
                       <td className="py-2 px-4  md:table-cell">
-                        <p>{row?.lastSeen.toDate().toLocaleString()}</p>
+                        <p>{row?.lastSeen?.toDate().toLocaleString()}</p>
                       </td>
 
                       <td className="py-2 px-4 ">

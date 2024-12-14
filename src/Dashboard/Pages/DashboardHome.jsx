@@ -1,12 +1,14 @@
 import { FaUser, FaBullhorn, FaChartLine, FaEye } from "react-icons/fa";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
+import { useDashboard } from "../../Context/DashboardContext";
 
 const DashboardHome = () => {
   const { getUserData } = useAuth();
+  const {getFirestoreStats} = useDashboard();
   const [UserData, setUserData] = useState({
-    name: "أحمد علي",
-    role: "مدير ",
+    name: "",
+    role: "",
   });
   useEffect(() => {
     const fetchUserData = async () => {
@@ -30,38 +32,46 @@ const DashboardHome = () => {
 
   }
 
-  const data = [
-    {
-      icon: <FaBullhorn className="text-3xl text-blue-500" />,
-      title: "إجمالي الحملات",
-      value: "1,250",
-      color: "text-blue-500",
-    },
-    {
-      icon: <FaChartLine className="text-3xl text-green-500" />,
-      title: "الحملات النشطة",
-      value: "320",
-      color: "text-green-500",
-    },
-    {
-      icon: <FaEye className="text-3xl text-purple-500" />,
-      title: "إجمالي النقرات",
-      value: "75,430",
-      color: "text-purple-500",
-    },
-    {
-      icon: <FaEye className="text-3xl text-yellow-500" />,
-      title: "المشاهدات",
-      value: "1,200,000",
-      color: "text-yellow-500",
-    },
-    {
-      icon: <FaEye className="text-3xl text-slate-600" />,
-      title: "المستخدمين النشطين",
-      value: "1,200",
-      color: "text-slate-600",
-    },
-  ];
+  const [ data,setData] = useState([
+    
+  ]);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const stats = await getFirestoreStats();
+        const {employees, ads} = stats;
+        setData([
+          {
+            icon: <FaBullhorn className="text-3xl text-blue-500" />,
+            title: "إجمالي الحملات",
+            value: ads,
+            color: "text-blue-500",
+          },
+          {
+            icon: <FaChartLine className="text-3xl text-green-500" />,
+            title: "الحملات النشطة",
+            value: ads,
+            color: "text-green-500",
+          },
+          
+          
+          {
+            icon: <FaEye className="text-3xl text-slate-600" />,
+            title: "المستخدمين النشطين",
+            value: employees,
+            color: "text-slate-600",
+          },
+        ]);
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
+    };
+
+    fetchStats();
+  }, [getFirestoreStats]);
+
+
 
   return (
     <div className="p- bg-gradient-to-br from-gray-100 to-gray-50 min-h-screen">

@@ -20,6 +20,7 @@ const Contact = () => {
 
   useEffect(() => {
     setData(contact);
+    console.log(contact)
     setValue("phone", contact.phone);
     setValue("email", contact.email);
     setValue("whatsapp", contact.whatsapp);
@@ -29,6 +30,8 @@ const Contact = () => {
     setValue("linkedin", contact.linkedin);
     setValue("snapchat", contact.snapchat);
     setValue("tiktok", contact.tiktok);
+    setValue("googlePlay", contact.googlePlay);
+    setValue("appStore", contact.appStore);
   }, [contact]);
 
   const onSubmit = (data) => {
@@ -190,7 +193,35 @@ const Contact = () => {
                 />
               </label>
             </div>
+            {/* google play */}
+            <div className="col-span-6 md:col-span-2">
+              <label
+                htmlFor="googlePlay"
+                className="text-gray-900 dark:text-white "
+              >
+                جوجل بلاى
+                <input
+                  type="text"
+                  {...register("googlePlay")}
+                  className="p-2 border w-full border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800"
+                />
+              </label>
+            </div>
 
+            {/* App Store */}
+            <div className="col-span-6 md:col-span-2">
+              <label
+                htmlFor="appStore"
+                className="text-gray-900 dark:text-white "
+              >
+                اب ستور
+                <input
+                  type="text"
+                  {...register("appStore")}
+                  className="p-2 border w-full border-gray-300 dark:border-gray-700 rounded-lg dark:bg-gray-800"
+                />
+              </label>
+            </div>
             <div className="col-span-6">
               <button
                 type="submit"

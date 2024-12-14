@@ -45,6 +45,8 @@ const CreateAd = () => {
     };
     console.log(adData);
     addADs(adData);
+    setImageURL([]);
+    setVideoURL("");
     reset();
     toast.success("تم إضافة  حملة بنجاح!");
   };

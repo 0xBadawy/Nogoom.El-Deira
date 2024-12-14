@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#FF6363",
+        primary: "#8437c7",
         secondary: {
-          100: "#E2E2D5",
+          100: "#8437c8",
           200: "#888883",
         },
         sidebar: {

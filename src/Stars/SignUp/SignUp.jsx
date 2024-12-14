@@ -67,7 +67,7 @@ const SignUpPage = () => {
       } else {
         toast.success("تم تسجيل الحساب بنجاح!");
         SendSignupNotification({ message, readed, time },"allAdmin");
-        // navigate("/status")
+        navigate("/status")
       }
     } catch (error) {
       setError(handleFirebaseError(error.code));
@@ -175,7 +175,7 @@ const SignUpPage = () => {
               />
               {TextData.privacyPolicy}
               <a
-                href="/"
+                href="/privacy-policy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-700 font-bold"

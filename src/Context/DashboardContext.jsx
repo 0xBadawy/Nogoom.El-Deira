@@ -38,10 +38,7 @@ const DashboardProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    getAllUsers();
-    console.log("all users", allUsers);
-  }, []);
+ 
 
   const fetchContact = useCallback(async () => {
     try {
@@ -56,6 +53,16 @@ const DashboardProvider = ({ children }) => {
       return;
     }
   }, []);
+
+  const updateContact = async (data) => {
+    try {
+      const contactDocRef = doc(db, "websiteData", "contact");
+      await setDoc(contactDocRef, { ...data, updatedAt: new Date() });
+      await fetchContact();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const updateUser = async (user) => {
     try {
@@ -88,6 +95,15 @@ const DashboardProvider = ({ children }) => {
       await setDoc(userDocRef, { ...userData, ads });
       addUserNotification({ message, readed: false, time }, star.Uid);
     });
+  };
+
+  const getFirestoreStats = async () => {
+    const employeesCount = await getDocs(collection(db, "users"));
+    const adsCount = await getDocs(collection(db, "advertisement"));
+    return {
+      employees: employeesCount.size,
+      ads: adsCount.size,
+    }
   };
 
   const getUserAds = async (Uid) => {
@@ -178,6 +194,21 @@ const DashboardProvider = ({ children }) => {
     }
   }, []);
 
+  const getAdvbyID = async (id) => {
+    try {
+      const adDocRef = doc(db, "advertisement", id);
+      const adDoc = await getDoc(adDocRef);
+      if (adDoc.exists()) {
+        return adDoc.data();
+      }
+      return {};
+    }
+    catch (error) {
+      setError(error.message);
+      return {};
+    }
+  }
+
   const updatePrivacy = async (privacy) => {
     try {
       const privacyDocRef = doc(db, "websiteData", "privacy");
@@ -234,39 +265,39 @@ const DashboardProvider = ({ children }) => {
   
 const addUserNotification = async (notification, Uid) => {
   try {
-    console.log("Starting addUserNotification function");
-    console.log("Notification:", notification, "Uid:", Uid);
+  //  console.log("Starting addUserNotification function");
+  //  console.log("Notification:", notification, "Uid:", Uid);
 
     const userDocRef = doc(db, "users", Uid);
-    console.log("Document reference created:", userDocRef);
+  //  console.log("Document reference created:", userDocRef);
 
     let userDoc;
     try {
       userDoc = await getDoc(userDocRef);
-      console.log("Fetched document:", userDoc);
+   //   console.log("Fetched document:", userDoc);
     } catch (fetchError) {
       console.error("Error fetching document:", fetchError);
       return; // Stop further execution
     }
 
     if (userDoc.exists()) {
-      console.log("User document exists");
+      // console.log("User document exists");
       const user = userDoc.data();
-      console.log("User data:", user);
+  //    console.log("User data:", user);
 
       const notifications = user.notifications || [];
-      console.log("Existing notifications:", notifications);
+    //  console.log("Existing notifications:", notifications);
 
       const notificationWithId = { ...notification, id: crypto.randomUUID() };
-      console.log("New notification with ID:", notificationWithId);
+      // console.log("New notification with ID:", notificationWithId);
 
       notifications.push(notificationWithId);
-      console.log("Updated notifications:", notifications);
+   //   console.log("Updated notifications:", notifications);
 
       await setDoc(userDocRef, { ...user, notifications });
-      console.log("Notification added successfully");
+      // console.log("Notification added successfully");
     } else {
-      console.log("User document does not exist or cannot be accessed");
+      //   console.log("User document does not exist or cannot be accessed");
     }
   } catch (error) {
     console.error("Error in addUserNotification:", error);
@@ -298,7 +329,7 @@ const addUserNotification = async (notification, Uid) => {
           ...user,
           notifications: updatedNotifications,
         });
-        console.log("Notification marked as read.");
+    //    console.log("Notification marked as read.");
       } else {
         console.error("User document not found.");
       }
@@ -391,6 +422,7 @@ const SendSignupNotification = async (notification, type) => {
         allUsers,
         updateUser,
         contact,
+        updateContact ,
         getAllAds,
         updatePrivacy,
         getPrivacy,
@@ -400,6 +432,8 @@ const SendSignupNotification = async (notification, type) => {
         updateNotificationReaded,
         UpdateCurrentUserAds,
         SendSignupNotification,
+        getFirestoreStats,
+        getAdvbyID,
         
         error,
       }}

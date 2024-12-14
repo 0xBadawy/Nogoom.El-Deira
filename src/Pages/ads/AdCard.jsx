@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 
 export default function AdCard({ ad, isHovered, onHoverStart, onHoverEnd }) {
+  const translations = {
+    events: "مناسبات",
+    real_estate: "عقارات",
+    cars: "سيارات",
+    electronics: "إلكترونيات",
+    services: "خدمات",
+    home_supplies: "لوازم منزلية",
+    personal_supplies: "لوازم شخصية",
+    animals: "حيوانات",
+  };
   return (
     <div
       className="ad-card rounded-2xl"
@@ -14,12 +24,12 @@ export default function AdCard({ ad, isHovered, onHoverStart, onHoverEnd }) {
           : "0 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Link to={`/ad/${ad.id}`}>
+      <Link to={`/ads/${ad.id}`}>
         <div className="card bg-white rounded-2xl border-2 border-purple-500 hover:border-blue-400 transition-all duration-300">
           <div className="card-content p-0">
             <div className="relative">
               <img
-                src={ad.image}
+                src={ad.images[0]}
                 alt={ad.title}
                 className="w-full h-48 object-cover rounded-t-2xl"
               />
@@ -29,7 +39,7 @@ export default function AdCard({ ad, isHovered, onHoverStart, onHoverEnd }) {
                   {ad.title}
                 </h2>
                 <span className="badge bg-purple-600 text-white px-2 py-1 rounded-md text-sm">
-                  {ad.category}
+                  {translations[ad.category]}
                 </span>
               </div>
               {isHovered && (
@@ -46,7 +56,7 @@ export default function AdCard({ ad, isHovered, onHoverStart, onHoverEnd }) {
               </p>
               <p className="text-sm text-gray-600 mb-2">
                 <span className="icon inline-block ml-1 h-3 w-3"> 📍 </span>
-                {ad.regions[0]}
+                {ad.region}
               </p>
 
               <p className="text-xs text-gray-400 mt-2">

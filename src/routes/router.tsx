@@ -33,9 +33,11 @@ const Privacy = React.lazy(() => import("../Dashboard/Pages/Privacy"));
 const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
 const Contact = React.lazy(() => import("../Dashboard/Pages/Contact"));
 const Unauthorized = React.lazy(() => import("../Pages/Unauthorized"));
+const PrivacyPolicy = React.lazy(() => import("../Pages/PrivacyPolicy"));
+
 const ContactPage = React.lazy(() => import("../Pages/ContactPage"));
 const AdListPage = React.lazy(() => import("../Pages/ads/AdListPage"));
-const AdDetailPage = React.lazy(() => import("../Pages/ads/AdDetailPage"));
+const AdDetailPage = React.lazy(() => import("../Pages/ads/AdDetailPage.jsx"));
 
 const withSuspense = (Component: React.ComponentType) => (
   <Suspense fallback={<LoadingSpinner />}>
@@ -82,6 +84,14 @@ export const router = createBrowserRouter([
   {
     path: "/Status",
     element: withSuspense(SignUpStatus),
+    errorElement: <ErrorBoundary />,
+  },{
+    path: "/Status",
+    element: withSuspense(SignUpStatus),
+    errorElement: <ErrorBoundary />,
+  },{
+    path: "/privacy-policy",
+    element: withSuspense(PrivacyPolicy),
     errorElement: <ErrorBoundary />,
   },
   {
