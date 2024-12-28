@@ -7,6 +7,7 @@ const FormField = ({ id, label, type = "text", register }) => (
       id={id}
       type={type}
       
+      
       className="w-full px-3 py-2 border rounded-lg focus:outline-none"
       {...register(id)}
     />
