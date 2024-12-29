@@ -1,0 +1,16 @@
+{
+    "navbar": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "footer": {
+      "copyright": "All rights reserved.",
+      "terms": "Terms and Conditions"
+    },
+    "homepage": {
+      "welcome": "Welcome to our website!",
+      "description": "This is a description for the homepage."
+    }
+  }
+  
