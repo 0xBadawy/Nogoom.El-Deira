@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { setDoc, doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { setDoc, doc, getDoc, collection, getDocs,deleteDoc  } from "firebase/firestore";
 import {
   createContext,
   useContext,
@@ -321,6 +321,10 @@ const addUserNotification = async (notification, Uid) => {
 };
 
 
+
+
+
+
   const updateNotificationReaded = async (Uid, notificationId) => {
     try {
       // Reference the user's document in the database
@@ -406,6 +410,29 @@ const SendSignupNotification = async (notification, type) => {
     }
   };
 
+
+  const deleteAdFromDB = async (adId) => {
+    try {
+      adId = String(adId);
+      const adDocRef = doc(db, "advertisement", adId);
+      try {
+        await deleteDoc(adDocRef);
+      } catch (error) {
+        // Handle error
+      }
+      await getAllAds();
+    } catch (error) {
+      // Handle error
+    }
+  };
+  
+  
+  
+  
+  
+  
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
@@ -449,6 +476,7 @@ const SendSignupNotification = async (notification, type) => {
         SendSignupNotification,
         getFirestoreStats,
         getAllStarUsers,
+        deleteAdFromDB,
         getAdvbyID,
         
         error,

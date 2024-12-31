@@ -43,26 +43,22 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
     const confirmMessage = isUpdate
       ? "هل أنت متأكد من تحديث بيانات المستخدم؟"
       : "هل انت متأكد من إضافة هذا المستخدم؟";
-
-    confirmAlert({
-      title: "تأكيد الحفظ",
-      message: confirmMessage,
-      buttons: [
-        {
-          label: "نعم",
-          onClick: async () => {
-            await handleUserSubmission(formData, isUpdate);
-          },
-        },
-        {
-          label: "إلغاء",
-          onClick: () => {
-            toast.error("تم إلغاء العملية");
-          },
-        },
-      ],
-    });
+  
+    const userConfirmed = confirm(confirmMessage);
+  
+    if (userConfirmed) {
+      try {
+        await handleUserSubmission(formData, isUpdate);
+        alert("تمت العملية بنجاح!"); // Optional success message
+      } catch (error) {
+        console.error("حدث خطأ أثناء العملية:", error);
+        alert("حدث خطأ أثناء العملية."); // Optional error message
+      }
+    } else {
+      toast.error("تم إلغاء العملية");
+    }
   };
+  
 
   const handleUserSubmission = async (formData, isUpdate) => {
     setError(null);
