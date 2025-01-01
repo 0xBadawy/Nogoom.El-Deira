@@ -8,7 +8,7 @@ import { AdEditModal } from "./AdEditModal";
 
 const AdDetails = ({ ads, selected }) => {
   const ad = ads.find((ad) => ad.id === selected);
-  const {deleteAdFromDB} = useDashboard()
+  const {deleteAdFromDB,updateADs} = useDashboard()
 
   function translateToArabic(english) {
     const translations = {
@@ -44,6 +44,22 @@ const AdDetails = ({ ads, selected }) => {
     Delete();
   };
   
+
+  const HandelUpdates = (data) => {
+    const Id = data.id;
+    const conf = confirm(" هل متاكد من تعديل البيانات")
+
+    if (conf){
+      updateADs(Id, data)
+      alert("تم تعديل البيانات بنجاح")
+    }else{
+      alert("تم الغاء التعديل")
+    }
+
+
+    // console.log(data)
+  }
+
 
   return (
     <Card className="max-w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto">
@@ -164,10 +180,10 @@ const AdDetails = ({ ads, selected }) => {
           </div>
         </div>
         <div className="mt-8 flex justify-end">
-          <Button variant="destructive" onClick={handelDelet} className="bg-red-600 text-white">
+          <Button variant="destructive" onClick={handelDelet} className="bg-red-600 text-white mx-3">
             حذف الإعلان
           </Button>
-          {selected &&   <AdEditModal ads={ads} selected={1}   />}
+          {selected &&   <AdEditModal ads={ads} selected={selected} onSave={HandelUpdates}   />}
         </div>
       </CardContent>
     </Card>

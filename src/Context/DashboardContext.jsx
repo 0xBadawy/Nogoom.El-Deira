@@ -164,12 +164,25 @@ const DashboardProvider = ({ children }) => {
       const newAdId = adCount + 1;
       const adDocRef = doc(db, "advertisement", newAdId.toString());
       await setDoc(adDocRef, { ...ad, id: newAdId });
-
       await updateUserAds(ad, newAdId);
     } catch (error) {
       setError(error.message);
     }
   };
+
+  const updateADs = async ( adId,ad) => {
+    try {
+      adId = String(adId);
+      const adDocRef = doc(db, "advertisement", adId);
+      await setDoc(adDocRef, ad, { merge: true }); 
+      
+    } catch (error) {
+      
+      throw error;  
+    }
+  };
+
+
 
   const addHomeData = async (data) => {
     try {
@@ -178,7 +191,6 @@ const DashboardProvider = ({ children }) => {
     } catch (error) {
       setError(error.message);
     }
-    // console.log(data)
   };
 
   const getHomeData = useCallback(async () => {
@@ -477,6 +489,7 @@ const SendSignupNotification = async (notification, type) => {
         getFirestoreStats,
         getAllStarUsers,
         deleteAdFromDB,
+        updateADs,
         getAdvbyID,
         
         error,
