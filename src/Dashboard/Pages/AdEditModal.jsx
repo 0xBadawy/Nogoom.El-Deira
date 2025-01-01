@@ -24,7 +24,7 @@ import {
 
 export function AdEditModal({ ads, selected, onSave }) {
   const [isOpen, setIsOpen] = useState(false)
-  const { control, handleSubmit, reset } = useForm()
+  const { control, handleSubmit, reset, register } = useForm()
 
   useEffect(() => {
     if (selected) {
@@ -57,83 +57,72 @@ export function AdEditModal({ ads, selected, onSave }) {
             <span className="sr-only">Close</span>
           </Button>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 py-6">
+
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">
               Name
-            </Label>
-            <Controller
-              name="name"
-              control={control}
-              defaultValue=""
-              rules={{ required: 'Name is required' }}
-              render={({ field }) => (
-                <Input {...field} className="col-span-3" />
-              )}
+            </label>
+            <input
+              type="text"
+              id="name"
+              className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              {...register("Name")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="price" className="text-right">
-              Price
-            </Label>
-            <Controller
-              name="price"
-              control={control}
-              defaultValue=""
-              rules={{ 
-                required: 'Price is required',
-                pattern: {
-                  value: /^\d+(\.\d{1,2})?$/,
-                  message: 'Please enter a valid price'
-                }
-              }}
-              render={({ field }) => (
-                <Input {...field} type="number" step="0.01" className="col-span-3" />
-              )}
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              {...register("Name")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="category" className="text-right">
-              Category
-            </Label>
-            <Controller
-              name="category"
-              control={control}
-              defaultValue=""
-              rules={{ required: 'Category is required' }}
-              render={({ field }) => (
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Select a category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="TV">TV/Monitors</SelectItem>
-                    <SelectItem value="PC">PC</SelectItem>
-                    <SelectItem value="GA">Gaming/Console</SelectItem>
-                    <SelectItem value="PH">Phones</SelectItem>
-                  </SelectContent>
-                </Select>
-              )}
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              {...register("Name")}
             />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="description" className="text-right">
-              Description
-            </Label>
-            <Controller
-              name="description"
-              control={control}
-              defaultValue=""
-              rules={{ required: 'Description is required' }}
-              render={({ field }) => (
-                <Textarea {...field} className="col-span-3" />
-              )}
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              {...register("Name")}
             />
           </div>
-          <Button type="submit" className="col-span-4">
-            Save changes
-          </Button>
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              {...register("Name")}
+            />
+          </div>
+
+          <button type='submet'>ضن</button>
+
+
         </form>
+
+
+
       </DialogContent>
     </Dialog>
   )

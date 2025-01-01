@@ -155,7 +155,7 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 max-w-screen">
         <h2 className="text-2xl mb-4">تفاصيل الحملة</h2>
         {selected && <AdDetails ads={ads} selected={selected} />}
-        {selected &&   <AdEditModal ads={ads} selected={1}   />}
+       
       
       </div>
     </div>

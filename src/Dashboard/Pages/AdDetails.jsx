@@ -4,6 +4,7 @@ import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
 import { Separator } from "@/Components/ui/separator";
 import { useDashboard } from "../../Context/DashboardContext";
+import { AdEditModal } from "./AdEditModal";
 
 const AdDetails = ({ ads, selected }) => {
   const ad = ads.find((ad) => ad.id === selected);
@@ -166,6 +167,7 @@ const AdDetails = ({ ads, selected }) => {
           <Button variant="destructive" onClick={handelDelet} className="bg-red-600 text-white">
             حذف الإعلان
           </Button>
+          {selected &&   <AdEditModal ads={ads} selected={1}   />}
         </div>
       </CardContent>
     </Card>
