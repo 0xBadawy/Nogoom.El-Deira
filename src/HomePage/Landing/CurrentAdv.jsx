@@ -6,7 +6,7 @@ import { MapPin, ChevronRight, ChevronLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from 'swiper/modules';
+import { Pagination,Navigation } from 'swiper/modules';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -114,6 +114,7 @@ const CurrentAdv = function () {
   <Swiper
    slidesPerView={1}
         spaceBetween={10}
+        navigation
         pagination={{
           clickable: true,
         }}
@@ -131,7 +132,7 @@ const CurrentAdv = function () {
             spaceBetween: 50,
           },
         }}
-        modules={[Pagination]}
+        modules={[Pagination,Navigation]}
         className="mySwiper"
 
   >

@@ -54,6 +54,7 @@ const SocialMediaInputs = ({ register }) => {
         <FormField
           key={id}
           id={id}
+          type={"url"}
           label={
             <span className="flex items-center gap-2">
               {icon} {label}

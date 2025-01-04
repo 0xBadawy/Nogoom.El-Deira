@@ -6,7 +6,9 @@ import { MapPin, ChevronRight, ChevronLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from 'swiper/modules';
+// import { Navigation } from 'swiper';
+
+import { Pagination,Navigation } from 'swiper/modules';
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -71,10 +73,13 @@ return (
           </h1>
         </div>
   
-        <div>
+        <div className="my-10">
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
+
+            navigation
+            
             pagination={{
               clickable: true,
             }}
@@ -92,7 +97,7 @@ return (
                 spaceBetween: 50,
               },
             }}
-            modules={[Pagination]}
+            modules={[Pagination,Navigation]}
             className="mySwiper"
           >
             {users.map((item, index) => (

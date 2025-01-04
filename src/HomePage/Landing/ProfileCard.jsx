@@ -35,11 +35,11 @@ const ProfileCard = ({
         animate={{ rotateY: isFlipped ? 180 : 0 }}
       >
         {/*      */}
-<div className="absolute inset-0 bg-gradient-to-bl from-purple-200 via-violet-50 to-purple-300 rounded-2xl shadow-xl overflow-hidden [backface-visibility:hidden]">
-          <img className="w-72 mx-auto h-72 object-cover rounded-full " src={image} alt={`${name}'s profile`} />
+<div className="absolute inset-0 bg-gradient-to-bl from-purple-400 via-violet-50 to-purple-300 rounded-2xl shadow-xl overflow-hidden [backface-visibility:hidden]">
+          <img className="w-64 mx-auto h-64 mt-3 object-cover rounded-full shadow-md border-4 border-white " src={image} alt={`${name}'s profile`} />
           <div className="absolute inset-0 text-primary" />
           <div className="absolute bottom-0 left-0 right-0 py-8 px-2 text-white">
-            <h2 className="text-2xl font-bold mb-2 text-primary">{name}</h2>
+            <h2 className="text-2xl text-center mb-4 font-bold  text-primary">{name}</h2>
             {/* <p className="text-sm mb-4 line-clamp-2 text-primary">{bio}</p> */}
             <div className="flex items-center justify-between">
               <span className="flex items-center text-primary">
@@ -52,18 +52,20 @@ const ProfileCard = ({
               </span>
             </div>
           </div>
-          <button 
+        </div>
+          {/*
+           <button 
             onClick={() => setIsFlipped(true)}
             className="absolute top-4 right-4 bg-white bg-opacity-20 hover:bg-opacity-30 text-white rounded-full p-2 transition-all duration-300"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-          </button>
-        </div>
+          </button> 
+          */}
 
         {/* Back of the card */}
-        <div className="absolute inset-0 bg-white rounded-2xl shadow-xl overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        {/* <div className="absolute inset-0 bg-white rounded-2xl shadow-xl overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)]">
           <div className="p-6 h-full flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-semibold text-gray-800 mb-4">تواصل مع {name}</h3>
@@ -91,7 +93,11 @@ const ProfileCard = ({
               Back to Profile
             </button>
           </div>
-        </div>
+        </div> */}
+
+
+
+
       </motion.div>
     </div>
   );
