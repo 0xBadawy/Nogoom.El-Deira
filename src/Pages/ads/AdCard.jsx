@@ -13,7 +13,7 @@ export default function AdCard({ ad, isHovered, onHoverStart, onHoverEnd }) {
   };
   return (
     <div
-      className="ad-card rounded-2xl"
+      // className="ad-card rounded-2xl"
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       style={{

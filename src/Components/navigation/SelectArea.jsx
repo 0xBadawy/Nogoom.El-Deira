@@ -17,6 +17,9 @@ const SelectArea = ({ isScrolled }) => {
     setSelectedOption(selectedValue);
     // Save the selected value in localStorage
     localStorage.setItem("selectedArea", selectedValue);
+
+    // reload 
+    window.location.reload();
   };
 
   return (

@@ -52,6 +52,11 @@ const CurrentAdv = function () {
         const lng = position.coords.longitude;
         const cityName = await getCityNameInArabic(lat, lng);
         setArabicCityName(cityName);
+       
+       
+        Update(cityName);
+
+       
         console.log("City name in Arabic:", cityName);
       } catch (error) {
         console.error("Error fetching location or city name:", error);
@@ -59,6 +64,39 @@ const CurrentAdv = function () {
     };
     fetchCityName();
   }, []);
+
+
+  const Update = (gov) => {
+    const GovernmentNames = [
+      "الرياض",
+      "مكة المكرمة",
+      "المدينة المنورة",
+      "القصيم",
+      "المنطقة الشرقية",
+      "عسير",
+      "تبوك",
+      "حائل",
+      "الحدود الشمالية",
+      "جازان",
+      "نجران",
+      "الباحة",
+      "الجوف",
+    ];
+  
+    const matchedArea = GovernmentNames.find(
+      (name) => name.includes(gov) || gov.includes(name)
+    );
+  
+    if (matchedArea) {
+      localStorage.setItem("selectedArea", matchedArea);
+    } else {
+      console.log("No match found");
+    }
+  };
+
+  
+
+  
 
   useEffect(
     function () {

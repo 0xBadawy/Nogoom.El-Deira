@@ -20,17 +20,35 @@ const AccountSettings = () => {
   const [selectedItems, setSelectedItems] = useState([]);
  
  
-  const handleSelectChange = (event) => {
-    const selectedValue = event.target.value;
-    const selectedGovernment = GovernmentData.find(
-      (gov) => gov.name === selectedValue
-    );
-    setSelectedItems(
-      selectedGovernment ? selectedGovernment.subGovernments : []
-    );
-    console.log("selectedGovernment",selectedGovernment)
-    console.log("selectedItems",selectedItems)
-  };
+// Function to find the selected government from the GovernmentData
+const findSelectedGovernment = (selectedValue) => {
+  return GovernmentData.find((gov) => gov.name === selectedValue);
+};
+
+// Function to update the selected items based on the selected government
+const updateSelectedItems = (selectedGovernment) => {
+  setSelectedItems(selectedGovernment ? selectedGovernment.subGovernments : []);
+};
+
+// Main event handler function
+const handleSelectChange = (event) => {
+  const selectedValue = event.target.value;
+  
+  // Find the selected government
+  const selectedGovernment = findSelectedGovernment(selectedValue);
+  
+  // Update the selected items
+  updateSelectedItems(selectedGovernment);
+
+  console.log("selectedGovernment", selectedGovernment);
+  console.log("selectedItems", selectedItems);
+};
+
+
+
+
+
+
 
 
   useEffect(() => {
@@ -40,11 +58,22 @@ const AccountSettings = () => {
       Object.keys(data).forEach((key) => {
         setValue(key, data[key]);
       });
+      updateSelectedItems(findSelectedGovernment(data.govern));
     };
     fetchData();
+
   }, [getUserData, setValue]);
 
   const onSubmit = (data) => {
+
+
+
+ if (!/^\d{10,11}$/.test(data.phone)) {
+      toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
+      return;
+    }
+
+
     const Data = {
       ...data,
       ...(imageURL && { profilePicture: imageURL }), // إضافة فقط إذا كانت imageURL موجودة
@@ -149,7 +178,7 @@ const AccountSettings = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="name">الاسم الكامل</Label>
+              <Label htmlFor="name">الاسم الكامل*</Label>
               <Controller
                 name="name"
                 control={control}
@@ -191,7 +220,7 @@ const AccountSettings = () => {
               />
             </div> */}
             <div className="space-y-2">
-              <Label htmlFor="phone">رقم الهاتف</Label>
+              <Label htmlFor="phone">رقم الهاتف*</Label>
               <Controller
                 name="phone"
                 control={control}
@@ -229,7 +258,7 @@ const AccountSettings = () => {
             </div> */}
 
 <div className="mb-4">
-  <label className="block text-gray-700">{"المنطقة"}</label>
+  <label className="block text-gray-700">{"المنطقة*"}</label>
   <Controller
     name="govern"
     control={control}
@@ -255,7 +284,7 @@ const AccountSettings = () => {
 
 
 <div className="mb-4">
-  <label className="block text-lg font-semibold text-gray-700">{"المحافظة"}</label>
+  <label className="block text-lg font-semibold text-gray-700">{"المحافظة*"}</label>
   <Controller
     name="area"
     control={control}

@@ -159,16 +159,20 @@ const DashboardProvider = ({ children }) => {
   const addADs = async (ad) => {
     try {
       const adsCollectionRef = collection(db, "advertisement");
-      const querySnapshot = await getDocs(adsCollectionRef);
-      const adCount = querySnapshot.size;
-      const newAdId = adCount + 1;
-      const adDocRef = doc(db, "advertisement", newAdId.toString());
-      await setDoc(adDocRef, { ...ad, id: newAdId });
-      await updateUserAds(ad, newAdId);
+  
+      // استخدام Firebase لإنشاء ID تلقائي للوثيقة الجديدة
+      const adDocRef = doc(adsCollectionRef); // Firebase يحدد ID جديد تلقائيًا هنا
+  
+      // إضافة الإعلان إلى قاعدة البيانات مع الـ ID التلقائي
+      await setDoc(adDocRef, { ...ad, id: adDocRef.id });
+  
+      // تحديث إعلانات المستخدم
+      await updateUserAds(ad, adDocRef.id);
     } catch (error) {
       setError(error.message);
     }
   };
+  
 
   const updateADs = async ( adId,ad) => {
     try {

@@ -124,7 +124,7 @@ const PublicProfile = () => {
               <label className="block text-sm font-medium text-indigo-900">
                 {item.label}
               </label>
-              <div className="p-2 rounded-lg bg-gray-100 text-gray-800">
+              <div className="p-2 rounded-lg bg-gray-100 text-gray-800 min-h-10">
                 {item.value}
               </div>
             </div>

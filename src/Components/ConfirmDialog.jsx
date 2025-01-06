@@ -17,6 +17,7 @@ const VisuallyHidden = ({ children }) => {
         position: "absolute",
         width: "1px",
         height: "1px",
+        background:"white",
         padding: 0,
         margin: "-1px",
         overflow: "hidden",
@@ -39,9 +40,9 @@ const ConfirmDialog = ({
   onCancel,
 }) => {
   return (
-    <div>
+    <div className="bg-white">
       <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent>
+        <DialogContent className="bg-white">
           <DialogHeader>
             <VisuallyHidden>
               <DialogTitle>{title}</DialogTitle>
@@ -53,7 +54,7 @@ const ConfirmDialog = ({
             <Button variant="ghost" onClick={onCancel}>
               إلغاء
             </Button>
-            <Button onClick={onConfirm}>نعم</Button>
+            <Button className="text-white" onClick={onConfirm}>نعم</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormField from "./FormField";
 import SocialMediaInputs from "./SocialMediaInputs";
 import TierSelection from "./TierSelection";
@@ -18,7 +18,7 @@ const SignUpPage = () => {
   const { register, handleSubmit } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const {SendSignupNotification} = useDashboard();
+  const { SendSignupNotification } = useDashboard();
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
@@ -45,10 +45,18 @@ const SignUpPage = () => {
     const readed = false;
 
 
-    if(!data.privacyPolicy){
+    if (!data.privacyPolicy) {
       toast.error("يجب الموافقة على سياسة الخصوصية");
       return;
     }
+
+    if (!/^\d{10,11}$/.test(data.phone)) {
+      toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
+      return;
+    }
+    
+
+    // if()
 
 
     try {
@@ -66,7 +74,7 @@ const SignUpPage = () => {
         setError(handleFirebaseError(result.error)); // Set error state
       } else {
         toast.success("تم تسجيل الحساب بنجاح!");
-        SendSignupNotification({ message, readed, time },"allAdmin");
+        SendSignupNotification({ message, readed, time }, "allAdmin");
         navigate("/status")
       }
     } catch (error) {
@@ -124,6 +132,15 @@ const SignUpPage = () => {
                 register={register}
               />
 
+              {/* confirem password */}
+              {/* <FormField
+                id="confirmPassword"
+                label={TextData.confirmPassword}
+                type="password"
+                register={register}
+              /> */}
+
+
 
               <div className="mb-4">
                 <label className="block text-gray-700">{TextData.area}</label>
@@ -156,7 +173,7 @@ const SignUpPage = () => {
               </div>
 
 
-              
+
               {/* <TierSelection
                 id="accountType"
                 tiers={Tiers}
@@ -190,12 +207,37 @@ const SignUpPage = () => {
               </a>
             </label>
           </div>
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-2 mt-6 rounded-lg hover:bg-indigo-700"
-          >
-            {TextData.signUp}
-          </button>
+
+
+
+          <div className="w-full mx-auto flex flex-col">
+            <button
+              type="submit"
+              className="w-fit px-20 mx-auto bg-indigo-600 text-white py-2 mt-6 rounded-lg hover:bg-indigo-700"
+            >
+              {TextData.signUp}
+            </button>
+          </div>
+          <div className="w-full mx-auto flex flex-row justify-center items-center gap-20 p-4">
+  {/* Go to Login */}
+  <Link
+    to="/signin"
+    className="text-blue-500 hover:text-blue-700 transition font-semibold hover:underline"
+    aria-label="الانتقال إلى تسجيل الدخول"
+  >
+    تسجيل الدخول
+  </Link>
+  {/* Back to Home */}
+  <Link
+    to="/"
+    className="text-blue-500 hover:text-blue-700 transition font-semibold hover:underline"
+    aria-label="العودة إلى الصفحة الرئيسية"
+  >
+    الصفحة الرئيسية
+  </Link>
+
+</div>
+
         </form>
       </div>
       <Toaster position="top-center" reverseOrder={false} />

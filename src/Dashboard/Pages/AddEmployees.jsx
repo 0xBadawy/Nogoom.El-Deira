@@ -31,13 +31,23 @@ const AddEmployees = () => {
 
   const onSubmit = async (formData) => {
 
+    if (!/^\d{10,11}$/.test(formData.phone)) {
+      toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9]{3,15}$/.test(formData.username)) {
+      toast.error("يجب أن يكون اسم المستخدم مكوناً من 3 إلى 15 حرفاً ويمكن أن يحتوي على حروف وأرقام فقط");
+      return;
+    }
+
 
 
 
     if (confirm("هل انت متأكد من إضافة هذا المستخدم؟") == true) {
       try {
         await handleUserSubmission(formData);
-        toast.success("تم إضافة المستخدم بنجاح!");
+        // toast.success("تم إضافة المستخدم بنجاح!");
       } catch (error) {
         toast.error("حدث خطأ أثناء إضافة المستخدم.");
       }
@@ -58,6 +68,8 @@ const AddEmployees = () => {
 
       if (!result.success) {
         setError(handleFirebaseError(result.error));
+        toast.error("حدث خطأ أثناء إضافة المستخدم.");
+
         return;
       }
 
@@ -199,13 +211,20 @@ const AddEmployees = () => {
 
         {/* Submit Button */}
 
-        <button
+          <div className="flex flex-row">
+
+
+          <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
+          className="w-fit px-20 mx-auto bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
         >
           {loading ? "جارٍ الحفظ..." : "حفظ البيانات"}
         </button>
+
+          </div>
+        
+
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </form>
     </div>

@@ -16,7 +16,7 @@ export default function AdListPage() {
   useEffect(() => {
     const fetchAds = async () => {
       const mockData = await getAllAds();
-      console.log(mockData);
+      console.table(mockData);
       setAds(mockData);
     };
     fetchAds();
@@ -101,6 +101,7 @@ export default function AdListPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredAds.map((ad) => (
+              
               <AdCard
                 key={ad.id}
                 ad={ad}

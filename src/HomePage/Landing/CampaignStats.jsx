@@ -46,7 +46,8 @@ const CampaignStats = () => {
 
   return (
     <div
-      className="bg-gradient-to-r from-gray-50 to-gray-100 py-14 mt-10 px-10 rounded-3xl shadow-xl mx-auto"
+      className="bg-gradient-to-r from-gray-50 to-gray-100 py-14 mt-10 px-10 rounded-3xl shadow-xl max-w-[95%] mx-auto"
+
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
       <h2 className="text-4xl font-extrabold text-blue-800 text-center mb-10">

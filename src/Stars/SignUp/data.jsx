@@ -1,14 +1,14 @@
 export const TextData = {
   title: "تسجيل حساب جديد",
-  name: "الاسم الكامل",
-  email: "البريد الالكتروني",
-  phone: "رقم الهاتف",
-  area: "المنطقة",
-  govern: "المحافظة",
+  name: "الاسم الكامل*",
+  email: "البريد الالكتروني*",
+  phone: "رقم الهاتف*",
+  area: "المنطقة*",
+  govern: "المحافظة*",
   signUp: "تسجيل حساب",
-  password:"كلمة المرور ",
+  password:"كلمة المرور *",
   iban: "رقم الحساب البنكى (IBAN)",
-  privacyPolicy: "أوافق على الشروط والأحكام",
+  privacyPolicy: "أوافق على الشروط والأحكام*",
   privacyPolicyLink: "شروط الاستخدام",
 };
 

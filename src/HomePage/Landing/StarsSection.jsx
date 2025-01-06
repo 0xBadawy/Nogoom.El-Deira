@@ -46,18 +46,9 @@ const StarsSection = function () {
     console.log(users)
   }, [users])
 
-  
-// //    const data = allUsers;
-// console.log("DD : ",data)
-// setUsers(
-//   data.map((item) => {
-//       if (item.role == "star" && item.verified ) {
-//           return item;   }
-//       return null;
-//   }).filter(item => item !== null) 
 
 return (
-    users.length ? (
+   
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -74,53 +65,58 @@ return (
         </div>
   
         <div className="my-10">
-          <Swiper
-            slidesPerView={1}
-            spaceBetween={10}
+{
+  
+  users.length ? (
+    <Swiper
+      slidesPerView={1}
+      spaceBetween={10}
 
-            navigation
-            
-            pagination={{
-              clickable: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 40,
-              },
-              1024: {
-                slidesPerView: 5,
-                spaceBetween: 50,
-              },
-            }}
-            modules={[Pagination,Navigation]}
-            className="mySwiper"
-          >
-            {users.map((item, index) => (
-              <SwiperSlide key={item?.id || index}>
-                <ProfileCard
-                  name={item.name}
-                  image={item.profilePicture}
-                  bio={item.bio}
-                  area={item.govern}
-                  followers={item.referredBy}
-                  facebook={item.facebook}
-                  instagram={item.instagram}
-                  snapchat={item.snapchat}
-                  tiktok={item.tiktok}
-                  twitter={item.twitter}
-                  youtube={item.youtube}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+      navigation
+      
+      pagination={{
+        clickable: true,
+      }}
+      breakpoints={{
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 50,
+        },
+      }}
+      modules={[Pagination,Navigation]}
+      className="mySwiper"
+    >
+      {users.map((item, index) => (
+        <SwiperSlide key={item?.id || index}>
+          <ProfileCard
+            name={item.name}
+            image={item.profilePicture}
+            bio={item.bio}
+            area={item.govern}
+            followers={item.referredBy}
+            facebook={item.facebook}
+            instagram={item.instagram}
+            snapchat={item.snapchat}
+            tiktok={item.tiktok}
+            twitter={item.twitter}
+            youtube={item.youtube}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>  ) : 
+    <p className="text-center">{ "لا يوجد نجوم فى منطقة " + selectedArea}</p>
+}
         </div>
       </motion.div>
-    ) : null
+  
   );
 }
   export default StarsSection;

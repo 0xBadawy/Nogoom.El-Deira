@@ -212,6 +212,20 @@ const CreateAd = () => {
       return;
     }
 
+    // validte the type 
+
+    const validVideoTypes = ["video/mp4", "video/webm", "video/ogg", "video/avi", "video/mkv"];
+    if (!validVideoTypes.includes(file.type)) {
+      // alert("نوع الفيديو غير مدعوم.")
+      // console.error("نوع الفيديو غير مدعوم.");
+      alert("نوع الفيديو غير مدعوم. يرجى رفع ملف بصيغة MP4 أو WEBM أو OGG أو AVI أو MKV."); // رسالة خطأ واضحة
+      setLoading(false); // إيقاف حالة التحميل
+      return;
+    }
+
+
+
+
     let fileName = "noUser";
     const userEmail = getUserEmail();
     if (userEmail) fileName = userEmail;
@@ -399,59 +413,116 @@ const CreateAd = () => {
               )}
             </div>
 
-            {/* رفع الصور */}
-            <div className="mb-6 md:col-span-2 col-span-6">
-              <label
-                className="block text-lg font-medium text-gray-800 dark:text-white mb-3 flex items-center gap-2"
-                htmlFor="images"
-              >
-                <span className="material-icons"> </span> صور الإعلان
-              </label>
-              <input
-                type="file"
-                id="images"
-                onChange={handleUpload}
-                multiple
-                className="w-full p-3 border-2 border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-              {errors.images && (
-                <p className="text-red-500 text-sm mt-2">
-                  {errors.images.message}
-                </p>
-              )}
-              <div className="relative w-full mt-2 h-2 bg-gray-200 rounded-lg dark:bg-gray-700">
-                <div
-                  className="absolute top-0 left-0 h-2 rounded-lg bg-blue-500"
-                  style={{ width: `${uploadImageProgress}%` }}
-                ></div>
-              </div>
-            </div>
 
-            <div className="mb-6 md:col-span-2 col-span-6">
-              <label
-                className="block text-lg font-medium text-gray-800 dark:text-white mb-3 flex items-center gap-2"
-                htmlFor="video"
-              >
-                <span className="material-icons"></span> فيديو الإعلان
-              </label>
-              <input
-                type="file"
-                id="video"
-                onChange={handleVideoUpload}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-              {errors.video && (
-                <p className="text-red-500 text-sm mt-2">
-                  {errors.video.message}
-                </p>
-              )}
-              <div className="relative w-full mt-2 h-2 bg-gray-200 rounded-lg dark:bg-gray-700">
-                <div
-                  className="absolute top-0 left-0 h-2 rounded-lg bg-blue-500"
-                  style={{ width: `${uploadVideoProgress}%` }}
-                ></div>
-              </div>
-            </div>
+
+
+
+
+
+
+
+            {/* رفع الصور */}
+
+            <div className="mb-8 md:col-span-2 col-span-6">
+  <label
+    className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
+    htmlFor="images"
+  >
+    <span className="material-icons text-blue-600 text-3xl"></span>
+    <span className="flex-1">صور الإعلان</span>
+  </label>
+  <div className="relative group">
+    <input
+      type="file"
+      id="images"
+      onChange={handleUpload}
+      multiple
+      className="hidden"
+    />
+    <label
+      htmlFor="images"
+      className="w-full p-4 border-2 border-dashed border-blue-400 rounded-lg cursor-pointer bg-blue-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
+    >
+      <span className="flex flex-col items-center">
+        <span className="material-icons text-blue-400 text-2xl">
+        اضغط لتحميل الصور
+        </span>
+        <p className="mt-2 text-blue-600 dark:text-gray-300"></p>
+      </span>
+    </label>
+  </div>
+  {errors.images && (
+    <p className="text-red-500 text-sm mt-3">
+      {errors.images.message}
+    </p>
+  )}
+  <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
+    <div
+      className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600 rounded-full transition-all"
+      style={{ width: `${uploadImageProgress}%` }}
+    ></div>
+  </div>
+  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+   نسبة التحميل: {uploadImageProgress.toFixed(2)}%
+  </p>
+</div>
+
+<div className="mb-8 md:col-span-2 col-span-6">
+  <label
+    className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
+    htmlFor="video"
+  >
+    <span className="material-icons text-red-600 text-3xl"></span>
+    <span className="flex-1">فيديو الإعلان</span>
+  </label>
+  <div className="relative group">
+    <input
+      type="file"
+      id="video"
+      onChange={handleVideoUpload}
+      className="hidden"
+    />
+    <label
+      htmlFor="video"
+      className="w-full p-4 border-2 border-dashed border-red-400 rounded-lg cursor-pointer bg-red-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-red-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
+    >
+      <span className="flex flex-col items-center">
+        <span className="material-icons text-red-400 text-2xl">
+        اضغط لتحميل الفيديو
+        </span>
+        <p className="mt-2 text-red-600 dark:text-gray-300"></p>
+      </span>
+    </label>
+  </div>
+  {errors.video && (
+    <p className="text-red-500 text-sm mt-3">
+      {errors.video.message}
+    </p>
+  )}
+  <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
+    <div
+      className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 via-red-400 to-red-600 rounded-full transition-all"
+      style={{ width: `${uploadVideoProgress}%` }}
+    ></div>
+  </div>
+  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+  نسبة التحميل: {uploadVideoProgress.toFixed(2)}%
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </div>
 
           <div className="md:col-span-2 col-span-6 ">

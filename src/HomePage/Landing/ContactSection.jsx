@@ -46,7 +46,7 @@ const ContactSection = () => {
               <h3 className="text-2xl font-bold text-gray-700 mb-4 text-center">
                 تابعنا
               </h3>
-              <div className="flex justify-center gap-6">
+              <div className="flex justify-center gap-8 mt-10 ">
                 <a
                   href={contact?.facebook}
                   target="_blank"
@@ -54,7 +54,7 @@ const ContactSection = () => {
                   className="text-blue-600 hover:text-blue-800 text-4xl"
                   aria-label="فيسبوك"
                 >
-                  <FaFacebookF />
+                  <FaFacebookF size={55}/>
                 </a>
                 <a
                   href={contact?.twitter}
@@ -63,7 +63,7 @@ const ContactSection = () => {
                   className="text-blue-400 hover:text-blue-600 text-4xl"
                   aria-label="تويتر"
                 >
-                  <FaTwitter />
+                  <FaTwitter size={55} />
                 </a>
                 <a
                   href={contact?.instagram}
@@ -72,7 +72,7 @@ const ContactSection = () => {
                   className="text-pink-600 hover:text-pink-800 text-4xl"
                   aria-label="إنستغرام"
                 >
-                  <FaInstagram />
+                  <FaInstagram size={55}/>
                 </a>
                 <a
                   href={contact?.snapchat}
@@ -81,7 +81,7 @@ const ContactSection = () => {
                   className="text-yellow-400 hover:text-yellow-600 text-4xl"
                   aria-label="سناب شات"
                 >
-                  <FaSnapchatGhost />
+                  <FaSnapchatGhost size={55} />
                 </a>
                 <a
                   href={contact?.tiktok}
@@ -90,7 +90,7 @@ const ContactSection = () => {
                   className="text-black hover:text-gray-700 text-4xl"
                   aria-label="تيك توك"
                 >
-                  <FaTiktok />
+                  <FaTiktok size={55} />
                 </a>
               </div>
             </div>
