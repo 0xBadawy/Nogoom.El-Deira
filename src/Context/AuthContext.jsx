@@ -8,6 +8,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { auth, db } from "../Configuration/Firebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { Navigate } from "react-router-dom";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -146,6 +147,19 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  const resetPassword = async (email) => {
+    const auth = getAuth(); // Ensure this retrieves the initialized auth instance
+  
+    try {
+      await sendPasswordResetEmail(auth, email); // Use the correct method signature
+      return { success: true };
+    } catch (error) {
+      console.error("Error resetting password:", error.message);
+      return { success: false, error: error.message }; // Return the error message for further handling
+    }
+  };
+  
+
   return (
     <AuthContext.Provider
       value={{
@@ -158,6 +172,7 @@ const AuthProvider = ({ children }) => {
         getUserEmail,
         getUserFullEmail,
         IsLogedIn,
+        resetPassword,
         getUserData,
       }}
     >

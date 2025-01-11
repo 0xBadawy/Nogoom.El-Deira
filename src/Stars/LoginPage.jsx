@@ -123,24 +123,30 @@ const onFormSubmit = async (data) => {
               {Text.login}
             </button>
           </form>
-
-          {/* Login using social media */}
           <div className="grid gap-3 mt-10">
-            
-            {/*Create acount */}
-            <div className="text-center">
-              <span>ليس لديك حساب؟</span>
-              <Link to="/signup" className="text-blue-500 hover:underline">
-                {" تسجيل جديد "}
-              </Link>
-            </div>
+  {/* Create account */}
+  <div className="text-center">
+    <span>ليس لديك حساب؟</span>
+    <Link to="/signup" className="text-blue-500 hover:underline">
+      {" تسجيل جديد "}
+    </Link>
+  </div>
 
-            <div className="text-center">
-              <Link to="/" className="text-blue-500 hover:underline">
-                {" تصفح الموقع كزائر بدون تسجيل الدخول"}
-              </Link>
-            </div>
-          </div>
+  {/* Forgot password */}
+  <div className="text-center">
+    <Link to="/forget-password" className="text-blue-500 hover:underline">
+      {" نسيت كلمة المرور؟ "}
+    </Link>
+  </div>
+
+  {/* Browse as guest */}
+  <div className="text-center">
+    <Link to="/" className="text-blue-500 hover:underline">
+      {" تصفح الموقع كزائر بدون تسجيل الدخول"}
+    </Link>
+  </div>
+</div>
+
         </div>
       </div>
       <div className="w-full h-screen hidden md:block ">

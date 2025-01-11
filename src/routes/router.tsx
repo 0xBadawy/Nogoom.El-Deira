@@ -7,6 +7,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 // Lazy load Components
 const HomePage = React.lazy(() => import("../HomePage/HomePage"));
 const LoginPage = React.lazy(() => import("../Stars/LoginPage"));
+const ForgetPasswordPage = React.lazy(() => import("../Stars/ForgetPasswordPage"));
 const SignUp = React.lazy(() => import("../Stars/SignUp/SignUp"));
 const SignUpStatus = React.lazy(() => import("../Stars/SignUp/SignUpStatus"));
 const Profile = React.lazy(() => import("../Stars/Profile/Profile"));
@@ -74,6 +75,12 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: withSuspense(LoginPage),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
+    path: "/forget-password",
+    element: withSuspense(ForgetPasswordPage),
     errorElement: <ErrorBoundary />,
   },
   {
