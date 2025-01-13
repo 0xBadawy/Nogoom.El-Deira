@@ -292,6 +292,7 @@ export function AdEditModal({ ads, selected, onSave }) {
 
         <form onSubmit={handleSubmit(onSubmit)} className="">
 
+
           <div className="flex flex-col space-y-2 mt-4">
             <label htmlFor="title" className="text-sm font-medium text-gray-700">
               العنوان
@@ -315,6 +316,10 @@ export function AdEditModal({ ads, selected, onSave }) {
               {...register("description")}
             />
           </div>
+
+
+          <div className='grid grid-cols-2 gap-2'>
+
 
           <div className="mb-4 mt-4">
               <label
@@ -357,12 +362,12 @@ export function AdEditModal({ ads, selected, onSave }) {
 
 
 
+</div>
 
 
 
 
-
-
+<div className='grid grid-cols-2 gap-2'>
 
 
 
@@ -450,6 +455,57 @@ export function AdEditModal({ ads, selected, onSave }) {
 
 
 
+
+
+
+</div>
+
+
+
+
+
+
+
+<div className='grid grid-cols-4 gap-2'>
+
+
+
+<div className="mb-4 md:col-span-2 col-span-6">
+              <label
+                className="block text-gray-800 dark:text-white mb-2"
+                htmlFor="startDate"
+              >
+                تاريخ البداية
+              </label>
+              <input
+                type="date"
+                id="startDate"
+                {...register("startDate", { required: "تاريخ البداية مطلوب" })}
+                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
+              />
+             
+            </div>
+
+            {/* تاريخ النهاية */}
+            <div className="mb-4 md:col-span-2 col-span-6">
+              <label
+                className="block text-gray-800 dark:text-white mb-2"
+                htmlFor="endDate"
+              >
+                تاريخ النهاية
+              </label>
+              <input
+                type="date"
+                id="endDate"
+                {...register("endDate", { required: "تاريخ النهاية مطلوب" })}
+                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
+              />
+              
+            </div>
+
+
+
+</div>
 
 
 
