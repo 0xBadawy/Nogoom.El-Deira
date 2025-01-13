@@ -50,10 +50,20 @@ const UserAds = () => {
   }, [getUserId]);
 
   const onSubmit = (data) => {
-    console.log(data);
-    UpdateCurrentUserAds(userId, { adId: AdID.adId, links: data });
+    // Create a new object to store the sanitized data
+    const NoNullData = Object.keys(data).reduce((acc, key) => {
+      // If the value is empty or undefined, assign an empty string
+      acc[key] = data[key] === "" || data[key] === undefined ? "" : data[key];
+      return acc;
+    }, {});
+  
+    console.log("Sanitized data:", NoNullData);
+  
+    // Now you can use the sanitized data in the UpdateCurrentUserAds function
+    UpdateCurrentUserAds(userId, { adId: AdID.adId, links: NoNullData });
     toast.success("تم حفظ المشاركات بنجاح!");
   };
+  
 
   useEffect(() => {
     if (AdID) {

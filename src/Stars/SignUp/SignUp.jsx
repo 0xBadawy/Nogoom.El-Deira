@@ -50,13 +50,17 @@ const SignUpPage = () => {
       return;
     }
 
+    if (data.confirmPassword !== data.password) {
+      toast.error("كلمة المرور غير متطابقة");
+      return;
+    }
+
     if (!/^\d{10,11}$/.test(data.phone)) {
       toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
       return;
     }
     
 
-    // if()
 
 
     try {
@@ -64,7 +68,8 @@ const SignUpPage = () => {
       setLoading(true);
 
       // Extract the necessary user data (e.g., name, role) excluding email and password
-      const { email, password, ...userData } = data;
+      const { email, password, confirmPassword, ...userData } = data;
+
 
       // Call the signUp function
       const result = await signUp(email, password, userData, "star");
@@ -131,6 +136,17 @@ const SignUpPage = () => {
                 type="password"
                 register={register}
               />
+
+             <FormField
+                id="confirmPassword"
+                label={"تاكيد كلمة المرور"}
+                type="password"
+                register={register}
+              /> 
+
+
+
+
 
               {/* confirem password */}
               {/* <FormField
@@ -221,7 +237,7 @@ const SignUpPage = () => {
           <div className="w-full mx-auto flex flex-row justify-center items-center gap-20 p-4">
   {/* Go to Login */}
   <Link
-    to="/signin"
+    to="/login"
     className="text-blue-500 hover:text-blue-700 transition font-semibold hover:underline"
     aria-label="الانتقال إلى تسجيل الدخول"
   >

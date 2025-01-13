@@ -45,7 +45,7 @@ const ContactPage = () => {
                 className="text-blue-600 hover:text-blue-800 text-4xl"
                 aria-label="فيسبوك"
               >
-                <FaFacebookF />
+                <FaFacebookF size={55}/>
               </a>
               <a
                 href={contact?.twitter}
@@ -54,7 +54,7 @@ const ContactPage = () => {
                 className="text-blue-400 hover:text-blue-600 text-4xl"
                 aria-label="تويتر"
               >
-                <FaTwitter />
+                <FaTwitter size={55}/>
               </a>
               <a
                 href={contact?.instagram}
@@ -63,7 +63,7 @@ const ContactPage = () => {
                 className="text-pink-600 hover:text-pink-800 text-4xl"
                 aria-label="إنستغرام"
               >
-                <FaInstagram />
+                <FaInstagram size={55}/>
               </a>
               <a
                 href={contact?.snapchat}
@@ -72,7 +72,7 @@ const ContactPage = () => {
                 className="text-yellow-400 hover:text-yellow-600 text-4xl"
                 aria-label="سناب شات"
               >
-                <FaSnapchatGhost />
+                <FaSnapchatGhost size={55}/>
               </a>
               <a
                 href={contact?.tiktok}
@@ -81,7 +81,7 @@ const ContactPage = () => {
                 className="text-black hover:text-gray-700 text-4xl"
                 aria-label="تيك توك"
               >
-                <FaTiktok />
+                <FaTiktok size={55}/>
               </a>
             </div>
           </div>

@@ -19,13 +19,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/Components/ui/dialog"
-import { useAuth } from '../../Context/AuthContext'
-import { storage } from "../../Configuration/Firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { toast } from 'sonner'
-export function AdEditModal({ ads, selected, onSave }) {
-  const { getUserEmail } = useAuth();
 
+export function AdEditModal({ ads, selected, onSave }) {
   const [isOpen, setIsOpen] = useState(false)
   const { control, handleSubmit, reset, register } = useForm()
 
@@ -263,7 +258,15 @@ export function AdEditModal({ ads, selected, onSave }) {
         return;
       }
     }
+
+
+
+
+
+
     onSave({ ...adData, id: selected })
+
+
     setImageURL([]);
     setVideoURL("");
     reset();

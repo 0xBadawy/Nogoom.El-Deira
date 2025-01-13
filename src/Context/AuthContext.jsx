@@ -98,6 +98,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUser = async (userId, data) => {
+    console.log (userId, data)
     try {
       await setDoc(doc(db, "users", userId), data, { merge: true });
       return { success: true };

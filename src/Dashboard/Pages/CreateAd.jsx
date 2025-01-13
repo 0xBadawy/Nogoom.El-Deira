@@ -20,7 +20,6 @@ const CreateAd = () => {
   const [starsList, setStarsList] = useState([]);
   const [uploadImageProgress, setuploadImageProgress] = useState(0); // حالة لنسبة الرفع
   const [uploadVideoProgress, setuploadVideoProgress] = useState(0); // حالة لنسبة الرفع
-
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -31,9 +30,8 @@ const CreateAd = () => {
     formState: { errors },
   } = useForm();
 
-  const [imageURL, setImageURL] = useState([]);
   const [videoURL, setVideoURL] = useState("");
-
+  
   const CheckDateValidation = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -42,14 +40,23 @@ const CreateAd = () => {
     }
     return true;
   };
-
-
+  
+  
+  const [imageURL, setImageURL] = useState([]);
   const onSubmit = (data) => {
+
+
+    // if (imageURL.length === 0) {
+    //   setImageURL([
+    //     "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FScreenshot_4.png?alt=media&token=bc03316e-9bfc-47b0-b660-c17e7dc2ca09"
+    //   ]);
+    // }
+
     const adData = {
       ...data,
       governorates: selectGovernorates,
       stars: selectStars,
-      images: imageURL,
+      images: imageURL.length > 0 ? imageURL : [ "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FScreenshot_5.png?alt=media&token=e314b8df-858e-4092-b3fe-920473f514e9"],
       video: videoURL,
       views: 0,
     };
@@ -65,6 +72,7 @@ const CreateAd = () => {
 
 
 
+    
       
 
 
@@ -126,9 +134,38 @@ const CreateAd = () => {
   });
 
   const handleUpload = (e) => {
+
+    
+
+
+    const files2 = event.target.files; // Get all the files from the input
+    console.log("Files:", files2); // Log all files to inspect them
+  
+    const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp"];
+    
+    // Loop through each file to check its type
+    for (let i = 0; i < files2.length; i++) {
+      const file = files2[i];
+      console.log("File type:", file.type); // Log the type of each file
+  
+      if (!validImageTypes.includes(file.type)) {
+        console.log("Invalid file type detected:", file.type); // Log invalid file type
+        alert("نوع الصورة غير مدعوم. يرجى رفع ملف بصيغة JPEG أو PNG أو GIF أو BMP أو WEBP."); // رسالة خطأ واضحة
+        setLoading(false); // إيقاف حالة التحميل
+        return;
+      } else {
+        console.log("Valid file type:", file.type); // Log valid file type
+      }
+    }
+
+
+
     setLoading(true);
 
     setuploadImageProgress(0); // تحديث الحالة
+
+
+
 
     const files = e.target.files; // الحصول على قائمة الملفات
     if (!files.length) {

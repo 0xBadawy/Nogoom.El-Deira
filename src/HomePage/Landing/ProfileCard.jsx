@@ -31,11 +31,11 @@ const ProfileCard = ({
   return (
     <div className="perspective w-full max-w-sm mx-auto">
       <motion.div 
-        className="w-full h-[400px] relative [transform-style:preserve-3d] transition-all duration-100"
+        className="w-full h-[400px] relative [transform-style:preserve-3d] transition-all duration-100 "
         animate={{ rotateY: isFlipped ? 180 : 0 }}
       >
         {/*      */}
-<div className="absolute inset-0 bg-gradient-to-bl from-purple-400 via-violet-50 to-purple-300 rounded-2xl shadow-xl overflow-hidden [backface-visibility:hidden]">
+<div className="absolute inset-0 p-5 bg-gradient-to-bl from-purple-400 via-violet-50 to-purple-300 rounded-2xl shadow-xl overflow-hidden [backface-visibility:hidden]">
           <img className="w-64 mx-auto h-64 mt-3 object-cover rounded-full shadow-md border-4 border-white " src={image} alt={`${name}'s profile`} />
           <div className="absolute inset-0 text-primary" />
           <div className="absolute bottom-0 left-0 right-0 py-8 px-2 text-white">

@@ -42,6 +42,9 @@ const AdDetails = ({ ads, selected }) => {
     };
   
     Delete();
+
+    window.location.reload();
+
   };
   
 

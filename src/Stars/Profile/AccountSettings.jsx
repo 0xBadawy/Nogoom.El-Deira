@@ -18,31 +18,31 @@ const AccountSettings = () => {
   const { control, handleSubmit, setValue } = useForm();
   const [uploadImageProgress, setuploadImageProgress] = useState(0); // حالة لنسبة الرفع
   const [selectedItems, setSelectedItems] = useState([]);
- 
- 
-// Function to find the selected government from the GovernmentData
-const findSelectedGovernment = (selectedValue) => {
-  return GovernmentData.find((gov) => gov.name === selectedValue);
-};
 
-// Function to update the selected items based on the selected government
-const updateSelectedItems = (selectedGovernment) => {
-  setSelectedItems(selectedGovernment ? selectedGovernment.subGovernments : []);
-};
 
-// Main event handler function
-const handleSelectChange = (event) => {
-  const selectedValue = event.target.value;
-  
-  // Find the selected government
-  const selectedGovernment = findSelectedGovernment(selectedValue);
-  
-  // Update the selected items
-  updateSelectedItems(selectedGovernment);
+  // Function to find the selected government from the GovernmentData
+  const findSelectedGovernment = (selectedValue) => {
+    return GovernmentData.find((gov) => gov.name === selectedValue);
+  };
 
-  console.log("selectedGovernment", selectedGovernment);
-  console.log("selectedItems", selectedItems);
-};
+  // Function to update the selected items based on the selected government
+  const updateSelectedItems = (selectedGovernment) => {
+    setSelectedItems(selectedGovernment ? selectedGovernment.subGovernments : []);
+  };
+
+  // Main event handler function
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+
+    // Find the selected government
+    const selectedGovernment = findSelectedGovernment(selectedValue);
+
+    // Update the selected items
+    updateSelectedItems(selectedGovernment);
+
+    console.log("selectedGovernment", selectedGovernment);
+    console.log("selectedItems", selectedItems);
+  };
 
 
 
@@ -66,9 +66,24 @@ const handleSelectChange = (event) => {
 
   const onSubmit = (data) => {
 
+    // check area and govern is selected 
+
+    if (data.govern === "" ||!data.govern  ) {
+
+      toast.error("يجب إدخال المنطقة.");
+      
+      return;
+    }
+    
+    if (data.area.length === 0) {
+      toast.error("يجب اختيار المحافظة.");
+      return;
+    }
+
+    
 
 
- if (!/^\d{10,11}$/.test(data.phone)) {
+     if (!/^\d{10,11}$/.test(data.phone)) {
       toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
       return;
     }
@@ -257,84 +272,89 @@ const handleSelectChange = (event) => {
               />
             </div> */}
 
-<div className="mb-4">
-  <label className="block text-gray-700">{"المنطقة*"}</label>
-  <Controller
-    name="govern"
-    control={control}
-    render={({ field }) => (
-      <select
-        className="w-full px-3 py-2 border rounded-lg focus:outline-none"
-        {...field}
-        onChange={(e) => {
-          field.onChange(e);
-          handleSelectChange(e);
-        }}
-      >
-        <option value="" >اختر المنطقة</option>
-        {GovernmentData.map((gov) => (
-          <option key={gov.name} value={gov.name}>
-            {gov.name}
-          </option>
-        ))}
-      </select>
-    )}
-  />
+            <div className="mb-4">
+              <label className="block text-gray-700">{"المنطقة*"}</label>
+              <Controller
+                name="govern"
+                control={control}
+                render={({ field }) => (
+                  <select
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none"
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleSelectChange(e);
+                    }}
+                  >
+                    <option value="" >اختر المنطقة</option>
+                    {GovernmentData.map((gov) => (
+                      <option key={gov.name} value={gov.name}>
+                        {gov.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              />
+            </div>
+
+
+            <div className="mb-4 ">
+              <label className="block text-lg font-semibold text-gray-700">{"المحافظة*"}</label>
+              <Controller
+                name="area"
+                control={control}
+                render={({ field }) => {
+                  useEffect(() => {
+                    // Reset selected values when selectedItems change
+                    field.onChange([]); // Clear the selected items
+                  }, [selectedItems]); // Run the effect when selectedItems changes
+
+                  return (
+                    <div className="space-y-3  ">
+                  <div className="max-h-32 overflow-y-auto p-2 border border-gray-300 rounded-md shadow-sm">
+  {selectedItems.length ? (
+    selectedItems.map((item) => (
+      <div key={item} className="flex items-center space-x-3">
+        <input
+          type="checkbox"
+          id={item}
+          value={item}
+          checked={field.value.includes(item)}
+          onChange={(e) => {
+            if (e.target.checked) {
+              field.onChange([...field.value, item]);
+            } else {
+              field.onChange(field.value.filter((i) => i !== item));
+            }
+          }}
+          className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+        />
+        <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
+      </div>
+    ))
+  ) : (
+    <p>   قم بأختيار المنطقة اولا</p>
+  )}
 </div>
 
+                    </div>
+                  );
+                }}
+              />
+            </div>
 
-<div className="mb-4">
-  <label className="block text-lg font-semibold text-gray-700">{"المحافظة*"}</label>
-  <Controller
-    name="area"
-    control={control}
-    render={({ field }) => {
-      useEffect(() => {
-        // Reset selected values when selectedItems change
-        field.onChange([]); // Clear the selected items
-      }, [selectedItems]); // Run the effect when selectedItems changes
-
-      return (
-        <div className="space-y-3">
-          <div className="max-h-32 overflow-y-auto p-2 border border-gray-300 rounded-md shadow-sm">
-            {selectedItems.map((item) => (
-              <div key={item} className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  id={item}
-                  value={item}
-                  checked={field.value.includes(item)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      field.onChange([...field.value, item]);
-                    } else {
-                      field.onChange(field.value.filter((i) => i !== item));
-                    }
-                  }}
-                  className="h-4 w-4  text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-                />
-                <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }}
-  />
-</div>
-
-          <div className="space-y-2 ">
-            <Label htmlFor="bio">نبذة عنك</Label>
-            <Controller
-              name="bio"
-              control={control}
-              render={({ field }) => <Textarea {...field} rows={4} />}
-            />
-          </div>
+            <div className="space-y-2 ">
+              <Label htmlFor="bio">نبذة عنك</Label>
+              <Controller
+                name="bio"
+                control={control}
+                render={({ field }) => <Textarea {...field} rows={4} />}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {["facebook", "instagram", "snapchat", "tiktok", "twitter","youtube"].map(
+            {["facebook", "instagram", "snapchat", "tiktok", "twitter", "youtube"].map(
               (platform) => (
                 <div key={platform} className="space-y-2">
                   <Label htmlFor={platform}>

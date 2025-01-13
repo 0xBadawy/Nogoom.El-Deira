@@ -137,23 +137,62 @@ const DashboardProvider = ({ children }) => {
   };
 
   const UpdateCurrentUserAds = async (Uid, data) => {
+
+    console.log("UUU")
+    console.log (Uid, data)
     try {
       const userDocRef = doc(db, "users", Uid);
+      console.log("Fetching user document:", userDocRef);
+    
       const userDoc = await getDoc(userDocRef);
+    
       if (userDoc.exists()) {
         const userData = userDoc.data();
+        console.log("User data fetched:", userData);
+    
         const ads = userData.ads;
+    
+        if (!Array.isArray(ads)) {
+          console.error("Invalid ads data:", ads);
+          return;
+        }
+    
         const updatedAds = ads.map((ad) => {
           if (ad.adId === data.adId) {
+            if (!data.links) {
+              console.error("No links provided for ad:", ad.adId);
+              return ad; // Skip update if links are undefined
+            }
+            console.log("Updating ad with ID:", ad.adId);
             return { ...ad, links: data.links };
           }
           return ad;
         });
-        await setDoc(userDocRef, { ...userData, ads: updatedAds });
+    
+        // Log the updated data before calling setDoc
+        console.log("Updated ads:", updatedAds);
+    
+        // Ensure no undefined values are being passed
+        const sanitizedUserData = { ...userData, ads: updatedAds };
+        for (const key in sanitizedUserData) {
+          if (sanitizedUserData[key] === undefined) {
+            console.error(`Field ${key} is undefined`);
+            return;
+          }
+        }
+    
+        await setDoc(userDocRef, sanitizedUserData);
+        console.log("Document updated successfully");
+      } else {
+        console.log("User document doesn't exist");
       }
     } catch (error) {
+      console.error("Error occurred:", error);
       setError(error.message);
     }
+    
+    
+    
   };
 
   const addADs = async (ad) => {
