@@ -174,21 +174,30 @@ const CurrentAdv = function () {
         className="mySwiper"
 
   >
-    {ads.map((item, index) => (
-      <SwiperSlide key={item?.id || index}>
-        <AdvCard
-          key={item?.id || index}
-          Title={item?.title || 'No Title'}
-          Link={`${item?.id || '#'}`}
-          Img={item?.images?.[0] || '/placeholder.jpg'}
-          altText={`Image of ${item?.title || 'Advertisement'}`}
-          des={item?.description || 'No Description Available'}
-          category={item?.category || 'Uncategorized'}
-          date={item?.date || 'Unknown Date'}
-          views={item?.views || 0}
-        />
-      </SwiperSlide>
-    ))}
+   {ads
+  .filter((ad) => {
+    // Get the current date
+    const currentDate = new Date();
+
+    // Filter by endDate: include ads where endDate is not provided or is greater than or equal to the current date
+    return !ad.endDate || new Date(ad.endDate) >= currentDate;
+  })
+  .map((item, index) => (
+    <SwiperSlide key={item?.id || index}>
+      <AdvCard
+        key={item?.id || index}
+        Title={item?.title || 'No Title'}
+        Link={`${item?.id || '#'}`}
+        Img={item?.images?.[0] || '/placeholder.jpg'}
+        altText={`Image of ${item?.title || 'Advertisement'}`}
+        des={item?.description || 'No Description Available'}
+        category={item?.category || 'Uncategorized'}
+        date={item?.date || 'Unknown Date'}
+        views={item?.views || 0}
+      />
+    </SwiperSlide>
+  ))}
+
   </Swiper>
 </div>
 {ads.length === 0 && (

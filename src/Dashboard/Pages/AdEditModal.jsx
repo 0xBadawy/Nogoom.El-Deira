@@ -23,6 +23,7 @@ import { useAuth } from '../../Context/AuthContext'
 import { storage } from "../../Configuration/Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { toast } from 'sonner'
+
 export function AdEditModal({ ads, selected, onSave }) {
   const { getUserEmail } = useAuth();
 
@@ -51,12 +52,11 @@ export function AdEditModal({ ads, selected, onSave }) {
     
 
 
-    const files2 = event.target.files; // Get all the files from the input
-    console.log("Files:", files2); // Log all files to inspect them
+    const files2 = event.target.files;  
+    console.log("Files:", files2);  
   
     const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp"];
     
-    // Loop through each file to check its type
     for (let i = 0; i < files2.length; i++) {
       const file = files2[i];
       console.log("File type:", file.type); // Log the type of each file
@@ -236,7 +236,8 @@ export function AdEditModal({ ads, selected, onSave }) {
 
 
 
-
+const [prevImages,setPrevImages]=useState([])
+const [prevVideo,setPrevVideo]=useState("")
 
 
   useEffect(() => {
@@ -244,16 +245,24 @@ export function AdEditModal({ ads, selected, onSave }) {
       const ad = ads.find(ad => ad.id === selected)
       if (ad) {
         reset(ad)
+        setPrevImages(ad.images)
+        setPrevVideo(ad.video)
       }
     }
   }, [selected, ads, reset])
 
   const onSubmit = (data) => {
 
+    // console.log("imageURL" ,imageURL)
+    // console.log("prevImages" ,prevImages)
+    let img=imageURL.length>0 ? imageURL : prevImages;
+    let vid= videoURL!=""?videoURL:prevVideo;
+    // console.log("imageURL" ,imageURL)
+    // console.log("img" ,img)
     const adData = {
       ...data,
-      images: imageURL.length > 0 ? imageURL : [ "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FScreenshot_5.png?alt=media&token=e314b8df-858e-4092-b3fe-920473f514e9"],
-      video: videoURL,
+      images: img,
+      video: vid,
     };
     
     if (data.startDate && data.endDate) {
@@ -331,7 +340,7 @@ export function AdEditModal({ ads, selected, onSave }) {
               <select
                 id="category"
                 {...register("category")}
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
+                className="w-full p-1 border rounded-lg dark:bg-gray-800 dark:text-white"
               >
                 <option value="">اختر نوعًا</option>
                 <option value="events">مناسبات</option>

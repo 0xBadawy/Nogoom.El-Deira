@@ -32,10 +32,23 @@ export default function AdListPage() {
       selectedCategory === "" || ad.category === selectedCategory;
     const matchesRegion =
       selectedRegion === "" || ad.region.includes(selectedRegion);
-    const matchesDate = !selectedDate || ad.startDate >= selectedDate;
+    const matchesStartDate = !selectedDate || new Date(ad.startDate) >= new Date(selectedDate);
 
-    return matchesSearch && matchesCategory && matchesRegion && matchesDate;
-  });
+    // Get the current date
+    const currentDate = new Date();
+
+    // Check if endDate is valid and greater than or equal to the current date
+    const matchesEndDate = !ad.endDate || new Date(ad.endDate) >= currentDate;
+
+    return (
+      matchesSearch &&
+      matchesCategory &&
+      matchesRegion &&
+      matchesStartDate &&
+      matchesEndDate
+    );
+});
+
 
   const categories = [...new Set(ads.map((ad) => ad.category))];
   const regions = [...new Set(ads.flatMap((ad) => ad.region))];
