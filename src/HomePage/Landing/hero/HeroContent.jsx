@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
 
-const HeroContent = ({ title, description, buttonText, image }) => {
+const HeroContent = ({ title, description, buttonText, image,buttonFunction}) => {
+
+
+const HandelbuttonFunction =()=>{
+
+  buttonFunction();
+}
+
+
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between h-full w-full px-4  lg:px-20">
       <div className="flex flex-col items-center lg:items-start text-center lg:text-right lg:w-1/2">
@@ -17,6 +25,9 @@ const HeroContent = ({ title, description, buttonText, image }) => {
           {description}
         </p>
         <button
+
+
+         onClick={HandelbuttonFunction}
           className="bg-white text-purple-800 px-6 py-3 mt-8 rounded-full font-bold
                         transform hover:scale-105 transition-all duration-300 hover:shadow-lg
                         animate-fade-in-delay-2"

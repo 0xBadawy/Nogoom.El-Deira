@@ -3,6 +3,18 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      animation: {
+        'bounce-slow': 'bounce 2s infinite',
+        'spin-slow': 'spin 2s linear infinite',
+        'spin-fast': 'spin 1s linear infinite',
+        'fade-in': 'fadeIn 1.5s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
       colors: {
         primary: "#8437c7",
         secondary: {
@@ -23,6 +35,7 @@ export default {
         // foreground: "var(--foreground)", // Optional, for consistency
       },
     },
+
   },
   plugins: [],
   darkMode: ["class", "class"],

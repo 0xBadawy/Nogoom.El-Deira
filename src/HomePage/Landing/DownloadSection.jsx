@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
-import Image from "../../assets/Image4.png";
 import Image2 from "../../assets/Images/Image1.png";
 import { useDashboard } from "../../Context/DashboardContext";
 
@@ -15,6 +14,7 @@ const DownloadSection = () => {
     };
     fetchData();
   }, []);
+
   return (
     <div
       className="bg-gradient-to-r from-blue-50 to-green-50 relative w-[95%] py-14 mt-10 md:px-32 px-10 rounded-3xl shadow-xl mx-auto flex flex-col md:flex-row items-center gap-10 overflow-hidden"
@@ -22,10 +22,24 @@ const DownloadSection = () => {
     >
       {/* النصوص وروابط التحميل */}
       <div className="text-center md:text-right flex-1 z-10">
-        <h2 className="text-5xl font-extrabold text-blue-800 mb-6">
-          حمل تطبيق الديرة للإعلانات
-        </h2>
-        <p className="text-2xl text-gray-600 mb-8">الديرة.. كل شيء بالديرة</p>
+        <div className="mb-6">
+          <h2 className="text-4xl font-extrabold text-blue-800 mb-4">
+            حمل و أربح <span className="text-red-600">٥٠ ريال</span>
+          </h2>
+          <p className="text-lg text-gray-500">في محفظتك</p>
+        </div>
+        <div className="mb-6">
+          <h2
+            className="text-5xl font-bold py-2"
+            style={{ color: "#8929e1" }}
+          >
+            تطبيق الديرة
+          </h2>
+          <p className="text-lg text-gray-600">للإعلانات</p>
+        </div>
+        <p className="text-2xl text-gray-600 font-bold mb-8">
+          الديرة.. كل شيء بالديرة
+        </p>
         <div
           className="flex justify-center flex-col md:flex-row md:justify-start gap-6"
           style={{ direction: "ltr" }}
@@ -48,7 +62,7 @@ const DownloadSection = () => {
       </div>
 
       {/* صورة التطبيق */}
-      <div className="flex- 1 relative z-10">
+      <div className="flex-1 relative z-10">
         <img
           src={Image2}
           alt="تطبيق الديرة"

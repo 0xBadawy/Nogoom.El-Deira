@@ -51,7 +51,7 @@ const CampaignStats = () => {
       style={{ direction: "rtl", fontFamily: "Cairo" }}
     >
       <h2 className="text-4xl font-extrabold text-blue-800 text-center mb-10">
-        إحصائيات الحملات الإعلانية السابقة
+      نتائج حملاتنا 
       </h2>
 
       <Swiper
@@ -71,10 +71,10 @@ const CampaignStats = () => {
           <SwiperSlide key={index}>
             <div className="bg-white rounded-lg shadow-md p-8 hover:shadow-xl transition-shadow duration-300 text-center">
               {card.icon}
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">
                 {card.count}
               </h3>
-              <p className="text-gray-600">{card.description}</p>
+              <p className="text-gray-600 font-bold">{card.description}</p>
             </div>
           </SwiperSlide>
         ))}

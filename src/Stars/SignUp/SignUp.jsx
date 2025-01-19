@@ -118,7 +118,7 @@ const SignUpPage = () => {
             {/* Main Data Section */}
 
             <div>
-              <FormField id="name" label={TextData.name} register={register} />
+              <FormField id="name"  label={TextData.name} register={register} />
               <FormField
                 id="email"
                 label={TextData.email}
@@ -198,7 +198,7 @@ const SignUpPage = () => {
                 // setValue={setValue}
               /> */}
               <input type="hidden" {...register("accountType")} value="عادي" />
-              <FormField id="iban" label={TextData.iban} register={register} />
+              {/* <FormField id="iban" label={TextData.iban} register={register} /> */}
             </div>
 
             {/* Social Media Data */}

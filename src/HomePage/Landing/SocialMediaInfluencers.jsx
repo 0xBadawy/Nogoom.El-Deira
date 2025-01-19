@@ -11,6 +11,12 @@ const SocialMediaInfluencers = () => {
     setLocation("الحاجز");
   }, []);
 
+  let selectedArea = localStorage.getItem("selectedArea") || "السعودية";
+
+  if (selectedArea === "all" || selectedArea === null) {
+    selectedArea = "السعودية";
+  }
+
   useEffect(() => {
     const checkSignUpStatus = async () => {
       const status = await IsLogedIn();
@@ -20,13 +26,13 @@ const SocialMediaInfluencers = () => {
   }, [IsLogedIn]);
 
   const handleSignUpClick = () => {
-    const targetRoute = isSignedUp ? "/profile" : "/login";
+    const targetRoute = isSignedUp ? "/profile" : "/signup";
     window.location.href = targetRoute; // Fallback for web
   };
 
   return (
     <div
-      className="bg-gradient-to-br from-purple-500 to-indigo-400 w-[95%] max-w-3xl py-10 px-8 mt-10 mx-auto rounded-3xl shadow-xl text-center relative"
+      className="bg-gradient-to-br from-purple-900 to-indigo-700 w-[95%] max-w-3xl py-10 px-8 mt-10 mx-auto rounded-3xl shadow-xl text-center relative"
       style={{ direction: "rtl" }}
     >
       {/* Animated Background Elements */}
@@ -46,7 +52,7 @@ const SocialMediaInfluencers = () => {
         محفظتك! 🌟
       </p>
       <p className="text-lg text-gray-200 mb-8">
-        انضم إلى <span className="font-bold">{`نجوم ${location}`}</span> وكن
+        انضم إلى <span className="font-bold">{`نجوم ${selectedArea}`}</span> وكن
         جزءًا من مجتمع المؤثرين الرائدين! 💫
       </p>
 

@@ -14,7 +14,7 @@ import { toast } from "sonner";
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {login,logOut} =useAuth();
+  const { login, logOut } = useAuth();
   const redirectPath = location.state?.path || "/";
 
   const [error, setError] = useState(null);
@@ -34,25 +34,25 @@ const LoginPage = () => {
 
 
 
-const onFormSubmit = async (data) => {
-  try {
-    await login(data.email, data.password);
-    toast.success("تم تسجيل الدخول بنجاح");
-    navigate(redirectPath);
-  } catch (error) {
-    console.error("Error during login:", error);
-    setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+  const onFormSubmit = async (data) => {
+    try {
+      await login(data.email, data.password);
+      toast.success("تم تسجيل الدخول بنجاح");
+      navigate(redirectPath);
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
 
-    // Handle specific Firebase error codes
-    if (error.code === "auth/user-not-found") {
-      toast.error("البريد الإلكتروني غير مسجل");
-    } else if (error.code === "auth/wrong-password") {
-      toast.error("كلمة المرور غير صحيحة");
-    } else {
-      toast.error("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+      // Handle specific Firebase error codes
+      if (error.code === "auth/user-not-found") {
+        toast.error("البريد الإلكتروني غير مسجل");
+      } else if (error.code === "auth/wrong-password") {
+        toast.error("كلمة المرور غير صحيحة");
+      } else {
+        toast.error("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+      }
     }
-  }
-};
+  };
 
 
   return (
@@ -60,15 +60,15 @@ const onFormSubmit = async (data) => {
       className="grid grid-cols-1 mx-auto  md:grid-cols-2"
       style={{ direction: "rtl" }}
     >
-      <div className="flex items-center justify-center min-h-screen ">
+      <div className="flex items-center justify-center h-screen ">
         <div className="w-full max-w-xl bg-white p-6 rounded-lg shado w-md">
-          <img src={Logo} alt="logo" className="w-52 pb-20  mx-auto " />
-          <h2 className="text-2xl font-bold text-center mb-6">{Text.title}</h2>
+          <img src={Logo} alt="logo" className="w-40 pb-3  mx-auto " />
+          <h2 className="text-2xl font-bold text-center mb-3">{Text.title}</h2>
 
           {/* Display error message */}
           {error && (
             <div
-              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py- rounded relative"
               role="alert"
             >
               <strong className="font-bold">{" خطأ! "}</strong>
@@ -76,7 +76,7 @@ const onFormSubmit = async (data) => {
             </div>
           )}
           <form onSubmit={handleSubmit(onFormSubmit)}>
-            <div className="mb-4">
+            <div className="mb-2">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="email"
@@ -94,7 +94,7 @@ const onFormSubmit = async (data) => {
                 {errors.email?.message}
               </p>
             </div>
-            <div className="mb-6">
+            <div className="mb-3">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="password"
@@ -118,40 +118,40 @@ const onFormSubmit = async (data) => {
               // disabled={loading}
               type="submit"
               // onClick={confirm}
-              className="w-full bg-indigo-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
+              className="w-full bg-indigo-800  text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
             >
               {Text.login}
             </button>
           </form>
-          <div className="grid gap-3 mt-10">
-  {/* Create account */}
-  <div className="text-center">
-    <span>ليس لديك حساب؟</span>
-    <Link to="/signup" className="text-blue-500 hover:underline">
-      {" تسجيل جديد "}
-    </Link>
-  </div>
+          <div className="grid gap-1 mt-2">
+            {/* Create account */}
+            <div className="text-center font-bold">
+              <span>ليس لديك حساب؟</span>
+              <Link to="/signup" className="text-blue-500 hover:underline">
+                {" تسجيل جديد "}
+              </Link>
+            </div>
 
-  {/* Forgot password */}
-  <div className="text-center">
-    <Link to="/forget-password" className="text-blue-500 hover:underline">
-      {" نسيت كلمة المرور؟ "}
-    </Link>
-  </div>
+            {/* Forgot password */}
+            <div className="text-center">
+              <Link to="/forget-password" className="text-blue-500 hover:underline">
+                {" نسيت كلمة المرور؟ "}
+              </Link>
+            </div>
 
-  {/* Browse as guest */}
-  <div className="text-center">
-    <Link to="/" className="text-blue-500 hover:underline">
-      {" تصفح الموقع كزائر بدون تسجيل الدخول"}
-    </Link>
-  </div>
-</div>
+            {/* Browse as guest */}
+            <div className="text-center">
+              <Link to="/" className="text-blue-500 hover:underline">
+                {" تصفح الموقع كزائر بدون تسجيل الدخول"}
+              </Link>
+            </div>
+          </div>
 
         </div>
       </div>
       <div className="w-full h-screen hidden md:block ">
         <img
-          className="w-full max-h-screen object-cover"
+          className="w-full h-full object-cover"
           src={LoginImage}
           alt="login"
         />

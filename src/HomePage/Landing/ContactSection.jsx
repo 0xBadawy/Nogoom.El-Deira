@@ -46,7 +46,7 @@ const ContactSection = () => {
               <h3 className="text-2xl font-bold text-gray-700 mb-4 text-center">
                 تابعنا
               </h3>
-              <div className="flex justify-center gap-8 mt-10 ">
+              <div className="flex justify-center gap-3 lg:gap-8  mt-10 ">
                 <a
                   href={contact?.facebook}
                   target="_blank"
@@ -102,16 +102,16 @@ const ContactSection = () => {
               </h3>
               <div className="space-y-4 text-center">
                 <p className="text-lg text-gray-800">
-                  <FaPhoneAlt className="inline text-blue-600 mr-2" />
+                  <FaPhoneAlt className="inline text-blue-600 ml-2" />
                   <a
                     href={`mailto:${contact?.phone}`}
-                    className="hover:text-blue-800"
+                    className="hover:text-blue-800 "
                   >
                     {contact?.phone}
                   </a>
                 </p>
                 <p className="text-lg text-gray-800">
-                  <FaEnvelope className="inline text-blue-600 mr-2" />
+                  <FaEnvelope className="inline text-blue-600 ml-2" />
                   <a
                     href={`mailto:${contact?.email}`}
                     className="hover:text-blue-800"
@@ -119,17 +119,14 @@ const ContactSection = () => {
                     {contact?.email}
                   </a>
                 </p>
-                <p className="text-lg text-gray-800">
-                  <FaWhatsapp className="inline text-green-500 mr-2" />
-                  <a
-                    href={`https://wa.me/${contact?.whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-green-700"
-                  >
-                    واتساب
-                  </a>
-                </p>
+                <button
+  className="flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 mx-auto rounded-full shadow-md hover:bg-green-600 transition-transform"
+  onClick={() => window.open(`https://wa.me/${contact?.whatsapp}`)}
+>
+  <FaWhatsapp className="text-xl" />
+  واتساب
+</button>
+
               </div>
             </div>
           </div>

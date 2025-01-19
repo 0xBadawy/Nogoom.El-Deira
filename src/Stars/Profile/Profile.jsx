@@ -32,7 +32,7 @@ const Profile = () => {
   };
 
   const menuItems = [
-    { id: "publicProfile", label: "الصفحة الشخصية", icon: MdPublic },
+    { id: "publicProfile", label: "بياناتى", icon: MdPublic },
     { id: "accountSettings", label: "إعدادات الحساب", icon: MdSettings },
     { id: "notifications", label: "الإشعارات", icon: MdNotifications },
     { id: "UserAds", label: "الحملات الاعلانية", icon: MdStar },
@@ -56,9 +56,9 @@ const Profile = () => {
                 <h2 className="text-2xl font-bold text-indigo-900">
                   {userData?.name || "User Name"}
                 </h2>
-                <p className="text-indigo-600">
+                {/* <p className="text-indigo-600">
                   {userData?.email || "user@example.com"}
-                </p>
+                </p> */}
               </div>
               <div>
                 <UserStatus
@@ -70,14 +70,14 @@ const Profile = () => {
                 {menuItems.map((item) => (
                   <button
                     key={item.id}
-                    className={`w-full mb-2 px-4 py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center ${
+                    className={`w-full mb-2 px-4  py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center ${
                       activePage === item.id
                         ? "bg-indigo-900 text-white"
                         : "text-indigo-700 hover:bg-indigo-100"
                     }`}
                     onClick={() => handleTabChange(item.id)}
                   >
-                    <item.icon className="mr-2" size={20} />
+                    <item.icon className="ml-2" size={20} />
                     {item.label}
                   </button>
                 ))}
@@ -85,7 +85,7 @@ const Profile = () => {
                   className="w-full mb-2 px-4 text-indigo-700 hover:bg-indigo-100 py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center"
                   onClick={() => navigate("/")}
                 >
-                  <IoMdHome className="mr-2" size={20} />
+                  <IoMdHome className="ml-2" size={20} />
                   الصفحة الرئيسية
                 </button>
               </nav>

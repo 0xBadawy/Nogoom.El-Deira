@@ -53,14 +53,14 @@ const PublicProfile = () => {
   };
 
   const UserDataInput = [
-    { label: "الاسم الكامل", value: userData.name },
+    { label: "اسم الشهرة ", value: userData.name },
     { label: "عنوان البريد الإلكتروني", value: userData.email },
     { label: "رقم الهاتف", value: userData.phone },
     { label: "تاريخ إنشاء الحساب", value: formatDate(userData.createdAt) },
     { label: "المنطقة", value: userData?.govern },
     { label: "المحافظات", value: userData.area?.join(", ") },
     { label: "رصيد الحساب", value: `$${userData.balance}` },
-    { label: "رقم الحساب الدولي (IBAN)", value: userData.iban },
+    // { label: "رقم الحساب الدولي (IBAN)", value: userData.iban },
     { label: "تم التحقق", value: userData.verified ? "نعم" : "لا" },
   ];
 
@@ -107,7 +107,7 @@ const PublicProfile = () => {
     <Card>
       <CardHeader>
         <CardTitle className="text-3xl font-bold text-indigo-900">
-          الملف الشخصي العام
+        بياناتى
         </CardTitle>
       </CardHeader>
       <CardContent>

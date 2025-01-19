@@ -67,8 +67,8 @@ export const router = createBrowserRouter([
   {
     path: "/ads",
     children: [
-      { index: true, element: <AdListPage /> },
-      { path: ":id", element: <AdDetailPage /> },
+      { index: true, element: withProtection(AdListPage, ["admin"]),},
+      { path: ":id", element: withProtection(AdDetailPage, ["star"]),},
     ],
   },
 

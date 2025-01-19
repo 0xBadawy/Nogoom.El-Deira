@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineWarning } from "react-icons/ai";
 
@@ -7,9 +7,16 @@ const Unauthorized = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+
+  useEffect(()=>{
+    navigate("/login")
+
+  },[])
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-100 p-2">
-      <div className="max-w-lg w-full p-10 bg-white rounded-2xl shadow-2xl border border-gray-200">
+      {/* <div className="max-w-lg w-full p-10 bg-white rounded-2xl shadow-2xl border border-gray-200">
         <div className="flex items-center justify-center mb-8">
           <AiOutlineWarning className="h-16 w-16 text-red-500 animate-bounce" />
         </div>
@@ -43,7 +50,8 @@ const Unauthorized = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
+      
     </div>
   );
 };

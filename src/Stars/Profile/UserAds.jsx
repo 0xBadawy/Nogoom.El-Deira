@@ -20,6 +20,7 @@ import { useDashboard } from "../../Context/DashboardContext";
 import { useAuth } from "../../Context/AuthContext";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const UserAds = () => {
   const { getUserId } = useAuth();
@@ -63,7 +64,10 @@ const UserAds = () => {
     UpdateCurrentUserAds(userId, { adId: AdID.adId, links: NoNullData });
     toast.success("تم حفظ المشاركات بنجاح!");
   };
-  
+  const isExpired = (endDate)=>{
+    return new Date(endDate) < new Date();
+  }
+
 
   useEffect(() => {
     if (AdID) {
@@ -99,26 +103,31 @@ const UserAds = () => {
                     <h4 className="text-lg font-semibold text-gray-800">
                       {ad.title}
                     </h4>
+                    <div className={`mt-2 px-4 py-1 rounded w-fit text-sm text-white ${isExpired(ad.endDate) ? "bg-red-600" : "bg-green-600"}`}>
+  {isExpired(ad.endDate) ? "الحملة منتهية" : "الحملة مستمرة"}
+</div>
+
                     <p className="text-sm text-gray-500 mt-2">
                       {/* {ad?.updatedAt.toDate().toLocaleString()} */}
                     </p>
                   </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <Button
+                  <div className="mt-4 flex justify-between items-center gap-1">
+                    <Link
                       size="sm"
                       variant="outlined"
                       color="indigo"
-                      className="flex items-center"
+                      className="flex items-center bg-indigo-800 text-white px-2 py-2 text-sm rounded-md"
+                      to={`/ads/${ad.adId}`}
                       // onClick={() => UpdateCurrentUserAds(ad.id)}
                     >
-                      <FaStar className="text-indigo-500 mr-2" />
-                      تمييز
-                    </Button>
+                      <FaStar className="text-white mr-2" />
+                       التفاصيل
+                    </Link>
                     <Button
                       size="sm"
                       variant="filled"
                       color="red"
-                      className="flex items-center"
+                      className="flex items-center bg-indigo-100"
                       onClick={() => setAdId(ad)}
                     >
                       اضافة مشاركات

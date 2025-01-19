@@ -70,6 +70,10 @@ const AdDetailPage = () => {
     );
   }
 
+  const isExpired = new Date(ad.endDate) < new Date();
+
+
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#9846e01b] via-[#cca1f1] to-[#e2c1ff] text-black">
       <div className="container mx-auto px-4 py-8">
@@ -84,9 +88,15 @@ const AdDetailPage = () => {
               <FaRocket className="ml-2" />
               {ad.title}
             </h1>
+
+
             <div className="mt-2 bg-[#030203] font-bold text-white px-4 py-1 rounded w-fit">
               {translations[ad.category]}
             </div>
+            <div className={`mt-2 px-4 py-1 rounded w-fit font-bold text-white ${isExpired ? "bg-red-600" : "bg-green-600"}`}>
+  {isExpired ? "الإعلان منتهي" : "الإعلان مستمر"}
+</div>
+
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -146,7 +156,7 @@ const AdDetailPage = () => {
                     المحافظات:
                   </h2>
                   <div className="flex flex-wrap gap-2">
-                    {ad.governorates.map((region, index) => (
+                    {ad?.governorates?.map((region, index) => (
                       <div
                         key={index}
                         className="bg-indigo-600 text-white px-4 py-1 rounded"
@@ -158,14 +168,14 @@ const AdDetailPage = () => {
                 </div>
 
                 <div>
-                  {ad.links.length > 0 && (
+                  {ad.links?.length > 0 && (
                     <div className="space-y-4">
                       <div className="my-4 border-t-2 border-blue-500"></div>
                       <h2 className="text-xl font-bold mb-2 flex items-center">
                         <FaRocket className="ml-2" /> روابط:
                       </h2>
                       <ul className="list-disc list-inside space-y-2">
-                        {ad.links.map((link, index) => (
+                        {ad?.links.map((link, index) => (
                           <li
                             key={index}
                             className="flex items-center gap-2 text-lg"
@@ -191,7 +201,7 @@ const AdDetailPage = () => {
                       النجوم المشاركين:
                     </h2>
                     <ul className="list-disc list-inside">
-                      {ad.stars.map((star, index) => (
+                      {ad.stars?.map((star, index) => (
                         <li key={index}>{star.name}</li>
                       ))}
                     </ul>

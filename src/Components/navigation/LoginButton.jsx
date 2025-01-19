@@ -23,7 +23,7 @@ export const LoginButton = ({ onLogin, isMobile = false, isScrolled }) => {
         ${isMobile ? "w-full" : ""}
       `}
     >
-     تسجيل | تسجيل دخول
+     الإدارة
     </Link>
   );
 };

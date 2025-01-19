@@ -38,18 +38,19 @@ const MobileMenu = ({
         </div>
 
         <div className="flex flex-col items-center mt-8 space-y-6">
-          <NavLinks links={links} isMobile={true} />
 
           <div className="mt-auto">
             {user?.isAuthenticated ? (
               <>
                             <SelectArea />
+                            <NavLinks links={links} isMobile={true} />
 
               <UserProfile user={user} onLogout={onLogout} isMobile={true} />
               </>
             ) : (
               <>
                             <SelectArea />
+                            <NavLinks links={links} isMobile={true} />
 
               <LoginButton onLogin={onLogin} isMobile={true} />
               </>

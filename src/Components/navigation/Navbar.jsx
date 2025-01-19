@@ -12,15 +12,26 @@ import Image from "../../assets/Images/LoginStar.jpg";
 import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import SelectArea from "./SelectArea";
+import PageLoader from "../PageLoader";
 
 const pages = [
   { path: "/", label: "الرئيسية" },
-  { path: "/privacy-policy", label: "سياسة الخصوصية" },
+  { path: "/privacy-policy", label: "الشروط والخصوصية" },
   { path: "/contact", label: "تواصل معنا" },
   { path: "/profile", label: "النجوم" },
 ];
 
 const Navbar = ({ color }) => {
+
+
+  const[ pages,setPages] = useState([
+    { path: "/", label: "الرئيسية" },
+    { path: "/privacy-policy", label: "الشروط والخصوصية" },
+    { path: "/contact", label: "تواصل معنا" },
+    { path: "/profile", label: "النجوم" },
+  ]);
+
+
 
   const navigate = useNavigate();
   const [mockUser, setMockUser] = useState({
@@ -48,6 +59,10 @@ const Navbar = ({ color }) => {
         // console.error("Error fetching user data:", error);
       }
     };
+
+
+    
+
 
     fetchUserData();
   }, [getUserData]);
@@ -78,6 +93,21 @@ const Navbar = ({ color }) => {
     
   }
 
+
+  
+
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000); // 3 seconds
+  }, []);
+
+
+
   const handleLogin = () => {
     console.log("Logging in...");
     navigate("/login");
@@ -101,20 +131,30 @@ const Navbar = ({ color }) => {
             <NavLinks links={pages} isScrolled={isScrolled} />
           </div>
 
+
+
+           <div>
+      {isLoading ? (
+        <PageLoader />
+      ) : (
+      
+     
+
           <div className="hidden md:block">
             {mockUser.isAuthenticated ? (
               <div className="flex gap-10">
-              <SelectArea isScrolled={isScrolled}/>
-              <UserProfile user={mockUser} onLogout={handleLogout} />
+                <SelectArea isScrolled={isScrolled}/>
+                <UserProfile user={mockUser} onLogout={handleLogout} />
               </div>
             ) : (
               <div className="flex gap-10">
-              <SelectArea isScrolled={isScrolled}/>
-              <LoginButton onLogin={handleLogin} isScrolled={isScrolled} />
+                <SelectArea isScrolled={isScrolled}/>
+                <LoginButton onLogin={handleLogin} isScrolled={isScrolled} />
               </div>
             )}
           </div>
-
+ )}
+    </div>
           <MobileMenuButton
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             isOpen={isMobileMenuOpen}

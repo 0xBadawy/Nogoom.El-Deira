@@ -42,6 +42,7 @@ export function AdEditModal({ ads, selected, onSave }) {
 
 
   const handleUpload = (e) => {
+    
 
     
 

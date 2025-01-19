@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Navbar from "../Components/navigation/Navbar";
 import "../style/pattern.css";
 import Loading from "../Components/Loading";
@@ -14,8 +14,16 @@ const CampaignStats = React.lazy(() => import("./Landing/CampaignStats"));
 const StarsSection = React.lazy(() => import("./Landing/StarsSection"));
 const ContactSection = React.lazy(() => import("./Landing/ContactSection"));
 
-
 const HomePage = () => {
+
+  
+
+  return (
+    <HomePageItems />
+  );
+};
+
+const HomePageItems = () => {
   return (
     <div className="PatternBG" style={{ fontFamily: "Cairo" }}>
       <Navbar />
@@ -25,14 +33,8 @@ const HomePage = () => {
       <Suspense fallback={<Loading />}>
         <CityAdv />
       </Suspense>
-      {/* Uncomment when needed */}
-      {/* 
-      <Suspense fallback={<div>Loading Download App Section...</div>}>
-        <DownloadApp />
-      </Suspense> 
-      */}
       <Suspense fallback={<Loading />}>
-        <CurrentAdv />
+        <StarsSection />
       </Suspense>
       <Suspense fallback={<Loading />}>
         <SocialMediaInfluencers />
@@ -40,13 +42,10 @@ const HomePage = () => {
       <Suspense fallback={<Loading />}>
         <DownloadSection />
       </Suspense>
-      <Suspense fallback={<Loading/> }>
+      <Suspense fallback={<Loading />}>
         <CampaignStats />
       </Suspense>
-      <Suspense fallback={<Loading/> }>
-        <StarsSection />
-      </Suspense>
-      <Suspense fallback={<Loading/> }>
+      <Suspense fallback={<Loading />}>
         <ContactSection />
       </Suspense>
       <div className="h-[100px]"></div>

@@ -19,6 +19,18 @@ import HeroContent from "./HeroContent";
 
 const HeroSection = () => {
   const [data,setData] = useState()
+
+  const { fetchContact } = useDashboard();
+  const [contact, setContact] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchContact();
+      setContact(data);
+    };
+    fetchData();
+  }, []);
+
   
   const { getHomeData } = useDashboard();
 
@@ -30,7 +42,15 @@ const HeroSection = () => {
     };
     fetchData();
   }, []);
-  
+
+  const contactWhatsapp = () => {
+    const phoneNumber = contact?.whatsapp;
+    const message = "مرحبًا، هل يمكنني معرفة كيفية بدء الحملة التسويقية؟"; // الرسالة بالعربية
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp link in the same tab
+    window.location.href = whatsappUrl;
+  };
   // const [socialMediaLinks, setSocialMediaLinks] = useState([
   //   {
   //     id: 1,
@@ -143,6 +163,7 @@ const HeroSection = () => {
           title={data?.main_title}
           description={data?.subtitle}
           buttonText={"أبدأ حملتك التسويقية"}
+          buttonFunction={contactWhatsapp}
           image={image}
         />
       )}

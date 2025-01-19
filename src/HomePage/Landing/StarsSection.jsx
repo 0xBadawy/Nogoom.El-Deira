@@ -59,8 +59,8 @@ return (
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-0">
           {selectedArea === "all"||!selectedArea
-    ? "النجوم في السعودية "
-    : "النجوم فى منطقة " + selectedArea}
+    ? "النجوم السعودية "
+    : "نجوم  " + selectedArea}
           </h1>
         </div>
   
