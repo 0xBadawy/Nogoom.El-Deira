@@ -53,7 +53,7 @@ const PublicProfile = () => {
   };
 
   const UserDataInput = [
-    { label: "اسم الشهرة ", value: userData.name },
+    { label: " اسم الشهرة او الحساب ", value: userData.name },
     { label: "عنوان البريد الإلكتروني", value: userData.email },
     { label: "رقم الهاتف", value: userData.phone },
     { label: "تاريخ إنشاء الحساب", value: formatDate(userData.createdAt) },
@@ -131,17 +131,17 @@ const PublicProfile = () => {
           ))}
         </div>
         <h3 className="text-2xl font-semibold text-indigo-900 mt-8 mb-4">
-          وسائل التواصل الاجتماعي
+           التواصل الاجتماعي
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {SocialMedia.map((item, index) => (
             <div key={index} className="space-y-2">
               <label className="block text-sm font-medium text-indigo-900">
-                {item.label}
+                {/* {item.label} */}
               </label>
               <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
                 <div className="flex items-center ">
-                  <item.icon className="mx-2 " />
+                  {/* <item.icon className="mx-2 " /> */}
                   <span>{item.value?.slice(0, 20)}...</span>
                 </div>
                 {item.link && (

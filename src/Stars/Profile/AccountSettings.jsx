@@ -193,7 +193,7 @@ const AccountSettings = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label htmlFor="name">الاسم الكامل*</Label>
+              <Label htmlFor="name">اسم الشهرة او الحساب*</Label>
               <Controller
                 name="name"
                 control={control}
@@ -312,28 +312,51 @@ const AccountSettings = () => {
                   return (
                     <div className="space-y-3  ">
                   <div className="max-h-32 overflow-y-auto p-2 border border-gray-300 rounded-md shadow-sm">
-  {selectedItems.length ? (
-    selectedItems.map((item) => (
-      <div key={item} className="flex items-center space-x-3">
+                  {selectedItems.length ? (
+    <>
+      {/* Select All Checkbox */}
+      <div className="flex items-center space-x-3 mb-4">
         <input
           type="checkbox"
-          id={item}
-          value={item}
-          checked={field.value.includes(item)}
+          id="select-all"
+          checked={field.value.length === selectedItems.length}
           onChange={(e) => {
             if (e.target.checked) {
-              field.onChange([...field.value, item]);
+              // Select all items
+              field.onChange([...selectedItems]);
             } else {
-              field.onChange(field.value.filter((i) => i !== item));
+              // Deselect all items
+              field.onChange([]);
             }
           }}
           className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
         />
-        <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
+        <label htmlFor="select-all" className="text-gray-800 px-2">تحديد الكل</label>
       </div>
-    ))
+
+      {/* Individual Checkboxes */}
+      {selectedItems.map((item) => (
+        <div key={item} className="flex items-center space-x-3">
+          <input
+            type="checkbox"
+            id={item}
+            value={item}
+            checked={field.value.includes(item)}
+            onChange={(e) => {
+              if (e.target.checked) {
+                field.onChange([...field.value, item]);
+              } else {
+                field.onChange(field.value.filter((i) => i !== item));
+              }
+            }}
+            className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+          />
+          <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
+        </div>
+      ))}
+    </>
   ) : (
-    <p>   قم بأختيار المنطقة اولا</p>
+    <p>قم بأختيار المنطقة اولا</p>
   )}
 </div>
 
@@ -353,12 +376,13 @@ const AccountSettings = () => {
             </div>
           </div>
 
+<p >            التواصل الاجتماعي</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {["facebook", "instagram", "snapchat", "tiktok", "twitter", "youtube"].map(
               (platform) => (
                 <div key={platform} className="space-y-2">
                   <Label htmlFor={platform}>
-                    {platform.charAt(0).toUpperCase() + platform.slice(1)}
+                    {/* {platform.charAt(0).toUpperCase() + platform.slice(1)} */}
                   </Label>
                   <Controller
                     name={platform}

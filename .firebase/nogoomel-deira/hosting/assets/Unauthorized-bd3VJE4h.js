@@ -1,1 +1,0 @@
-import{u as s,a as o,r,j as n}from"./index-CoGUfGXn.js";const u=()=>{var t,e;const a=s();return(e=(t=o().state)==null?void 0:t.from)!=null&&e.pathname,r.useEffect(()=>{a("/login")},[]),n.jsx("div",{className:"min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-100 p-2"})};export{u as default};
