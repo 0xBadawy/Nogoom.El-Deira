@@ -20,7 +20,7 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const Text = {
-    title: "تسجيل الدخول",
+    title: "تسجيل الدخول النجوم",
     email: "البريد الالكتروني",
     password: "كلمة المرور",
     login: "تسجيل الدخول",

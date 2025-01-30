@@ -29,6 +29,7 @@ const Navbar = ({ color }) => {
     { path: "/privacy-policy", label: "الشروط والخصوصية" },
     { path: "/contact", label: "تواصل معنا" },
     { path: "/profile", label: "النجوم" },
+    {path:"/dashboard" ,label:"الادراة"}
   ]);
 
 
@@ -103,7 +104,7 @@ const Navbar = ({ color }) => {
     // Simulate a loading delay
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000); // 3 seconds
+    }, 1000); // 3 seconds
   }, []);
 
 
@@ -132,7 +133,6 @@ const Navbar = ({ color }) => {
           </div>
 
 
-
            <div>
       {isLoading ? (
         <PageLoader />
@@ -144,17 +144,20 @@ const Navbar = ({ color }) => {
             {mockUser.isAuthenticated ? (
               <div className="flex gap-10">
                 <SelectArea isScrolled={isScrolled}/>
-                <UserProfile user={mockUser} onLogout={handleLogout} />
+                {/* <UserProfile user={mockUser} onLogout={handleLogout} /> */}
               </div>
             ) : (
               <div className="flex gap-10">
                 <SelectArea isScrolled={isScrolled}/>
-                <LoginButton onLogin={handleLogin} isScrolled={isScrolled} />
+                {/* <LoginButton onLogin={handleLogin} isScrolled={isScrolled} /> */}
               </div>
             )}
           </div>
  )}
-    </div>
+    </div> 
+
+
+
           <MobileMenuButton
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             isOpen={isMobileMenuOpen}

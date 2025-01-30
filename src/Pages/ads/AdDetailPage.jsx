@@ -1,191 +1,194 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link ,useLocation} from "react-router-dom";
-import { FaArrowLeft, FaHeart, FaShareAlt, FaEye, FaStar, FaRocket, FaGlobe } from "react-icons/fa";
-import { useDashboard } from "../../Context/DashboardContext";
+import React, { useState, useEffect } from "react"
+import { useParams, Link, useLocation } from "react-router-dom"
+import { ArrowLeft, Heart, Share2, Eye, Star, Rocket, Globe, Calendar } from "lucide-react"
+import { useDashboard } from "../../Context/DashboardContext"
+import { motion } from "framer-motion"
+import { Button } from "@/Components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card"
+import { Badge } from "@/Components/ui/badge"
+import { Separator } from "@/Components/ui/separator"
+import { DownloadButton } from "./DownloadButton"
+import { useNavigate } from "react-router-dom";
 
 const AdDetailPage = () => {
-  const { id } = useParams();
-  const [ad, setAd] = useState(null);
-  const [copied, setCopied] = useState(false);
- const{getAdvbyID} =useDashboard()
+  const { id } = useParams()
+  const [ad, setAd] = useState(null)
+  const [copied, setCopied] = useState(false)
+  const { getAdvbyID } = useDashboard()
+  const location = useLocation()
+
   useEffect(() => {
     const fetchAds = async () => {
-      const mockData = await getAdvbyID(id);
-      console.log(mockData);
-      setAd(mockData);
-    };
-    fetchAds();    
-  }, [id]);
-
-    const translations = {
-      events: "مناسبات",
-      real_estate: "عقارات",
-      cars: "سيارات",
-      electronics: "إلكترونيات",
-      services: "خدمات",
-      home_supplies: "لوازم منزلية",
-      personal_supplies: "لوازم شخصية",
-      animals: "حيوانات",
-    };
-
-  const location = useLocation();
-  const handleShare = async () => {
-    
-    const textToCopy = window.location.href;
-
-    // Try the modern clipboard API
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(textToCopy)
-        .then(() => {
-          setCopied(true);
-          setTimeout(() => setCopied(false), 2000);
-        })
-        .catch((error) => {
-          console.error("Failed to copy text: ", error);
-        });
-    } else {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = textToCopy;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      const mockData = await getAdvbyID(id)
+      console.log(mockData)
+      setAd(mockData)
     }
-  };
+    fetchAds()
+  }, [id, getAdvbyID])
+
+  const translations = {
+    events: "مناسبات",
+    real_estate: "عقارات",
+    cars: "سيارات",
+    electronics: "إلكترونيات",
+    services: "خدمات",
+    home_supplies: "لوازم منزلية",
+    personal_supplies: "لوازم شخصية",
+    animals: "حيوانات",
+  }
+
+  const handleShare = async () => {
+    const textToCopy = window.location.href
+
+    try {
+      await navigator.clipboard.writeText(textToCopy)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (error) {
+      console.error("Failed to copy text: ", error)
+    }
+  }
 
   if (!ad) {
     return (
-      <div className="flex justify-center items-center h-screen bg-purple-100">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-b from-purple-100 to-purple-200">
         <div className="animate-pulse flex gap-4">
           <div className="rounded-full bg-purple-500 h-12 w-12"></div>
           <div className="rounded-full bg-purple-500 h-12 w-12"></div>
           <div className="rounded-full bg-purple-500 h-12 w-12"></div>
         </div>
       </div>
-    );
+    )
   }
 
-  const isExpired = new Date(ad.endDate) < new Date();
-
-
+  const isExpired = new Date(ad.endDate) < new Date()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#9846e01b] via-[#cca1f1] to-[#e2c1ff] text-black">
+    <div className="min-h-screen bg-gradient-to-b from-purple-100 via-purple-200 to-purple-300 text-gray-900">
       <div className="container mx-auto px-4 py-8">
-        <Link to="/ads">
-          <button className="mb-4 font-bold text-purple-500 bg-transparent border-2 border-blue-500 hover:bg-blue-800 py-2 px-4 rounded flex items-center">
-            <FaArrowLeft className="ml-2" /> العودة إلى الإعلانات
-          </button>
-        </Link>
-        <div className="overflow-hidden bg-opacity-10 bg-white backdrop-filter backdrop-blur-lg border-2 border-blue-500 rounded-lg">
-          <div className="bg-gradient-to-r from-[#9846e0] to-[#9846e0] text-white p-6">
-            <h1 className="text-3xl font-bold flex items-center">
-              <FaRocket className="ml-2" />
-              {ad.title}
-            </h1>
-
-
-            <div className="mt-2 bg-[#030203] font-bold text-white px-4 py-1 rounded w-fit">
-              {translations[ad.category]}
-            </div>
-            <div className={`mt-2 px-4 py-1 rounded w-fit font-bold text-white ${isExpired ? "bg-red-600" : "bg-green-600"}`}>
-  {isExpired ? "الإعلان منتهي" : "الإعلان مستمر"}
-</div>
-
-          </div>
-          <div className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                {ad.images ? (
-                  <img
-                    src={ad.images}
-                    alt={ad.title}
-                    className="w-full rounded-lg shadow-lg"
-                  />
-                ) : (
-                  <div className="bg-gray-200 w-full h-64 rounded-lg flex justify-center items-center text-gray-500">
-                    لا توجد صور
-                  </div>
-                )}
-                {ad.video && (
-                  <video controls className="w-full mt-4 rounded-lg shadow-lg">
-                    <source src={ad.video} type="video/mp4" />
-                    متصفحك لا يدعم وسم الفيديو.
-                  </video>
-                )}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          <Card className="overflow-hidden backdrop-blur-lg bg-white/90 border-2 border-purple-500">
+            <CardHeader className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6">
+              <div className="flex justify-between items-center">
+                <Link to="/profile" className="text-white hover:text-purple-200 transition-colors">
+                  <ArrowLeft className="h-6 w-6" />
+                </Link>
+                {/* <Button
+      variant="ghost"
+      onClick={() => navigate("/profile")} // Navigate to the previous page
+      className="text-white hover:text-purple-200"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="mr-2 h-4 w-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      الرجوع
+    </Button> */}
               </div>
-              <div>
-                <p className="text-xl mb-4">{ad.description}</p>
-                <div className="space-y-2">
-                  <p className="flex items-center">
-                    <FaGlobe className="ml-2" />
-                    <strong>تاريخ الإطلاق:</strong>{" "}
-                    {new Date(ad.startDate).toLocaleDateString()}
-                  </p>
-                  <p className="flex items-center">
-                    <FaRocket className="ml-2" />
-                    <strong>تاريخ انتهاء الحدث:</strong>{" "}
-                    {new Date(ad.endDate).toLocaleDateString()}
-                  </p>
-                  <p className="flex items-center">
-                    <FaEye className="ml-2" />
-                    <strong>عدد المشاهدات:</strong>{" "}
-                    {ad.views && ad.views != 0
-                      ? ad.views.toLocaleString()
-                      : "غير متوفر"}
-                  </p>
+              <CardTitle className="text-3xl font-bold mt-4 flex items-center">
+                <Rocket className="mr-2 h-6 w-6" />
+                {ad.title}
+              </CardTitle>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <Badge variant="secondary" className="text-sm">
+                  {translations[ad.category]}
+                </Badge>
+                <Badge variant={isExpired ? "destructive" : "success"} className="text-sm">
+                  {isExpired ? "الإعلان منتهي" : "الإعلان مستمر"}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  {ad.images && (
+                    <div className="relative group">
+                      <img
+                        src={ad.images || "/placeholder.svg"}
+                        alt={ad.title}
+                        className="w-full rounded-lg shadow-lg transition-transform group-hover:scale-105"
+                      />
+                      {/* <DownloadButton storagePath={ad.images} filename={`${ad.title}-image.jpg`} label="تحميل الصورة" /> */}
+                    </div>
+                  )}
+                  {ad.video && (
+                    <div className="relative group">
+                      <video controls className="w-full rounded-lg shadow-lg">
+                        <source src={ad.video} type="video/mp4" />
+                        متصفحك لا يدعم وسم الفيديو.
+                      </video>
+                      {/* <DownloadButton storagePath={ad.video} filename={`${ad.title}-video.mp4`} label="تحميل الفيديو" /> */}
+                    </div>
+                  )}
                 </div>
-                <div className="my-4 border-t-2 border-blue-500"></div>
-                <div>
-                  <h2 className="text-xl font-bold mb-2 flex items-center">
-                    <FaGlobe className="ml-2" /> المنطقة:
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    <div className="bg-indigo-700 text-white px-4 py-1 rounded font-semibold">
-                      {ad.region}
+                <div className="space-y-6">
+                  <p className="text-xl">{ad.description}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center">
+                      <Calendar className="mr-2 h-5 w-5 text-purple-600" />
+                      <div>
+                        <strong>تاريخ الإطلاق:</strong>
+                        <p>{new Date(ad.startDate).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <Calendar className="mr-2 h-5 w-5 text-purple-600" />
+                      <div>
+                        <strong>تاريخ انتهاء الحدث:</strong>
+                        <p>{new Date(ad.endDate).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center">
+                      <Eye className="mr-2 h-5 w-5 text-purple-600" />
+                      <div>
+                        <strong>عدد المشاهدات:</strong>
+                        <p>{ad.views && ad.views !== 0 ? ad.views.toLocaleString() : "غير متوفر"}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold mb-2 flex items-center">
-                    المحافظات:
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {ad?.governorates?.map((region, index) => (
-                      <div
-                        key={index}
-                        className="bg-indigo-600 text-white px-4 py-1 rounded"
-                      >
-                        {region}
-                      </div>
-                    ))}
+                  <Separator />
+                  <div>
+                    <h2 className="text-xl font-bold mb-2 flex items-center">
+                      <Globe className="mr-2 h-5 w-5 text-purple-600" /> المنطقة:
+                    </h2>
+                    <Badge variant="outline" className="text-lg">
+                      {ad.region}
+                    </Badge>
                   </div>
-                </div>
-
-                <div>
+                  <div>
+                    <h2 className="text-xl font-bold mb-2">المحافظات:</h2>
+                    <div className="flex flex-wrap gap-2">
+                      {ad?.governorates?.map((region, index) => (
+                        <Badge key={index} variant="outline" className="text-sm">
+                          {region}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
                   {ad.links?.length > 0 && (
-                    <div className="space-y-4">
-                      <div className="my-4 border-t-2 border-blue-500"></div>
+                    <div>
+                      <Separator />
                       <h2 className="text-xl font-bold mb-2 flex items-center">
-                        <FaRocket className="ml-2" /> روابط:
+                        <Rocket className="mr-2 h-5 w-5 text-purple-600" /> روابط:
                       </h2>
-                      <ul className="list-disc list-inside space-y-2">
+                      <ul className="space-y-2">
                         {ad?.links.map((link, index) => (
-                          <li
-                            key={index}
-                            className="flex items-center gap-2 text-lg"
-                          >
-                            -
+                          <li key={index} className="flex items-center gap-2 text-lg">
                             <a
                               href={link.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-blue-800 hover:text-blue-500 hover:underline font-medium"
+                              className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
                             >
                               {link.url.slice(0, 30)}
                             </a>
@@ -194,10 +197,10 @@ const AdDetailPage = () => {
                       </ul>
                     </div>
                   )}
-                  <div className="my-4 border-t-2 border-blue-500"></div>
+                  <Separator />
                   <div>
                     <h2 className="text-xl font-bold mb-2 flex items-center">
-                      <FaStar className="ml-2" />
+                      <Star className="mr-2 h-5 w-5 text-purple-600" />
                       النجوم المشاركين:
                     </h2>
                     <ul className="list-disc list-inside">
@@ -208,21 +211,13 @@ const AdDetailPage = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="mt-6 flex justify-between items-center">
-              <button
-                onClick={handleShare}
-                className="flex items-center bg-blue-300 border-2 border-blue-900 text-blue-700 hover:bg-blue-800 hover:text-white py-2 px-4 rounded"
-              >
-                <FaShareAlt className="ml-2" />
-                {copied ? "تم النسخ!" : "نسخ الرابط"}
-              </button>
-            </div>
-          </div>
-        </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdDetailPage;
+export default AdDetailPage
+

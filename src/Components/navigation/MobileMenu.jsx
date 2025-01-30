@@ -8,8 +8,7 @@ const MobileMenu = ({
   isOpen,
   links,
   user,
-  onLogin,
-  onLogout,
+ 
   onClose = () => {},
 }) => {
   if (!isOpen) return null;
@@ -45,14 +44,14 @@ const MobileMenu = ({
                             <SelectArea />
                             <NavLinks links={links} isMobile={true} />
 
-              <UserProfile user={user} onLogout={onLogout} isMobile={true} />
+              {/* <UserProfile user={user} onLogout={onLogout} isMobile={true} /> */}
               </>
             ) : (
               <>
                             <SelectArea />
                             <NavLinks links={links} isMobile={true} />
 
-              <LoginButton onLogin={onLogin} isMobile={true} />
+              {/* <LoginButton onLogin={onLogin} isMobile={true} /> */}
               </>
             )}
           </div>

@@ -7,6 +7,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 // Lazy load Components
 const HomePage = React.lazy(() => import("../HomePage/HomePage"));
 const LoginPage = React.lazy(() => import("../Stars/LoginPage"));
+const AdminLoginPage = React.lazy(() => import("../Stars/AdminLoginPage"));
 const ForgetPasswordPage = React.lazy(() => import("../Stars/ForgetPasswordPage"));
 const SignUp = React.lazy(() => import("../Stars/SignUp/SignUp"));
 const SignUpStatus = React.lazy(() => import("../Stars/SignUp/SignUpStatus"));
@@ -17,9 +18,9 @@ const DashboardHome = React.lazy(
 const DashboardLayout = React.lazy(
   () => import("../Dashboard/DashboardLayout")
 );
-
 // Lazy load dashboard pages
 const Users = React.lazy(() => import("../Dashboard/Pages/Users"));
+const UsersBalance = React.lazy(() => import("../Dashboard/Pages/UsersBalance"));
 const Apartments = React.lazy(() => import("../Dashboard/Pages/Apartments"));
 const NotificationsPanel = React.lazy(
   () => import("../Dashboard/Pages/NotificationsPanel")
@@ -78,6 +79,11 @@ export const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
+    path: "/admin-login",
+    element: withSuspense(AdminLoginPage),
+    errorElement: <ErrorBoundary />,
+  },
+  {
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
     path: "/forget-password",
     element: withSuspense(ForgetPasswordPage),
@@ -122,6 +128,10 @@ export const router = createBrowserRouter([
       {
         path: "apartments",
         element: withProtection(Apartments, ["admin", "editor"]),
+      },
+      {
+        path: "balance",
+        element: withProtection(UsersBalance, ["admin", "editor"]),
       },
       {
         path: "notifications",

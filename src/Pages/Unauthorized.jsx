@@ -9,7 +9,16 @@ const Unauthorized = () => {
 
 
   useEffect(()=>{
-    navigate("/login")
+   
+    if(from === "/dashboard")
+      navigate("/admin-login")
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3066857505.
+    else if (from === "/profile")
+      navigate("/login")
+
+
+
+
 
   },[])
 

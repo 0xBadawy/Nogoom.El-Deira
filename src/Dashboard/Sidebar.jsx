@@ -8,6 +8,7 @@ import {
   FaBox,
   FaCog,
   FaRegGrinStars,
+  FaBalanceScale,
 } from "react-icons/fa";
 import { BsFillSendPlusFill } from "react-icons/bs";
 
@@ -18,6 +19,7 @@ import { RiContactsBook3Line } from "react-icons/ri";
 import { TbSpeakerphone } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import { FaMoneyBill, FaMoneyBillTransfer } from "react-icons/fa6";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -45,7 +47,11 @@ const Sidebar = () => {
       text: "النجوم",
       link: "/dashboard/users",
     },
-
+    {
+      icon: <FaMoneyBillTransfer />,
+      text: "المحفظة",
+      link: "/dashboard/balance",
+    },
     {
       icon: <FaCog />,
       text: "بيانات الموقع",
@@ -105,7 +111,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`bg-gray-200 rounded-xl text-gray-900 h-screen px-4 fixed  ${
+      className={`bg-gray-200 rounded-xl text-gray-900 h-screen px-4 fixed z-10 ${
         phone ? "w-23" : "w-16"
       } md:w-64 border-r border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white`}
     >

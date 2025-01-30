@@ -13,6 +13,7 @@ import { useAuth } from "../../Context/AuthContext";
 const CreateAd = () => {
   const { allUsers, addADs } = useDashboard();
   const [GovernList, setGovernList] = useState([]);
+  const [Region, setRegion] = useState();
   const { getUserEmail } = useAuth();
   const [selectGovernorates, setSelectGovernorates] = useState([]);
   const [data, setData] = useState(null);
@@ -52,6 +53,8 @@ const CreateAd = () => {
     //   ]);
     // }
 
+
+
     const adData = {
       ...data,
       governorates: selectGovernorates,
@@ -69,6 +72,19 @@ const CreateAd = () => {
         return;
       }
     }
+
+    if (selectGovernorates.length === 0) {
+      toast.error("يجب اختيار المحافظة");
+      return;
+    }
+
+
+    if (selectStars.length === 0) {
+      toast.error("يجب اختيار النجوم");
+      return;
+    }
+
+    
 
 
 
@@ -110,14 +126,20 @@ const CreateAd = () => {
   };
 
   useEffect(() => {
-    const stars = allUsers.filter((user) => user.role === "star");
+
+    setSelectStars([]);
+    // setSelectGovernorates([]);
+    const stars = allUsers.filter((user) => user.role === "star" &&  user.govern===Region);
     setStarsList(stars.map((star) => star.name));
     setStarsList(stars.map((star) => ({ name: star.name, Uid: star.Uid })));
-  }, [allUsers]);
+
+  }, [allUsers,Region]);
 
   const HandelRegionChange = (e) => {
     setSelectGovernorates([]);
     setGovernList([]);
+
+    setRegion(e.target.value);
     const fun = () => {
       const region = e.target.value;
       const selectedRegion = GovernmentData.find(
@@ -564,6 +586,8 @@ const CreateAd = () => {
 
           <div className="md:col-span-2 col-span-6 ">
             {/* اختيار المنطقة */}
+
+
             <div className="mb-4">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
@@ -591,21 +615,62 @@ const CreateAd = () => {
               )}
             </div>
 
-            <div className="mb-4">
-              <CheckboxList
-                text="اختر المحافظات"
-                selected={handleGovernorateSelection}
-                items={GovernList}
-              />
-            </div>
 
-            <div className="mb-4">
-              <CheckboxListName
-                text="اختر النجوم"
-                selected={handleStarSelection}
-                items={starsList}
-              />
-            </div>
+
+
+            
+{
+  GovernList.length > 0 ?(
+  <div className="mb-4">
+  <CheckboxList
+    text="اختر المحافظات"
+    selected={handleGovernorateSelection}
+    items={GovernList}
+  />
+</div>
+
+
+
+
+
+
+) :
+<div>
+  <h6 className="mt-10  font-semibold text-black">اختيار المحافظات</h6>
+    <div className="p-4 bg-red-50 rounded-lg text-center">
+  <p className="text-sm text-gray-600">يجب تحديد المنطقة أولًا</p>
+  </div>
+</div>
+}
+
+
+{
+  GovernList.length > 0 ?(
+    <div className="mb-4">
+    <CheckboxListName
+      text="اختر النجوم"
+      selected={handleStarSelection}
+      items={starsList}
+    />
+  </div>
+
+
+
+
+
+
+) :
+<div>
+  <h6 className="mt-10 font-semibold text-black">اختيار النجوم</h6>
+    <div className="p-4 bg-red-50 rounded-lg text-center">
+  <p className="text-sm text-gray-600">يجب تحديد المنطقة أولًا</p>
+  </div>
+</div>
+}
+
+
+
+         
 
             {/* روابط الإعلان */}
             <div className="mb-4">

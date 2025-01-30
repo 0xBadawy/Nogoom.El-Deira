@@ -9,10 +9,11 @@ import { IoMdHome } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import UserAds from "./UserAds";
 import UserStatus from "./UserStatus";
+import { HiOutlineLogout } from "react-icons/hi";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
-  const { getUserData } = useAuth();
+  const { getUserData,logOut } = useAuth();
   const  navigate =useNavigate();
   const [verified, setVerified] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -30,13 +31,25 @@ const Profile = () => {
   const handleTabChange = (page) => {
     setActivePage(page);
   };
-
   const menuItems = [
     { id: "publicProfile", label: "بياناتى", icon: MdPublic },
     { id: "accountSettings", label: "إعدادات الحساب", icon: MdSettings },
     { id: "notifications", label: "الإشعارات", icon: MdNotifications },
     { id: "UserAds", label: "الحملات الاعلانية", icon: MdStar },
   ];
+
+const handelLogout=()=>{
+  const confirmLogout = window.confirm("هل أنت متأكد من تسجيل الخروج؟");
+  if (!confirmLogout) 
+    return; // If the user cancels the logout, do nothing
+  
+  logOut();
+  navigate("/login");
+
+
+
+}
+
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-50 via-indigo-100 to-indigo-200">
@@ -87,6 +100,13 @@ const Profile = () => {
                 >
                   <IoMdHome className="ml-2" size={20} />
                   الصفحة الرئيسية
+                </button>
+                <button
+                  className="w-full mb-2 px-4 text-indigo-700 hover:bg-indigo-100 py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center"
+                  onClick={()=>handelLogout()}
+                >
+                  <HiOutlineLogout className="ml-2" size={20} />
+                  تسجيل الخروج
                 </button>
               </nav>
             </div>

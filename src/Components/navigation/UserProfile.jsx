@@ -15,6 +15,7 @@ export const UserProfile = ({ user, onLogout, isMobile = false }) => {
     return null;
   }
 
+  
   return (
     <div className={`relative ${isMobile ? "w-full" : ""}`} ref={dropdownRef}>
       <button
