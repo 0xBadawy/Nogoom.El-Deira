@@ -129,11 +129,17 @@ const CreateAd = () => {
 
     setSelectStars([]);
     // setSelectGovernorates([]);
-    const stars = allUsers.filter((user) => user.role === "star" &&  user.govern===Region);
+    // const stars = allUsers.filter((user) => user.role === "star" &&  user.govern===Region);
+    // console.log(stars)
+    const stars = allUsers.filter(
+  (user) => user.role === "star" && user.area.some(region => selectGovernorates.includes(region))
+);
+
+
     setStarsList(stars.map((star) => star.name));
     setStarsList(stars.map((star) => ({ name: star.name, Uid: star.Uid })));
 
-  }, [allUsers,Region]);
+  }, [allUsers,Region,selectGovernorates]);
 
   const HandelRegionChange = (e) => {
     setSelectGovernorates([]);
@@ -273,15 +279,12 @@ const CreateAd = () => {
 
     // validte the type 
 
-    const validVideoTypes = ["video/mp4", "video/webm", "video/ogg", "video/avi", "video/mkv"];
-    if (!validVideoTypes.includes(file.type)) {
-      // alert("نوع الفيديو غير مدعوم.")
-      // console.error("نوع الفيديو غير مدعوم.");
-      alert("نوع الفيديو غير مدعوم. يرجى رفع ملف بصيغة MP4 أو WEBM أو OGG أو AVI أو MKV."); // رسالة خطأ واضحة
+    if (!file.type.startsWith("video/")) {
+      alert("نوع الملف غير مدعوم. يرجى رفع ملف بصيغة فيديو."); // رسالة خطأ واضحة
       setLoading(false); // إيقاف حالة التحميل
       return;
     }
-
+    
 
 
 
@@ -401,7 +404,7 @@ const CreateAd = () => {
             </div>
 
             {/* اختيار نوع الإعلان */}
-            <div className="mb-4 md:col-span-2 col-span-6">
+            {/* <div className="mb-4 md:col-span-2 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="category"
@@ -428,10 +431,10 @@ const CreateAd = () => {
                   {errors.category.message}
                 </p>
               )}
-            </div>
+            </div> */}
 
             {/* تاريخ البداية */}
-            <div className="mb-4 md:col-span-2 col-span-6">
+            <div className="mb-4 md:col-span-3 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="startDate"
@@ -452,7 +455,7 @@ const CreateAd = () => {
             </div>
 
             {/* تاريخ النهاية */}
-            <div className="mb-4 md:col-span-2 col-span-6">
+            <div className="mb-4 md:col-span-3 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="endDate"
@@ -645,7 +648,7 @@ const CreateAd = () => {
 
 
 {
-  GovernList.length > 0 ?(
+  starsList.length > 0 ?(
     <div className="mb-4">
     <CheckboxListName
       text="اختر النجوم"
@@ -663,7 +666,12 @@ const CreateAd = () => {
 <div>
   <h6 className="mt-10 font-semibold text-black">اختيار النجوم</h6>
     <div className="p-4 bg-red-50 rounded-lg text-center">
-  <p className="text-sm text-gray-600">يجب تحديد المنطقة أولًا</p>
+  <p className="text-sm text-gray-600"> 
+  
+  {
+    GovernList.length <=0? "يجب اختيار المنطقة والمحافظات اولا":"لا يوجد نجوم متاحين فى المحافظات المحددة"
+  }
+    </p>
   </div>
 </div>
 }
