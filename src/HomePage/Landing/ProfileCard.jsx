@@ -27,13 +27,14 @@ const ProfileCard = ({ name, image, area, followers }) => {
           <h2 className="text-2xl font-bold text-gray-800 mb-2 line-clamp-2">
             {name}
           </h2>
-          <div className="flex justify-center space-x-6 mt-4">
+          <div className="flex justify-center space-x -6 mt-4 gap-2">
             <div className="flex items-center text-gray-700">
-              <FaMapMarkerAlt className="mr-2 text-purple-500" />
+              <FaMapMarkerAlt className="ml-2 text-purple-500" />
               <span className="line-clamp-1">{area}</span>
             </div>
+            -
             <div className="flex items-center text-gray-700">
-              <FaUsers className="mr-3 text-purple-500" />
+              <FaUsers className="ml-3 text-purple-500" />
               <span className="line-clamp-1">{followers} متابع</span>
             </div>
           </div>

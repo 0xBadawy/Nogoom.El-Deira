@@ -24,7 +24,10 @@ const DownloadSection = () => {
       <div className="text-center md:text-right flex-1 z-10">
         <div className="mb-6">
           <h2 className="text-4xl font-extrabold text-blue-800 mb-4">
-            حمل و أربح <span className="text-red-600">٥٠ ريال</span>
+            حمل و أربح 
+          </h2>
+          <h2 className="text-4xl font-extrabold text-blue-800 mb-4">
+              <span className="text-red-600">٥٠ ريال</span>
           </h2>
           <p className="text-lg text-gray-500">في محفظتك</p>
         </div>

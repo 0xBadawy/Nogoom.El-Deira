@@ -9,11 +9,10 @@ const AdsList = () => {
   const [selected, setSelected] = useState(null);
   const [ads, setAds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20; // عدد العناصر لكل صفحة
-const [selectedRegion, setSelectedRegion] = useState("الكل");
-const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
+  const itemsPerPage = 10; // عدد العناصر لكل صفحة
+  const [selectedRegion, setSelectedRegion] = useState("الكل");
+  const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
 
-  
   useEffect(() => {
     getAllAds().then((data) => {
       setAds(data);
@@ -25,7 +24,6 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
     if (!areas) return "";
     return Array.isArray(areas) ? areas.join(", ") : areas;
   };
-
 
   const filteredAds = ads
     .filter((ad) => {
@@ -39,15 +37,12 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
     })
     .sort((a, b) => b.id - a.id);
 
-
-  
-
-  // حساب العناصر المعروضة في الصفحة الحالية
+  // حساب العناصر المعروضة في الصفحة الحالية بناءً على البيانات المفلترة
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentAds = ads.slice(startIndex, startIndex + itemsPerPage);
+  const currentAds = filteredAds.slice(startIndex, startIndex + itemsPerPage);
 
-  // حساب عدد الصفحات
-  const totalPages = Math.ceil(ads.length / itemsPerPage);
+  // حساب عدد الصفحات بناءً على البيانات المفلترة
+  const totalPages = Math.ceil(filteredAds.length / itemsPerPage);
 
   return (
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full overflow-y-auto">
@@ -59,6 +54,7 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
             value={selectedRegion}
             onChange={(e) => {
               setSelectedRegion(e.target.value);
+              setCurrentPage(1)
               setSelectedGovernorate("الكل"); // إعادة تعيين المحافظة عند تغيير المنطقة
             }}
             className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
@@ -74,7 +70,10 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
           {/* قائمة المحافظة */}
           <select
             value={selectedGovernorate}
-            onChange={(e) => setSelectedGovernorate(e.target.value)}
+            onChange={(e) =>{
+              setSelectedGovernorate(e.target.value)
+              setCurrentPage(1)
+            } }
             className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
             disabled={selectedRegion === "الكل"} // تعطيل إذا لم يتم اختيار منطقة
           >
@@ -100,13 +99,11 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
             </tr>
           </thead>
           <tbody>
-            {filteredAds.map((row, index) => (
+            {currentAds.map((row, index) => (
               <tr
                 key={index}
                 onClick={() => setSelected(row.id)}
-                className={`border-b ${
-                  row.id === selected ? "bg-gray-200" : ""
-                }`}
+                className={`border-b ${row.id === selected ? "bg-gray-200" : ""}`}
               >
                 <td className="py-2 px-4">{row.title}</td>
                 <td className="py-2 px-4">{row.region}</td>
@@ -120,6 +117,7 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
             ))}
           </tbody>
         </table>
+
         {/* نظام الترقيم */}
         <div className="flex justify-center mt-4">
           <button
@@ -143,9 +141,7 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
             </button>
           ))}
           <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
             className="px-4 py-2 mx-1 bg-gray-200 rounded-lg dark:bg-gray-700 disabled:opacity-50"
           >
@@ -156,8 +152,6 @@ const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 max-w-screen">
         <h2 className="text-2xl mb-4">تفاصيل الحملة</h2>
         {selected && <AdDetails ads={ads} selected={selected} />}
-       
-      
       </div>
     </div>
   );

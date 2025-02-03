@@ -62,60 +62,55 @@ const Employees = () => {
   };
 
   return (
-    <div className="grow md:p-8 p-3 dark:bg-gray-800">
-      <h2 className="text-2xl w-full mb-4 text-">صفحة ادارة الموظفين </h2>
+    // <div className="grow md:p-8 p-3 dark:bg-gray-800">
+    //   <h2 className="text-2xl w-full mb-4 text-">صفحة ادارة الموظفين </h2>
+ 
+    //   <div>
 
-      <div>
+    <div className="grow md:p-8 p-2  dark:bg-gray-800 h-full">
+    <h2 className="text-2xl mb-4">النجوم</h2>
+    <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 w-full max-w-screen overflow-x-auto">
+      
         <AddEmployees />
         <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
           <h3 className="text-lg font-semibold mb-4">قائمة المستخدمين </h3>
+          <div className="overflow-x-auto">
+  <table className="min-w-full table-auto">
+    <thead>
+      <tr className="border-b bg-gray-50">
+        <th className="py-2 px-4 text-right">الاسم</th>
+        <th className="py-2 px-4 text-right hidden sm:table-cell">البريد الإلكتروني</th>
+        <th className="py-2 px-4 text-right hidden md:table-cell">اخر ظهور</th>
+        <th className="py-2 px-4 text-right">الوظيفية</th>
+      </tr>
+    </thead>
+    <tbody>
+      {usersData?.map(
+        (row, index) =>
+          row.role !== "star" &&
+          !row.isDeleted && (
+            <tr
+              key={index}
+              onClick={() => setSelectedUser(row.Uid)}
+              className={`border-b cursor-pointer ${
+                row.Uid === selectedUser ? "bg-gray-200" : ""
+              } hover:bg-gray-100`}
+            >
+              <td className="py-2 px-4">{row.name}</td>
+              <td className="py-2 px-4 hidden sm:table-cell">{row.email}</td>
+              <td className="py-2 px-4 hidden md:table-cell">
+                <p>{row?.lastSeen?.toDate().toLocaleString()}</p>
+              </td>
+              <td className="py-2 px-4">
+                {row.role === "admin" ? "مدير" : row.role === "editor" ? "محرر" : "مشاهد"}
+              </td>
+            </tr>
+          )
+      )}
+    </tbody>
+  </table>
+</div>
 
-          <table className="min-w-full table-auto">
-            <thead>
-              <tr className="border-b">
-                <th className="py-2 px-4 text-right">الاسم</th>
-                <th className="py-2 px-4 text-right hidden md:table-cell">
-                  البريد الإلكتروني
-                </th>
-                <th className="py-2 px-4 text-right  md:table-cell">
-                  اخر ظهور{" "}
-                </th>
-
-                <th className="py-2 px-4 text-right ">الوظيفية</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usersData?.map(
-                (row, index) =>
-                  row.role != "star" &&
-                  !row.isDeleted && (
-                    <tr
-                      key={index}
-                      onClick={() => setSelectedUser(row.Uid)}
-                      className={`border-b ${
-                        row.Uid === selectedUser ? "bg-gray-200" : ""
-                      }`}
-                    >
-                      <td className="py-2 px-4">{row.name}</td>
-                      <td className="py-2 px-4 hidden md:table-cell">
-                        {row.email}
-                      </td>
-                      <td className="py-2 px-4  md:table-cell">
-                        <p>{row?.lastSeen?.toDate().toLocaleString()}</p>
-                      </td>
-
-                      <td className="py-2 px-4 ">
-                        {row.role === "admin"
-                          ? "مدير"
-                          : row.role === "editor"
-                          ? "محرر"
-                          : "مشاهد"}
-                      </td>
-                    </tr>
-                  )
-              )}
-            </tbody>
-          </table>
         </div>
         {selectedUser && (
           <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">

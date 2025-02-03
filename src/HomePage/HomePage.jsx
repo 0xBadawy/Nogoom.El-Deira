@@ -33,6 +33,12 @@ const HomePageItems = () => {
       <Suspense fallback={<Loading />}>
         <CityAdv />
       </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <CampaignStats />
+      </Suspense>
+
+      
       <Suspense fallback={<Loading />}>
         <StarsSection />
       </Suspense>
@@ -42,9 +48,7 @@ const HomePageItems = () => {
       <Suspense fallback={<Loading />}>
         <DownloadSection />
       </Suspense>
-      <Suspense fallback={<Loading />}>
-        <CampaignStats />
-      </Suspense>
+     
       <Suspense fallback={<Loading />}>
         <ContactSection />
       </Suspense>

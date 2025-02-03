@@ -197,7 +197,7 @@ const AddEmployees = () => {
             </option>
             <option value="editor">
               <span>محرر</span>
-              (كل الصلاحيات عدا المديرين والمحفظة)
+              (كل الصلاحيات عدا الموظفين والمحفظة)
             </option>
             <option value="viewer">
               {" "}

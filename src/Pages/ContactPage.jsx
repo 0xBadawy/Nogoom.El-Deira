@@ -92,15 +92,16 @@ const ContactPage = () => {
               تواصل معنا
             </h2>
             <div className="space-y-6 text-center">
-              <p className="text-lg text-gray-700">
-                <FaPhoneAlt className="inline text-blue-600 ml-2" />
-                <a
-                  href={`tel:${contact?.phone}`}
-                  className="hover:text-blue-800 font-medium"
-                >
-                  {contact?.phone}
-                </a>
-              </p>
+            <p className="text-lg text-gray-800">
+  <FaPhoneAlt className="inline text-blue-600 ml-2" />
+  <a
+    href={`tel:${contact?.phone}`}
+    className="hover:text-blue-800"
+  >
+    {contact?.phone}
+  </a>
+</p>
+
               <p className="text-lg text-gray-700">
                 <FaEnvelope className="inline text-blue-600 ml-2" />
                 <a

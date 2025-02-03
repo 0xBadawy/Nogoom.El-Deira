@@ -9,6 +9,8 @@ import { GovernmentData, TextData, Tiers } from "./data";
 import { useAuth } from "../../Context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 import { useDashboard } from "../../Context/DashboardContext";
+import CheckboxList from "../../Components/CheckboxList";
+// import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/Components/ui/select"
 
 const SignUpPage = () => {
   const { signUp } = useAuth();
@@ -19,8 +21,10 @@ const SignUpPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { SendSignupNotification } = useDashboard();
+  const [selectedGovernorates, setSelectGovernorates] = useState([]);
 
   const handleSelectChange = (event) => {
+    setSelectGovernorates([])
     const selectedValue = event.target.value;
     const selectedGovernment = GovernmentData.find(
       (gov) => gov.name === selectedValue
@@ -29,6 +33,7 @@ const SignUpPage = () => {
       selectedGovernment ? selectedGovernment.subGovernments : []
     );
   };
+
   const handleFirebaseError = (errorCode) => {
     if (errorCode.includes("auth/email-already-in-use")) {
       return "هذا البريد الإلكتروني مستخدم بالفعل.";
@@ -38,6 +43,8 @@ const SignUpPage = () => {
       return "حدث خطأ غير معروف. الرجاء المحاولة مرة أخرى.";
     }
   };
+
+
   const onSubmit = async (data) => {
 
     const message = `تم تسجيل حساب جديد بواسطة ${data.name} - ${data.email} وبانتظار المراجعة`;
@@ -70,9 +77,15 @@ const SignUpPage = () => {
       // Extract the necessary user data (e.g., name, role) excluding email and password
       const { email, password, confirmPassword, ...userData } = data;
 
+      let NewData = {
+        ...userData,
+        area:selectedGovernorates
+      } 
+
+      console.log("NewData : ",NewData);
 
       // Call the signUp function
-      const result = await signUp(email, password, userData, "star");
+      const result = await signUp(email, password, NewData, "star");
 
       // Check if there was an error during sign-up
       if (!result.success) {
@@ -91,6 +104,28 @@ const SignUpPage = () => {
 
     // console.log(data);  
   };
+
+
+
+
+
+
+  
+  const handleGovernorateSelection = (item, isSelected) => {
+    setSelectGovernorates((prevState) => {
+      if (isSelected) {
+        if (!prevState.includes(item)) {
+          return [...prevState, item];
+        }
+      } else {
+        return prevState.filter((selectedItem) => selectedItem !== item);
+      }
+      return prevState;
+    });
+  };
+
+
+
 
   return (
     <div className="PatternBG py-10 flex items-center justify-center min-h-screen">
@@ -173,7 +208,9 @@ const SignUpPage = () => {
                   ))}
                 </select>
               </div>
-              <div className="mb-4">
+
+
+              {/* <div className="mb-4">
                 <label className="block text-gray-700">{TextData.govern}</label>
                 <select
                   multiple
@@ -186,7 +223,55 @@ const SignUpPage = () => {
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
+
+              {/* sssssssssssssssssssssssssssssssssssssss */}
+
+
+
+
+
+
+
+
+
+
+
+            
+              {
+  selectedItems.length > 0 ?(
+  <div className="mb-4">
+  <CheckboxList
+    text="اختر المحافظات"
+    selected={handleGovernorateSelection}
+    items={selectedItems}
+  />
+</div>
+
+
+
+
+
+
+) :
+<div>
+  <h6 className="mt-10  font-semibold text-black">اختيار المحافظات</h6>
+    <div className="p-4 bg-red-50 rounded-lg text-center">
+  <p className="text-sm text-gray-600">يجب تحديد المنطقة أولًا</p>
+  </div>
+</div>
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -68,22 +68,22 @@ const AccountSettings = () => {
 
     // check area and govern is selected 
 
-    if (data.govern === "" ||!data.govern  ) {
+    if (data.govern === "" || !data.govern) {
 
       toast.error("يجب إدخال المنطقة.");
-      
+
       return;
     }
-    
+
     if (data.area.length === 0) {
       toast.error("يجب اختيار المحافظة.");
       return;
     }
 
-    
 
 
-     if (!/^\d{10,11}$/.test(data.phone)) {
+
+    if (!/^\d{10,11}$/.test(data.phone)) {
       toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
       return;
     }
@@ -298,7 +298,7 @@ const AccountSettings = () => {
             </div>
 
 
-            <div className="mb-4 ">
+            <div className="mb-2 ">
               <label className="block text-lg font-semibold text-gray-700">{"المحافظة*"}</label>
               <Controller
                 name="area"
@@ -311,54 +311,54 @@ const AccountSettings = () => {
 
                   return (
                     <div className="space-y-3  ">
-                  <div className="max-h-32 overflow-y-auto p-2 border border-gray-300 rounded-md shadow-sm">
-                  {selectedItems.length ? (
-    <>
-      {/* Select All Checkbox */}
-      <div className="flex items-center space-x-3 mb-4">
-        <input
-          type="checkbox"
-          id="select-all"
-          checked={field.value.length === selectedItems.length}
-          onChange={(e) => {
-            if (e.target.checked) {
-              // Select all items
-              field.onChange([...selectedItems]);
-            } else {
-              // Deselect all items
-              field.onChange([]);
-            }
-          }}
-          className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-        />
-        <label htmlFor="select-all" className="text-gray-800 px-2">تحديد الكل</label>
-      </div>
+                      <div className="max-h-32 overflow-y-auto p-2 border border-gray-300 rounded-md shadow-sm">
+                        {selectedItems.length ? (
+                          <>
+                            {/* Select All Checkbox */}
+                            <div className="flex items-center space-x-3 mb-4">
+                              <input
+                                type="checkbox"
+                                id="select-all"
+                                checked={field.value.length === selectedItems.length}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    // Select all items
+                                    field.onChange([...selectedItems]);
+                                  } else {
+                                    // Deselect all items
+                                    field.onChange([]);
+                                  }
+                                }}
+                                className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+                              />
+                              <label htmlFor="select-all" className="text-gray-800 px-2">تحديد الكل</label>
+                            </div>
 
-      {/* Individual Checkboxes */}
-      {selectedItems.map((item) => (
-        <div key={item} className="flex items-center space-x-3">
-          <input
-            type="checkbox"
-            id={item}
-            value={item}
-            checked={field.value.includes(item)}
-            onChange={(e) => {
-              if (e.target.checked) {
-                field.onChange([...field.value, item]);
-              } else {
-                field.onChange(field.value.filter((i) => i !== item));
-              }
-            }}
-            className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-          />
-          <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
-        </div>
-      ))}
-    </>
-  ) : (
-    <p>قم بأختيار المنطقة اولا</p>
-  )}
-</div>
+                            {/* Individual Checkboxes */}
+                            {selectedItems.map((item) => (
+                              <div key={item} className="flex items-center space-x-3">
+                                <input
+                                  type="checkbox"
+                                  id={item}
+                                  value={item}
+                                  checked={field.value.includes(item)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      field.onChange([...field.value, item]);
+                                    } else {
+                                      field.onChange(field.value.filter((i) => i !== item));
+                                    }
+                                  }}
+                                  className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+                                />
+                                <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <p>قم بأختيار المنطقة اولا</p>
+                        )}
+                      </div>
 
                     </div>
                   );
@@ -366,7 +366,7 @@ const AccountSettings = () => {
               />
             </div>
 
-            <div className="space-y-2 ">
+            <div className="space-y- 2 col-span-2 ">
               <Label htmlFor="bio">نبذة عنك</Label>
               <Controller
                 name="bio"
@@ -376,7 +376,7 @@ const AccountSettings = () => {
             </div>
           </div>
 
-<p >            التواصل الاجتماعي</p>
+          <p >            التواصل الاجتماعي</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {["facebook", "instagram", "snapchat", "tiktok", "twitter", "youtube"].map(
               (platform) => (

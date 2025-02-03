@@ -15,7 +15,7 @@ const CheckboxList = ({ items, selected, text }) => {
       setCheckedItems({});
 
     },[items]);
-
+ 
 
 
 

@@ -1,19 +1,18 @@
+
+
 import React, { useEffect, useState } from "react";
 import CheckboxListName from "../../Components/CheckboxListName";
 import { useDashboard } from "../../Context/DashboardContext";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { GovernmentData } from "../../Stars/SignUp/data";
 
 const SendNotification = () => {
   const [selectStars, setSelectStars] = useState([]);
   const [starsList, setStarsList] = useState([]);
   const { allUsers, SendNotification } = useDashboard();
-  const [governFilter, setGovernFilter] = useState("");
-  const [areaFilter, setAreaFilter] = useState([]);
-
-  // Extract unique governorates and areas for the filter
-  const governList = [...new Set(allUsers.map((user) => user.govern))];
-  const areaList = [...new Set(allUsers.flatMap((user) => user.area))];
+  const [selectedRegion, setSelectedRegion] = useState("all");
+  const [selectedGovern, setSelectedGovern] = useState("all");
 
   useEffect(() => {
     const stars = allUsers.filter((user) => user.role === "star");
@@ -40,11 +39,18 @@ const SendNotification = () => {
       readed: false,
       time: new Date(),
     };
-
-    if (data.message === "") {
+    if (data.message == "") {
       toast.error("لا يمكن ارسال رسالة فارغة");
       return;
     }
+
+    if (selectStars.length == 0) {
+      toast.error("يجب اختيار نجم على الاقل")
+      return;
+    }
+
+
+
 
     SendNotification(adData);
     reset();
@@ -58,62 +64,77 @@ const SendNotification = () => {
     formState: { errors },
   } = useForm();
 
-  const handleFilterUsers = () => {
-    const filteredStars = allUsers.filter((user) => {
-      const matchGovern = !governFilter || user.govern === governFilter;
-      const matchArea = areaFilter.length === 0 || areaFilter.some((area) => user.area.includes(area));
-      return user.role === "star" && matchGovern && matchArea;
-    });
+  useEffect(() => {
+    let filteredStars = allUsers.filter((user) => user.role === "star");
+
+    if (selectedGovern !== "all") {
+      filteredStars = filteredStars.filter((star) => {
+        return star.area?.includes(selectedGovern); // تأكد من أن منطقة المستخدم ضمن المنطقة المحددة
+      });
+    }
+
+    if (selectedRegion !== "all") {
+      filteredStars = filteredStars.filter((star) => star.govern === selectedRegion);
+    }
 
     setStarsList(filteredStars.map((star) => ({ name: star.name, Uid: star.Uid })));
-  };
+  }, [allUsers, selectedRegion, selectedGovern]);
+
+
+
+
+
 
   return (
     <div className=" flex items-center justify-center md:p-4 p-2">
       <div className=" w-full bg-white rounded-lg shadow-lg md:p-8 p-2">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">إرسال إشعار</h1>
 
-        {/* Filter Section */}
-        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">اختر المحافظة</label>
-            <select
-              className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none"
-              value={governFilter}
-              onChange={(e) => setGovernFilter(e.target.value)}
-            >
-              <option value="">جميع المحافظات</option>
-              {governList.map((govern) => (
+
+
+
+
+
+
+
+        <div className="flex gap-4 mb-4">
+          {/* قائمة المنطقة */}
+          <select
+            value={selectedRegion}
+            onChange={(e) => {
+              setSelectedRegion(e.target.value);
+              setSelectedGovern("all"); // إعادة تعيين المحافظة عند تغيير المنطقة
+            }}
+            className="border rounded px-2 py-1"
+          >
+            <option value="all">كل المناطق</option>
+            {GovernmentData.map((region) => (
+              <option key={region.name} value={region.name}>
+                {region.name}
+              </option>
+            ))}
+          </select>
+
+          {/* قائمة المحافظة */}
+          <select
+            value={selectedGovern}
+            onChange={(e) => setSelectedGovern(e.target.value)}
+            className="border rounded px-2 py-1"
+            disabled={selectedRegion === "all"}
+          >
+            <option value="all">كل المحافظات</option>
+            {selectedRegion !== "all" &&
+              GovernmentData.find(
+                (region) => region.name === selectedRegion
+              )?.subGovernments.map((govern) => (
                 <option key={govern} value={govern}>
                   {govern}
                 </option>
               ))}
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">اختر المناطق</label>
-            <CheckboxListName
-              text="المناطق"
-              selected={(area, isSelected) => {
-                setAreaFilter((prev) => {
-                  if (isSelected) {
-                    return [...prev, area];
-                  }
-                  return prev.filter((item) => item !== area);
-                });
-              }}
-              items={areaList.map((area) => ({ name: area }))}
-            />
-          </div>
-
-          <button
-            className="bg-green-500 text-white py-2 px-4 rounded-lg"
-            onClick={handleFilterUsers}
-          >
-            تطبيق التصفية
-          </button>
+          </select>
         </div>
+
+
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="">
@@ -127,13 +148,38 @@ const SendNotification = () => {
             ></textarea>
           </div>
 
-          <div>
-            <CheckboxListName
-              text="اختر النجوم"
-              selected={handleStarSelection}
-              items={starsList}
-            />
-          </div>
+
+
+
+          {
+            starsList.length > 0 ? (
+              <div>
+                <CheckboxListName
+                  text="اختر النجوم"
+                  selected={handleStarSelection}
+                  items={starsList}
+                />
+              </div>
+
+
+
+
+
+
+
+            ) :
+              <div>
+                <h6 className="mt-10  font-semibold text-black">اختيار النجوم</h6>
+                <div className="p-4 bg-red-50 rounded-lg text-center">
+                  <p className="text-sm text-gray-600"> لا يوجد نجوم متاحين فى المنطفة او المحافظات المحددة </p>
+                </div>
+              </div>
+          }
+
+
+
+
+
 
           <button
             type="submit"

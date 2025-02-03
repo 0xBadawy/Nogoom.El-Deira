@@ -286,7 +286,7 @@ const [prevVideo,setPrevVideo]=useState("")
       <DialogTrigger asChild>
         <Button variant="outline">تعديل الأعلان</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="sm:max-w-[425px] bg-white max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-center"> تعديل عنوان ومشاهدات الاعلان </DialogTitle>
           {/* <Button

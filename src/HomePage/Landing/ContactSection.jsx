@@ -13,8 +13,8 @@ import { useDashboard } from "../../Context/DashboardContext";
 
 
 const ContactSection = () => {
-   const [contact,setContact] = useState()
-  const {  fetchContact } = useDashboard();
+  const [contact, setContact] = useState()
+  const { fetchContact } = useDashboard();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +54,7 @@ const ContactSection = () => {
                   className="text-blue-600 hover:text-blue-800 text-4xl"
                   aria-label="فيسبوك"
                 >
-                  <FaFacebookF size={55}/>
+                  <FaFacebookF size={55} />
                 </a>
                 <a
                   href={contact?.twitter}
@@ -72,7 +72,7 @@ const ContactSection = () => {
                   className="text-pink-600 hover:text-pink-800 text-4xl"
                   aria-label="إنستغرام"
                 >
-                  <FaInstagram size={55}/>
+                  <FaInstagram size={55} />
                 </a>
                 <a
                   href={contact?.snapchat}
@@ -101,15 +101,16 @@ const ContactSection = () => {
                 تواصل معنا
               </h3>
               <div className="space-y-4 text-center">
-                <p className="text-lg text-gray-800">
-                  <FaPhoneAlt className="inline text-blue-600 ml-2" />
-                  <a
-                    href={`mailto:${contact?.phone}`}
-                    className="hover:text-blue-800 "
-                  >
-                    {contact?.phone}
-                  </a>
-                </p>
+              <p className="text-lg text-gray-800">
+  <FaPhoneAlt className="inline text-blue-600 ml-2" />
+  <a
+    href={`tel:${contact?.phone}`}
+    className="hover:text-blue-800"
+  >
+    {contact?.phone}
+  </a>
+</p>
+
                 <p className="text-lg text-gray-800">
                   <FaEnvelope className="inline text-blue-600 ml-2" />
                   <a
@@ -120,12 +121,12 @@ const ContactSection = () => {
                   </a>
                 </p>
                 <button
-  className="flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 mx-auto rounded-full shadow-md hover:bg-green-600 transition-transform"
-  onClick={() => window.open(`https://wa.me/${contact?.whatsapp}`)}
->
-  <FaWhatsapp className="text-xl" />
-  واتساب
-</button>
+                  className="flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 mx-auto rounded-full shadow-md hover:bg-green-600 transition-transform"
+                  onClick={() => window.open(`https://wa.me/${contact?.whatsapp}`)}
+                >
+                  <FaWhatsapp className="text-xl" />
+                  واتساب
+                </button>
 
               </div>
             </div>

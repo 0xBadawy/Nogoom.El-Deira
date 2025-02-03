@@ -73,6 +73,7 @@ const Users = () => {
               value={selectedRegion}
               onChange={(e) => {
                 setSelectedRegion(e.target.value);
+                setCurrentPage(1);
                 setSelectedGovern("all"); // إعادة تعيين المحافظة عند تغيير المنطقة
               }}
               className="border rounded px-2 py-1"
@@ -88,7 +89,10 @@ const Users = () => {
             {/* قائمة المحافظة */}
             <select
               value={selectedGovern}
-              onChange={(e) => setSelectedGovern(e.target.value)}
+              onChange={(e) => {setSelectedGovern(e.target.value);
+                setCurrentPage(1);
+              }
+              }
               className="border rounded px-2 py-1"
               disabled={selectedRegion === "all"}
             >

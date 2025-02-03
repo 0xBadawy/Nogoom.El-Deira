@@ -9,8 +9,6 @@ const Users = () => {
   const { allUsers, updateUser } = useDashboard();
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedGovern, setSelectedGovern] = useState("all");
-
-  // State for search query
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredUsers = usersData.filter((user) => {
@@ -19,12 +17,13 @@ const Users = () => {
     const governMatch =
       selectedGovern === "all" || user.area?.includes(selectedGovern);
 
-    // Add search by name
     const nameMatch =
       user.name.toLowerCase().includes(searchQuery.toLowerCase());
 
     return regionMatch && governMatch && nameMatch;
   });
+
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -60,6 +59,14 @@ const Users = () => {
     updateUser(updatedUser);
   };
 
+
+
+
+  useEffect(() => {
+    setCurrentPage(1);   
+   
+  }, [searchQuery]);
+
   return (
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">النجوم</h2>
@@ -72,6 +79,7 @@ const Users = () => {
               onChange={(e) => {
                 setSelectedRegion(e.target.value);
                 setSelectedGovern("all"); // إعادة تعيين المحافظة عند تغيير المنطقة
+                setCurrentPage(1);
               }}
               className="border rounded px-2 py-1"
             >
@@ -86,7 +94,10 @@ const Users = () => {
             {/* قائمة المحافظة */}
             <select
               value={selectedGovern}
-              onChange={(e) => setSelectedGovern(e.target.value)}
+              onChange={(e) => {
+                setSelectedGovern(e.target.value);
+                setCurrentPage(1); // إعادة تعيين الصفحة عند تغيير المحافظة
+              }}
               className="border rounded px-2 py-1"
               disabled={selectedRegion === "all"}
             >

@@ -2,112 +2,112 @@ import React, { useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import {
   FaTachometerAlt,
-  FaShoppingCart,
   FaUsers,
-  FaUser,
-  FaBox,
-  FaCog,
   FaRegGrinStars,
-  FaBalanceScale,
+  FaCog,
 } from "react-icons/fa";
-import { BsFillSendPlusFill } from "react-icons/bs";
-
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { IoNotificationsSharp } from "react-icons/io5";
-import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
 import { RiContactsBook3Line } from "react-icons/ri";
 import { TbSpeakerphone } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
-import { FaMoneyBill, FaMoneyBillTransfer } from "react-icons/fa6";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoNotificationsSharp } from "react-icons/io5";
+import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
+import { BsFillSendPlusFill } from "react-icons/bs";
+import { FaMoneyBill } from 'react-icons/fa';
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { getUserData, logOut } = useAuth();
+  const [userRole, setUserRole] = useState(null);
+  const [phone, setPhone] = useState(false);
+  const [currentRoute, setCurrentRoute] = useState("");
 
-  const {logOut} = useAuth();
-  const handelLogOut = async () => {
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      const user = await getUserData();
+      setUserRole(user.role);  // Set the user role
+    };
+    fetchUserRole();
+  }, [getUserData]);
+
+  const handleLogOut = async () => {
     await logOut();
     navigate("/login");
-  }
+  };
 
-
-  const [menuItems] = useState([
+  const menuItems = [
     {
       icon: <FaTachometerAlt />,
       text: "لوحة التحكم",
       link: "/dashboard",
+      roles: ["admin", "editor", "viewer"],
     },
     {
       icon: <FaUsers />,
       text: "الموظفين",
       link: "/dashboard/employees",
+      roles: ["admin"],
     },
     {
       icon: <FaRegGrinStars />,
       text: "النجوم",
       link: "/dashboard/users",
+      roles: ["admin"],
     },
     {
-      icon: <FaMoneyBillTransfer />,
+      icon: <FaCog />,
       text: "المحفظة",
       link: "/dashboard/balance",
+      roles: ["admin", "editor"],
     },
     {
       icon: <FaCog />,
       text: "بيانات الموقع",
       link: "/dashboard/website_data",
+      roles: ["admin", "editor"],
     },
     {
       icon: <RiContactsBook3Line />,
       text: "بيانات التواصل",
       link: "/dashboard/contact",
+      roles: ["admin", "editor"],
     },
     {
       icon: <TbSpeakerphone />,
-      text: " إنشاء حملة ",
+      text: "إنشاء حملة",
       link: "/dashboard/createAd",
+      roles: ["admin", "viewer"],
     },
     {
       icon: <MdVideoSettings />,
-      text: " الحملات",
+      text: "الحملات",
       link: "/dashboard/ads-list",
+      roles: ["admin", "editor"],
     },
     {
       icon: <IoNotificationsSharp />,
       text: "الإشعارات",
       link: "/dashboard/notifications",
+      roles: ["admin", "editor"],
     },
     {
       icon: <BsFillSendPlusFill />,
-      text: " ارسال اشعار",
+      text: "إرسال إشعار",
       link: "/dashboard/Send_Notification",
+      roles: ["admin", "editor"],
     },
     {
       icon: <MdOutlinePrivacyTip />,
       text: "الشروط والخصوصية",
       link: "/dashboard/privacy",
+      roles: ["admin", "editor"],
     },
+  ];
 
-   
-  ]);
-
-  const [currentRoute,setCurrentRoute]= useState("")
-//   useEffect(()=>{
-//     const currentPath = window.location.pathname; // Path only
-// console.log("currentUrl ", currentPath);
-//   },[currentRoute])
-  
-
-
-
-  
-  
-
-
-
-
-
-  const [phone,setPhone] = useState(false)
+  const filteredMenuItems = menuItems.filter(item =>
+    item.roles.includes(userRole)
+  );
 
   return (
     <div
@@ -120,18 +120,18 @@ const Sidebar = () => {
         <p className="text-sm font-normal">صفحة ادارة الموقع والمستخدمين</p>
       </h1>
       <ul className="flex flex-col mt-5 text-xl">
-        {menuItems.map((item, index) => (
+        {filteredMenuItems.map((item, index) => (
           <li
             key={index}
             className={`py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white 
-                        ${currentRoute==item.link ? "bg-blue-600 text-white rounded " : ""}
+                        ${currentRoute === item.link ? "bg-blue-600 text-white rounded " : ""}
                         `}
             onClick={() => setCurrentRoute(window.location.pathname)}
           >
             {phone ? (
               <Link
                 to={item.link}
-                className="flex items-center text-center md:space-x-4 gap-3  justify-c enter"
+                className="flex items-center text-center md:space-x-4 gap-3  justify-center"
               >
                 {item.icon}
                 <span className="text-xs md:inline text-center">
@@ -165,13 +165,12 @@ const Sidebar = () => {
         </button>
       </div>
 
-
-      {/* logout button */}
+      {/* Logout button */}
       <div className="absolute bottom-0 w-full">
         <button
           type="button"
           className="flex items-center space-x-4 pb-5 gap-3 hover:bg-gray-300"
-          onClick={handelLogOut}
+          onClick={handleLogOut}
         >
           <BiLogOut size={28} />
           <span className="hidden md:inline text-lg">تسجيل الخروج</span>

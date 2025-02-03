@@ -12,32 +12,32 @@ const SocialMediaInputs = ({ register }) => {
  const platforms = [
    {
      id: "facebook",
-     label: "فيسبوك",
+     label: "",
      icon: <FaFacebook className="text-blue-600" />,
    },
    {
      id: "twitter",
-     label: "تويتر",
+     label: "",
      icon: <FaTwitter className="text-blue-400" />,
    },
    {
      id: "snapchat",
-     label: "سناب شات",
+     label: "",
      icon: <FaSnapchat className="text-yellow-500" />,
    },
    {
      id: "tiktok",
-     label: "تيك توك",
+     label: "",
      icon: <FaTiktok className="text-black" />,
    },
    {
      id: "instagram",
-     label: "إنستغرام",
+     label: "",
      icon: <FaInstagram className="text-pink-500" />,
    },
    {
      id: "youtube",
-     label: "يوتيوب",
+     label: "",
      icon: <FaYoutube className="text-red-600" />,
    },
  ];
@@ -48,8 +48,7 @@ const SocialMediaInputs = ({ register }) => {
   return (
     <div>
       <h4 className="text-xl font-bold text-center mb-4">
-        روابط حسابات السوشيال ميديا
-      </h4>
+التواصل الاجتماعى      </h4>
       {platforms.map(({ id, label, icon }) => (
         <FormField
           key={id}
@@ -57,7 +56,7 @@ const SocialMediaInputs = ({ register }) => {
           type={"url"}
           label={
             <span className="flex items-center gap-2">
-              {icon} {label}
+              {label}
             </span>
           }
           register={register}
