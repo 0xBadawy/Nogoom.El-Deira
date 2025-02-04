@@ -4,6 +4,7 @@ import UserDetails from "./UserDetails"; // استيراد المكون الجد
 import { useDashboard } from "../../Context/DashboardContext";
 import { GovernmentData } from "../../Stars/SignUp/data";
 import UserAdds from "./UserAdds";
+import UserDetailsBalance from "./UserDetailsBalance"; // استيراد المكون الجديد
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
@@ -117,6 +118,8 @@ const Users = () => {
               <th className="py-2 px-4 text-right min-w-36 ">الاسم</th>
               <th className="py-2 px-4 text-right">المنطقة</th>
               <th className="py-2 px-4 text-right">المحافظة</th>
+              <th className="py-2 px-4 text-right">الرصيد</th>
+
               <th className="py-2 px-4 text-right">عدد الحملات</th>
               <th className="py-2 px-4 text-center">القبول</th>
               <th className="py-2 px-4 text-right">فئة النجم</th>
@@ -138,6 +141,8 @@ const Users = () => {
                     <td className="py-2 px-4">{row.name}</td>
                     <td className="py-2 px-4">{row.govern}</td>
                     <td className="py-2 px-4">{Area(row.area)}</td>
+                    <td className="py-2 px-4">{row.balance}</td>
+
                     <td className="py-2 px-4">{row.ads?.length}</td>
                     <td className="py-2 px-4 text-center">
                       <span
@@ -205,6 +210,18 @@ const Users = () => {
           onSave={handleSave}
         />
       )}
+
+
+{selectedUser && (
+        <UserDetailsBalance
+          selectedUserUid={selectedUser}
+          usersData={usersData}
+          onSave={handleSave}
+        />
+      )}
+
+
+
     </div>
   );
 };

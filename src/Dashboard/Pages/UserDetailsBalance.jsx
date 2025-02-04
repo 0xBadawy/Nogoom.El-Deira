@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
+const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   const {
     register,
     handleSubmit,
@@ -161,7 +161,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
             disabled={isUpdating}
             className="w-full h-12 rounded-lg bg-gradient-to-r from-sky-900 to-sky-700 hover:from-sky-700 hover:to-sky-900 text-white font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isUpdating ? "جاري الحفظ..." : "حفظ التعديلات"}
+            {isUpdating ? "جاري الحفظ..." : "حفظ تعديلات الرصيد"}
           </button>
         </form>
       </div>
@@ -172,4 +172,4 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
   );
 };
 
-export default UserDetails;
+export default UserDetailsBalance;

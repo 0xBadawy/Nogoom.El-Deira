@@ -189,12 +189,12 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
 
 
 
-
+ 
 
 
 
         {/* Balance */}
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
+        {/* <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             الرصيد
             <input
@@ -203,7 +203,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
               className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
             />
           </label>
-        </div>
+        </div> */}
         {/* Created At
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">

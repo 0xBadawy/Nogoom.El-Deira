@@ -32,11 +32,11 @@ const ProfileCard = ({ name, image, area, followers }) => {
               <FaMapMarkerAlt className="ml-2 text-purple-500" />
               <span className="line-clamp-1">{area}</span>
             </div>
-            -
+            {/* -
             <div className="flex items-center text-gray-700">
               <FaUsers className="ml-3 text-purple-500" />
               <span className="line-clamp-1">{followers} متابع</span>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Follow Button */}
