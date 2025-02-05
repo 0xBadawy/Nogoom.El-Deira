@@ -55,12 +55,12 @@ const Sidebar = () => {
       link: "/dashboard/users",
       roles: ["admin"],
     },
-    {
-      icon: <FaCog />,
-      text: "المحفظة",
-      link: "/dashboard/balance",
-      roles: ["admin", "editor"],
-    },
+    // {
+    //   icon: <FaCog />,
+    //   text: "المحفظة",
+    //   link: "/dashboard/balance",
+    //   roles: ["admin", "editor"],
+    // },
     {
       icon: <FaCog />,
       text: "بيانات الموقع",

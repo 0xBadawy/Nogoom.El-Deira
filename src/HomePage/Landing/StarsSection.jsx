@@ -94,23 +94,25 @@ return (
       modules={[Pagination,Navigation]}
       className="mySwiper"
     >
-      {users.map((item, index) => (
-        <SwiperSlide key={item?.id || index}>
-          <ProfileCard
-            name={item.name}
-            image={item.profilePicture}
-            bio={item.bio}
-            area={item.govern}
-            followers={item.referredBy}
-            facebook={item.facebook}
-            instagram={item.instagram}
-            snapchat={item.snapchat}
-            tiktok={item.tiktok}
-            twitter={item.twitter}
-            youtube={item.youtube}
-          />
-        </SwiperSlide>
-      ))}
+{users
+  .filter(item => item.verified === true || item.verified === "true")
+  .map((item, index) => (
+    <SwiperSlide key={item?.id || index}>
+      <ProfileCard
+        name={item.name}
+        image={item.profilePicture}
+        bio={item.bio}
+        area={item.govern}
+        followers={item.referredBy}
+        facebook={item.facebook}
+        instagram={item.instagram}
+        snapchat={item.snapchat}
+        tiktok={item.tiktok}
+        twitter={item.twitter}
+        youtube={item.youtube}
+      />
+    </SwiperSlide>
+  ))}
     </Swiper>  ) : 
     <p className="text-center">{ "لا يوجد نجوم فى منطقة " + selectedArea}</p>
 }
