@@ -30,7 +30,7 @@ const AdminLoginPage = () => {
     try {
       await login(data.email, data.password);
       toast.success("تم تسجيل الدخول بنجاح");
-      navigate(redirectPath);
+      navigate("/dashboard")
     } catch (error) {
       console.error("Error during login:", error);
       setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");

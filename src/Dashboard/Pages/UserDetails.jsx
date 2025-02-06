@@ -78,7 +78,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         onSubmit={handleSubmit(onSubmit)}
         className="mb-4 grid grid-cols-6 gap-3"
       >
-        <div className="mb-4 grid md:col-span-2 col-span-6">
+        {/* <div className="mb-4 grid md:col-span-2 col-span-6">
           <label className="block mb-2 text-right">
             حالة المستخدم
             <select
@@ -89,7 +89,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
               <option value="false">قيد المراجعة</option>
             </select>
           </label>
-        </div>
+        </div> */}
 
         {/* Name */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
@@ -125,6 +125,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
           </label>
         </div>
         {/* Iban */}
+        {/* 
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             الآيبان
@@ -134,9 +135,9 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
               className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
             />
           </label>
-        </div>
+        </div> */}
 
-
+ 
 
 
         {/* Area */}
@@ -218,7 +219,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         {/* Facebook */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            Facebook
+             
             <input
               type="text"
               {...register("facebook")}
@@ -230,7 +231,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         {/* Instagram */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            Instagram
+             
             <input
               type="text"
               {...register("instagram")}
@@ -242,7 +243,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         {/* Snapchat */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            Snapchat
+             
             <input
               type="text"
               {...register("snapchat")}
@@ -254,7 +255,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         {/* Tiktok */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            Tiktok
+             
             <input
               type="text"
               {...register("tiktok")}
@@ -266,7 +267,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
         {/* Twitter */}
         <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
-            Twitter
+             
             <input
               type="text"
               {...register("twitter")}
@@ -326,7 +327,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
        
       
         {/* Account Type */}
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
+        {/* <div className="mb-4 grid   md:col-span-2 col-span-6 ">
           <label className="block mb-2 text-right">
             فئة النجم
             <select
@@ -344,7 +345,7 @@ const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
               ))}
             </select>
           </label>
-        </div>
+        </div> */}
 
         {/* permissions */}
 

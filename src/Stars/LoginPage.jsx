@@ -38,7 +38,7 @@ const LoginPage = () => {
     try {
       await login(data.email, data.password);
       toast.success("تم تسجيل الدخول بنجاح");
-      navigate(redirectPath);
+      navigate("/profile");
     } catch (error) {
       console.error("Error during login:", error);
       setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");

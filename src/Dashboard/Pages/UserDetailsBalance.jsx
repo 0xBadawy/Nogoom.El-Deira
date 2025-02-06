@@ -7,12 +7,17 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   const {
-    register,
+    register, 
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
+   const Tiers = [
+    { name: "عادي", views: 1000, earnings: 10 },
+    { name: "فضي", views: 5000, earnings: 30 },
+    { name: "ذهبي", views: 10000, earnings: 50 },
+    { name: "برونزي", views: 100000, earnings: 100 },
+  ];
   const [selectedSubGovernments, setSelectedSubGovernments] = useState([]);
   const [balance, setBalance] = useState(0);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -76,18 +81,18 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
+    <div className="max-w- xl mx-auto mt-10 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
       {/* Header */}
       <div className="text-center border-b border-gray-100 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-t-xl">
         <h2 className="flex items-center justify-center gap-2 text-3xl font-bold text-gray-800">
           <User className="h-8 w-8 text-blue-500" />
-          بيانات الرصيد والحالة
+          بيانات الرصيد والحالة والفئة
         </h2>
       </div>
       
       <div className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* User Status */}
             <div className="space-y-2">
               <label className="block text-right text-gray-700 font-medium">
@@ -107,6 +112,34 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
                 </option>
               </select>
             </div>
+
+
+
+
+
+        {/* Account Type */}
+        <div className="space-y-2">
+              <label className="block text-right text-gray-700 font-medium pb">
+                فئة النجم
+                </label>
+
+            <select
+              {...register("accountType")}
+              className="w-full p-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              >
+              <option value="" disabled>
+                اختر فئة
+              </option>
+              {Tiers.map((tier) => (
+                <option key={tier.name} value={tier.name}>
+                  {tier.name} - شرط المشاهدات: {tier.views}+ - الأرباح:{" "}
+                  {tier.earnings} ريال
+                </option>
+              ))}
+            </select>
+        </div>
+
+
 
             {/* Balance Section */}
             <div className="space-y-2">

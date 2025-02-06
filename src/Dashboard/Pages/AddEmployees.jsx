@@ -29,6 +29,13 @@ const AddEmployees = () => {
     }
   };
 
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const onSubmit = async (formData) => {
 
     if (!/^\d{10,11}$/.test(formData.phone)) {
@@ -162,25 +169,34 @@ const AddEmployees = () => {
 
         {/* حقل كلمة المرور */}
         <div>
-          <label className="block text-gray-700 font-medium mb-1">
-            كلمة المرور
-          </label>
-          <input
-            type="password"
-            {...register("password", {
-              required: "كلمة المرور مطلوبة",
-              minLength: {
-                value: 8,
-                message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
-              },
-            })}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="أدخل كلمة المرور"
-          />
-          {errors.password && (
-            <p className="text-red-500 text-sm">{errors.password.message}</p>
-          )}
-        </div>
+      <label className="block text-gray-700 font-medium mb-1">
+        كلمة المرور
+      </label>
+      <div className="relative">
+        <input
+          type={showPassword ? "text" : "password"}
+          {...register("password", {
+            required: "كلمة المرور مطلوبة",
+            minLength: {
+              value: 8,
+              message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+            },
+          })}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="أدخل كلمة المرور"
+        />
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute left-2 top-2 text-gray-500"
+        >
+          {showPassword ? "إخفاء" : "إظهار"}
+        </button>
+      </div>
+      {errors.password && (
+        <p className="text-red-500 text-sm">{errors.password.message}</p>
+      )}
+    </div>
 
         {/* Role Field */}
         <div>

@@ -12,10 +12,10 @@ const Unauthorized = () => {
    
     if(from === "/dashboard")
       navigate("/admin-login")
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:3066857505.
     else if (from === "/profile")
       navigate("/login")
-
+    else 
+      navigate("/login")
 
 
 
@@ -25,7 +25,7 @@ const Unauthorized = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-100 p-2">
-      <div className="max-w-lg w-full p-10 bg-white rounded-2xl shadow-2xl border border-gray-200">
+      {/* <div className="max-w-lg w-full p-10 bg-white rounded-2xl shadow-2xl border border-gray-200">
         <div className="flex items-center justify-center mb-8">
           <AiOutlineWarning className="h-16 w-16 text-red-500 animate-bounce" />
         </div>
@@ -59,7 +59,7 @@ const Unauthorized = () => {
             </button>
           </div>
         </div>
-      </div> 
+      </div>  */}
     </div>
   );
 };

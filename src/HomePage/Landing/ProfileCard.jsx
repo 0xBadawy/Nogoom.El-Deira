@@ -17,7 +17,7 @@ const ProfileCard = ({ name, image, area, followers }) => {
           <motion.img
             src={image}
             alt={`${name}'s profile`}
-            className="w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg"
+            className="w-64 h-64 object-cover rounded-full border-4 border-white shadow-lg"
             whileHover={{ scale: 1.1 }}
           />
         </div>
