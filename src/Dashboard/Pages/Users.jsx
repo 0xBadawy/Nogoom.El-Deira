@@ -57,10 +57,7 @@ const Users = () => {
         user.Uid === updatedUser.Uid ? updatedUser : user
       )
     );
-
     updateUser(updatedUser);
-
-    // console.log(updatedUser);
   };
 
   return (
@@ -69,13 +66,12 @@ const Users = () => {
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 w-full max-w-screen overflow-x-auto">
         <div>
           <div className="flex gap-4 mb-4">
-            {/* قائمة المنطقة */}
             <select
               value={selectedRegion}
               onChange={(e) => {
                 setSelectedRegion(e.target.value);
                 setCurrentPage(1);
-                setSelectedGovern("all"); // إعادة تعيين المحافظة عند تغيير المنطقة
+                setSelectedGovern("all");
               }}
               className="border rounded px-2 py-1"
             >
@@ -87,7 +83,6 @@ const Users = () => {
               ))}
             </select>
 
-            {/* قائمة المحافظة */}
             <select
               value={selectedGovern}
               onChange={(e) => {setSelectedGovern(e.target.value);

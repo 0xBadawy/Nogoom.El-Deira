@@ -6,7 +6,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
-  const {
+  const { 
     register, 
     handleSubmit,
     reset,
@@ -50,6 +50,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
       return newBalance;
     });
   };
+
 
   const onSubmit = (data) => {
     setIsUpdating(true);
@@ -117,7 +118,6 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
 
 
 
-        {/* Account Type */}
         <div className="space-y-2">
               <label className="block text-right text-gray-700 font-medium pb">
                 فئة النجم

@@ -335,16 +335,16 @@ const DashboardProvider = ({ children }) => {
   
 const addUserNotification = async (notification, Uid) => {
   try {
-  //  console.log("Starting addUserNotification function");
-  //  console.log("Notification:", notification, "Uid:", Uid);
+   console.log("Starting addUserNotification function");
+   console.log("Notification:", notification, "Uid:", Uid);
 
     const userDocRef = doc(db, "users", Uid);
-  //  console.log("Document reference created:", userDocRef);
+   console.log("Document reference created:", userDocRef);
 
     let userDoc;
     try {
       userDoc = await getDoc(userDocRef);
-   //   console.log("Fetched document:", userDoc);
+     console.log("Fetched document:", userDoc);
     } catch (fetchError) {
       console.error("Error fetching document:", fetchError);
       return; // Stop further execution
@@ -359,10 +359,10 @@ const addUserNotification = async (notification, Uid) => {
     //  console.log("Existing notifications:", notifications);
 
       const notificationWithId = { ...notification, id: crypto.randomUUID() };
-      // console.log("New notification with ID:", notificationWithId);
+      console.log("New notification with ID:", notificationWithId);
 
       notifications.push(notificationWithId);
-   //   console.log("Updated notifications:", notifications);
+     console.log("Updated notifications:", notifications);
 
       await setDoc(userDocRef, { ...user, notifications });
       // console.log("Notification added successfully");
@@ -441,7 +441,7 @@ const SendSignupNotification = async (notification, type) => {
 
   // Get users based on the type of notification
   const users = getUsersByRole(type);
-
+  console.log("Not users " ,users);
   
 
   // Send notification to each user

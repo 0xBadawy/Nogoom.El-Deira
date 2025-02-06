@@ -38,7 +38,9 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
         <ScrollArea className="h-[70vh] pr-4">
           {userAdds.length > 0 ? (
             <div className="space-y-6">
-              {userAdds.map((ad, id) => (
+            {userAdds
+              .filter(ad => ad.links && Object.values(ad.links).some(link => link))
+              .map((ad, id) => (
                 <Card
                   key={id}
                   className="overflow-hidden hover:shadow-md transition-shadow duration-300"
@@ -50,57 +52,55 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
                     <p className="text-gray-600 dark:text-gray-300 mb-4 text-lg">
                       {ad.description}
                     </p>
-                    {ad.links &&
-                      Object.values(ad.links).some((link) => link) && (
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                          {ad.links.fb && (
-                            <SocialLink
-                              href={ad.links.fb}
-                              icon={FaFacebook}
-                              label="فيسبوك"
-                            />
-                          )}
-                          {ad.links.in && (
-                            <SocialLink
-                              href={ad.links.in}
-                              icon={FaInstagram}
-                              label="انستجرام"
-                            />
-                          )}
-                          {ad.links.sh && (
-                            <SocialLink
-                              href={ad.links.sh}
-                              icon={FaSnapchat}
-                              label="سناب شات"
-                            />
-                          )}
-                          {ad.links.tk && (
-                            <SocialLink
-                              href={ad.links.tk}
-                              icon={FaTiktok}
-                              label="تيك توك"
-                            />
-                          )}
-                          {ad.links.x && (
-                            <SocialLink
-                              href={ad.links.x}
-                              icon={FaXTwitter}
-                              label="اكس"
-                            />
-                          )}
-                          {ad.links.you && (
-                            <SocialLink
-                              href={ad.links.you}
-                              icon={FaYoutube}
-                              label="يوتيوب"
-                            />
-                          )}
-                        </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      {ad.links.fb && (
+                        <SocialLink
+                          href={ad.links.fb}
+                          icon={FaFacebook}
+                          label="فيسبوك"
+                        />
                       )}
+                      {ad.links.in && (
+                        <SocialLink
+                          href={ad.links.in}
+                          icon={FaInstagram}
+                          label="انستجرام"
+                        />
+                      )}
+                      {ad.links.sh && (
+                        <SocialLink
+                          href={ad.links.sh}
+                          icon={FaSnapchat}
+                          label="سناب شات"
+                        />
+                      )}
+                      {ad.links.tk && (
+                        <SocialLink
+                          href={ad.links.tk}
+                          icon={FaTiktok}
+                          label="تيك توك"
+                        />
+                      )}
+                      {ad.links.x && (
+                        <SocialLink
+                          href={ad.links.x}
+                          icon={FaXTwitter}
+                          label="اكس"
+                        />
+                      )}
+                      {ad.links.you && (
+                        <SocialLink
+                          href={ad.links.you}
+                          icon={FaYoutube}
+                          label="يوتيوب"
+                        />
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))}
-            </div>
+          </div>
+          
           ) : (
             <div className="text-center py-16 text-gray-500 dark:text-gray-400">
               <h3 className="text-2xl font-semibold">لا يوجد مشاركات</h3>
