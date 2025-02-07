@@ -9,94 +9,80 @@ import { Textarea } from "@/Components/ui/textarea";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../Configuration/Firebase";
 import toast, { Toaster } from "react-hot-toast";
-import { GovernmentData } from "../SignUp/data";
+import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
 
 const AccountSettings = () => {
-  const { getUserData, updateUser } = useAuth();
+  const { user } = useAuth();
   const [userData, setUserData] = useState({});
+  const [address, setAddress] = useState({});
   const [imageURL, setImageURL] = useState("");
   const { control, handleSubmit, setValue } = useForm();
-  const [uploadImageProgress, setuploadImageProgress] = useState(0); // حالة لنسبة الرفع
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [uploadImageProgress, setUploadImageProgress] = useState(0);
 
-
-  // Function to find the selected government from the GovernmentData
-  const findSelectedGovernment = (selectedValue) => {
-    return GovernmentData.find((gov) => gov.name === selectedValue);
+  const preloadedData = {
+    area: "الرياض",
+    governments: [],
   };
-
-  // Function to update the selected items based on the selected government
-  const updateSelectedItems = (selectedGovernment) => {
-    setSelectedItems(selectedGovernment ? selectedGovernment.subGovernments : []);
-  };
-
-  // Main event handler function
-  const handleSelectChange = (event) => {
-    const selectedValue = event.target.value;
-
-    // Find the selected government
-    const selectedGovernment = findSelectedGovernment(selectedValue);
-
-    // Update the selected items
-    updateSelectedItems(selectedGovernment);
-
-    console.log("selectedGovernment", selectedGovernment);
-    console.log("selectedItems", selectedItems);
-  };
-
-
-
-
-
-
-
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getUserData();
-      setUserData(data);
-      Object.keys(data).forEach((key) => {
-        setValue(key, data[key]);
+    if (user) {
+      setUserData(user);
+      setAddress({
+        area: user.address?.area || "",
+        governments: user.address?.govern || [],
       });
-      updateSelectedItems(findSelectedGovernment(data.govern));
-    };
-    fetchData();
+    }
+  }, [user]);
 
-  }, [getUserData, setValue]);
+  useEffect(() => {
+    // console.log("User Data:", userData.address?.area);
+    if (userData) {
+      setValue("name", userData.name || "");
+      setValue("phone", userData.phone || "");
+      setValue("bio", userData.bio || "");
+      setAddress({
+        area: userData.address?.area || "",
+        governments: userData.address?.govern || [],
+      });
+      console.log("User address :", address);
+    }
+  }, [userData, setValue]);
+
+  useEffect(() => {
+    console.log("Updated address:", address);
+  }, [address]);
 
   const onSubmit = (data) => {
-
-    // check area and govern is selected 
-
-    if (data.govern === "" || !data.govern) {
-
+    if (!address.govern) {
       toast.error("يجب إدخال المنطقة.");
-
       return;
     }
 
-    if (data.area.length === 0) {
+    if (!address.area || address.area.length === 0) {
       toast.error("يجب اختيار المحافظة.");
       return;
     }
 
-
-
-
     if (!/^\d{10,11}$/.test(data.phone)) {
-      toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
+      toast.error(
+        "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
+      );
       return;
     }
 
-
-    const Data = {
+    const updatedData = {
       ...data,
-      ...(imageURL && { profilePicture: imageURL }), // إضافة فقط إذا كانت imageURL موجودة
+      address,
+      ...(imageURL && { profilePicture: imageURL }),
       verified: false,
     };
-    updateUser(data.Uid, Data);
+
     toast.success("تم حفظ التعديلات بنجاح");
-    // console.log(data)
+    console.log(updatedData); // Use this to debug the final payload.
+  };
+
+  const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
+    // setAddress({ area: selectedArea, govern: selectedGovernments });
   };
 
   const handleImageUpload = (e) => {
@@ -104,18 +90,17 @@ const AccountSettings = () => {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      alert("يرجى رفع ملف صورة فقط.");
+      toast.error("يرجى رفع ملف صورة فقط.");
       return;
     }
 
     if (file.size > 2 * 1024 * 1024) {
-      alert("حجم الصورة كبير جدًا. الحد الأقصى هو 2 ميغابايت.");
+      toast.error("حجم الصورة كبير جدًا. الحد الأقصى هو 2 ميغابايت.");
       return;
     }
 
-    setuploadImageProgress(0);
-
-    let fileName = userData.email || "noUser";
+    setUploadImageProgress(0);
+    const fileName = userData.email || "noUser";
     const storageRef = ref(storage, `${fileName}/profile/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -124,18 +109,18 @@ const AccountSettings = () => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("نسبة التقدم:", progress); // عرض نسبة الرفع
-        setuploadImageProgress(progress);
+        setUploadImageProgress(progress);
       },
       (error) => {
-        console.error("خطأ أثناء رفع الصورة:", error); // عرض تفاصيل الخطأ
+        toast.error("خطأ أثناء رفع الصورة.");
+        console.error("خطأ أثناء رفع الصورة:", error);
       },
       async () => {
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          // console.log("رابط الصورة الذي تم رفعها:", downloadURL); // تحقق من الرابط
           setImageURL(downloadURL);
-          setuploadImageProgress(0);
+          setUploadImageProgress(0);
+          toast.success("تم رفع الصورة بنجاح.");
         } catch (err) {
           console.error("خطأ في الحصول على رابط التنزيل:", err);
         }
@@ -164,7 +149,9 @@ const AccountSettings = () => {
                 <img
                   className="object-cover w-32 h-32 rounded-full ring-4 ring-indigo-300 mb-4"
                   src={
-                    imageURL || field.value || "https://via.placeholder.com/150"
+                    imageURL ||
+                    userData.profileImage ||
+                    "https://via.placeholder.com/150"
                   }
                   alt="Profile"
                 />
@@ -181,7 +168,7 @@ const AccountSettings = () => {
                 onChange={handleImageUpload}
                 className="hidden"
               />
-              {uploadImageProgress != 0 && (
+              {uploadImageProgress !== 0 && (
                 <div className="relative w-full mt-4 h-2 bg-gray-200 rounded-lg dark:bg-gray-700">
                   <div
                     className="absolute top-0 left-0 h-2 rounded-lg bg-blue-500"
@@ -191,6 +178,7 @@ const AccountSettings = () => {
               )}
             </Label>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name">اسم الشهرة او الحساب*</Label>
@@ -210,30 +198,7 @@ const AccountSettings = () => {
                 )}
               />
             </div>
-            {/* <div className="space-y-2">
-              <Label htmlFor="email">البريد الإلكتروني</Label>
-              <Controller
-                name="email"
-                control={control}
-                rules={{
-                  required: "البريد الإلكتروني مطلوب",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "البريد الإلكتروني غير صالح",
-                  },
-                }}
-                render={({ field, fieldState: { error } }) => (
-                  <>
-                    <Input {...field} type="email" />
-                    {error && (
-                      <span className="text-red-500 text-sm">
-                        {error.message}
-                      </span>
-                    )}
-                  </>
-                )}
-              />
-            </div> */}
+
             <div className="space-y-2">
               <Label htmlFor="phone">رقم الهاتف*</Label>
               <Controller
@@ -253,120 +218,14 @@ const AccountSettings = () => {
               />
             </div>
 
-            {/* <div className="space-y-2">
-              <Label htmlFor="area">المنطقة</Label>
-              <Controller
-                name="area"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    value={field.value ? field.value.join(", ") : ""}
-                    onChange={(e) =>
-                      field.onChange(
-                        e.target.value.split(",").map((item) => item.trim())
-                      )
-                    }
-                  />
-                )}
-              />
-            </div> */}
+            <AreaGovernmentSelector
+              initialData={
+                Object.keys(address).length > 0 ? address : preloadedData
+              }
+              onSelectionChange={handleSelectionChange}
+            />
 
-            <div className="mb-4">
-              <label className="block text-gray-700">{"المنطقة*"}</label>
-              <Controller
-                name="govern"
-                control={control}
-                render={({ field }) => (
-                  <select
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none"
-                    {...field}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      handleSelectChange(e);
-                    }}
-                  >
-                    <option value="" >اختر المنطقة</option>
-                    {GovernmentData.map((gov) => (
-                      <option key={gov.name} value={gov.name}>
-                        {gov.name}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              />
-            </div>
-
-
-            <div className="mb-2 ">
-              <label className="block text-lg font-semibold text-gray-700">{"المحافظة*"}</label>
-              <Controller
-                name="area"
-                control={control}
-                render={({ field }) => {
-                  useEffect(() => {
-                    // Reset selected values when selectedItems change
-                    field.onChange([]); // Clear the selected items
-                  }, [selectedItems]); // Run the effect when selectedItems changes
-
-                  return (
-                    <div className="space-y-3  ">
-                      <div className="max-h-32 overflow-y-auto p-2 border border-gray-300 rounded-md shadow-sm">
-                        {selectedItems.length ? (
-                          <>
-                            {/* Select All Checkbox */}
-                            <div className="flex items-center space-x-3 mb-4">
-                              <input
-                                type="checkbox"
-                                id="select-all"
-                                checked={field.value.length === selectedItems.length}
-                                onChange={(e) => {
-                                  if (e.target.checked) {
-                                    // Select all items
-                                    field.onChange([...selectedItems]);
-                                  } else {
-                                    // Deselect all items
-                                    field.onChange([]);
-                                  }
-                                }}
-                                className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-                              />
-                              <label htmlFor="select-all" className="text-gray-800 px-2">تحديد الكل</label>
-                            </div>
-
-                            {/* Individual Checkboxes */}
-                            {selectedItems.map((item) => (
-                              <div key={item} className="flex items-center space-x-3">
-                                <input
-                                  type="checkbox"
-                                  id={item}
-                                  value={item}
-                                  checked={field.value.includes(item)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      field.onChange([...field.value, item]);
-                                    } else {
-                                      field.onChange(field.value.filter((i) => i !== item));
-                                    }
-                                  }}
-                                  className="h-4 w-4 text-blue-600 border-2 border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-                                />
-                                <label htmlFor={item} className="text-gray-800 px-2">{item}</label>
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          <p>قم بأختيار المنطقة اولا</p>
-                        )}
-                      </div>
-
-                    </div>
-                  );
-                }}
-              />
-            </div>
-
-            <div className="space-y- 2 col-span-2 ">
+            <div className="space-y-2 col-span-2">
               <Label htmlFor="bio">نبذة عنك</Label>
               <Controller
                 name="bio"
@@ -376,41 +235,6 @@ const AccountSettings = () => {
             </div>
           </div>
 
-          <p >            التواصل الاجتماعي</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {["facebook", "instagram", "snapchat", "tiktok", "twitter", "youtube"].map(
-              (platform) => (
-                <div key={platform} className="space-y-2">
-                  <Label htmlFor={platform}>
-                    {/* {platform.charAt(0).toUpperCase() + platform.slice(1)} */}
-                  </Label>
-                  <Controller
-                    name={platform}
-                    control={control}
-                    render={({ field }) => <Input {...field} />}
-                  />
-                </div>
-              )
-            )}
-          </div>
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              "facebookLink",
-              "instagramLink",
-              "snapchatLink",
-              "tiktokLink",
-              "twitterLink",
-            ].map((link) => (
-              <div key={link} className="space-y-2">
-                <Label htmlFor={link}>{link.replace("Link", " رابط")}</Label>
-                <Controller
-                  name={link}
-                  control={control}
-                  render={({ field }) => <Input {...field} type="url" />}
-                />
-              </div>
-            ))}
-          </div> */}
           <Button type="submit" className="w-full text-white">
             حفظ التغييرات
           </Button>

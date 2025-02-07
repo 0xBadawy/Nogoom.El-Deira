@@ -5,6 +5,7 @@ import UserModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 import sendEmail from "../utils/sendEmail.js";
+import Notification from "../models/notificationSchema.js";
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
@@ -14,44 +15,82 @@ const generateToken = (userId) => {
 };
 
 // SignUp function
-export const signUp = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+export const signUp = asyncHandler(async (req, res, next) => {
+  try {
+    const {
+      name,
+      email,
+      password,
+      confirmPassword,
+      phone,
+      social,
+      profileImage,
+      about,
+      address = {},
+    } = req.body;
 
-  // Check if user already exists
-  const existingUser = await UserModel.findOne({ email });
-  if (existingUser) {
-    throw new ApiError("Email already in use", 400);
+    // Check if user already exists
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "UserExists" });
+    }
+
+    // Password confirmation validation
+    if (password !== confirmPassword) {
+      return res
+        .status(400)
+        .json({ message: "PasswordNotMatch" });
+    }
+
+    // Create user
+    const user = await UserModel.create({
+      name,
+      email,
+      password,
+      phone: phone || "no phone",
+      social,
+      profileImage,
+      about,
+      address: {
+        area: address.area || "no country",
+        govern: address.govern || [],
+      },
+    });
+
+    const targetUsers = await UserModel.find({
+      role: { $in: ["admin", "manager", "editor"] },
+    });
+
+    // Create notifications for users
+    const notifications = targetUsers.map((targetUser) => ({
+      userId: targetUser._id,
+      title: "مستخدم جديد",
+      message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+    }));
+
+    if (notifications.length > 0) {
+      await Notification.insertMany(notifications);
+    }
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    res.status(201).json({
+      status: "success",
+      token,
+      data: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (err) {
+    next(new ApiError(err.message || "حدث خطأ أثناء معالجة الطلب", 500));
   }
-
-
-  const { about, address, confirmPassword, phone, username, profileImage } =req.body;
-
-  const user = await UserModel.create({
-    name,
-    email,
-    password,
-    about,
-    address,
-    confirmPassword,
-    phone,
-    username,
-    profileImage
-
-  });
-
-  // Generate token
-  const token = generateToken(user._id);
-
-  res.status(201).json({
-    status: "success",
-    token,
-    data: {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-    },
-  });
 });
+
+
 
 // SignIn function
 export const signIn = asyncHandler(async (req, res, next) => {

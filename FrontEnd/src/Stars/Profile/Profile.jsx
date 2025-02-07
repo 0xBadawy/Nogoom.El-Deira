@@ -13,20 +13,19 @@ import { HiOutlineLogout } from "react-icons/hi";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
-  const { getUserData,logOut } = useAuth();
+  const { user } = useAuth();
   const  navigate =useNavigate();
   const [verified, setVerified] = useState(true);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getUserData();
-      console.log(data)
+      const data = await user;
+      console.log("User Data:", data);
       setUserData(data);
-      setVerified(data.verified);
     };
     fetchData();
-  }, [getUserData]);
+  }, [user]);
 
   const handleTabChange = (page) => {
     setActivePage(page);
@@ -43,7 +42,7 @@ const handelLogout=()=>{
   if (!confirmLogout) 
     return; // If the user cancels the logout, do nothing
   
-  logOut();
+  // logOut();
   navigate("/login");
 
 
@@ -60,8 +59,7 @@ const handelLogout=()=>{
               <div className="flex flex-col items-center mb-6">
                 <img
                   src={
-                    userData?.profilePicture ||
-                    "https://via.placeholder.com/150"
+                    userData?.profileImage || "https://via.placeholder.com/150"
                   }
                   alt="Profile"
                   className="w-32 h-32 rounded-full border-4 border-indigo-300 mb-4"
@@ -103,7 +101,7 @@ const handelLogout=()=>{
                 </button>
                 <button
                   className="w-full mb-2 px-4 text-indigo-700 hover:bg-indigo-100 py-3 font-bold rounded-lg transition duration-300 ease-in-out flex items-center"
-                  onClick={()=>handelLogout()}
+                  onClick={() => handelLogout()}
                 >
                   <HiOutlineLogout className="ml-2" size={20} />
                   تسجيل الخروج

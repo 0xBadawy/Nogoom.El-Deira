@@ -10,12 +10,13 @@ const userSchema = new Schema(
       required: [true, "Name is required"],
       trim: true,
     },
-    useName: {
-      type: String,
-      trim: true,
-      unique: [true, "UserName already exists"],
+    // userName: {
+    //   type: String,
+    //   trim: true,
+    //   default: "no username",
+    //   // unique: [true, "UserName already exists"],
 
-    },
+    // },
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -71,6 +72,7 @@ const userSchema = new Schema(
     },
     profileImage: {
       type: String,
+      default: "https://avatar.iran.liara.run/public/2",
     },
     balance: {
       type: Number,

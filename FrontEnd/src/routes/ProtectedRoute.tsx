@@ -12,7 +12,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRoles,
 }) => {
-  const { getUserData } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
   const [userRole, setUserRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -20,14 +20,14 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   // Use useCallback to memoize the function so it doesn't change every render
   const fetchUserData = useCallback(async () => {
     try {
-      const userData = await getUserData();
-      setUserRole(userData?.role || "guest");
+      const userData = await user;
+      setUserRole(userData?.role || "user");
     } catch (error) {
       console.error("Error fetching user data:", error);
     } finally {
       setLoading(false);
     }
-  }, [getUserData]);
+  }, [user]);
 
   // UseEffect should run only once on mount
   useEffect(() => {
@@ -43,7 +43,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const routeRoles = requiredRoles ?? getRoutePermissions(location.pathname);
 
   // If the user doesn't have permission, redirect to unauthorized page
-  if (!hasPermission(userRole || "guest", routeRoles)) {
+  if (!hasPermission("star" || "guest", routeRoles)) {
     return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }
 

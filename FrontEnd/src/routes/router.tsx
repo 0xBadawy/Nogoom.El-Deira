@@ -98,11 +98,13 @@ export const router = createBrowserRouter([
     path: "/Status",
     element: withSuspense(SignUpStatus),
     errorElement: <ErrorBoundary />,
-  },{
-    path: "/Status",
-    element: withSuspense(SignUpStatus),
-    errorElement: <ErrorBoundary />,
-  },{
+  },
+  // {
+  //   path: "/Status",
+  //   element: withSuspense(SignUpStatus),
+  //   errorElement: <ErrorBoundary />,
+  // },
+  {
     path: "/privacy-policy",
     element: withSuspense(PrivacyPolicy),
     errorElement: <ErrorBoundary />,
