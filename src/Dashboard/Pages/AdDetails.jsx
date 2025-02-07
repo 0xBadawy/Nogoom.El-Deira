@@ -22,7 +22,7 @@ const AdDetails = ({ ads, selected }) => {
       animals: "حيوانات",
     };
 
-    return translations[english] || "ترجمة غير متوفرة";
+    return translations[english] || "";
   }
 
   const handelDelet = () => {

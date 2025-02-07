@@ -57,12 +57,14 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
                         <SocialLink
                           href={ad.links.fb}
                           icon={FaFacebook}
+                          id={1}
                           label="فيسبوك"
                         />
                       )}
                       {ad.links.in && (
                         <SocialLink
                           href={ad.links.in}
+                          id={2}
                           icon={FaInstagram}
                           label="انستجرام"
                         />
@@ -70,6 +72,7 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
                       {ad.links.sh && (
                         <SocialLink
                           href={ad.links.sh}
+                          id={3}
                           icon={FaSnapchat}
                           label="سناب شات"
                         />
@@ -78,12 +81,14 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
                         <SocialLink
                           href={ad.links.tk}
                           icon={FaTiktok}
+                          id={4}
                           label="تيك توك"
                         />
                       )}
                       {ad.links.x && (
                         <SocialLink
                           href={ad.links.x}
+                          id={5}
                           icon={FaXTwitter}
                           label="اكس"
                         />
@@ -92,6 +97,7 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
                         <SocialLink
                           href={ad.links.you}
                           icon={FaYoutube}
+                          id={6}
                           label="يوتيوب"
                         />
                       )}
@@ -113,7 +119,7 @@ function UserAdds({ selectedUserUid, usersData, onSave }) {
   );
 }
 
-function SocialLink({ href, icon: Icon, label }) {
+function SocialLink({ href, icon: Icon, label ,id}) {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -124,9 +130,8 @@ function SocialLink({ href, icon: Icon, label }) {
             rel="noreferrer"
             className="flex items-center gap-2 p-2 rounded-md bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Icon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
             <span className="font-medium text-gray-800 dark:text-gray-200">
-              {label}
+            المشاركة رقم { id}
             </span>
           </a>
         </TooltipTrigger>

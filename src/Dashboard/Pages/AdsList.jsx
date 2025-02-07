@@ -26,16 +26,17 @@ const AdsList = () => {
   };
 
   const filteredAds = ads
-    .filter((ad) => {
-      const regionMatch = selectedRegion === "الكل" || ad.region === selectedRegion;
-      const governorateMatch =
-        selectedGovernorate === "الكل" ||
-        (ad.governorates &&
-          Array.isArray(ad.governorates) &&
-          ad.governorates.includes(selectedGovernorate));
-      return regionMatch && governorateMatch;
-    })
-    .sort((a, b) => b.id - a.id);
+  .filter((ad) => {
+    const regionMatch = selectedRegion === "الكل" || ad.region === selectedRegion;
+    const governorateMatch =
+      selectedGovernorate === "الكل" ||
+      (ad.governorates &&
+        Array.isArray(ad.governorates) &&
+        ad.governorates.includes(selectedGovernorate));
+    return regionMatch && governorateMatch;
+  })
+  .sort((a, b) => new Date(a.startDate) - new Date(b.startDate)); // فرز حسب تاريخ البدء
+
 
   // حساب العناصر المعروضة في الصفحة الحالية بناءً على البيانات المفلترة
   const startIndex = (currentPage - 1) * itemsPerPage;

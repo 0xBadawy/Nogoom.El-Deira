@@ -49,18 +49,18 @@ export function AdEditModal({ ads, selected, onSave }) {
 
   const handleUpload = (e) => {
 
-    
 
 
-    const files2 = event.target.files;  
-    console.log("Files:", files2);  
-  
+
+    const files2 = event.target.files;
+    console.log("Files:", files2);
+
     const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp"];
-    
+
     for (let i = 0; i < files2.length; i++) {
       const file = files2[i];
       console.log("File type:", file.type); // Log the type of each file
-  
+
       if (!validImageTypes.includes(file.type)) {
         console.log("Invalid file type detected:", file.type); // Log invalid file type
         alert("نوع الصورة غير مدعوم. يرجى رفع ملف بصيغة JPEG أو PNG أو GIF أو BMP أو WEBP."); // رسالة خطأ واضحة
@@ -236,8 +236,8 @@ export function AdEditModal({ ads, selected, onSave }) {
 
 
 
-const [prevImages,setPrevImages]=useState([])
-const [prevVideo,setPrevVideo]=useState("")
+  const [prevImages, setPrevImages] = useState([])
+  const [prevVideo, setPrevVideo] = useState("")
 
 
   useEffect(() => {
@@ -255,8 +255,8 @@ const [prevVideo,setPrevVideo]=useState("")
 
     // console.log("imageURL" ,imageURL)
     // console.log("prevImages" ,prevImages)
-    let img=imageURL.length>0 ? imageURL : prevImages;
-    let vid= videoURL!=""?videoURL:prevVideo;
+    let img = imageURL.length > 0 ? imageURL : prevImages;
+    let vid = videoURL != "" ? videoURL : prevVideo;
     // console.log("imageURL" ,imageURL)
     // console.log("img" ,img)
     const adData = {
@@ -264,7 +264,7 @@ const [prevVideo,setPrevVideo]=useState("")
       images: img,
       video: vid,
     };
-    
+
     if (data.startDate && data.endDate) {
       const isValid = CheckDateValidation(data.startDate, data.endDate);
       if (!isValid) {
@@ -286,7 +286,7 @@ const [prevVideo,setPrevVideo]=useState("")
       <DialogTrigger asChild>
         <Button variant="outline">تعديل الأعلان</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white max-h-[80vh] overflow-y-auto">
+      <DialogContent className="bg-white max-h-[80vh] overflow-y-auto focus:outline-none z-50">
         <DialogHeader>
           <DialogTitle className="text-center"> تعديل عنوان ومشاهدات الاعلان </DialogTitle>
           {/* <Button
@@ -330,7 +330,7 @@ const [prevVideo,setPrevVideo]=useState("")
           <div className='grid grid-cols-2 gap-2'>
 
 
-          <div className="mb-4 mt-4">
+            <div className="mb-4 mt-4">
               <label
                 className="block text-gray-800 dark:text-white mb-2 text-sm "
                 htmlFor="category"
@@ -355,131 +355,161 @@ const [prevVideo,setPrevVideo]=useState("")
             </div>
 
 
+            <div className="flex flex-col space-y-2 mt-4">
+              <label htmlFor="views" className="text-sm font-medium text-gray-700">
+                المشاهدات
+              </label>
+              <input
+                type="number"
+                id="views"
+                min={0}
+                className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                {...register("views")}
+              />
+            </div>
+
+
+
+
+          </div>
+
           <div className="flex flex-col space-y-2 mt-4">
-            <label htmlFor="views" className="text-sm font-medium text-gray-700">
-            المشاهدات
-            </label>
-            <input
-              type="number"
-              id="views"
-              min={0}
-              className=" border border-blue-300 rounded-md p-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              {...register("views")}
-            />
+            <label className="text-sm font-medium text-gray-700">الصور الحالية</label>
+            <div className="grid grid-cols-3 gap-2">
+              {prevImages.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Preview ${index}`}
+                  className="w-24 h-24 object-cover rounded-md"
+                />
+              ))}
+            </div>
+          </div>
+
+
+
+          <div className='grid grid-cols-2 gap-2'>
+
+
+
+            {/* رفع الصور */}
+
+            <div className="mb-8 md:col-span-2 col-span-6">
+              <label
+                className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
+                htmlFor="images"
+              >
+                <span className="material-icons text-blue-600 text-3xl"></span>
+                <span className="flex-1">صور الإعلان</span>
+              </label>
+              <div className="relative group">
+                <input
+                  type="file"
+                  id="images"
+                  onChange={handleUpload}
+                  multiple
+                  className="hidden"
+                />
+                <label
+                  htmlFor="images"
+                  className="w-full p-4 border-2 border-dashed border-blue-400 rounded-lg cursor-pointer bg-blue-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
+                >
+                  <span className="flex flex-col items-center">
+                    <span className="material-icons text-blue-400 text-2xl">
+                      اضغط لتحميل الصور
+                    </span>
+                    <p className="mt-2 text-blue-600 dark:text-gray-300"></p>
+                  </span>
+                </label>
+              </div>
+
+              <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
+                <div
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600 rounded-full transition-all"
+                  style={{ width: `${uploadImageProgress}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                نسبة التحميل: {uploadImageProgress.toFixed(2)}%
+              </p>
+            </div>
+
+            <hr />
+
+            {/* Video Preview Section */}
+            {prevVideo && !videoURL && (
+              <div className="mt-4">
+                <label className="block text-gray-700 text-sm mb-2">الفيديو الحالي:</label>
+                <video src={prevVideo} controls className="w-full max-h-[300px]" />
+              </div>
+            )}
+            {videoURL && (
+              <div className="mt-4">
+                <label className="block text-gray-700 text-sm mb-2">الفيديو المرفوع:</label>
+                <video src={videoURL} controls className="w-full max-h-[300px]" />
+              </div>
+            )}
+
+
+            <div className="mb-8 md:col-span-2 col-span-6">
+              <label
+                className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
+                htmlFor="video"
+              >
+                <span className="material-icons text-red-600 text-3xl"></span>
+                <span className="flex-1">فيديو الإعلان</span>
+              </label>
+              <div className="relative group">
+                <input
+                  type="file"
+                  id="video"
+                  onChange={handleVideoUpload}
+                  className="hidden"
+                />
+                <label
+                  htmlFor="video"
+                  className="w-full p-4 border-2 border-dashed border-red-400 rounded-lg cursor-pointer bg-red-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-red-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
+                >
+                  <span className="flex flex-col items-center">
+                    <span className="material-icons text-red-400 text-2xl">
+                      اضغط لتحميل الفيديو
+                    </span>
+                    <p className="mt-2 text-red-600 dark:text-gray-300"></p>
+                  </span>
+                </label>
+              </div>
+
+              <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
+                <div
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 via-red-400 to-red-600 rounded-full transition-all"
+                  style={{ width: `${uploadVideoProgress}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                نسبة التحميل: {uploadVideoProgress.toFixed(2)}%
+              </p>
+            </div>
+
+
+
+
+
+
+
           </div>
 
 
 
 
-</div>
 
 
 
-
-<div className='grid grid-cols-2 gap-2'>
-
-
-
-          {/* رفع الصور */}
-
-          <div className="mb-8 md:col-span-2 col-span-6">
-  <label
-    className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
-    htmlFor="images"
-  >
-    <span className="material-icons text-blue-600 text-3xl"></span>
-    <span className="flex-1">صور الإعلان</span>
-  </label>
-  <div className="relative group">
-    <input
-      type="file"
-      id="images"
-      onChange={handleUpload}
-      multiple
-      className="hidden"
-    />
-    <label
-      htmlFor="images"
-      className="w-full p-4 border-2 border-dashed border-blue-400 rounded-lg cursor-pointer bg-blue-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
-    >
-      <span className="flex flex-col items-center">
-        <span className="material-icons text-blue-400 text-2xl">
-        اضغط لتحميل الصور
-        </span>
-        <p className="mt-2 text-blue-600 dark:text-gray-300"></p>
-      </span>
-    </label>
-  </div>
- 
-  <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
-    <div
-      className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600 rounded-full transition-all"
-      style={{ width: `${uploadImageProgress}%` }}
-    ></div>
-  </div>
-  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-   نسبة التحميل: {uploadImageProgress.toFixed(2)}%
-  </p>
-</div>
-
-<div className="mb-8 md:col-span-2 col-span-6">
-  <label
-    className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
-    htmlFor="video"
-  >
-    <span className="material-icons text-red-600 text-3xl"></span>
-    <span className="flex-1">فيديو الإعلان</span>
-  </label>
-  <div className="relative group">
-    <input
-      type="file"
-      id="video"
-      onChange={handleVideoUpload}
-      className="hidden"
-    />
-    <label
-      htmlFor="video"
-      className="w-full p-4 border-2 border-dashed border-red-400 rounded-lg cursor-pointer bg-red-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-red-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
-    >
-      <span className="flex flex-col items-center">
-        <span className="material-icons text-red-400 text-2xl">
-        اضغط لتحميل الفيديو
-        </span>
-        <p className="mt-2 text-red-600 dark:text-gray-300"></p>
-      </span>
-    </label>
-  </div>
- 
-  <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
-    <div
-      className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 via-red-400 to-red-600 rounded-full transition-all"
-      style={{ width: `${uploadVideoProgress}%` }}
-    ></div>
-  </div>
-  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-  نسبة التحميل: {uploadVideoProgress.toFixed(2)}%
-  </p>
-</div>
+          <div className='grid grid-cols-4 gap-2'>
 
 
 
-
-
-
-
-</div>
-
-
-
-
-
-
-
-<div className='grid grid-cols-4 gap-2'>
-
-
-
-<div className="mb-4 md:col-span-2 col-span-6">
+            <div className="mb-4 md:col-span-2 col-span-6">
               <label
                 className="block text-gray-800 dark:text-white mb-2"
                 htmlFor="startDate"
@@ -492,7 +522,7 @@ const [prevVideo,setPrevVideo]=useState("")
                 {...register("startDate", { required: "تاريخ البداية مطلوب" })}
                 className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
               />
-             
+
             </div>
 
             {/* تاريخ النهاية */}
@@ -509,12 +539,12 @@ const [prevVideo,setPrevVideo]=useState("")
                 {...register("endDate", { required: "تاريخ النهاية مطلوب" })}
                 className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
               />
-              
+
             </div>
 
 
 
-</div>
+          </div>
 
 
 
@@ -543,9 +573,9 @@ const [prevVideo,setPrevVideo]=useState("")
 
 
 
-         
+
           <button type='submet' className="bg-blue-500 text-white p-2 rounded-lg w-full mt-4"
-          
+
           >
             حفظ البيانات
           </button>

@@ -24,7 +24,7 @@ const ProfileCard = ({ name, image, area, followers }) => {
 
         {/* Profile Details */}
         <div className="p-6 text-center flex-grow flex flex-col justify-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2 line-clamp-2">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2 min-h-16 line-clamp-2">
             {name}
           </h2>
           <div className="flex justify-center space-x -6 mt-4 gap-2">

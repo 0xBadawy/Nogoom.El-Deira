@@ -29,7 +29,7 @@ const Navbar = ({ color }) => {
     { path: "/privacy-policy", label: "الشروط والخصوصية" },
     { path: "/contact", label: "تواصل معنا" },
     { path: "/profile", label: "النجوم" },
-    {path:"/dashboard" ,label:"الادراة"}
+    // {path:"/dashboard" ,label:"الادراة"}
   ]);
 
 

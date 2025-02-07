@@ -60,7 +60,7 @@ const CityAdv = () => {
           </a>
         </div>
         <div className="flex items-center justify-center">
-          <img src={Image} alt="city" />
+          <img src={data?.image2Url} alt="city" />
         </div>
       </div>
     </div>

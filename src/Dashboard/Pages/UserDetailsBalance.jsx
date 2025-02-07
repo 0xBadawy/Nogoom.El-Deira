@@ -160,7 +160,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex gap-2">
-                    {[10, 20].map((amount) => (
+                    {[10, 100].map((amount) => (
                       <button
                         key={`increase-${amount}`}
                         type="button"
@@ -172,7 +172,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
                     ))}
                   </div>
                   <div className="flex gap-2">
-                    {[10, 20].map((amount) => (
+                    {[10, 100].map((amount) => (
                       <button
                         key={`decrease-${amount}`}
                         type="button"

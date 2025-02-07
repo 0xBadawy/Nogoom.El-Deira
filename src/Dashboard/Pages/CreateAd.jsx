@@ -9,8 +9,11 @@ import { useDashboard } from "../../Context/DashboardContext";
 import CheckboxListName from "../../Components/CheckboxListName";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateAd = () => {
+  const navigate = useNavigate(); // Correct usage
+
   const { allUsers, addADs } = useDashboard();
   const [GovernList, setGovernList] = useState([]);
   const [Region, setRegion] = useState();
@@ -97,7 +100,7 @@ const CreateAd = () => {
     setVideoURL("");
     reset();
     toast.success("تم إضافة  حملة بنجاح!");
-  };
+    navigate("/dashboard/ads-list")  };
 
   const handleGovernorateSelection = (item, isSelected) => {
     setSelectGovernorates((prevState) => {

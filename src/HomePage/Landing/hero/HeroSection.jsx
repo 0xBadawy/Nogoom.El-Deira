@@ -164,7 +164,7 @@ const HeroSection = () => {
           description={data?.subtitle}
           buttonText={"أبدأ حملتك التسويقية"}
           buttonFunction={contactWhatsapp}
-          image={image}
+          image={data?.image1Url}
         />
       )}
       {/* <SocialLinks links={socialMediaLinks} /> */}

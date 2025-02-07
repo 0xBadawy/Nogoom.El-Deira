@@ -134,29 +134,33 @@ const PublicProfile = () => {
            التواصل الاجتماعي
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SocialMedia.map((item, index) => (
-            <div key={index} className="space-y-2">
-              <label className="block text-sm font-medium text-indigo-900">
-                {/* {item.label} */}
-              </label>
-              <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
-                <div className="flex items-center ">
-                  {/* <item.icon className="mx-2 " /> */}
-                  <span>{item.value?.slice(0, 20)}...</span>
-                </div>
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-indigo-700 hover:text-indigo-900 px-2"
-                  >
-                    <FaLink />
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
+        {SocialMedia.map((item, index) => (
+  (item.value || item.link) && (
+    <div key={index} className="space-y-2">
+      <label className="block text-sm font-medium text-indigo-900">
+        {/* Optionally display item label here */}
+      </label>
+      <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
+        <div className="flex items-center">
+          {/* Optional icon */}
+          <span>{item.value?.length > 20 ? `${item.value.slice(0, 20)}...` : item.value}</span>
+        </div>
+        {item.link && (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Visit link for ${item.value}`}
+            className="text-indigo-700 hover:text-indigo-900 px-2"
+          >
+            <FaLink />
+          </a>
+        )}
+      </div>
+    </div>
+  )
+))}
+
         </div>
       </CardContent>
     </Card>
