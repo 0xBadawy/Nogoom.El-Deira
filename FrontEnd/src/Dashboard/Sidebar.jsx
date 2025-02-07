@@ -18,18 +18,19 @@ import { FaMoneyBill } from 'react-icons/fa';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { getUserData, logOut } = useAuth();
+  const { user, logOut } = useAuth();
   const [userRole, setUserRole] = useState(null);
   const [phone, setPhone] = useState(false);
   const [currentRoute, setCurrentRoute] = useState("");
 
   useEffect(() => {
     const fetchUserRole = async () => {
-      const user = await getUserData();
-      setUserRole(user.role);  // Set the user role
+      const User = user;
+      setUserRole(User.role); // Set the user role
+      console.log("User Role:", User.role);
     };
     fetchUserRole();
-  }, [getUserData]);
+  }, [user]);
 
   const handleLogOut = async () => {
     await logOut();

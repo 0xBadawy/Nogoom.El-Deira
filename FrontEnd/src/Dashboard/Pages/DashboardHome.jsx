@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDashboard } from "../../Context/DashboardContext";
 
 const DashboardHome = () => {
-  const { getUserData } = useAuth();
+  const { user } = useAuth();
   const {getFirestoreStats} = useDashboard();
   const [UserData, setUserData] = useState({
     name: "",
@@ -13,7 +13,7 @@ const DashboardHome = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userData = await getUserData();
+        const userData = await user;
         setUserData(userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -21,7 +21,7 @@ const DashboardHome = () => {
     };
 
     fetchUserData();
-  }, [getUserData]);
+  }, [user]);
 
   const dataText =(name)=>{
     if(name=="admin") return "مدير";

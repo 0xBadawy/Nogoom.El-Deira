@@ -43,7 +43,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const routeRoles = requiredRoles ?? getRoutePermissions(location.pathname);
 
   // If the user doesn't have permission, redirect to unauthorized page
-  if (!hasPermission("star" || "guest", routeRoles)) {
+  if (!hasPermission("admin" || "guest", routeRoles)) {
     return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }
 

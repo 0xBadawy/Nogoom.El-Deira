@@ -10,14 +10,17 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../Configuration/Firebase";
 import toast, { Toaster } from "react-hot-toast";
 import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
+import axiosInstance from "../../Configuration/axiosInstance";
 
 const AccountSettings = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [userData, setUserData] = useState({});
   const [address, setAddress] = useState({});
   const [imageURL, setImageURL] = useState("");
   const { control, handleSubmit, setValue } = useForm();
+  const [selectedAddress, setSelectedAddress] = useState({});
   const [uploadImageProgress, setUploadImageProgress] = useState(0);
+  const [socialLinks, setSocialLinks] = useState(userData?.social || []);
 
   const preloadedData = {
     area: "الرياض",
@@ -44,6 +47,8 @@ const AccountSettings = () => {
         area: userData.address?.area || "",
         governments: userData.address?.govern || [],
       });
+      setImageURL(userData.profileImage || "");
+      setSocialLinks(userData.social || []);
       console.log("User address :", address);
     }
   }, [userData, setValue]);
@@ -52,38 +57,77 @@ const AccountSettings = () => {
     console.log("Updated address:", address);
   }, [address]);
 
-  const onSubmit = (data) => {
-    if (!address.govern) {
-      toast.error("يجب إدخال المنطقة.");
-      return;
-    }
-
-    if (!address.area || address.area.length === 0) {
-      toast.error("يجب اختيار المحافظة.");
-      return;
-    }
-
-    if (!/^\d{10,11}$/.test(data.phone)) {
-      toast.error(
-        "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
-      );
-      return;
-    }
-
-    const updatedData = {
-      ...data,
-      address,
-      ...(imageURL && { profilePicture: imageURL }),
-      verified: false,
+    const handleInputChange = (index, value) => {
+      const updatedLinks = [...socialLinks];
+      updatedLinks[index].link = value;
+      setSocialLinks(updatedLinks);
     };
+
+  const onSubmit = (data) => {
+
+    const allData = {
+      ...data,
+      selectedAddress,
+      profilePicture: imageURL,
+      verified: false,
+      socialLinks,
+    };
+
+    console.log(allData);
+
+
+
+    // if (!address.govern) {
+    //   toast.error("يجب إدخال المنطقة.");
+    //   return;
+    // }
+
+    // if (!address.area || address.area.length === 0) {
+    //   toast.error("يجب اختيار المحافظة.");
+    //   return;
+    // }
+
+    // if (!/^\d{10,11}$/.test(data.phone)) {
+    //   toast.error(
+    //     "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
+    //   );
+    //   return;
+    // }
+
+   const updatedData = async () => {
+      try {
+        const response = await axiosInstance.put(
+          "/user/update_loggedin_user",
+          allData
+        );
+        console.log(response.data);
+        await updateUser(response.data.data);
+      } catch (error) {
+        console.error("خطأ في تحديث البيانات:", error);
+      }
+    };
+
+    updatedData();
+    // 
+    
+  
 
     toast.success("تم حفظ التعديلات بنجاح");
     console.log(updatedData); // Use this to debug the final payload.
   };
 
-  const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
-    // setAddress({ area: selectedArea, govern: selectedGovernments });
-  };
+const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
+  setSelectedAddress((prevState) => {
+    if (
+      prevState.area === selectedArea &&
+      JSON.stringify(prevState.govern) === JSON.stringify(selectedGovernments)
+    ) {
+      return prevState; // Avoid unnecessary re-renders
+    }
+    return { area: selectedArea, govern: selectedGovernments };
+  });
+};
+
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -224,6 +268,43 @@ const AccountSettings = () => {
               }
               onSelectionChange={handleSelectionChange}
             />
+
+            <div className="grid grid-cols-3 gap-6">
+              <label htmlFor="">التواصل الاجتماعي</label>
+
+              {socialLinks.map(
+                (item, index) =>
+                  (item.link || item.label) && (
+                    <div key={index} className="space-y- col-span-3">
+                     
+                      <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
+                        <input
+                          type="text"
+                          value={item.link || ""}
+                          onChange={(e) =>
+                            handleInputChange(index, e.target.value)
+                          }
+                          className="w-full bg-gray-100 border-none focus:ring-0"
+                          placeholder={`أدخل الرابط لـ ${
+                            item.label || "التواصل الاجتماعي"
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  )
+              )}
+
+              {/* زر إضافة رابط جديد */}
+              <button
+                type="button"
+                onClick={() =>
+                  setSocialLinks([...socialLinks, { label: "", link: " " }])
+                }
+                className="col-span-3 mt-4 max-h-10 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              >
+                إضافة رابط جديد
+              </button>
+            </div>
 
             <div className="space-y-2 col-span-2">
               <Label htmlFor="bio">نبذة عنك</Label>

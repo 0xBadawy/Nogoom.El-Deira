@@ -51,14 +51,19 @@ export const getLoggedInUser = asyncHandler(async (req, res, next) => {
 
 
 export const updateLogedUser = asyncHandler(async (req, res, next) => {
-  const user = await UserModal.findByIdAndUpdate(req.user.id,{
-    name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-  },
-  {
-    new: true,
-  }
+  const user = await UserModal.findByIdAndUpdate(
+    req.user.id,
+    {
+      name: req.body.name,
+      email: req.body.email,
+      phone: req.body.phone,
+      address: req.body.selectedAddress,
+      profileImage: req.body.profilePicture,
+      social: req.body.socialLinks,
+    },
+    {
+      new: true,
+    }
   );
 
   res.status(200).json({

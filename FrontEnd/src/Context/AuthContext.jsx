@@ -230,7 +230,11 @@ export const AuthProvider = ({ children }) => {
     setUser(userData); // Set user data on signup
   };
 
-  const value = { user, login, logout, loading, signup };
+  const updateUser = (userData) => {
+    setUser(userData); // Update user data
+  };
+
+  const value = { user, login, logout, loading, signup, updateUser };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
