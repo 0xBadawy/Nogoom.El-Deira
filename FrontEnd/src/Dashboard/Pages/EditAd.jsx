@@ -200,6 +200,9 @@ const EditAd = () => {
   };
 
   const onSubmit = async (data) => {
+
+
+
     if (!validateDates(data.startDate, data.endDate)) {
       toast.error("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
       return;
@@ -213,7 +216,7 @@ const EditAd = () => {
     const adData = {
       ...data,
       address: selectedAddress,
-      Images: mediaUrls.images.length
+      Images: mediaUrls.images?.length
         ? mediaUrls.images
         : [
             "https://firebasestorage.googleapis.com/v0/b/default-placeholder-image.jpg",
@@ -223,11 +226,19 @@ const EditAd = () => {
       users: selectedUsers,
     };
 
+
+    console.log("adData", adData);
+
     try {
-      const response = await axiosInstance.put(`/advertisement/${id}`, adData);
-      updateADs(id, response.data);
+      const response = await axiosInstance.put(
+        `/advertisement/edit/${id}`,
+        adData
+      );
+
+    //   updateADs(id, response.data);
+      console.log("response.data", response.data);
       toast.success("تم تحديث الإعلان بنجاح");
-      navigate("/dashboard/ads");
+    //   navigate("/dashboard/ads");
     } catch (error) {
       toast.error(`خطأ في تحديث الإعلان: ${error.message}`);
     }

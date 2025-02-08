@@ -136,11 +136,9 @@ const AdDetails = ({ ads, selected }) => {
             </div>
           </div>
           <div>
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
-              النجوم المشاركين
-            </p>
-
+            <h2 className="text-xl font-bold my-8">النجوم المشاركين</h2>
             <div className="space-y-6">
+              {/* Display users with links */}
               {ad?.users
                 ?.filter((user) => user?.links?.length > 0)
                 .map((user, index) => (
@@ -181,6 +179,19 @@ const AdDetails = ({ ads, selected }) => {
                       ))}
                     </div>
                   </div>
+                ))}
+
+              {/* Display users without links */}
+              <h2 className="text-xl font-bold py-8">النجوم بدون مشاركات</h2>
+              {ad?.users
+                ?.filter((user) => user?.links?.length === 0)
+                .map((user, index) => (
+                  <span
+                    key={index}
+                    className="bg-gray-50 w-32 mx-1 px-2 py-1 rounded-full text-sm font-semibold text-gray-800 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    {user?.userId?.name}
+                  </span>
                 ))}
             </div>
           </div>

@@ -55,7 +55,7 @@ const PublicProfile = () => {
   const UserDataInput = [
     { label: " اسم الشهرة او الحساب ", value: userData?.name },
     { label: "عنوان البريد الإلكتروني", value: userData?.email },
-    { label: "رقم الهاتف", value: userData.phone },
+    { label: "رقم الهاتف", value: userData?.phone },
     { label: "تاريخ إنشاء الحساب", value: formatDate(userData.createdAt) },
     { label: "المنطقة", value: userData.address?.area },
     { label: "المحافظات", value: userData.address?.govern.join(", ") },

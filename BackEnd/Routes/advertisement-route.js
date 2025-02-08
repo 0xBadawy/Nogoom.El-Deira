@@ -240,10 +240,72 @@ router.post(
 
 
 
+router.put(
+  "/edit/:adId",
+  asyncHandler(async (req, res) => {
+    try {
+      const { adId } = req.params;
+      const { title, users, ...otherData } = req.body;
 
+      // Find the existing advertisement
+      const advertisement = await Advertisement.findById(adId);
 
+      if (!advertisement) {
+        return res.status(404).json({ message: "لم يتم العثور على الإعلان" });
+      }
 
+      // Update advertisement details
+      advertisement.title = title || advertisement.title;
+      Object.assign(advertisement, otherData);
 
+      if (users && Array.isArray(users)) {
+        const existingUsersMap = new Map(
+          advertisement.users.map((user) => [
+            user.userId.toString(),
+            user.links,
+          ])
+        );
+
+        const updatedUsers = users.map((user) => {
+          const userId = typeof user === "string" ? user : user.userId;
+          const newLinks = user.links || existingUsersMap.get(userId) || [];
+
+          return { userId, links: newLinks };
+        });
+
+        advertisement.users = updatedUsers;
+
+        // Sync user references without creating duplicates
+        for (const user of updatedUsers) {
+          await User.findByIdAndUpdate(
+            user.userId,
+            {
+              $set: {
+                "ads.$[elem].links": user.links || [],
+              },
+            },
+            {
+              arrayFilters: [{ "elem.adId": adId }],
+              new: true,
+              upsert: true,
+            }
+          );
+        }
+      }
+
+      // Save the updated advertisement
+      const updatedAd = await advertisement.save();
+
+      res.status(200).json({
+        message: "تم تعديل الإعلان بنجاح",
+        advertisement: updatedAd,
+      });
+    } catch (error) {
+      console.error("خطأ أثناء تعديل الإعلان:", error);
+      res.status(500).json({ message: "حدث خطأ أثناء تعديل الإعلان." });
+    }
+  })
+);
 
 
 
