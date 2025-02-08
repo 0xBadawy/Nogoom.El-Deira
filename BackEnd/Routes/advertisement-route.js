@@ -67,6 +67,95 @@ router.post(
   })
 );
 
+router.get("/all", asyncHandler(async (req, res) => { // Get all advertisements
+  try {
+    const advertisements = await Advertisement.find().exec();
+
+    res.status(200).json({
+      message: "تم جلب الإعلانات بنجاح",
+      advertisements,
+    });
+  } catch (error) {
+    console.error("خطأ أثناء جلب الإعلانات:", error);
+    res.status(500).json({ message: "حدث خطأ أثناء جلب الإعلانات." });
+  }
+}));
+
+
+
+router.get(
+  "/get_one/:adId",
+  asyncHandler(async (req, res) => {
+    try {
+      const { adId } = req.params;
+
+      // Find advertisement and populate user information
+      const advertisement = await Advertisement.findById(adId)
+        .populate({
+          path: "users.userId",
+          model: User,
+          select: "name email", // Adjust fields as necessary
+        })
+        .exec();
+
+      if (!advertisement) {
+        return res.status(404).json({ message: "لم يتم العثور على الإعلان" });
+      }
+
+      res.status(200).json({
+        message: "تم جلب الإعلان بنجاح",
+        advertisement,
+      });
+    } catch (error) {
+      console.error("خطأ أثناء جلب الإعلان:", error);
+      res.status(500).json({ message: "حدث خطأ أثناء جلب الإعلان." });
+    }
+  })
+);
+
+router.delete(
+  "/delete/:adId",
+  asyncHandler(async (req, res) => {
+    try {
+      const { adId } = req.params;
+
+      // Find and delete the advertisement
+      const advertisement = await Advertisement.findByIdAndDelete(adId);
+
+      if (!advertisement) {
+        return res.status(404).json({ message: "لم يتم العثور على الإعلان" });
+      }
+
+      // Remove the ad reference from all users
+      const userUpdates = advertisement.users.map(async (user) => {
+        await User.findByIdAndUpdate(
+          user.userId,
+          { $pull: { ads: { adId } } },
+          { new: true }
+        );
+      });
+
+      await Promise.all(userUpdates);
+
+      res.status(200).json({
+        message: "تم حذف الإعلان وجميع المراجع بنجاح",
+        advertisement,
+      });
+    } catch (error) {
+      console.error("خطأ أثناء حذف الإعلان:", error);
+      res.status(500).json({ message: "حدث خطأ أثناء حذف الإعلان." });
+    }
+  })
+);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -80,7 +169,7 @@ router.get(
         .populate({
           path: "ads.adId",
           model: Advertisement,
-          select: "title description", // Adjust the fields to return only necessary details
+          // select: "title description ", // Adjust the fields to return only necessary details
         })
         .exec();
 
@@ -98,6 +187,57 @@ router.get(
     }
   })
 );
+
+
+
+router.post(
+  "/edit-links/:adId/:userId",
+  asyncHandler(async (req, res) => {
+    try {
+      const { adId, userId } = req.params;
+      const { links } = req.body;
+
+      if (!Array.isArray(links)) {
+        return res.status(400).json({ message: "يجب إرسال قائمة بالروابط" });
+      }
+
+      // Find the advertisement and update the user's links
+      const advertisement = await Advertisement.findOneAndUpdate(
+        {
+          _id: adId,
+          "users.userId": userId,
+        },
+        {
+          $set: { "users.$.links": links },
+        },
+        { new: true }
+      );
+
+      if (!advertisement) {
+        return res
+          .status(404)
+          .json({ message: "لم يتم العثور على الإعلان أو المستخدم" });
+      }
+
+      // Update the user's links in their profile as well
+      await User.findOneAndUpdate(
+        { _id: userId, "ads.adId": adId },
+        { $set: { "ads.$.links": links } },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: "تم تحديث الروابط بنجاح",
+        advertisement,
+      });
+    } catch (error) {
+      console.error("خطأ أثناء تحديث الروابط:", error);
+      res.status(500).json({ message: "حدث خطأ أثناء تحديث الروابط." });
+    }
+  })
+);
+
+
 
 
 

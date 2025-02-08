@@ -3,6 +3,7 @@ import { AreaData } from "./data";
 
 const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
   const [selectedArea, setSelectedArea] = useState(initialData.area || "");
+  
   const [selectedGovernments, setSelectedGovernments] = useState(
     initialData.governments || []
   );

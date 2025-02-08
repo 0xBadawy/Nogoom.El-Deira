@@ -31,6 +31,8 @@ const SendNotification = React.lazy(
 const CreateAd = React.lazy(() => import("../Dashboard/Pages/CreateAd"));
 const Employees = React.lazy(() => import("../Dashboard/Pages/Employees"));
 const AdsList = React.lazy(() => import("../Dashboard/Pages/AdsList"));
+const EditAd = React.lazy(() => import("../Dashboard/Pages/EditAd"));
+
 const Privacy = React.lazy(() => import("../Dashboard/Pages/Privacy"));
 const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
 const Contact = React.lazy(() => import("../Dashboard/Pages/Contact"));
@@ -68,8 +70,8 @@ export const router = createBrowserRouter([
   {
     path: "/ads",
     children: [
-      { index: true, element: withProtection(AdListPage, ["admin"]),},
-      { path: ":id", element: withProtection(AdDetailPage, ["star"]),},
+      { index: true, element: withProtection(AdListPage, ["admin"]) },
+      { path: ":id", element: withProtection(AdDetailPage, ["star"]) },
     ],
   },
 
@@ -84,7 +86,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
+    // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
     path: "/forget-password",
     element: withSuspense(ForgetPasswordPage),
     errorElement: <ErrorBoundary />,
@@ -153,8 +155,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "ads-list",
-        element: withProtection(AdsList, ["admin", "editor"]),
+        element: withProtection(AdsList, ["admin", "editor"]),      
       },
+      {
+        path: "editAd/:id",
+        element: withProtection(EditAd, ["admin", "editor"]),
+
+      },
+
       {
         path: "privacy",
         element: withProtection(Privacy, ["admin", "editor"]),

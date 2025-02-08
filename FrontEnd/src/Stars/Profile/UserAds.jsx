@@ -11,6 +11,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { Trash2 } from "lucide-react";
 
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
@@ -21,6 +22,8 @@ import { useAuth } from "../../Context/AuthContext";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../Configuration/axiosInstance";
+import formatDate from "../../hooks/formatDate";
 
 const UserAds = () => {
   const { user } = useAuth();
@@ -29,44 +32,69 @@ const UserAds = () => {
   const [userId, setUserId] = useState(null);
   const [AdID, setAdId] = useState(null);
   const { handleSubmit, register, setValue } = useForm();
+const [links, setLinks] = useState(["https://example.com", "https://test.com"]);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const response = 
+      const response = await axiosInstance.get(
+        `/advertisement/user-ads/${user._id}`
+      );
+      setAds(response.data.ads);
+
+      console.log(response.data.ads);
     };
 
     fetchUserData();
   }, [user]);
 
-  const onSubmit = (data) => {
-    // Create a new object to store the sanitized data
-    const NoNullData = Object.keys(data).reduce((acc, key) => {
-      // If the value is empty or undefined, assign an empty string
-      acc[key] = data[key] === "" || data[key] === undefined ? "" : data[key];
-      return acc;
-    }, {});
-  
-    console.log("Sanitized data:", NoNullData);
-  
-    // Now you can use the sanitized data in the UpdateCurrentUserAds function
-    UpdateCurrentUserAds(userId, { adId: AdID.adId, links: NoNullData });
-    toast.success("تم حفظ المشاركات بنجاح!");
-  };
+
+
+
   const isExpired = (endDate)=>{
     return new Date(endDate) < new Date();
   }
 
 
-  useEffect(() => {
-    if (AdID) {
-      setValue("fb", AdID.links.fb);
-      setValue("in", AdID.links.in);
-      setValue("sh", AdID.links.sh);
-      setValue("tk", AdID.links.tk);
-      setValue("x", AdID.links.x);
-      setValue("you", AdID.links.you);
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  console.log(
+    "Saved Links:",
+    links.filter((link) => link.trim() !== "")
+  );
+
+  const addData = async () => {
+    try {
+      const response = await axiosInstance.post(
+        `/advertisement/edit-links/${AdID.adId._id}/${user._id}`,
+        {
+          links: links.filter((link) => link.trim() !== ""),
+        }
+      );
+
+      console.log(response.data);
+      toast.success("تم حفظ الروابط بنجاح");
+    } catch (error) {
+      console.error("Error while saving links:", error);
+      toast.error("حدث خطأ أثناء حفظ الروابط");
     }
-  }, [AdID, setValue]);
+  };
+
+  addData();
+};
+
+const handleInputChange = (index, value) => {
+  const updatedLinks = [...links];
+  updatedLinks[index] = value;
+  setLinks(updatedLinks);
+};
+
+const addInputField = () => {
+  setLinks([...links, ""]);
+};
+
+const handleDeleteInput = (index) => {
+  setLinks(links.filter((_, i) => i !== index));
+};
 
   return (
     <>
@@ -88,12 +116,21 @@ const UserAds = () => {
                   className="p-4 bg-white rounded-lg shadow-md border border-gray-200 flex flex-col justify-between"
                 >
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-800">
-                      {ad.title}
+                    <h4
+                      className="text-lg font-semibold text-gray-800 
+                    overflow-hidden overflow-ellipsis whitespace-nowrap"
+                    >
+                      {ad.adId.title}
                     </h4>
-                    <div className={`mt-2 px-4 py-1 rounded w-fit text-sm text-white ${isExpired(ad.endDate) ? "bg-red-600" : "bg-green-600"}`}>
-  {isExpired(ad.endDate) ? "الحملة منتهية" : "الحملة مستمرة"}
-</div>
+                    <div
+                      className={`mt-2 px-4 py-1 rounded w-fit text-sm text-white ${
+                        isExpired(ad.endDate) ? "bg-red-600" : "bg-green-600"
+                      }`}
+                    >
+                      {isExpired(ad.endDate)
+                        ? "الحملة منتهية"
+                        : "الحملة مستمرة"}
+                    </div>
 
                     <p className="text-sm text-gray-500 mt-2">
                       {/* {ad?.updatedAt.toDate().toLocaleString()} */}
@@ -109,14 +146,18 @@ const UserAds = () => {
                       // onClick={() => UpdateCurrentUserAds(ad.id)}
                     >
                       <FaStar className="text-white mr-2" />
-                       التفاصيل
+                      التفاصيل
                     </Link>
                     <Button
                       size="sm"
                       variant="filled"
                       color="red"
                       className="flex items-center bg-indigo-100"
-                      onClick={() => setAdId(ad)}
+                      onClick={() => {
+                        setAdId(ad);
+                        console.log("ad", ad);
+                        setLinks(ad.links);
+                      }}
                     >
                       اضافة مشاركات
                     </Button>
@@ -139,123 +180,74 @@ const UserAds = () => {
           <CardContent>
             <div className="p-4 bg-white rounded-lg shadow-md border border-gray-200">
               <h4 className="text-lg font-semibold text-gray-800">
-                {AdID.title}
+                {AdID.adId.title}
               </h4>
-            </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-10">
-              <div className="grid md:grid-cols-6 gap-4 grid-cols-3 items-center mb-6">
-                {/* Facebook */}
-                <div className="mb-4 col-span-3">
-                  <label
-                    className="text-gray-700 text-sm font-bold mb-2 flex flex-row items-center gap-2"
-                    htmlFor="fb"
-                  >
-                    <FaFacebook size={19} />
-                    {"مشاركة الفيس بوك"}
-                  </label>
-                  <input
-                    type="text"
-                    id="fb"
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-                    {...register("fb")}
-                    placeholder="https://facebook.com"
-                  />
-                </div>
-
-                {/* Instagram */}
-                <div className="mb-4 col-span-3">
-                  <label
-                    className="text-gray-700 text-sm font-bold mb-2 flex flex-row items-center gap-2"
-                    htmlFor="in"
-                  >
-                    <FaInstagram size={19} />
-                    {"مشاركة الإنستجرام"}
-                  </label>
-                  <input
-                    type="text"
-                    id="in"
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-                    {...register("in")}
-                    placeholder="https://instagram.com"
-                  />
-                </div>
-
-                {/* Snapchat */}
-                <div className="mb-4 col-span-3">
-                  <label
-                    className="text-gray-700 text-sm font-bold mb-2 flex flex-row items-center gap-2"
-                    htmlFor="sh"
-                  >
-                    <FaSnapchat size={19} />
-                    {"مشاركة سناب شات"}
-                  </label>
-                  <input
-                    type="text"
-                    id="sh"
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-                    {...register("sh")}
-                    placeholder="https://snapchat.com"
-                  />
-                </div>
-
-                {/* TikTok */}
-                <div className="mb-4 col-span-3">
-                  <label
-                    className="text-gray-700 text-sm font-bold mb-2 flex flex-row items-center gap-2"
-                    htmlFor="tk"
-                  >
-                    <FaTiktok size={19} />
-                    {"مشاركة تيك توك"}
-                  </label>
-                  <input
-                    type="text"
-                    id="tk"
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-                    {...register("tk")}
-                    placeholder="https://tiktok.com"
-                  />
-                </div>
-
-                {/* X */}
-                <div className="mb-4 col-span-3">
-                  <label
-                    className="text-gray-700 text-sm font-bold mb-2 flex flex-row items-center gap-2"
-                    htmlFor="x"
-                  >
-                    <FaTwitter size={19} />
-                    {"مشاركة X (تويتر سابقًا)"}
-                  </label>
-                  <input
-                    type="text"
-                    id="x"
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-                    {...register("x")}
-                    placeholder="https://x.com"
-                  />
-                </div>
-
-                {/* YouTube */}
-                <div className="mb-4 col-span-3">
-                  <label
-                    className="text-gray-700 text-sm font-bold mb-2 flex flex-row items-center gap-2"
-                    htmlFor="you"
-                  >
-                    <FaYoutube size={19} />
-                    {"مشاركة يوتيوب"}
-                  </label>
-                  <input
-                    type="text"
-                    id="you"
-                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-                    {...register("you")}
-                    placeholder="https://youtube.com"
-                  />
-                </div>
+              <div
+                className={`mt-2 px-4 py-1 rounded w-fit text-sm text-white ${
+                  isExpired(AdID.adId.endDate) ? "bg-red-600" : "bg-green-600"
+                }`}
+              >
+                {isExpired(AdID.endDate) ? "الحملة منتهية" : "الحملة مستمرة"}
+                <span className="text-gray-700 text-sm">
+                  {` (${formatDate(AdID.adId.startDate)} - ${formatDate(
+                    AdID.adId.endDate
+                  )})`}
+                </span>
               </div>
 
-              <Button type="submit" className="w-full">
-                حفظ التغييرات
-              </Button>
+              <div className="mt-4">
+                <p className="text-sm text-gray-500">{AdID.adId.description}</p>
+              </div>
+            </div>
+            <form
+              onSubmit={handleFormSubmit}
+              className="space-y-6 mt-10 p-8 bg-white rounded-2xl shadow-lg max-w-3xl mx-auto"
+            >
+              <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+                    اضافة روابط المشاركات
+              </h2>
+
+              <div className="space-y-4">
+                {links.map((link, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col sm:flex-row items-center gap-3 bg-gray-50 rounded-lg px-4 py-2 shadow-sm"
+                  >
+                    <input
+                      type="url"
+                      value={link}
+                      onChange={(e) => handleInputChange(index, e.target.value)}
+                      placeholder={`Link ${index + 1}`}
+                      className="flex-1 text-gray-800 border-none bg-transparent outline-none placeholder-gray-400 focus:ring-0 w-full"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteInput(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      <Trash2 className="w-6 h-6" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-4">
+                <Button
+                  type="button"
+                  onClick={addInputField}
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium text-sm rounded-lg hover:bg-blue-700 transition-all"
+                >
+                  <span>إضافة حقل جديد</span>
+                  <span className="text-lg font-bold">+</span>
+                </Button>
+
+                <Button
+                  type="submit"
+                  className="flex-1 px-6 py-3 bg-green-600 text-white font-medium text-sm rounded-lg hover:bg-green-700 transition-all"
+                >
+                  حفظ التغييرات
+                </Button>
+              </div>
             </form>
           </CardContent>
         </Card>

@@ -56,7 +56,13 @@ const advertisementSchema = new mongoose.Schema({
       links: [String], // Links added by this user specifically for the ad
     },
   ],
-});
+}
+,
+  {
+    timestamps: true,
+  }
+
+);
 
 const Advertisement = mongoose.model("advertisement", advertisementSchema);
 

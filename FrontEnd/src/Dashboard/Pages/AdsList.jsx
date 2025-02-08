@@ -3,6 +3,9 @@ import { useDashboard } from "../../Context/DashboardContext";
 import { GovernmentData } from "../../Stars/SignUp/data";
 import AdDetails from "./AdDetails";
 import { AdEditModal } from "./AdEditModal";
+import axiosInstance from "../../Configuration/axiosInstance";
+import formatDate from "../../hooks/formatDate";
+import { Outlet } from "react-router-dom";
 
 const AdsList = () => {
   const { getAllAds } = useDashboard();
@@ -14,10 +17,15 @@ const AdsList = () => {
   const [selectedGovernorate, setSelectedGovernorate] = useState("الكل");
 
   useEffect(() => {
-    getAllAds().then((data) => {
+    const featchAds = async () => {
+      const response = await axiosInstance.get("/advertisement/all");
+      const data = response.data.advertisements;
       setAds(data);
       console.log(data);
-    });
+      
+    }
+    featchAds();
+
   }, []);
 
   const Area = (areas) => {
@@ -47,6 +55,7 @@ const AdsList = () => {
 
   return (
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full overflow-y-auto">
+      {/* <Outlet /> */}
       <h2 className="text-2xl mb-4">الحملات الاعلانية</h2>
       <div className="mt-6 bg-white w-fit dark:bg-gray-800 rounded-lg shadow-md p-4">
         <div className="flex gap-4 mb-4">
@@ -55,7 +64,7 @@ const AdsList = () => {
             value={selectedRegion}
             onChange={(e) => {
               setSelectedRegion(e.target.value);
-              setCurrentPage(1)
+              setCurrentPage(1);
               setSelectedGovernorate("الكل"); // إعادة تعيين المحافظة عند تغيير المنطقة
             }}
             className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
@@ -71,10 +80,10 @@ const AdsList = () => {
           {/* قائمة المحافظة */}
           <select
             value={selectedGovernorate}
-            onChange={(e) =>{
-              setSelectedGovernorate(e.target.value)
-              setCurrentPage(1)
-            } }
+            onChange={(e) => {
+              setSelectedGovernorate(e.target.value);
+              setCurrentPage(1);
+            }}
             className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
             disabled={selectedRegion === "الكل"} // تعطيل إذا لم يتم اختيار منطقة
           >
@@ -103,15 +112,19 @@ const AdsList = () => {
             {currentAds.map((row, index) => (
               <tr
                 key={index}
-                onClick={() => setSelected(row.id)}
-                className={`border-b ${row.id === selected ? "bg-gray-200" : ""}`}
+                onClick={() => setSelected(row._id)}
+                className={`border-b ${
+                  row._id === selected ? "bg-gray-200" : ""
+                }`}
               >
                 <td className="py-2 px-4">{row.title}</td>
-                <td className="py-2 px-4">{row.region}</td>
-                <td className="py-2 px-4">{Area(row.governorates)}</td>
+                <td className="py-2 px-4">{row.address.area}</td>
+                <td className="py-2 px-4 max-w-96 ">
+                  {Area(row.address.govern)}
+                </td>
                 <td className="py-2 px-4">
-                  <p className="text-xs">من {row.startDate}</p>
-                  <p className="text-xs">إلى {row.endDate}</p>
+                  <p className="text-xs">من {formatDate(row.startDate)}</p>
+                  <p className="text-xs">إلى {formatDate(row.endDate)}</p>
                 </td>
                 <td className="py-2 px-4">{row.views}</td>
               </tr>
@@ -142,7 +155,9 @@ const AdsList = () => {
             </button>
           ))}
           <button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
             disabled={currentPage === totalPages}
             className="px-4 py-2 mx-1 bg-gray-200 rounded-lg dark:bg-gray-700 disabled:opacity-50"
           >
