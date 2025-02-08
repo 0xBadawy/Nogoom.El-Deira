@@ -26,8 +26,9 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchUserRole = async () => {
       const User = user;
-      setUserRole(User.role); // Set the user role
-      console.log("User Role:", User.role);
+      // setUserRole(User.role); // Set the user role
+      setUserRole("admin");
+      // console.log("User Role:", User.role);
     };
     fetchUserRole();
   }, [user]);

@@ -279,7 +279,7 @@ const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
                      
                       <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
                         <input
-                          type="text"
+                          type="url"
                           value={item.link || ""}
                           onChange={(e) =>
                             handleInputChange(index, e.target.value)

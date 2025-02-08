@@ -1,742 +1,445 @@
-import { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import CheckboxList from "../../Components/CheckboxList";
-import ImageUploader from "../../Components/ImageUploader";
-import { storage } from "../../Configuration/Firebase";
+import React, { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { GovernmentData } from "../../Stars/SignUp/data";
-import { useDashboard } from "../../Context/DashboardContext";
-import CheckboxListName from "../../Components/CheckboxListName";
-import toast, { Toaster } from "react-hot-toast";
-import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { storage } from "../../Configuration/Firebase";
+import { useDashboard } from "../../Context/DashboardContext";
+import { useAuth } from "../../Context/AuthContext";
+import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
+import UserSelector from "../../Components/UserSelector";
+import { X } from "lucide-react"; // Import X icon for delete button
+import axiosInstance from "../../Configuration/axiosInstance";
 
 const CreateAd = () => {
-  const navigate = useNavigate(); // Correct usage
-
-  const { allUsers, addADs } = useDashboard();
-  const [GovernList, setGovernList] = useState([]);
-  const [Region, setRegion] = useState();
+  // ... (previous state and hooks remain the same)
+  const navigate = useNavigate();
+  const { addADs } = useDashboard();
   const { getUserEmail } = useAuth();
-  const [selectGovernorates, setSelectGovernorates] = useState([]);
-  const [data, setData] = useState(null);
-  const [selectStars, setSelectStars] = useState([]);
-  const [starsList, setStarsList] = useState([]);
-  const [uploadImageProgress, setuploadImageProgress] = useState(0); // حالة لنسبة الرفع
-  const [uploadVideoProgress, setuploadVideoProgress] = useState(0); // حالة لنسبة الرفع
+  const [uploadProgress, setUploadProgress] = useState({ images: 0, video: 0 });
   const [loading, setLoading] = useState(false);
+  const [mediaUrls, setMediaUrls] = useState({ images: [], video: "" });
+  const [socialLinks, setSocialLinks] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState({
+    area: "",
+    govern: [],
+  });
+  const [videoPreview, setVideoPreview] = useState(null);
+
   const {
     register,
     handleSubmit,
-    control,
     reset,
-    setValue,
     formState: { errors },
   } = useForm();
 
-  const [videoURL, setVideoURL] = useState("");
-  
-  const CheckDateValidation = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    if (start > end) {
-      return false;
-    }
-    return true;
+  const handleSelectionChange = useCallback(
+    ({ selectedArea, selectedGovernments }) => {
+      setSelectedAddress((prev) => {
+        if (
+          prev.area !== selectedArea ||
+          JSON.stringify(prev.govern) !== JSON.stringify(selectedGovernments)
+        ) {
+          return { area: selectedArea, govern: selectedGovernments };
+        }
+        return prev;
+      });
+    },
+    []
+  );
+
+  const validateDates = (startDate, endDate) => {
+    return new Date(startDate) <= new Date(endDate);
   };
-  
-  
-  const [imageURL, setImageURL] = useState([]);
-  const onSubmit = (data) => {
 
+  const handleImageDelete = (indexToDelete) => {
+    setMediaUrls((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, index) => index !== indexToDelete),
+    }));
+  };
 
-    // if (imageURL.length === 0) {
-    //   setImageURL([
-    //     "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FScreenshot_4.png?alt=media&token=bc03316e-9bfc-47b0-b660-c17e7dc2ca09"
-    //   ]);
-    // }
+  const handleVideoDelete = () => {
+    setMediaUrls((prev) => ({ ...prev, video: "" }));
+    setVideoPreview(null);
+  };
+  const handleFileUpload = async (files, type) => {
+    if (!files.length) return;
 
+    setLoading(true);
+    const validTypes =
+      type === "images"
+        ? ["image/jpeg", "image/png", "image/gif", "image/webp"]
+        : ["video/mp4", "video/webm"];
 
+    const invalidFile = Array.from(files).find(
+      (file) => !validTypes.includes(file.type)
+    );
+    if (invalidFile) {
+      toast.error(`نوع الملف غير مدعوم: ${invalidFile.name}`);
+      setLoading(false);
+      return;
+    }
+
+    // Create preview for video
+    if (type === "video" && files[0]) {
+      const videoURL = URL.createObjectURL(files[0]);
+      setVideoPreview(videoURL);
+    }
+
+    const uploadPromises = Array.from(files).map((file) => {
+      const fileName = "noUser";
+      const storageRef = ref(storage, `${fileName}/${type}/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      return new Promise((resolve, reject) => {
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadProgress((prev) => ({ ...prev, [type]: progress }));
+          },
+          reject,
+          async () => {
+            try {
+              const url = await getDownloadURL(uploadTask.snapshot.ref);
+              resolve(url);
+            } catch (error) {
+              reject(error);
+            }
+          }
+        );
+      });
+    });
+
+    try {
+      const urls = await Promise.all(uploadPromises);
+      setMediaUrls((prev) => ({
+        ...prev,
+        [type]: type === "images" ? [...prev.images, ...urls] : urls[0],
+      }));
+    } catch (error) {
+      toast.error(`خطأ في رفع الملفات: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSocialLinksChange = (index, value) => {
+    setSocialLinks((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], link: value };
+      return updated;
+    });
+  };
+
+  const onSubmit = async (data) => {
+    if (!validateDates(data.startDate, data.endDate)) {
+      toast.error("تاريخ البداية يجب أن يكون قبل تاريخ النهاية");
+      return;
+    }
+
+    if (!selectedAddress.govern.length) {
+      toast.error("يجب اختيار المنطقة");
+      return;
+    }
 
     const adData = {
       ...data,
-      governorates: selectGovernorates,
-      stars: selectStars,
-      images: imageURL.length > 0 ? imageURL : [ "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FScreenshot_5.png?alt=media&token=e314b8df-858e-4092-b3fe-920473f514e9"],
-      video: videoURL,
+      address: selectedAddress,
+      Images: mediaUrls.images.length
+        ? mediaUrls.images
+        : [
+            "https://firebasestorage.googleapis.com/v0/b/default-placeholder-image.jpg",
+          ],
+      videos: mediaUrls.video,
       views: 0,
+      links: socialLinks.filter((link) => link.link?.trim()),
+      users: selectedUsers,
     };
-    console.log(adData);
 
-    if (data.startDate && data.endDate) {
-      const isValid = CheckDateValidation(data.startDate, data.endDate);
-      if (!isValid) {
-        toast.error("تاريخ البداية يجب ان يكون قبل تاريخ النهاية");
-        return;
-      }
+    console.log("Ad Data:", adData);
+    // return;
+
+    try {
+      const response = await axiosInstance.post("/advertisement/add", adData);
+      // addADs(response.data);
+      console.log(response.data);
+      toast.success("تم إضافة الإعلان بنجاح");
+      // reset();
+      // navigate("/dashboard/ads");
+    }
+    catch (error) {
+      toast.error(`خطأ في إضافة الإعلان: ${error.message}`);
     }
 
-    if (selectGovernorates.length === 0) {
-      toast.error("يجب اختيار المحافظة");
-      return;
-    }
-
-
-    if (selectStars.length === 0) {
-      toast.error("يجب اختيار النجوم");
-      return;
-    }
-
-    
-
-
-
-    
-      
-
-
-    addADs(adData);
-    setImageURL([]);
-    setVideoURL("");
-    reset();
-    toast.success("تم إضافة  حملة بنجاح!");
-    navigate("/dashboard/ads-list")  };
-
-  const handleGovernorateSelection = (item, isSelected) => {
-    setSelectGovernorates((prevState) => {
-      if (isSelected) {
-        if (!prevState.includes(item)) {
-          return [...prevState, item];
-        }
-      } else {
-        return prevState.filter((selectedItem) => selectedItem !== item);
-      }
-      return prevState;
-    });
+   
   };
-
-  const handleStarSelection = (item, isSelected) => {
-    setSelectStars((prevState) => {
-      if (isSelected) {
-        if (!prevState.includes(item)) {
-          return [...prevState, item];
-        }
-      } else {
-        return prevState.filter((selectedItem) => selectedItem !== item);
-      }
-      return prevState;
-    });
-  };
-
-  useEffect(() => {
-
-    setSelectStars([]);
-    // setSelectGovernorates([]);
-    // const stars = allUsers.filter((user) => user.role === "star" &&  user.govern===Region);
-    // console.log(stars)
-    const stars = allUsers.filter(
-  (user) => user.role === "star" && user.area.some(region => selectGovernorates.includes(region))
-);
-
-
-    setStarsList(stars.map((star) => star.name));
-    setStarsList(stars.map((star) => ({ name: star.name, Uid: star.Uid })));
-
-  }, [allUsers,Region,selectGovernorates]);
-
-  const HandelRegionChange = (e) => {
-    setSelectGovernorates([]);
-    setGovernList([]);
-
-    setRegion(e.target.value);
-    const fun = () => {
-      const region = e.target.value;
-      const selectedRegion = GovernmentData.find(
-        (item) => item.name === region
-      );
-      setGovernList(selectedRegion.subGovernments);
-    };
-    fun();
-  };
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "links", // اسم الحقل في الفورم
-  });
-
-  const handleUpload = (e) => {
-
-    
-
-
-    const files2 = event.target.files; // Get all the files from the input
-    console.log("Files:", files2); // Log all files to inspect them
-  
-    const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp"];
-    
-    // Loop through each file to check its type
-    for (let i = 0; i < files2.length; i++) {
-      const file = files2[i];
-      console.log("File type:", file.type); // Log the type of each file
-  
-      if (!validImageTypes.includes(file.type)) {
-        console.log("Invalid file type detected:", file.type); // Log invalid file type
-        alert("نوع الصورة غير مدعوم. يرجى رفع ملف بصيغة JPEG أو PNG أو GIF أو BMP أو WEBP."); // رسالة خطأ واضحة
-        setLoading(false); // إيقاف حالة التحميل
-        return;
-      } else {
-        console.log("Valid file type:", file.type); // Log valid file type
-      }
-    }
-
-
-
-    setLoading(true);
-
-    setuploadImageProgress(0); // تحديث الحالة
-
-
-
-
-    const files = e.target.files; // الحصول على قائمة الملفات
-    if (!files.length) {
-      //  console.error("No files selected");
-      return;
-    }
-
-    Array.from(files).forEach((file) => {
-      let fileName = "noUser";
-      const userEmail = getUserEmail();
-      if (userEmail) fileName = userEmail;
-      const storageRef = ref(storage, `${fileName}/images/${file.name}`); // مرجع لكل ملف
-      const uploadTask = uploadBytesResumable(storageRef, file); // بدء رفع الملف
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // تحديث نسبة الرفع
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(
-            `Upload progress for ${file.name}: ${progress.toFixed(2)}%`
-          );
-
-          setuploadImageProgress(progress); // تحديث الحالة
-
-          switch (snapshot.state) {
-            case "paused":
-              console.log(`Upload for ${file.name} is paused`);
-              break;
-            case "running":
-              console.log(`Upload for ${file.name} is running`);
-              break;
-            default:
-              break;
-          }
-        },
-        (error) => {
-          // التعامل مع الأخطاء أثناء الرفع
-          console.error(`Upload failed for ${file.name}:`, error.message);
-          switch (error.code) {
-            case "storage/unauthorized":
-              console.error(
-                "User does not have permission to access the object"
-              );
-              break;
-            case "storage/canceled":
-              console.error("User canceled the upload");
-              break;
-            case "storage/unknown":
-              console.error("Unknown error occurred", error.serverResponse);
-              break;
-            default:
-              break;
-          }
-          setLoading(false);
-        },
-        async () => {
-          // عند إكمال الرفع بنجاح
-          try {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log(`File available at ${downloadURL}`);
-            setImageURL((prevState) => [...prevState, downloadURL]);
-
-            // هنا يمكنك تخزين الروابط في مصفوفة أو إضافتها إلى حالة
-          } catch (err) {
-            console.error("Error getting download URL:", err);
-          }
-
-          setLoading(false);
-        }
-      );
-    });
-  };
-
-  const handleVideoUpload = (e) => {
-    setLoading(true);
-    const file = e.target.files[0]; // الحصول على الفيديو
-    if (!file) {
-      console.error("No video selected");
-      return;
-    }
-
-    // validte the type 
-
-    if (!file.type.startsWith("video/")) {
-      alert("نوع الملف غير مدعوم. يرجى رفع ملف بصيغة فيديو."); // رسالة خطأ واضحة
-      setLoading(false); // إيقاف حالة التحميل
-      return;
-    }
-    
-
-
-
-    let fileName = "noUser";
-    const userEmail = getUserEmail();
-    if (userEmail) fileName = userEmail;
-    const storageRef = ref(storage, `${fileName}/videos/${file.name}`); // مرجع الفيديو في التخزين
-    const uploadTask = uploadBytesResumable(storageRef, file); // بدء رفع الفيديو
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // تحديث نسبة الرفع
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload progress: ${progress.toFixed(2)}%`);
-        setuploadVideoProgress(progress);
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
-            break;
-        }
-      },
-      (error) => {
-        // التعامل مع الأخطاء أثناء الرفع
-        console.error("Upload failed:", error.message);
-        switch (error.code) {
-          case "storage/unauthorized":
-            console.error("User does not have permission to access the object");
-            break;
-          case "storage/canceled":
-            console.error("User canceled the upload");
-            break;
-          case "storage/unknown":
-            console.error("Unknown error occurred", error.serverResponse);
-            break;
-          default:
-            break;
-        }
-        setLoading(false);
-      },
-      async () => {
-        // عند إكمال الرفع بنجاح
-        try {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log("Video available at", downloadURL);
-          setVideoURL(downloadURL);
-          // يمكنك تخزين الرابط في حالة أو إظهاره في الواجهة
-        } catch (err) {
-          console.error("Error getting download URL:", err);
-        }
-        setLoading(false);
-      }
-    );
-  };
-
-  // useEffect(() => {
-  //   // console.log(selectGovernorates);
-  //   // console.log(selectStars);
-  // }, [selectGovernorates, selectStars]);
 
   return (
-    <div className="p-2 md:p-8 dark:bg-gray-800">
-      <h2 className="text-2xl mb-4 text-gray-800  font-bold">
-        اضافة حملة جديدة{" "}
-      </h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md"
-      >
-        <div className="grid grid-cols-6 gap-3 ">
-          <div className="md:col-span-3 col-span-6 grid grid-cols-6 gap-3">
-            {/* عنوان الإعلان */}
-            <div className="mb-4 col-span-6">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="title"
-              >
-                عنوان الإعلان
-              </label>
-              <input
-                type="text"
-                id="title"
-                {...register("title", { required: "عنوان الإعلان مطلوب" })}
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-              />
-              {errors.title && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.title.message}
-                </p>
-              )}
+    <div className="p-4 md:p-8 bg-gray-50 dark:bg-gray-800 min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+          إضافة حملة جديدة
+        </h2>
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Ad Details Section */}
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                  عنوان الإعلان
+                </label>
+                <input
+                  {...register("title", { required: "عنوان الإعلان مطلوب" })}
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                />
+                {errors.title && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.title.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                  وصف الإعلان
+                </label>
+                <textarea
+                  {...register("description", {
+                    required: "وصف الإعلان مطلوب",
+                  })}
+                  rows={4}
+                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                />
+                {errors.description && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.description.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Date Selection */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    تاريخ البداية
+                  </label>
+                  <input
+                    type="date"
+                    {...register("startDate", {
+                      required: "تاريخ البداية مطلوب",
+                    })}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                    تاريخ النهاية
+                  </label>
+                  <input
+                    type="date"
+                    {...register("endDate", {
+                      required: "تاريخ النهاية مطلوب",
+                    })}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* نص الإعلان */}
-            <div className="mb-4 col-span-6 ">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="description"
-              >
-                نص الإعلان
-              </label>
-              <textarea
-                id="description"
-                {...register("description", { required: "نص الإعلان مطلوب" })}
-                className="w-full h-52 p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-              ></textarea>
-              {errors.description && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.description.message}
-                </p>
-              )}
+            {/* Media Upload Section */}
+            <div className="space-y-6">
+              {/* Image Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                  صور الإعلان
+                </label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                  <div className="space-y-1 text-center">
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={(e) =>
+                        handleFileUpload(e.target.files, "images")
+                      }
+                      className="hidden"
+                      id="image-upload"
+                    />
+                    <label
+                      htmlFor="image-upload"
+                      className="cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    >
+                      اختر الصور
+                    </label>
+                    <p className="text-xs text-gray-500">
+                      PNG, JPG, GIF حتى 10MB
+                    </p>
+                  </div>
+                </div>
+
+                {/* Image Preview Grid */}
+                {mediaUrls.images.length > 0 && (
+                  <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {mediaUrls.images.map((url, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={url}
+                          alt={`Preview ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleImageDelete(index)}
+                          className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {uploadProgress.images > 0 && uploadProgress.images < 100 && (
+                  <div className="mt-2">
+                    <div className="h-2 bg-gray-200 rounded-full">
+                      <div
+                        className="h-2 bg-blue-500 rounded-full"
+                        style={{ width: `${uploadProgress.images}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Video Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
+                  فيديو الإعلان
+                </label>
+                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
+                  <div className="space-y-1 text-center">
+                    <input
+                      type="file"
+                      accept="video/*"
+                      onChange={(e) =>
+                        handleFileUpload(e.target.files, "video")
+                      }
+                      className="hidden"
+                      id="video-upload"
+                    />
+                    <label
+                      htmlFor="video-upload"
+                      className="cursor-pointer bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    >
+                      اختر الفيديو
+                    </label>
+                    <p className="text-xs text-gray-500">MP4, WebM حتى 100MB</p>
+                  </div>
+                </div>
+
+                {/* Video Preview */}
+                {(videoPreview || mediaUrls.video) && (
+                  <div className="mt-4 relative group">
+                    <video
+                      controls
+                      className="w-full max-h-64 rounded-lg"
+                      src={videoPreview || mediaUrls.video}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                    <button
+                      type="button"
+                      onClick={handleVideoDelete}
+                      className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                )}
+
+                {uploadProgress.video > 0 && uploadProgress.video < 100 && (
+                  <div className="mt-2">
+                    <div className="h-2 bg-gray-200 rounded-full">
+                      <div
+                        className="h-2 bg-blue-500 rounded-full"
+                        style={{ width: `${uploadProgress.video}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-
-            {/* اختيار نوع الإعلان */}
-            {/* <div className="mb-4 md:col-span-2 col-span-6">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="category"
-              >
-                اختر نوع الإعلان
-              </label>
-              <select
-                id="category"
-                {...register("category", { required: "اختيار النوع مطلوب" })}
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-              >
-                <option value="">اختر نوعًا</option>
-                <option value="events">مناسبات</option>
-                <option value="real_estate">عقارات</option>
-                <option value="cars">سيارات</option>
-                <option value="electronics">إلكترونيات</option>
-                <option value="services">خدمات</option>
-                <option value="home_supplies">لوازم منزلية</option>
-                <option value="personal_supplies">لوازم شخصية</option>
-                <option value="animals">حيوانات</option>
-              </select>
-              {errors.category && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.category.message}
-                </p>
-              )}
-            </div> */}
-
-            {/* تاريخ البداية */}
-            <div className="mb-4 md:col-span-3 col-span-6">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="startDate"
-              >
-                تاريخ البداية
-              </label>
-              <input
-                type="date"
-                id="startDate"
-                {...register("startDate", { required: "تاريخ البداية مطلوب" })}
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-              />
-              {errors.startDate && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.startDate.message}
-                </p>
-              )}
-            </div>
-
-            {/* تاريخ النهاية */}
-            <div className="mb-4 md:col-span-3 col-span-6">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="endDate"
-              >
-                تاريخ النهاية
-              </label>
-              <input
-                type="date"
-                id="endDate"
-                {...register("endDate", { required: "تاريخ النهاية مطلوب" })}
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-              />
-              {errors.endDate && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.endDate.message}
-                </p>
-              )}
-            </div>
-
-
-
-
-
-
-
-
-
-            {/* رفع الصور */}
-
-            <div className="mb-8 md:col-span-2 col-span-6">
-  <label
-    className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
-    htmlFor="images"
-  >
-    <span className="material-icons text-blue-600 text-3xl"></span>
-    <span className="flex-1">صور الإعلان</span>
-  </label>
-  <div className="relative group">
-    <input
-      type="file"
-      id="images"
-      onChange={handleUpload}
-      multiple
-      className="hidden"
-    />
-    <label
-      htmlFor="images"
-      className="w-full p-4 border-2 border-dashed border-blue-400 rounded-lg cursor-pointer bg-blue-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-blue-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
-    >
-      <span className="flex flex-col items-center">
-        <span className="material-icons text-blue-400 text-2xl">
-        اضغط لتحميل الصور
-        </span>
-        <p className="mt-2 text-blue-600 dark:text-gray-300"></p>
-      </span>
-    </label>
-  </div>
-  {errors.images && (
-    <p className="text-red-500 text-sm mt-3">
-      {errors.images.message}
-    </p>
-  )}
-  <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
-    <div
-      className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600 rounded-full transition-all"
-      style={{ width: `${uploadImageProgress}%` }}
-    ></div>
-  </div>
-  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-   نسبة التحميل: {uploadImageProgress.toFixed(2)}%
-  </p>
-</div>
-
-<div className="mb-8 md:col-span-2 col-span-6">
-  <label
-    className="block text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-3"
-    htmlFor="video"
-  >
-    <span className="material-icons text-red-600 text-3xl"></span>
-    <span className="flex-1">فيديو الإعلان</span>
-  </label>
-  <div className="relative group">
-    <input
-      type="file"
-      id="video"
-      onChange={handleVideoUpload}
-      className="hidden"
-    />
-    <label
-      htmlFor="video"
-      className="w-full p-4 border-2 border-dashed border-red-400 rounded-lg cursor-pointer bg-red-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-red-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all"
-    >
-      <span className="flex flex-col items-center">
-        <span className="material-icons text-red-400 text-2xl">
-        اضغط لتحميل الفيديو
-        </span>
-        <p className="mt-2 text-red-600 dark:text-gray-300"></p>
-      </span>
-    </label>
-  </div>
-  {errors.video && (
-    <p className="text-red-500 text-sm mt-3">
-      {errors.video.message}
-    </p>
-  )}
-  <div className="relative w-full mt-5 h-3 bg-gray-300 rounded-full dark:bg-gray-700 overflow-hidden">
-    <div
-      className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 via-red-400 to-red-600 rounded-full transition-all"
-      style={{ width: `${uploadVideoProgress}%` }}
-    ></div>
-  </div>
-  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-  نسبة التحميل: {uploadVideoProgress.toFixed(2)}%
-  </p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
 
-          <div className="md:col-span-2 col-span-6 ">
-            {/* اختيار المنطقة */}
-
-
-            <div className="mb-4">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="region"
-              >
-                اختر المنطقة
-              </label>
-              <select
-                id="region"
-                {...register("region", { required: "اختيار المنطقة مطلوب" })}
-                className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-                onChange={HandelRegionChange}
-              >
-                <option value="">اختر المنطقة</option>
-                {GovernmentData.map((item, index) => (
-                  <option key={index} value={item.name}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-              {errors.region && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.region.message}
-                </p>
-              )}
+          {/* Area Selection & Social Links */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <AreaGovernmentSelector
+                onSelectionChange={handleSelectionChange}
+              />
             </div>
 
-
-
-
-            
-{
-  GovernList.length > 0 ?(
-  <div className="mb-4">
-  <CheckboxList
-    text="اختر المحافظات"
-    selected={handleGovernorateSelection}
-    items={GovernList}
-  />
-</div>
-
- 
-
-
-
-
-) :
-<div>
-  <h6 className="mt-10  font-semibold text-black">اختيار المحافظات</h6>
-    <div className="p-4 bg-red-50 rounded-lg text-center">
-  <p className="text-sm text-gray-600">يجب تحديد المنطقة أولًا</p>
-  </div>
-</div>
-}
-
-
-{
-  starsList.length > 0 ?(
-    <div className="mb-4">
-    <CheckboxListName
-      text="اختر النجوم"
-      selected={handleStarSelection}
-      items={starsList}
-    />
-  </div>
-
-
-
-
-
-
-) :
-<div>
-  <h6 className="mt-10 font-semibold text-black">اختيار النجوم</h6>
-    <div className="p-4 bg-red-50 rounded-lg text-center">
-  <p className="text-sm text-gray-600"> 
-  
-  {
-    GovernList.length <=0? "يجب اختيار المنطقة والمحافظات اولا":"لا يوجد نجوم متاحين فى المحافظات المحددة"
-  }
-    </p>
-  </div>
-</div>
-}
-
-
-
-         
-
-            {/* روابط الإعلان */}
-            <div className="mb-4">
-              <label
-                className="block text-gray-800 dark:text-white mb-2"
-                htmlFor="links"
-              >
-                روابط الإعلان
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">
+                روابط التواصل الاجتماعي
               </label>
-              {fields.map((field, index) => (
-                <div key={field.id} className="flex items-center gap-2 mb-2">
+              {socialLinks.map((link, index) => (
+                <div key={index} className="mb-2">
                   <input
                     type="url"
-                    id={`link-${index}`}
-                    {...register(`links.${index}.url`)}
-                    className="w-full p-2 border rounded-lg dark:bg-gray-800 dark:text-white"
-                    placeholder={`رابط ${index + 1}`}
+                    value={link.link || ""}
+                    onChange={(e) =>
+                      handleSocialLinksChange(index, e.target.value)
+                    }
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
+                    placeholder="أدخل رابط التواصل الاجتماعي"
                   />
-                  <button
-                    type="button"
-                    onClick={() => remove(index)}
-                    className="p-2 text-white bg-red-500 rounded hover:bg-red-700"
-                  >
-                    حذف
-                  </button>
                 </div>
               ))}
               <button
                 type="button"
-                onClick={() => append({ url: "" })}
-                className="p-2 mt-2 text-white bg-blue-500 rounded hover:bg-blue-700"
+                onClick={() => setSocialLinks([...socialLinks, { link: "" }])}
+                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
               >
                 إضافة رابط جديد
               </button>
             </div>
           </div>
-        </div>
-        {loading ? (
-          <button
-            type="submit"
-            className="w-full p-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700"
-            disabled
-          >
-            جاري الإضافة...
-          </button>
-        ) : (
-          <button
-            type="submit"
-            className="w-full p-2 mt-4 text-white bg-blue-500 rounded hover:bg-blue-700"
-          >
-            إضافة الإعلان
-          </button>
-        )}
-      </form>
-      <Toaster position="top-center" reverseOrder={false} />
+
+          {/* User Selection */}
+          <div className="mt-8">
+            <UserSelector
+              initialSelectedUsers={[]}
+              onSelectionChange={setSelectedUsers}
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div className="mt-8">
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 px-4 rounded-lg text-white font-medium ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-500 hover:bg-blue-600"
+              }`}
+            >
+              {loading ? "جاري الإضافة..." : "إضافة الإعلان"}
+            </button>
+          </div>
+        </form>
+      </div>
+      <Toaster position="top-center" />
     </div>
   );
 };

@@ -1,35 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AreaData } from "./data";
 
 const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
   const [selectedArea, setSelectedArea] = useState(initialData.area || "");
   const [selectedGovernments, setSelectedGovernments] = useState(
     initialData.governments || []
-
   );
 
-  console.log("initialData Area:", initialData);
+  // Memoize government options based on selected area to avoid unnecessary recalculations
+  const availableGovernments = useMemo(() => {
+    const area = AreaData.find((item) => item.name === selectedArea);
+    return area ? area.subGovernments : [];
+  }, [selectedArea]);
 
-
-  useEffect(() => {
-  if (initialData) {
-    setSelectedArea(initialData.area);
-    setSelectedGovernments(initialData.governments);
-  }
-}, [initialData]);
-
-
-  useEffect(() => {
-    if (onSelectionChange) {
-      onSelectionChange({ selectedArea, selectedGovernments });
-    }
-  }, [selectedArea, selectedGovernments, onSelectionChange]);
-
+  // Handle area change and clear selected governments when switching areas
   const handleAreaChange = (event) => {
-    setSelectedArea(event.target.value);
-    setSelectedGovernments([]);
+    const area = event.target.value;
+    setSelectedArea(area);
+    setSelectedGovernments([]); // Clear selection when switching areas
   };
 
+  // Handle individual government checkbox change
   const handleGovernmentChange = (event) => {
     const { value, checked } = event.target;
     setSelectedGovernments((prev) =>
@@ -37,22 +28,20 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
     );
   };
 
+  // Select all or clear all governments
   const handleSelectAll = (event) => {
-    if (event.target.checked) {
-      const allGovernments = getGovernmentsForSelectedArea();
-      setSelectedGovernments(allGovernments);
-    } else {
-      setSelectedGovernments([]);
-    }
+    setSelectedGovernments(event.target.checked ? availableGovernments : []);
   };
 
-  const getGovernmentsForSelectedArea = () => {
-    const area = AreaData.find((item) => item.name === selectedArea);
-    return area ? area.subGovernments : [];
-  };
+  // Trigger the parent's callback when selection changes
+  useEffect(() => {
+    if (onSelectionChange) {
+      onSelectionChange({ selectedArea, selectedGovernments });
+    }
+  }, [selectedArea, selectedGovernments, onSelectionChange]);
 
   return (
-    <div className=" mx-auto w-full bg-white p-6 border rounded-2xl shadow-xl h-fit">
+    <div className="mx-auto w-full bg-white p-6 border rounded-2xl shadow-xl h-fit">
       {/* Area Selector */}
       <label className="block text-xl font-bold text-gray-700 mb-3">
         اختر المنطقة:
@@ -70,7 +59,7 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
         ))}
       </select>
 
-      {selectedArea && (
+      {availableGovernments.length > 0 && (
         <div>
           {/* Select All Checkbox */}
           <div className="flex items-center mb-3">
@@ -78,8 +67,7 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
               type="checkbox"
               id="select-all"
               checked={
-                selectedGovernments.length ===
-                getGovernmentsForSelectedArea().length
+                selectedGovernments.length === availableGovernments.length
               }
               onChange={handleSelectAll}
               className="w-5 h-5 accent-blue-500 rounded-md"
@@ -91,7 +79,7 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
 
           {/* Governments Checkbox List */}
           <div className="h-48 overflow-y-scroll border border-gray-300 rounded-lg p-3 space-y-3 bg-gray-50">
-            {getGovernmentsForSelectedArea().map((government) => (
+            {availableGovernments.map((government) => (
               <div key={government} className="flex items-center">
                 <input
                   type="checkbox"

@@ -23,7 +23,7 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 
 const UserAds = () => {
-  const { getUserId } = useAuth();
+  const { user } = useAuth();
   const { UpdateCurrentUserAds, getUserAds } = useDashboard();
   const [Ads, setAds] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -32,23 +32,11 @@ const UserAds = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
-        const Uid = await getUserId();
-        setUserId(Uid);
-        console.log("User ID fetched:", Uid);
-
-        if (Uid) {
-          const data = await getUserAds(Uid);
-          setAds(data);
-          console.log("User Ads fetched:", data);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      const response = 
     };
 
     fetchUserData();
-  }, [getUserId]);
+  }, [user]);
 
   const onSubmit = (data) => {
     // Create a new object to store the sanitized data

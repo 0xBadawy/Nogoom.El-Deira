@@ -19,13 +19,12 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 
-function UserAdds({ selectedUserUid, usersData, onSave }) {
+function UserAdds({ selectedUserUid, onSave }) {
   const [userAdds, setUserAdds] = useState([]);
 
   useEffect(() => {
-    const user = usersData.find((user) => user.Uid === selectedUserUid);
-    setUserAdds(user?.ads || []);
-  }, [selectedUserUid, usersData]);
+    console.log("selectedUserUid", selectedUserUid);
+  }, [selectedUserUid]);
 
   return (
     <Card className="w-full max-w-4xl mt-10 mx-auto shadow-lg">

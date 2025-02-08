@@ -78,6 +78,17 @@ const userSchema = new Schema(
       type: Number,
       default: 50,
     },
+    ads: [
+      {
+        adId: { type: mongoose.Schema.Types.ObjectId, ref: "advertisement" },
+        links: [String], // User-specific links for that ad
+      },
+    ],
+    accountType: {
+      type: String,
+      enum: ["gold", "silver", "bronze", "none"],
+      default: "none",
+    },
 
     passwordChangedAt: Date,
     passwordResetCode: String,

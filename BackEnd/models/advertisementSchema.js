@@ -50,11 +50,12 @@ const advertisementSchema = new mongoose.Schema({
     ],
     default: [],
   },
-  users: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "user", 
-    default: [],
-  },
+  users: [
+    {
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+      links: [String], // Links added by this user specifically for the ad
+    },
+  ],
 });
 
 const Advertisement = mongoose.model("advertisement", advertisementSchema);

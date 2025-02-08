@@ -5,6 +5,7 @@ import { useDashboard } from "../../Context/DashboardContext";
 import { GovernmentData } from "../../Stars/SignUp/data";
 import UserAdds from "./UserAdds";
 import UserDetailsBalance from "./UserDetailsBalance"; // استيراد المكون الجديد
+import axiosInstance from "../../Configuration/axiosInstance";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
@@ -39,9 +40,20 @@ const Users = () => {
   const [area, setArea] = useState("");
 
   useEffect(() => {
-    const users = allUsers;
-    // console.log("users", users);
-    setUsersData(users);
+    
+    const featchUsers = async () => {
+      try {
+        const response = await axiosInstance.get("/user/all_users");
+        console.log(response.data.data);
+        setUsersData(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    featchUsers();
+  
+  
+    // setUsersData(users);
   }, [allUsers]);
 
   const Area = (areas) => {
@@ -54,7 +66,7 @@ const Users = () => {
   const handleSave = (updatedUser) => {
     setUsersData((prevState) =>
       prevState.map((user) =>
-        user.Uid === updatedUser.Uid ? updatedUser : user
+        user._id === updatedUser._id ? updatedUser : user
       )
     );
     updateUser(updatedUser);
@@ -85,10 +97,10 @@ const Users = () => {
 
             <select
               value={selectedGovern}
-              onChange={(e) => {setSelectedGovern(e.target.value);
+              onChange={(e) => {
+                setSelectedGovern(e.target.value);
                 setCurrentPage(1);
-              }
-              }
+              }}
               className="border rounded px-2 py-1"
               disabled={selectedRegion === "all"}
             >
@@ -126,16 +138,16 @@ const Users = () => {
                 row.role === "star" && (
                   <tr
                     key={index}
-                    onClick={() => setSelectedUser(row.Uid)}
+                    onClick={() => setSelectedUser(row._id)}
                     className={`border-b hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                      row.Uid === selectedUser
+                      row._id === selectedUser
                         ? "bg-gray-200 dark:bg-gray-600"
                         : ""
                     }`}
                   >
                     <td className="py-2 px-4">{row.name}</td>
-                    <td className="py-2 px-4">{row.govern}</td>
-                    <td className="py-2 px-4">{Area(row.area)}</td>
+                    <td className="py-2 px-4">{row.address.area}</td>
+                    <td className="py-2 px-4">{Area(row.address.govern)}</td>
                     <td className="py-2 px-4">{row.balance}</td>
 
                     <td className="py-2 px-4">{row.ads?.length}</td>
@@ -206,17 +218,13 @@ const Users = () => {
         />
       )}
 
-
-{selectedUser && (
+      {selectedUser && (
         <UserDetailsBalance
           selectedUserUid={selectedUser}
           usersData={usersData}
           onSave={handleSave}
         />
       )}
-
-
-
     </div>
   );
 };
