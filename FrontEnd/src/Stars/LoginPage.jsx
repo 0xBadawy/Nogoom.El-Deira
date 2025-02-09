@@ -10,11 +10,12 @@ import Logo from "../../src/assets/Images/Logo/Deira-logo2.png";
 import LoginImage from "../../src/assets/Images/LoginStar.jpg";
 import { useAuth } from "../Context/AuthContext";
 import { toast } from "sonner";
+import axiosInstance from "../Configuration/axiosInstance";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, logOut } = useAuth();
+  const { login } = useAuth();
   const redirectPath = location.state?.path || "/";
 
   const [error, setError] = useState(null);
@@ -35,23 +36,20 @@ const LoginPage = () => {
 
 
   const onFormSubmit = async (data) => {
-    try {
-      await login(data.email, data.password);
-      toast.success("تم تسجيل الدخول بنجاح");
-      navigate("/profile");
-    } catch (error) {
-      console.error("Error during login:", error);
-      setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
-
-      // Handle specific Firebase error codes
-      if (error.code === "auth/user-not-found") {
-        toast.error("البريد الإلكتروني غير مسجل");
-      } else if (error.code === "auth/wrong-password") {
-        toast.error("كلمة المرور غير صحيحة");
-      } else {
-        toast.error("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+    const { email, password } = data;
+    const loginR = async () => {
+      try {
+        const response = await axiosInstance.post("/auth/signin", { email, password });
+        const { data } = response;
+        console.log(data);
+        login(data);
+        localStorage.setItem("token", data.token);
+      } catch (error) {
+        const errorMessage = handleFirebaseError(error);
+        setError(errorMessage);
       }
     }
+    loginR();
   };
 
 

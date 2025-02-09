@@ -25,6 +25,25 @@ router.get("/notifications", async (req, res) => {
   }
 });
 
+router.put("/read-notification", async (req, res) => {
+  try {
+    const { notificationId } = req.body;
+    await Notification.findByIdAndUpdate(notificationId, { isRead: true });
+    res.status(200).json({ success: true,
+      message: "تم تحديث الإشعار بنجاح",
+      data: { notificationId },
+
+
+     }
+
+    );
+  } catch (error) {
+    res.status(500).json({ error: "خطأ في تحديث الإشعار" });
+  }
+}
+);
+
+
 
 
 router.post('/notifications', async (req, res) => {
