@@ -23,5 +23,6 @@ const TierSelection = ({ tiers, register, id }) => {
     </div>
   );
 };
+ 
 
 export default TierSelection;
