@@ -202,14 +202,6 @@ const Users = () => {
         </div>
       </div>
 
-      {/* عرض وتعديل بيانات المستخدم */}
-      {selectedUser && (
-        <UserAdds
-          selectedUserUid={selectedUser}
-          usersData={usersData}
-          onSave={handleSave}
-        />
-      )}
       {selectedUser && (
         <UserDetails
           selectedUserUid={selectedUser}

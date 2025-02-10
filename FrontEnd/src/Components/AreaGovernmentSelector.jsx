@@ -2,11 +2,20 @@ import React, { useState, useEffect, useMemo } from "react";
 import { AreaData } from "./data";
 
 const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
-  const [selectedArea, setSelectedArea] = useState(initialData.area || "");
-  
-  const [selectedGovernments, setSelectedGovernments] = useState(
-    initialData.governments || []
-  );
+  const [selectedArea, setSelectedArea] = useState("");
+  const [selectedGovernments, setSelectedGovernments] = useState([]);
+
+  // Synchronize initial data with state when initialData changes
+  useEffect(() => {
+    if (initialData.area) {
+      setSelectedArea(initialData.area);
+    }
+    if (initialData.governments) {
+      setSelectedGovernments(initialData.governments);
+    }
+  }, [initialData]);
+
+  console.log("Initial Data from Props:", initialData);
 
   // Memoize government options based on selected area to avoid unnecessary recalculations
   const availableGovernments = useMemo(() => {

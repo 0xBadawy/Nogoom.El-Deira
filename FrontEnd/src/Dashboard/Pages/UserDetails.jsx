@@ -1,236 +1,318 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDashboard } from "../../Context/DashboardContext";
-import { GovernmentData, Tiers } from "../../Stars/SignUp/data";
+import React, { useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useAuth } from "../../Context/AuthContext";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
+import { Button } from "@/Components/ui/button";
+import { Textarea } from "@/Components/ui/textarea";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../Configuration/Firebase";
 import toast, { Toaster } from "react-hot-toast";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
+import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
+import axiosInstance from "../../Configuration/axiosInstance";
 
-const UserDetails = ({ selectedUserUid, usersData, onSave }) => {
-  const {
-
-    register,
-    handleSubmit,
-    setValue,
-    reset,watch,
-    formState: { errors },
-  } = useForm();
+const AccountSettings = ({ selectedUserUid, usersData        }) => {
 
 
-  const [selectedItems, setSelectedItems] = useState([]);
+  const { user, updateUser } = useAuth();
+  const [userData, setUserData] = useState({});
+  const [address, setAddress] = useState({});
+  const [imageURL, setImageURL] = useState("");
+  const { control, handleSubmit, setValue } = useForm();
+  const [selectedAddress, setSelectedAddress] = useState({});
+  const [uploadImageProgress, setUploadImageProgress] = useState(0);
+  const [socialLinks, setSocialLinks] = useState(userData?.social || []);
 
+  // const preloadedData = {
+  //   area: "الرياض",
+  //   governments: ["الرياض"],
+  // };
 
-  const handleSelectChange = (event) => {
-    const selectedValue = event.target.value;
-    const selectedGovernment = GovernmentData.find(
-      (gov) => gov.name === selectedValue
-    );
-    setSelectedItems(
-      selectedGovernment ? selectedGovernment.subGovernments : []
-    );
-    console.log("selectedGovernment", selectedGovernment)
-    console.log("selectedItems", selectedItems)
-  };
+  useEffect(() => {
+    console.log("Form edit USer User Data:", usersData);
+    console.log("Form edit USer User Data:", selectedUserUid);
 
+    const user = usersData.find((user) => user._id === selectedUserUid);
+    console.log("Form edit USer User Data:", user);
+
+    if (user) {
+      setUserData(user);
+      setAddress({
+        area: user.address?.area || "",
+        governments: user.address?.govern || [],
+      });
+      console.log("User address  --------- :", address);
+    }
+  }, [selectedUserUid]);
 
 
   useEffect(() => {
-    const user = usersData.find((user) => user.Uid === selectedUserUid);
-    if (user) {
-      // Set default values using reset
-      reset(user);
-    }
-  }, [selectedUserUid, usersData, reset]);
+    console.log("Updated address:", address);
+  }, [address]);
+
+  const handleInputChange = (index, value) => {
+    const updatedLinks = [...socialLinks];
+    updatedLinks[index].link = value;
+    setSocialLinks(updatedLinks);
+  };
 
   const onSubmit = (data) => {
+    const allData = {
+      ...data,
+      selectedAddress,
+      profilePicture: imageURL,
+      verified: false,
+      socialLinks,
+    };
 
+    console.log(allData);
 
-    confirmAlert({
-      title: "تأكيد الحفظ",
-      message: "هل تريد بالتأكيد حفظ التعديلات؟",
-      buttons: [
-        {
-          label: "نعم",
-          onClick: () => {
-            onSave(data);
-            toast.success("تم حفظ التعديلات بنجاح");
-          },
-        },
-        {
-          label: "إلغاء",
-          onClick: () => {
-            toast.error("تم إلغاء العملية");
-          },
-        },
-      ],
+    // if (!address.govern) {
+    //   toast.error("يجب إدخال المنطقة.");
+    //   return;
+    // }
+
+    // if (!address.area || address.area.length === 0) {
+    //   toast.error("يجب اختيار المحافظة.");
+    //   return;
+    // }
+
+    // if (!/^\d{10,11}$/.test(data.phone)) {
+    //   toast.error(
+    //     "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
+    //   );
+    //   return;
+    // }
+
+    const updatedData = async () => {
+      try {
+        const response = await axiosInstance.put(
+          "/user/update_loggedin_user",
+          allData
+        );
+        console.log(response.data);
+        await updateUser(response.data.data);
+      } catch (error) {
+        console.error("خطأ في تحديث البيانات:", error);
+      }
+    };
+
+    updatedData();
+    //
+
+    toast.success("تم حفظ التعديلات بنجاح");
+    console.log(updatedData); // Use this to debug the final payload.
+  };
+
+  const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
+    setSelectedAddress((prevState) => {
+      if (
+        prevState.area === selectedArea &&
+        JSON.stringify(prevState.govern) === JSON.stringify(selectedGovernments)
+      ) {
+        return prevState; // Avoid unnecessary re-renders
+      }
+      return { area: selectedArea, govern: selectedGovernments };
     });
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
+    if (!file.type.startsWith("image/")) {
+      toast.error("يرجى رفع ملف صورة فقط.");
+      return;
+    }
 
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("حجم الصورة كبير جدًا. الحد الأقصى هو 2 ميغابايت.");
+      return;
+    }
 
+    setUploadImageProgress(0);
+    const fileName = userData.email || "noUser";
+    const storageRef = ref(storage, `${fileName}/profile/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadImageProgress(progress);
+      },
+      (error) => {
+        toast.error("خطأ أثناء رفع الصورة.");
+        console.error("خطأ أثناء رفع الصورة:", error);
+      },
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setImageURL(downloadURL);
+          setUploadImageProgress(0);
+          toast.success("تم رفع الصورة بنجاح.");
+        } catch (err) {
+          console.error("خطأ في الحصول على رابط التنزيل:", err);
+        }
+      }
+    );
+  };
 
   return (
-    <div className=" h-fit dark:bg-gray-900 p-5 rounded-lg">
-      <h3 className="font-bold">بيانات المستخدم</h3>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="mb-4 grid grid-cols-6 gap-3"
-      >
-
-        {/* Name */}
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
-          <label className="block mb-2 text-right">
-            الاسم
-            <input
-              type="text"
-              {...register("name")}
-              className="w-full p-2 mt-2  rounded-lg dark:bg-gray-800"
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-3xl font-bold text-indigo-900 mt-10">
+          إعدادات الحساب
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="mb-6 text-gray-600">
+          يمكنك هنا تحديث بيانات حسابك بما في ذلك التفاصيل الشخصية وصورتك
+          الشخصية.
+        </p>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="flex flex-col items-center mb-6">
+            <Controller
+              name="profilePicture"
+              control={control}
+              render={({ field }) => (
+                <img
+                  className="object-cover w-32 h-32 rounded-full ring-4 ring-indigo-300 mb-4"
+                  src={
+                    imageURL ||
+                    userData.profileImage ||
+                    "https://via.placeholder.com/150"
+                  }
+                  alt="Profile"
+                />
+              )}
             />
-          </label>
-        </div>
-        {/* Email */}
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
-          <label className="block mb-2 text-right">
-            البريد الإلكتروني
-            <input
-              type="email"
-              {...register("email")}
-              className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-            />
-          </label>
-        </div>
-        {/* Phone */}
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
-          <label className="block mb-2 text-right">
-            الهاتف
-            <input
-              type="tel"
-              {...register("phone")}
-              className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-            />
-          </label>
-        </div>
-
-
-
-
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
-          <div className="mb-4">
-            <label className="block text-gray-700">{"المنطقة"}</label>
-            <select
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none"
-              {...register("govern")}
-              onChange={handleSelectChange}
-            >
-              <option value="">اختر المنطقة</option>
-              {GovernmentData.map((gov) => (
-                <option key={gov.name} value={gov.name}>
-                  {gov.name}
-                </option>
-              ))}
-            </select>
+            <Label htmlFor="profilePicture" className="cursor-pointer">
+              <span className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300">
+                تغيير الصورة الشخصية
+              </span>
+              <Input
+                id="profilePicture"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
+              {uploadImageProgress !== 0 && (
+                <div className="relative w-full mt-4 h-2 bg-gray-200 rounded-lg dark:bg-gray-700">
+                  <div
+                    className="absolute top-0 left-0 h-2 rounded-lg bg-blue-500"
+                    style={{ width: `${uploadImageProgress}%` }}
+                  ></div>
+                </div>
+              )}
+            </Label>
           </div>
-        </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="name">اسم الشهرة او الحساب*</Label>
+              <Controller
+                name="name"
+                control={control}
+                rules={{ required: "الاسم الكامل مطلوب" }}
+                render={({ field, fieldState: { error } }) => (
+                  <>
+                    <Input {...field} />
+                    {error && (
+                      <span className="text-red-500 text-sm">
+                        {error.message}
+                      </span>
+                    )}
+                  </>
+                )}
+              />
+            </div>
 
-        <div className="mb-4 grid   md:col-span-2 col-span-6 ">
+            <div className="space-y-2">
+              <Label htmlFor="phone">رقم الهاتف*</Label>
+              <Controller
+                name="phone"
+                control={control}
+                rules={{ required: "رقم الهاتف مطلوب" }}
+                render={({ field, fieldState: { error } }) => (
+                  <>
+                    <Input {...field} />
+                    {error && (
+                      <span className="text-red-500 text-sm">
+                        {error.message}
+                      </span>
+                    )}
+                  </>
+                )}
+              />
+            </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">{"المحافظة"}</label>
-            <select
-              multiple
-              className="w-full h-40 border rounded-lg overflow-auto"
-              {...register("area")}
-            >
-              {selectedItems.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+            <AreaGovernmentSelector
+              initialData={
+                // Object.keys(address).length > 0 ?
+                 address
+                  // : preloadedData
+              }
+              onSelectionChange={handleSelectionChange}
+            />
+
+            <div className="grid grid-cols-3 gap-6">
+              <label htmlFor="">التواصل الاجتماعي</label>
+
+              {socialLinks.map(
+                (item, index) =>
+                  (item.link || item.label) && (
+                    <div key={index} className="space-y- col-span-3">
+                      <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
+                        <input
+                          type="url"
+                          value={item.link || ""}
+                          onChange={(e) =>
+                            handleInputChange(index, e.target.value)
+                          }
+                          className="w-full bg-gray-100 border-none focus:ring-0"
+                          placeholder={`أدخل الرابط لـ ${
+                            item.label || "التواصل الاجتماعي"
+                          }`}
+                        />
+                      </div>
+                    </div>
+                  )
+              )}
+
+              {/* زر إضافة رابط جديد */}
+              <button
+                type="button"
+                onClick={() =>
+                  setSocialLinks([...socialLinks, { label: "", link: " " }])
+                }
+                className="col-span-3 mt-4 max-h-10 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+              >
+                إضافة رابط جديد
+              </button>
+            </div>
+
+            <div className="space-y-2 col-span-2">
+              <Label htmlFor="bio">نبذة عنك</Label>
+              <Controller
+                name="bio"
+                control={control}
+                render={({ field }) => <Textarea {...field} rows={4} />}
+              />
+            </div>
           </div>
-        </div>
 
-
-        <div className="col-span-6">
-  <div>روابط التواصل الاجتماعى</div>
-
-  {watch("facebook") && (
-    <div className="mb-4 grid md:col-span-2 col-span-3">
-      <label className="block mb-2 text-right">
-        <input
-          type="text"
-          {...register("facebook")}
-          className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-        />
-      </label>
-    </div>
-  )}
-
-  {watch("instagram") && (
-    <div className="mb-4 grid md:col-span-2 col-span-3">
-      <label className="block mb-2 text-right">
-        <input
-          type="text"
-          {...register("instagram")}
-          className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-        />
-      </label>
-    </div>
-  )}
-
-  {watch("snapchat") && (
-    <div className="mb-4 grid md:col-span-2 col-span-3">
-      <label className="block mb-2 text-right">
-        <input
-          type="text"
-          {...register("snapchat")}
-          className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-        />
-      </label>
-    </div>
-  )}
-
-  {watch("tiktok") && (
-    <div className="mb-4 grid md:col-span-2 col-span-3">
-      <label className="block mb-2 text-right">
-        <input
-          type="text"
-          {...register("tiktok")}
-          className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-        />
-      </label>
-    </div>
-  )}
-
-  {watch("twitter") && (
-    <div className="mb-4 grid md:col-span-2 col-span-3">
-      <label className="block mb-2 text-right">
-        <input
-          type="text"
-          {...register("twitter")}
-          className="w-full p-2 mt-2 rounded-lg dark:bg-gray-800"
-        />
-      </label>
-    </div>
-  )}
-</div>
-
-
-        <div className="mb-4 grid h-fit  md:col-span-6 col-span-6 ">
-          <button
-            type="submit"
-            className="px-6 py-2 mt-4 h-fit bg-blue-500 text-white rounded-lg"
-          >
-            حفظ التعديلات
-          </button>
-        </div>
-      </form>
+          <Button type="submit" className="w-full text-white">
+            حفظ التغييرات
+          </Button>
+        </form>
+      </CardContent>
       <Toaster position="top-center" reverseOrder={false} />
-    </div>
+    </Card>
   );
 };
 
-export default UserDetails;
+export default AccountSettings;

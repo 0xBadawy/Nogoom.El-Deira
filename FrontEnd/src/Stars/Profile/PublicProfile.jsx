@@ -56,52 +56,13 @@ const PublicProfile = () => {
     { label: " اسم الشهرة او الحساب ", value: userData?.name },
     { label: "عنوان البريد الإلكتروني", value: userData?.email },
     { label: "رقم الهاتف", value: userData?.phone },
-    { label: "تاريخ إنشاء الحساب", value: formatDate(userData.createdAt) },
+    { label: "تاريخ إنشاء الحساب", value: formatDate(userData?.createdAt) },
     { label: "المنطقة", value: userData.address?.area },
     { label: "المحافظات", value: userData.address?.govern.join(", ") },
     { label: "رصيد الحساب", value: `$${userData.balance}` },
-    // { label: "رقم الحساب الدولي (IBAN)", value: userData.iban },
     { label: "تم التحقق", value: userData.verified ? "نعم" : "لا" },
   ];
 
-  const SocialMedia = [
-    {
-      icon: FaFacebook,
-      label: "Facebook",
-      value: userData.facebook,
-      link: userData.facebook,
-    },
-    {
-      icon: FaInstagram,
-      label: "Instagram",
-      value: userData.instagram,
-      link: userData.instagram,
-    },
-    {
-      icon: FaSnapchat,
-      label: "Snapchat",
-      value: userData.snapchat,
-      link: userData.snapchat,
-    },
-    {
-      icon: FaTiktok,
-      label: "Tiktok",
-      value: userData.tiktok,
-      link: userData.tiktok,
-    },
-    {
-      icon: FaTwitter,
-      label: "Twitter",
-      value: userData.twitter,
-      link: userData.twitter,
-    },
-    {
-      icon: FaYoutube ,
-      label: "Youtube",
-      value: userData.youtube,
-      link: userData.youtube,
-    },
-  ];
 
   return (
     <Card>
