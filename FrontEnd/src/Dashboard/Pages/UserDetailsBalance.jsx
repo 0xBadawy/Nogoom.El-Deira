@@ -10,7 +10,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   const { 
     register, 
     handleSubmit,
-    reset,
+    reset, 
     formState: { errors },
   } = useForm();
    const Tiers = [

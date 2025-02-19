@@ -18,7 +18,16 @@ const Employees = () => {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get("/user/all_users_admin");
-        setUsersData(response.data.data);
+
+
+        const sortedUsers = response.data.data.sort(
+          (a, b) => new Date(b.lastSeen) - new Date(a.lastSeen)
+        );
+
+        console.log("Sorted Users:", sortedUsers);
+
+
+        setUsersData(sortedUsers  );
       } catch (error) {
         toast.error("فشل في تحميل البيانات");
       }
@@ -39,12 +48,40 @@ const Employees = () => {
   };
 
   const confirmDelete = () => {
-    deleteUserFromDB(selectedUser);
-    setUsersData((prev) => prev.filter((user) => user._id !== selectedUser));
-    setSelectedUser(null);
-    toast.success("تم حذف الموظف بنجاح", {
-      description: new Date().toLocaleString(),
-    });
+    const handelDelet = async () => {
+      try {
+        const response = await axiosInstance.delete(`/user/delete_user`, {
+          params: { id: selectedUser },
+        });
+
+        console.log("Response:", response);
+
+        
+
+
+        if (response.data.status === "error") {
+          toast.error(response.data.message);
+          return;
+        }
+        toast.success("تم حذف الموظف بنجاح");
+
+        setUsersData((prev) =>
+          prev.filter((user) => user._id !== selectedUser)
+        );
+        setSelectedUser(null);
+        setIsDialogOpen(false);
+      } catch (error) {
+        toast.error("حدث خطأ أثناء حذف الموظف.");
+      }
+    };
+    handelDelet();
+
+    // deleteUserFromDB(selectedUser);
+    // setUsersData((prev) => prev.filter((user) => user._id !== selectedUser));
+    // setSelectedUser(null);
+    // toast.success("تم حذف الموظف بنجاح", {
+    //   description: new Date().toLocaleString(),
+    // });
     setIsDialogOpen(false);
   };
 
@@ -74,64 +111,104 @@ const Employees = () => {
     return formattedDate.toLocaleString();
   };
 
+
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 5; // عدد المستخدمين في كل صفحة
+
+    // تصفية المستخدمين غير المحذوفين
+    const filteredUsers = usersData?.filter(
+      (user) => user.role !== "star" && !user.isDeleted
+    );
+
+    // حساب عدد الصفحات
+    const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+
+    // تحديد المستخدمين للصفحة الحالية
+    const paginatedUsers = filteredUsers.slice(
+      (currentPage - 1) * usersPerPage,
+      currentPage * usersPerPage
+    );
+
+    
+
   return (
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">النجوم</h2>
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 w-full max-w-screen overflow-x-auto">
         <AddEmployees />
-        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-          <h3 className="text-lg font-semibold mb-4">قائمة المستخدمين</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr className="border-b bg-gray-50">
-                  <th className="py-2 px-4 text-right">الاسم</th>
-                  <th className="py-2 px-4 text-right hidden sm:table-cell">
-                    البريد الإلكتروني
-                  </th>
-                  <th className="py-2 px-4 text-right hidden md:table-cell">
-                    اخر ظهور
-                  </th>
-                  <th className="py-2 px-4 text-right">الوظيفية</th>
-                </tr>
-              </thead>
-              <tbody>
-                {usersData
-                  ?.filter((user) => user.role !== "star" && !user.isDeleted)
-                  .map((user) => (
-                    <tr
-                      key={user._id}
-                      onClick={() => handleUserSelection(user._id)}
-                      className={`border-b cursor-pointer ${
-                        user._id === selectedUser ? "bg-gray-200" : ""
-                      } hover:bg-gray-100`}
-                    >
-                      <td className="py-2 px-4">{user.name}</td>
-                      <td className="py-2 px-4 hidden sm:table-cell">
-                        {user.email}
-                      </td>
-                      <td className="py-2 px-4 hidden md:table-cell">
-                        <LastSeenAgo lastSeenDate={user.lastSeen} />
-                        </td>
-                      <td className="py-2 px-4">
-                        {user.role === "admin"
-                          ? "مدير"
-                          : user.role === "editor"
-                          ? "محرر"
-                          : "مشاهد"}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+     
+     
+     
+     {/* 000000000000000000000000000000000000000 */}
+
+         <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+      <h3 className="text-lg font-semibold mb-4">قائمة المستخدمين</h3>
+      <div className="overflow-x-auto">
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr className="border-b bg-gray-50">
+              <th className="py-2 px-4 text-right">الاسم</th>
+              <th className="py-2 px-4 text-right hidden md:table-cell">
+                اخر ظهور
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedUsers.map((user) => (
+              <tr
+                key={user._id}
+                onClick={() => handleUserSelection(user._id)}
+                className={`border-b cursor-pointer ${
+                  user._id === selectedUser ? "bg-gray-200" : ""
+                } hover:bg-gray-100`}
+              >
+                <td className="py-2 px-4">{user.name}</td>
+                <td className="py-2 px-4 hidden md:table-cell">
+                  <LastSeenAgo lastSeenDate={user.lastSeen} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* أزرار التنقل بين الصفحات */}
+      <div className="flex justify-center mt-4 space-x-2">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded ${
+            currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
+          }`}
+        >
+          السابق
+        </button>
+        <span className="px-4 py-2">{currentPage} من {totalPages}</span>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded ${
+            currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
+          }`}
+        >
+          التالي
+        </button>
+      </div>
+    </div>
+
+
+     {/* 000000000000000000000000000000000000000 */}
+
+
+
+
         {selectedUserDetails && (
           <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
             <h3 className="text-lg font-semibold mb-4">بيانات المستخدم</h3>
             <div className="flex flex-col md:flex-row">
               <div className="md:w-1/2">
-                {["name", "email", "username", "role", "phone"].map((field) => (
+                {["name", "email", "role", "phone"].map((field) => (
                   <div key={field} className="flex items-center mb-4">
                     <span className="w-32">
                       {field === "role"

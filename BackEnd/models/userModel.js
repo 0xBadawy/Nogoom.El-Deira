@@ -91,7 +91,7 @@ const userSchema = new Schema(
     },
     lastSeen: {
       type: Date,
-      default: Date.now(),
+      default: Date.now,
     },
 
     passwordChangedAt: Date,

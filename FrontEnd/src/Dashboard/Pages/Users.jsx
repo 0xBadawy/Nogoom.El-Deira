@@ -7,6 +7,7 @@ import UserAdds from "./UserAdds";
 import UserDetailsBalance from "./UserDetailsBalance"; // استيراد المكون الجديد
 import axiosInstance from "../../Configuration/axiosInstance";
 import { useParams } from "react-router-dom";
+import { AiFillStar } from "react-icons/ai";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
@@ -76,6 +77,25 @@ const Users = () => {
     updateUser(updatedUser);
   };
 
+
+
+  const getStarColor = (accountType) => {
+    switch (accountType) {
+      case "none":
+        return "text-white";
+      case "silver":
+        return "text-gray-300"; // نجمة ذهبية
+      case "gold":
+        return "text-yellow-500"; // نجمة ذهبية
+      case "bronze":
+        return "text-yellow-200"; // نجمة برونزية
+      default:
+        return ""; // لا تظهر النجمة
+    }
+  };
+
+
+
   return (
     <div className="grow md:p-8 p-2  dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">النجوم</h2>
@@ -127,12 +147,12 @@ const Users = () => {
           <thead>
             <tr className="border-b">
               <th className="py-2 px-4 text-right min-w-36 ">الاسم</th>
-              <th className="py-2 px-4 text-right">المنطقة</th>
+              {/* <th className="py-2 px-4 text-right">المنطقة</th>
               <th className="py-2 px-4 text-right">المحافظة</th>
               <th className="py-2 px-4 text-right">الرصيد</th>
 
               <th className="py-2 px-4 text-right">عدد الحملات</th>
-              <th className="py-2 px-4 text-center">القبول</th>
+              <th className="py-2 px-4 text-center">القبول</th> */}
               <th className="py-2 px-4 text-right">فئة النجم</th>
             </tr>
           </thead>
@@ -150,8 +170,8 @@ const Users = () => {
                     }`}
                   >
                     <td className="py-2 px-4">{row.name}</td>
-                    <td className="py-2 px-4">{row.address.area}</td>
-                    <td className="py-2 px-4">{Area(row.address.govern)}</td>
+                    {/* <td className="py-2 px-4">{row.address.area}</td> */}
+                    {/* <td className="py-2 px-4">{Area(row.address.govern)}</td>
                     <td className="py-2 px-4">{row.balance}</td>
 
                     <td className="py-2 px-4">{row.ads?.length}</td>
@@ -165,8 +185,13 @@ const Users = () => {
                       >
                         {row.verified ? "مقبول" : "قيد المراجعة"}
                       </span>
+                    </td>*/}
+                    <td className="py-2 px-4 flex items-center gap-2">
+                      {row.accountType !== "غير مقبول" && (
+                        <AiFillStar className={getStarColor(row.accountType)} />
+                      )}
                     </td>
-                    <td className="py-2 px-4">{row.accountType}</td>
+
                   </tr>
                 )
             )}

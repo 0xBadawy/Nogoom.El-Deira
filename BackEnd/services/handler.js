@@ -311,9 +311,7 @@ export const getAll = (Model) =>
 
 export const getAllAdmins = (Model) =>
   asyncHandler(async (req, res, next) => {
-    const apiFeatures = new ApiFeatures(Model.find( 
-      { role: { $in: ["admin", "manager", "editor"] } }
-    ), req.query)
+    const apiFeatures = new ApiFeatures(Model.find(), req.query)
       .filter()
       .sort()
       .limitFields()

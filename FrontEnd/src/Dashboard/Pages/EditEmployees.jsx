@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../Context/AuthContext";
 import { confirmAlert } from "react-confirm-alert";
 import toast, { Toaster } from "react-hot-toast";
+import axiosInstance from "../../Configuration/axiosInstance";
 
 const EditEmployees = ({ userData, onUserUpdated }) => {
   const {
-    register,
+    register, 
     handleSubmit,
     setValue,
     reset,
@@ -50,6 +51,10 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
       try {
         await handleUserSubmission(formData, isUpdate);
         alert("تمت العملية بنجاح!"); // Optional success message
+        // reload 
+
+        window.location.reload();
+
       } catch (error) {
         console.error("حدث خطأ أثناء العملية:", error);
         alert("حدث خطأ أثناء العملية."); // Optional error message
@@ -61,48 +66,13 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
   
 
   const handleUserSubmission = async (formData, isUpdate) => {
-    setError(null);
-    setLoading(true);
-
-    try {
-      const { email, password, role, ...otherData } = formData;
-
-      if (isUpdate) {
-        // Update user logic
-        const result = await updateUser(userData.Uid, {
-          email,
-          role,
-          ...otherData,
-        });
-
-        if (!result.success) {
-          setError(handleFirebaseError(result.error));
-          return;
-        }
-
-        toast.success("تم تحديث بيانات الموظف بنجاح!");
-        onUserUpdated && onUserUpdated(result.data); // Callback to parent
-      } else {
-        // Add new user logic
-        const result = await signUp(email, password, otherData, role);
-
-        if (!result.success) {
-          setError(handleFirebaseError(result.error));
-          return;
-        }
-
-        toast.success("تم إضافة الموظف بنجاح!");
-        reset();
+      const response  = await axiosInstance.put(`/user/update_user/${userData._id}`, formData);
+      console.log("Response:", response);
+      if (response.data.status === "error") {
+        throw new Error(response.data.message);
       }
-    } catch (error) {
-      const errorMessage = error?.code
-        ? handleFirebaseError(error.code)
-        : "حدث خطأ غير متوقع!";
-      setError(errorMessage);
-      console.error("Error during submission:", error.message || error);
-    } finally {
-      setLoading(false);
-    }
+      onUserUpdated(response.data.data);
+
   };
 
   return (
@@ -120,12 +90,16 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="أدخل الاسم"
           />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          )}
         </div>
 
         {/* Email Field */}
         <div>
-          <label className="block text-gray-700 font-medium mb-1">البريد الإلكتروني</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            البريد الإلكتروني
+          </label>
           <input
             type="email"
             {...register("email", {
@@ -138,12 +112,16 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="أدخل البريد الإلكتروني"
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
 
         {/* Username Field */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">اسم المستخدم</label>
+        {/* <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            اسم المستخدم
+          </label>
           <input
             type="text"
             {...register("username", { required: "اسم المستخدم مطلوب" })}
@@ -153,24 +131,30 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
           {errors.username && (
             <p className="text-red-500 text-sm">{errors.username.message}</p>
           )}
-        </div>
+        </div> */}
 
         {/* Phone Field */}
         <div>
-          <label className="block text-gray-700 font-medium mb-1">رقم الهاتف</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            رقم الهاتف
+          </label>
           <input
             type="text"
             {...register("phone", { required: "رقم الهاتف مطلوب" })}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="أدخل رقم الهاتف"
           />
-          {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+          {errors.phone && (
+            <p className="text-red-500 text-sm">{errors.phone.message}</p>
+          )}
         </div>
 
         {/* Password Field */}
         {!userData && (
           <div>
-            <label className="block text-gray-700 font-medium mb-1">كلمة المرور</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              كلمة المرور
+            </label>
             <input
               type="password"
               {...register("password", {
@@ -191,7 +175,9 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
 
         {/* Role Field */}
         <div>
-          <label className="block text-gray-700 font-medium mb-1">الصلاحيات</label>
+          <label className="block text-gray-700 font-medium mb-1">
+            الصلاحيات
+          </label>
           <select
             {...register("role", { required: "الصلاحيات مطلوبة" })}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -199,9 +185,11 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
             <option value="">اختر الصلاحيات</option>
             <option value="admin">مدير</option>
             <option value="editor">محرر</option>
-            <option value="viewer">مشاهد</option>
+            <option value="manager">مشاهد</option>
           </select>
-          {errors.role && <p className="text-red-500 text-sm">{errors.role.message}</p>}
+          {errors.role && (
+            <p className="text-red-500 text-sm">{errors.role.message}</p>
+          )}
         </div>
 
         {/* Submit Button */}
@@ -210,7 +198,11 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
           disabled={loading}
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200"
         >
-          {loading ? "جارٍ الحفظ..." : userData ? "تحديث البيانات" : "حفظ البيانات"}
+          {loading
+            ? "جارٍ الحفظ..."
+            : userData
+            ? "تحديث البيانات"
+            : "حفظ البيانات"}
         </button>
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </form>
