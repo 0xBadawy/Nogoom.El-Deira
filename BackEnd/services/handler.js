@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/userModel.js";
 import mongoose from "mongoose";
 import Notification from "../models/notificationSchema.js";
+import { sendNotificationToRoles } from "../functions/notification.js";
 
 export const deleteOne = (Model) =>
   asyncHandler(async (req, res, next) => {
@@ -178,20 +179,28 @@ export const createOne = (Model) =>
           data: doc,
         });
 
-         const targetUsers = await Model.find({
-           role: { $in: ["admin", "manager", "editor"] },
-         });
+        //  const targetUsers = await Model.find({
+        //    role: { $in: ["admin", "manager", "editor"] },
+        //  });
 
-         // إنشاء إشعارات للمستخدمين
-         const notifications = targetUsers.map((user) => ({
-           userId: user._id,
-           title: "مستخدم جديد",
-           message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
-         }));
-         console.log("Notifications:", notifications);
+        //  // إنشاء إشعارات للمستخدمين
+        //  const notifications = targetUsers.map((user) => ({
+        //    userId: user._id,
+        //    title: "مستخدم جديد",
+        //    message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+        //  }));
+        //  console.log("Notifications:", notifications);
 
-         // حفظ الإشعارات في قاعدة البيانات
-         await Notification.insertMany(notifications);
+        //  // حفظ الإشعارات في قاعدة البيانات
+        //  await Notification.insertMany(notifications);
+
+        sendNotificationToRoles(
+          ["admin", "manager", "editor","star"],
+          "مستخدم جديد",
+          `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+          doc._id,
+          "newAdmin"          
+        );
 
          
       } catch (err) {
@@ -297,6 +306,29 @@ export const getAll = (Model) =>
       data: category,
     });
   });
+
+
+
+export const getAllAdmins = (Model) =>
+  asyncHandler(async (req, res, next) => {
+    const apiFeatures = new ApiFeatures(Model.find( 
+      { role: { $in: ["admin", "manager", "editor"] } }
+    ), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .search()
+      .paginate();
+
+    const { mongooseQuery, paginationResult } = apiFeatures;
+    const category = await mongooseQuery;
+    res.json({
+      paginationResult,
+      results: category.length,
+      data: category,
+    });
+  });
+
 
 export const getCurruntUserHomes = (Model) =>
   asyncHandler(async (req, res, next) => {

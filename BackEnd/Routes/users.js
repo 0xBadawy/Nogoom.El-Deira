@@ -10,12 +10,14 @@ import {
   changePassword,
   getLoggedInUser,
   updateLogedUser,
+  getUsersAdmin,
 } from "../services/userService.js";
 import { protect } from "../services/authService.js";
 
 const router = express.Router();
 
 router.post("/add_user", createUser);                                       // Create a new user
+router.get("/all_users_admin", getUsersAdmin);                                         // Get all users
 router.get("/all_users", getUsers);                                         // Get all users
 router.get("/user_by_id/:id", getUserById);                                 // Get a user by ID
 router.put("/update_user/:id", updateUser);                                 // Update a user by ID

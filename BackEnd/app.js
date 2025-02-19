@@ -5,6 +5,7 @@ import homeRoute from './Routes/home-route.js';
 import preferencesRoute from './Routes/preferences-route.js';
 import contactRoute from "./Routes/contact-route.js";
 import settingsRoute from "./Routes/settings-route.js";
+import dashboardRoute from "./Routes/dashboard-route.js";
 import notificationsRoute from "./Routes/notifications-route.js";
 import advertisementRoute from "./Routes/advertisement-route.js";
 
@@ -48,7 +49,7 @@ app.use('/api/v1/home', homeRoute);
 app.use("/api/v1/preferences", preferencesRoute);
 app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/settings", settingsRoute);
-app.get("/api/v1/dashboard", settingsRoute);
+app.use("/api/v1/dashboard", dashboardRoute);
 
 
 app.all('*', (req, res, next) => {

@@ -89,12 +89,17 @@ const userSchema = new Schema(
       enum: ["gold", "silver", "bronze", "none"],
       default: "none",
     },
+    lastSeen: {
+      type: Date,
+      default: Date.now(),
+    },
 
     passwordChangedAt: Date,
     passwordResetCode: String,
     passwordResetExpires: Date,
     passwordResetVerified: Boolean,
   },
+
   {
     timestamps: true,
   }

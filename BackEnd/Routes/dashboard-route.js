@@ -1,14 +1,10 @@
 import express from "express";
 import { body, validationResult } from "express-validator";
 import { protect, authorize } from "../services/authService.js";
-import {
-  getSettings,
-  updateSettings,
-  addSettings,
-} from "../services/settings.js";
+import { getCountes } from "../services/dashboard.js";
 
 const router = express.Router();
 
-router.get("/get", getSettings);
+router.get("/get", getCountes);
 
 export default router;

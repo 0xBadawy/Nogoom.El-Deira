@@ -5,6 +5,7 @@ import { confirmAlert } from "react-confirm-alert";
 
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "sonner";
+import axiosInstance from "../../Configuration/axiosInstance";
 
 const AddEmployees = () => {
   const {
@@ -29,7 +30,6 @@ const AddEmployees = () => {
     }
   };
 
-
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -37,19 +37,26 @@ const AddEmployees = () => {
   };
 
   const onSubmit = async (formData) => {
+    // return
 
     if (!/^\d{10,11}$/.test(formData.phone)) {
-      toast.error("يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط");
+      toast.error(
+        "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
+      );
       return;
     }
 
     if (!/^[a-zA-Z0-9]{3,15}$/.test(formData.username)) {
-      toast.error("يجب أن يكون اسم المستخدم مكوناً من 3 إلى 15 حرفاً ويمكن أن يحتوي على حروف وأرقام فقط");
+      toast.error(
+        "يجب أن يكون اسم المستخدم مكوناً من 3 إلى 15 حرفاً ويمكن أن يحتوي على حروف وأرقام فقط"
+      );
       return;
     }
 
-
-
+    if (formData.password !== formData["confirm-password"]) {
+      toast.error("كلمتا المرور غير متطابقتين");
+      return;
+    }
 
     if (confirm("هل انت متأكد من إضافة هذا المستخدم؟") == true) {
       try {
@@ -61,41 +68,45 @@ const AddEmployees = () => {
     } else {
       toast.error("تم إلغاء العملية");
     }
-   
   };
 
   const handleUserSubmission = async (formData) => {
     setError(null);
-    setLoading(true);
+    console.log("Form Data:", formData);
 
     try {
-      const { email, password, role, ...otherData } = formData;
-
-      const result = await signUp(email, password, otherData, role);
-
-      if (!result.success) {
-        setError(handleFirebaseError(result.error));
-        toast.error("حدث خطأ أثناء إضافة المستخدم.");
-
+      setLoading(true);
+      const response = await axiosInstance.post("/user/add_user", formData);
+      console.log("Response:", response);
+      if (response.data.status === "error") {
+        toast.error(response.data.message);
+        setError(response.data.message);
         return;
       }
 
-      toast.success("تم إضافة الموظف بنجاح!");
-      reset();
+      toast.success("تم إضافة المستخدم بنجاح!");
     } catch (error) {
-      const errorMessage = error?.code
-        ? handleFirebaseError(error.code)
-        : "حدث خطأ غير متوقع!";
-      setError(errorMessage);
-      console.error("Error during submission:", error.message || error);
-    } finally {
-      setLoading(false);
+      console.log("Error:", error);
+      if (error.response.data.message === "Email already exists") {
+        toast.error("المستخدم موجود بالفعل");
+        setError("المستخدم موجود بالفعل");
+      } else {
+        setError("حدث خطأ أثناء إضافة المستخدم.");
+        toast.error("حدث خطأ أثناء إضافة المستخدم.");
+      }
     }
+    setLoading(false);
   };
 
   return (
     <div className="mx-auto mt-10 md:p-6 p-2 bg-white rounded-lg shadow-md">
       <h2 className="text-xl font-semibold text-center mb-4">إضافة موظف</h2>
+      {error && (
+        <p className="text-red-500 text-center mt-2 bg-red-100 p-2 rounded-lg font-semibold">
+          {error}
+        </p>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name Field */}
         <div>
@@ -169,34 +180,66 @@ const AddEmployees = () => {
 
         {/* حقل كلمة المرور */}
         <div>
-      <label className="block text-gray-700 font-medium mb-1">
-        كلمة المرور
-      </label>
-      <div className="relative">
-        <input
-          type={showPassword ? "text" : "password"}
-          {...register("password", {
-            required: "كلمة المرور مطلوبة",
-            minLength: {
-              value: 8,
-              message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
-            },
-          })}
-          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="أدخل كلمة المرور"
-        />
-        <button
-          type="button"
-          onClick={togglePasswordVisibility}
-          className="absolute left-2 top-2 text-gray-500"
-        >
-          {showPassword ? "إخفاء" : "إظهار"}
-        </button>
-      </div>
-      {errors.password && (
-        <p className="text-red-500 text-sm">{errors.password.message}</p>
-      )}
-    </div>
+          <label className="block text-gray-700 font-medium mb-1">
+            كلمة المرور
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password", {
+                required: "كلمة المرور مطلوبة",
+                minLength: {
+                  value: 8,
+                  message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+                },
+              })}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="أدخل كلمة المرور"
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute left-2 top-2 text-gray-500"
+            >
+              {showPassword ? "إخفاء" : "إظهار"}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
+        </div>
+
+        {/* confirm password */}
+
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            كلمة المرور
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("confirm-password", {
+                required: "كلمة المرور مطلوبة",
+                minLength: {
+                  value: 8,
+                  message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+                },
+              })}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="أدخل كلمة المرور"
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute left-2 top-2 text-gray-500"
+            >
+              {showPassword ? "إخفاء" : "إظهار"}
+            </button>
+          </div>
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
+        </div>
 
         {/* Role Field */}
         <div>
@@ -215,7 +258,7 @@ const AddEmployees = () => {
               <span>محرر</span>
               (كل الصلاحيات عدا الموظفين والمحفظة)
             </option>
-            <option value="viewer">
+            <option value="manager">
               {" "}
               <span>مشاهد</span> (الدخول والمتابعة فقط)
             </option>
@@ -227,19 +270,15 @@ const AddEmployees = () => {
 
         {/* Submit Button */}
 
-          <div className="flex flex-row">
-
-
+        <div className="flex flex-row">
           <button
-          type="submit"
-          disabled={loading}
-          className="w-fit px-20 mx-auto bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
-        >
-          {loading ? "جارٍ الحفظ..." : "حفظ البيانات"}
-        </button>
-
-          </div>
-        
+            type="submit"
+            disabled={loading}
+            className="w-fit px-20 mx-auto bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+          >
+            {loading ? "جارٍ الحفظ..." : "حفظ البيانات"}
+          </button>
+        </div>
 
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
       </form>

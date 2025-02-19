@@ -58,26 +58,27 @@ const DashboardHome = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const stats = await getFirestoreStats();
-        const { employees, ads } = stats;
+        const stats = await axiosInstance.get("/dashboard/get");
+        const { advertisementCount, userCount } = stats.data.data;
+        
         setData([
           {
             icon: <FaBullhorn className="text-3xl text-blue-500" />,
             title: "إجمالي الحملات",
-            value: ads,
+            value: advertisementCount,
             color: "text-blue-500",
           },
           {
             icon: <FaChartLine className="text-3xl text-green-500" />,
             title: "الحملات النشطة",
-            value: ads,
+            value: advertisementCount,
             color: "text-green-500",
           },
 
           {
             icon: <FaEye className="text-3xl text-slate-600" />,
-            title: "المستخدمين النشطين",
-            value: employees,
+            title: "المستخدمين ",
+            value: userCount,
             color: "text-slate-600",
           },
         ]);
@@ -106,10 +107,10 @@ const DashboardHome = () => {
           {/* User Info */}
           <div className="flex-1 text-center md:text-left">
             <h2 className="text-2xl text-right font-bold text-gray-800 hover:text-gray-900 transition duration-300">
-              مرحباً، {UserData.name}
+              مرحباً، {UserData?.name}
             </h2>
             <p className="text-gray-600 text-right mt-1">
-              الوظيفة: {UserData.role}
+              الوظيفة: {UserData?.role}
             </p>
           </div>
 

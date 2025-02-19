@@ -9,10 +9,12 @@ import {
   getAll,
   createOneUser,
   updateOneParam,
+  getAllAdmins,
 } from "../services/handler.js";
 import asyncHandler from "express-async-handler";
 
 export const getUsers = getAll(UserModal);
+export const getUsersAdmin = getAllAdmins(UserModal);
 export const createUser = createOneUser(UserModal);
 export const getUserById = getOne(UserModal);
 export const deleteUser = deleteOne(UserModal);
@@ -47,9 +49,17 @@ export const changePassword = async (req, res, next) => {
 
 export const getLoggedInUser = asyncHandler(async (req, res, next) => {
   req.params.id = req.user.id;
-  next();
-} );
+  // update last seen
 
+  const user = await UserModal.findByIdAndUpdate(
+    req.user.id,
+    { lastSeen: Date.now() },
+    { new: true }
+  );
+  // console.log("last seen updated", user);
+
+  next();
+});
 
 export const updateLogedUser = asyncHandler(async (req, res, next) => {
   const user = await UserModal.findByIdAndUpdate(
@@ -71,5 +81,4 @@ export const updateLogedUser = asyncHandler(async (req, res, next) => {
     status: "success",
     data: user,
   });
-
 });
