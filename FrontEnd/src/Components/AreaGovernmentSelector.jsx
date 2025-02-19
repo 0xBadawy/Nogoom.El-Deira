@@ -5,8 +5,7 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
   const [selectedArea, setSelectedArea] = useState("");
   const [selectedGovernments, setSelectedGovernments] = useState([]);
 
-  // Synchronize initial data with state when initialData changes
-  useEffect(() => {
+   useEffect(() => {
     if (initialData.area) {
       setSelectedArea(initialData.area);
     }
@@ -17,20 +16,18 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
 
   console.log("Initial Data from Props:", initialData);
 
-  // Memoize government options based on selected area to avoid unnecessary recalculations
   const availableGovernments = useMemo(() => {
     const area = AreaData.find((item) => item.name === selectedArea);
     return area ? area.subGovernments : [];
   }, [selectedArea]);
 
-  // Handle area change and clear selected governments when switching areas
   const handleAreaChange = (event) => {
     const area = event.target.value;
     setSelectedArea(area);
-    setSelectedGovernments([]); // Clear selection when switching areas
+    setSelectedGovernments([]);
   };
 
-  // Handle individual government checkbox change
+
   const handleGovernmentChange = (event) => {
     const { value, checked } = event.target;
     setSelectedGovernments((prev) =>
@@ -86,6 +83,8 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
               اختر الكل
             </label>
           </div>
+
+
 
           {/* Governments Checkbox List */}
           <div className="h-48 overflow-y-scroll border border-gray-300 rounded-lg p-3 space-y-3 bg-gray-50">

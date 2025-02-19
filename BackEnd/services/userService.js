@@ -8,6 +8,7 @@ import {
   getOne,
   getAll,
   createOneUser,
+  updateOneParam,
 } from "../services/handler.js";
 import asyncHandler from "express-async-handler";
 
@@ -16,7 +17,7 @@ export const createUser = createOneUser(UserModal);
 export const getUserById = getOne(UserModal);
 export const deleteUser = deleteOne(UserModal);
 
-export const updateUser = updateOne(UserModal);
+export const updateUser = updateOneParam(UserModal);
 
 export const changePassword = async (req, res, next) => {
   try {

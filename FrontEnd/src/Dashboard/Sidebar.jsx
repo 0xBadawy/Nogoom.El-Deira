@@ -64,28 +64,16 @@ const Sidebar = () => {
     //   roles: ["admin", "editor"],
     // },
     {
-      icon: <FaCog />,
-      text: "بيانات الموقع",
-      link: "/dashboard/website_data",
-      roles: ["admin", "editor"],
-    },
-    {
-      icon: <RiContactsBook3Line />,
-      text: "بيانات التواصل",
-      link: "/dashboard/contact",
-      roles: ["admin", "editor"],
-    },
-    {
-      icon: <TbSpeakerphone />,
-      text: "إنشاء حملة",
-      link: "/dashboard/createAd",
-      roles: ["admin", "viewer"],
-    },
-    {
       icon: <MdVideoSettings />,
       text: "الحملات",
       link: "/dashboard/ads-list",
       roles: ["admin", "editor"],
+    },
+    {
+      icon: <TbSpeakerphone />,
+      text: "حملة جديدة",
+      link: "/dashboard/createAd",
+      roles: ["admin", "viewer"],
     },
     {
       icon: <IoNotificationsSharp />,
@@ -95,8 +83,20 @@ const Sidebar = () => {
     },
     {
       icon: <BsFillSendPlusFill />,
-      text: "إرسال إشعار",
+      text: "  إشعار جديد",
       link: "/dashboard/Send_Notification",
+      roles: ["admin", "editor"],
+    },
+    {
+      icon: <FaCog />,
+      text: "بيانات الموقع",
+      link: "/dashboard/website_data",
+      roles: ["admin", "editor"],
+    },
+    {
+      icon: <RiContactsBook3Line />,
+      text: "بيانات التواصل",
+      link: "/dashboard/contact",
       roles: ["admin", "editor"],
     },
     {

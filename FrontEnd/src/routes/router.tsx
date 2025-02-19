@@ -130,6 +130,10 @@ export const router = createBrowserRouter([
         element: withProtection(Users, ["admin"]),
       },
       {
+        path: "users/:id",
+        element: withProtection(Users, ["admin"]),
+      },
+      {
         path: "apartments",
         element: withProtection(Apartments, ["admin", "editor"]),
       },
@@ -155,12 +159,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "ads-list",
-        element: withProtection(AdsList, ["admin", "editor"]),      
+        element: withProtection(AdsList, ["admin", "editor"]),
       },
       {
         path: "editAd/:id",
         element: withProtection(EditAd, ["admin", "editor"]),
-
       },
 
       {

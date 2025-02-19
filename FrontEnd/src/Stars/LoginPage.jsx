@@ -33,25 +33,30 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-
-
   const onFormSubmit = async (data) => {
     const { email, password } = data;
     const loginR = async () => {
       try {
-        const response = await axiosInstance.post("/auth/signin", { email, password });
+        const response = await axiosInstance.post("/auth/signin", {
+          email,
+          password,
+        });
         const { data } = response;
         console.log(data);
+        console.log(data.data.role);
         login(data);
         localStorage.setItem("token", data.token);
+        
+        if (data.data.role === "admin") navigate("/dashboard");
+        else navigate("/profile");
+
       } catch (error) {
         const errorMessage = handleFirebaseError(error);
         setError(errorMessage);
       }
-    }
+    };
     loginR();
   };
-
 
   return (
     <div
@@ -132,7 +137,10 @@ const LoginPage = () => {
 
             {/* Forgot password */}
             <div className="text-center">
-              <Link to="/forget-password" className="text-blue-500 hover:underline">
+              <Link
+                to="/forget-password"
+                className="text-blue-500 hover:underline"
+              >
                 {" نسيت كلمة المرور؟ "}
               </Link>
             </div>
@@ -144,7 +152,6 @@ const LoginPage = () => {
               </Link>
             </div>
           </div>
-
         </div>
       </div>
       <div className="w-full h-screen hidden md:block ">

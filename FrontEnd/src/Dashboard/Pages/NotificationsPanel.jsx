@@ -6,6 +6,7 @@ import { useDashboard } from "../../Context/DashboardContext";
 import { useAuth } from "../../Context/AuthContext";
 import axiosInstance from "../../Configuration/axiosInstance";
 import formatDate, { formatDateTime } from "../../hooks/formatDate";
+import { Link } from "react-router-dom";
 
 const NotificationsPanel = () => {
   const { user } = useAuth();
@@ -80,9 +81,14 @@ const NotificationsPanel = () => {
               >
                 <div className="flex justify-between items-start flex-col md:flex-row max-w-full overflow-hidden">
                   <div className="w-full text-ellipsis overflow-hidden">
-                    <p className="text-sm text-indigo-900 whitespace-normal">
-                      {notification?.message}
-                    </p>
+                    <Link
+                      to={`/dashboard/users/${notification.messageUserId}`}
+                      className="text-indigo-900 font-semibold hover:text-indigo-700"
+                    >
+                      <p className="text-sm text-indigo-900 whitespace-normal">
+                        {notification?.message}
+                      </p>
+                    </Link>
                     <p className="text-xs text-gray-500 whitespace-normal">
                       {formatDateTime(notification?.createdAt)}
                     </p>

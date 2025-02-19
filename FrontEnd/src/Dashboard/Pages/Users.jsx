@@ -6,6 +6,7 @@ import { GovernmentData } from "../../Stars/SignUp/data";
 import UserAdds from "./UserAdds";
 import UserDetailsBalance from "./UserDetailsBalance"; // استيراد المكون الجديد
 import axiosInstance from "../../Configuration/axiosInstance";
+import { useParams } from "react-router-dom";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
@@ -13,7 +14,16 @@ const Users = () => {
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedGovern, setSelectedGovern] = useState("all");
 
- 
+  const { id } = useParams();
+  console.log("useParams output:", id);
+  useEffect(() => {
+    if (id && usersData.length > 0) {
+      const foundUser = usersData.find((user) => user._id === id);
+      if (foundUser) {
+        setSelectedUser(foundUser._id);
+      }
+    }
+  }, [id, usersData]); // التحقق عند تغير `id` أو `usersData`
 
   const filteredUsers = usersData.filter((user) => {
     const regionMatch =
@@ -24,23 +34,18 @@ const Users = () => {
     return regionMatch && governMatch;
   });
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
-   const [currentPage, setCurrentPage] = useState(1);
-   const itemsPerPage = 20; 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
 
-   const indexOfLastItem = currentPage * itemsPerPage;
-   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-   const currentItems = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
-
-    const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
-
-
-
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
 
   const [area, setArea] = useState("");
 
   useEffect(() => {
-    
     const featchUsers = async () => {
       try {
         const response = await axiosInstance.get("/user/all_users");
@@ -51,8 +56,7 @@ const Users = () => {
       }
     };
     featchUsers();
-  
-  
+
     // setUsersData(users);
   }, [allUsers]);
 

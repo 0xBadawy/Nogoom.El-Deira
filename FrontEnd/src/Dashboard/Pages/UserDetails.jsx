@@ -12,44 +12,44 @@ import toast, { Toaster } from "react-hot-toast";
 import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
 import axiosInstance from "../../Configuration/axiosInstance";
 
-const AccountSettings = ({ selectedUserUid, usersData        }) => {
-
-
-  const { user, updateUser } = useAuth();
+const AccountSettings = ({ selectedUserUid, usersData }) => {
+  const { updateUser } = useAuth();
   const [userData, setUserData] = useState({});
   const [address, setAddress] = useState({});
   const [imageURL, setImageURL] = useState("");
   const { control, handleSubmit, setValue } = useForm();
   const [selectedAddress, setSelectedAddress] = useState({});
   const [uploadImageProgress, setUploadImageProgress] = useState(0);
-  const [socialLinks, setSocialLinks] = useState(userData?.social || []);
-
-  // const preloadedData = {
-  //   area: "الرياض",
-  //   governments: ["الرياض"],
-  // };
+  const [socialLinks, setSocialLinks] = useState([]);
 
   useEffect(() => {
-    console.log("Form edit USer User Data:", usersData);
-    console.log("Form edit USer User Data:", selectedUserUid);
-
     const user = usersData.find((user) => user._id === selectedUserUid);
-    console.log("Form edit USer User Data:", user);
-
+    console.log(user);
     if (user) {
       setUserData(user);
       setAddress({
         area: user.address?.area || "",
         governments: user.address?.govern || [],
       });
-      console.log("User address  --------- :", address);
+      setSocialLinks(user.social || []);
+      setValue("name", user.name);
+      setValue("phone", user.phone);
+      setValue("bio", user.bio);
+      // setValue
+      
+      
+      setImageURL(user.profileImage || "");
+      
+
+      
+      
+      console.log(user.profileImage || "");
+
+
+
+
     }
-  }, [selectedUserUid]);
-
-
-  useEffect(() => {
-    console.log("Updated address:", address);
-  }, [address]);
+  }, [selectedUserUid, usersData, setValue]);
 
   const handleInputChange = (index, value) => {
     const updatedLinks = [...socialLinks];
@@ -57,52 +57,27 @@ const AccountSettings = ({ selectedUserUid, usersData        }) => {
     setSocialLinks(updatedLinks);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const allData = {
       ...data,
       selectedAddress,
-      profilePicture: imageURL,
+      profileImage: imageURL,
       verified: false,
       socialLinks,
     };
 
-    console.log(allData);
-
-    // if (!address.govern) {
-    //   toast.error("يجب إدخال المنطقة.");
-    //   return;
-    // }
-
-    // if (!address.area || address.area.length === 0) {
-    //   toast.error("يجب اختيار المحافظة.");
-    //   return;
-    // }
-
-    // if (!/^\d{10,11}$/.test(data.phone)) {
-    //   toast.error(
-    //     "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
-    //   );
-    //   return;
-    // }
-
-    const updatedData = async () => {
-      try {
-        const response = await axiosInstance.put(
-          "/user/update_loggedin_user",
-          allData
-        );
-        console.log(response.data);
-        await updateUser(response.data.data);
-      } catch (error) {
-        console.error("خطأ في تحديث البيانات:", error);
-      }
-    };
-
-    updatedData();
-    //
-
-    toast.success("تم حفظ التعديلات بنجاح");
-    console.log(updatedData); // Use this to debug the final payload.
+    try {
+      const response = await axiosInstance.put(
+        `/user/update_user/${selectedUserUid}`,
+        allData
+      );
+      await updateUser(response.data.data);
+      toast.success("تم حفظ التعديلات بنجاح");
+      console.log(response.data);
+    } catch (error) {
+      console.error("خطأ في تحديث البيانات:", error);
+      toast.error("فشل في تحديث البيانات");
+    }
   };
 
   const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
@@ -111,7 +86,7 @@ const AccountSettings = ({ selectedUserUid, usersData        }) => {
         prevState.area === selectedArea &&
         JSON.stringify(prevState.govern) === JSON.stringify(selectedGovernments)
       ) {
-        return prevState; // Avoid unnecessary re-renders
+        return prevState;
       }
       return { area: selectedArea, govern: selectedGovernments };
     });
@@ -251,11 +226,7 @@ const AccountSettings = ({ selectedUserUid, usersData        }) => {
             </div>
 
             <AreaGovernmentSelector
-              initialData={
-                // Object.keys(address).length > 0 ?
-                 address
-                  // : preloadedData
-              }
+              initialData={address}
               onSelectionChange={handleSelectionChange}
             />
 
@@ -283,7 +254,6 @@ const AccountSettings = ({ selectedUserUid, usersData        }) => {
                   )
               )}
 
-              {/* زر إضافة رابط جديد */}
               <button
                 type="button"
                 onClick={() =>
@@ -303,6 +273,21 @@ const AccountSettings = ({ selectedUserUid, usersData        }) => {
                 render={({ field }) => <Textarea {...field} rows={4} />}
               />
             </div>
+
+            {/* -------------------------------------------------------------- */}
+
+
+
+
+
+
+
+
+
+
+
+            
+            {/* -------------------------------------------------------------- */}
           </div>
 
           <Button type="submit" className="w-full text-white">

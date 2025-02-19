@@ -42,7 +42,7 @@ const PublicProfile = () => {
     const fetchData = async () => {
       const data = await user;
       setUserData(data);
-      console.log(data);
+      console.table(data);
     };
     fetchData();
   }, [user]);

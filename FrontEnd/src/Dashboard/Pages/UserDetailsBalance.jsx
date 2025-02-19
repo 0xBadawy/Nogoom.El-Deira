@@ -4,6 +4,7 @@ import { AlertCircle, CheckCircle2, Wallet, User } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import axiosInstance from "../../Configuration/axiosInstance";
 
 const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   const { 
@@ -13,32 +14,24 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
     formState: { errors },
   } = useForm();
    const Tiers = [
-    { name: "عادي", views: 1000, earnings: 10 },
-    { name: "فضي", views: 5000, earnings: 30 },
-    { name: "ذهبي", views: 10000, earnings: 50 },
-    { name: "برونزي", views: 100000, earnings: 100 },
+    { name: "عادي", views: 1000, earnings: 10 ,value:"none"},
+    { name: "فضي", views: 5000, earnings: 30, value:"silver"}, 
+    { name: "ذهبي", views: 10000, earnings: 50 ,value:"gold"},
+    { name: "برونزي", views: 100000, earnings: 100 ,value:"bronze"},
   ];
   const [selectedSubGovernments, setSelectedSubGovernments] = useState([]);
   const [balance, setBalance] = useState(0);
   const [isUpdating, setIsUpdating] = useState(false);
 
   useEffect(() => {
-    const user = usersData.find((user) => user.Uid === selectedUserUid);
+    const user = usersData.find((user) => user._id === selectedUserUid);
     if (user) {
+      console.log("UserDetailsBalance User found:", user);
       reset(user);
       setBalance(user.balance || 0);
     }
   }, [selectedUserUid, usersData, reset]);
 
-  const handleGovernmentChange = (event) => {
-    const selectedGovernmentName = event.target.value;
-    const selectedGovernment = GovernmentData.find(
-      (gov) => gov.name === selectedGovernmentName
-    );
-    setSelectedSubGovernments(
-      selectedGovernment ? selectedGovernment.subGovernments : []
-    );
-  };
 
   const adjustBalance = (amount) => {
     setBalance((prevBalance) => {
@@ -52,8 +45,41 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   };
 
 
+
+  const HandelSave = async (dataForm) => {
+
+    const allData = {
+     
+      balance: balance,
+      accountType: dataForm.accountType,
+      verified: dataForm.verified,
+      
+    };
+
+    console.log("handelSave allData:", allData);
+
+    try {
+      const response = await axiosInstance.put(
+        `/user/update_user/${selectedUserUid}`,
+        allData
+      );
+      // await updateUser(response.data.data);
+      toast.success("تم حفظ التعديلات بنجاح");
+      console.log(response.data);
+    } catch (error) {
+      console.error("خطأ في تحديث البيانات:", error);
+      toast.error("فشل في تحديث البيانات");
+    }
+
+    setIsUpdating(false);
+  };
+
+
   const onSubmit = (data) => {
     setIsUpdating(true);
+
+    console.log("onSubmit data:", data);
+
     const isVerified = JSON.parse(data.verified);
   
     const message = `سيتم تغيير مبلغ النجم إلى ${balance} ريال و ${isVerified ? "وتفعيل الحساب" : "إلغاء تفعيل الحساب"}`;
@@ -64,9 +90,10 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
         {
           label: "نعم",
           onClick: () => {
-            onSave({ ...data, verified: isVerified, balance });
-            toast.success("تم حفظ التعديلات بنجاح");
-            setIsUpdating(false);
+            // onSave({ ...data, verified: isVerified, balance });
+
+            HandelSave(data);
+
           },
         },
         {
@@ -90,15 +117,17 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
           بيانات الرصيد والحالة والفئة
         </h2>
       </div>
-      
+
       <div className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
             {/* User Status */}
             <div className="space-y-2">
               <label className="block text-right text-gray-700 font-medium">
                 حالة المستخدم
               </label>
+
               <select
                 {...register("verified")}
                 className="w-full p-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
@@ -114,32 +143,26 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
               </select>
             </div>
 
-
-
-
-
-        <div className="space-y-2">
+            <div className="space-y-2">
               <label className="block text-right text-gray-700 font-medium pb">
                 فئة النجم
-                </label>
+              </label>
 
-            <select
-              {...register("accountType")}
-              className="w-full p-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              <select
+                {...register("accountType")}
+                className="w-full p-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
               >
-              <option value="" disabled>
-                اختر فئة
-              </option>
-              {Tiers.map((tier) => (
-                <option key={tier.name} value={tier.name}>
-                  {tier.name} - شرط المشاهدات: {tier.views}+ - الأرباح:{" "}
-                  {tier.earnings} ريال
+                <option value="" disabled>
+                  اختر فئة
                 </option>
-              ))}
-            </select>
-        </div>
-
-
+                {Tiers.map((tier) => (
+                  <option key={tier.name} value={tier.value}>
+                    {tier.name} - شرط المشاهدات: {tier.views}+ - الأرباح:{" "}
+                    {tier.earnings} ريال
+                  </option>
+                ))}
+              </select>
+            </div>
 
             {/* Balance Section */}
             <div className="space-y-2">
@@ -157,7 +180,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
                     className="w-full p-3 pr-12 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex gap-2">
                     {[10, 100].map((amount) => (

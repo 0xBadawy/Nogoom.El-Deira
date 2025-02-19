@@ -74,6 +74,46 @@ export const updateOne = (Model) =>
     });
   });
 
+
+ 
+
+export const updateOneParam = (Model) =>
+  asyncHandler(async (req, res, next) => {
+    const id = req.params.id;
+
+    // Debugging
+    console.log("Request ID:", id);
+    console.log("Request Body:", req.body);
+
+    if (!id) {
+      return next(new ApiError("No ID provided", 400));
+    }
+
+    // Validate the ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return next(new ApiError(`Invalid ID format: ${id}`, 400));
+    }
+
+    const doc = await Model.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!doc) {
+      return next(new ApiError(`No document found with that id => ${id}`, 404));
+    }
+
+    console.log("Document: ---------- ", doc);
+
+    res.status(200).json({
+      status: "success",
+      data: doc,
+    });
+  });
+
+
+
+
 // const updateHomeDisplay = (Model) =>
 //   asyncHandler(async (req, res, next) => {
 //     try {
@@ -104,7 +144,7 @@ export const updateOne = (Model) =>
 //     res.status(201).json({
 //       status: "success",
 //       data: doc,
-//     });
+//     }); 
 //   }); 
 
 export const createOne = (Model) =>

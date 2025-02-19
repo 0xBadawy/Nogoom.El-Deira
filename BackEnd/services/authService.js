@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 import sendEmail from "../utils/sendEmail.js";
 import Notification from "../models/notificationSchema.js";
+import { sendNotificationToRoles } from "../functions/notification.js";
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
@@ -30,16 +31,17 @@ export const signUp = asyncHandler(async (req, res, next) => {
     } = req.body;
 
     // Check if user already exists
+
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
+      console.log("UserExists");
       return res.status(400).json({ message: "UserExists" });
     }
 
     // Password confirmation validation
     if (password !== confirmPassword) {
-      return res
-        .status(400)
-        .json({ message: "PasswordNotMatch" });
+      console.log("PasswordNotMatch");
+      return res.status(400).json({ message: "PasswordNotMatch" });
     }
 
     // Create user
@@ -57,20 +59,29 @@ export const signUp = asyncHandler(async (req, res, next) => {
       },
     });
 
-    const targetUsers = await UserModel.find({
-      role: { $in: ["admin", "manager", "editor"] },
-    });
+    if (user) console.log("UserCreated", user);
+    // const targetUsers = await UserModel.find({
+    //   role: { $in: ["admin", "manager", "editor"] },
+    // });
 
-    // Create notifications for users
-    const notifications = targetUsers.map((targetUser) => ({
-      userId: targetUser._id,
-      title: "مستخدم جديد",
-      message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
-    }));
+    // // Create notifications for users
+    // const notifications = targetUsers.map((targetUser) => ({
+    //   userId: targetUser._id,
+    //   title: "مستخدم جديد",
+    //   message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+    // }));
 
-    if (notifications.length > 0) {
-      await Notification.insertMany(notifications);
-    }
+    // if (notifications.length > 0) {
+    //   await Notification.insertMany(notifications);
+    // }
+
+    sendNotificationToRoles(
+      ["admin", "manager", "editor", "star"],
+      "مستخدم جديد",
+      `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+      user._id,
+      "newUser"
+    );
 
     // Generate token
     const token = generateToken(user._id);
@@ -86,8 +97,10 @@ export const signUp = asyncHandler(async (req, res, next) => {
       },
     });
   } catch (err) {
+    console.error("Signup Error:", err);
     next(new ApiError(err.message || "حدث خطأ أثناء معالجة الطلب", 500));
   }
+
 });
 
 
@@ -116,11 +129,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     token,
-    data: {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-    },
+    data:user
   });
 });
 
