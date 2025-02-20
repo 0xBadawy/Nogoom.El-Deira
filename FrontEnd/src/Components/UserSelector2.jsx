@@ -7,16 +7,15 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
   const [selectedUsers, setSelectedUsers] = useState(initialSelectedUsers);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [filters, setFilters] = useState({ area: "", govrn: "" });
- 
+
   // Fetch users from the API
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axiosInstance.get("/user/all_users");
         const data = response.data.data;
-        // console.log(data);
         setUsers(data);
-        setFilteredUsers(data); 
+        setFilteredUsers(data);
       } catch (error) {
         console.error("Failed to fetch users:", error);
       }
@@ -26,24 +25,28 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
   }, []);
 
   // Filter users based on selected area and govrn
-  useEffect(() => {
-    const { area, govrn } = filters;
-    console.log("Filters: ", filters);
-    console.log("Users: ", users);
-    const filtered = users.filter((user) => {
-      console.log("area ----: ", user.address?.area);
-      console.log("govrn -----: ", user.address?.govern);
-      return (
-        (!area || user.address?.area === area) &&
-        // (!govrn || user.address?.govrn === govrn)
-        (!govrn || user.address?.govern === govrn)
-      );
-    });
+useEffect(() => {
+  let { area, govrn } = filters;
 
-    console.log("Filtered Users: ", filtered);
+  if (!area && !govrn) {
+    setFilteredUsers(users);
+    return;
+  }
 
-    setFilteredUsers(filtered);
-  }, [filters, users]);
+  const filtered = users.filter((user) => {
+    const userArea = user.address?.area || "";
+    const userGovernArray = user.address?.govern || []; // المصفوفة
+    const userGovern = Array.isArray(userGovernArray)
+      ? userGovernArray.join(", ")
+      : userGovernArray; // تحويلها لنص
+
+    return (
+      (!area || userArea === area) && (!govrn || userGovern.includes(govrn)) // التأكد من أن المحافظة موجودة داخل المصفوفة
+    );
+  });
+
+  setFilteredUsers(filtered);
+}, [filters, users]);
 
   // Notify parent component when selected users change
   useEffect(() => {
@@ -62,7 +65,12 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
 
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
-    setFilters((prev) => ({ ...prev, [name]: value }));
+
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+      ...(name === "area" ? { govrn: "" } : {}), // إعادة ضبط المحافظة عند تغيير المنطقة
+    }));
   };
 
   // Get the sub-governments for the selected area
@@ -128,7 +136,7 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
                 htmlFor={`user-${user._id}`}
                 className="ml-3 text-gray-700"
               >
-                {user.name} - {user.address?.area}, {user.address?.govrn}
+                {user.name} - {user?.email}
               </label>
             </div>
           ))

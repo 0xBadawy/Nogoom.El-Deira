@@ -1,7 +1,14 @@
 import Notification from "../models/notificationSchema.js";
+import SendedNotification from "../models/sendedNotificationSchema.js";
 import User from "../models/userModel.js";
 
-const createNotification = async (userId, title, message,messageUserId, type = "info") => {
+const createNotification = async (
+  userId,
+  title,
+  message,
+  messageUserId,
+  type = "info"
+) => {
   try {
     // Validate title and message
     if (!title || !message) {
@@ -53,7 +60,7 @@ const sendNotificationToRoles = async (
   roles,
   title,
   message,
-    messageUserId,
+  messageUserId,
   type = "info"
 ) => {
   try {
@@ -76,7 +83,13 @@ const sendNotificationToRoles = async (
     // Send the notification to each user
     const notifications = [];
     for (const user of users) {
-      const result = await createNotification(user._id, title, message,messageUserId, type);
+      const result = await createNotification(
+        user._id,
+        title,
+        message,
+        messageUserId,
+        type
+      );
       if (result.success) {
         notifications.push(result.notification);
       }
@@ -99,4 +112,135 @@ const sendNotificationToRoles = async (
   }
 };
 
-export { createNotification, sendNotificationToRoles };
+const sendNotificationToUsers = async (
+  userIds,
+  title,
+  message,
+  messageUserId,
+  type = "info"
+) => {
+  try {
+    if (!userIds.length) {
+      return {
+        success: false,
+        message: "User ID list is empty.",
+      };
+    }
+
+    // تحضير بيانات الإشعارات لكل مستخدم
+    const notificationsData = userIds.map((userId) => ({
+      userId,
+      title,
+      message,
+      messageUserId,
+      type,
+    }));
+
+    // إدخال جميع الإشعارات دفعة واحدة لتحسين الأداء
+    const notifications = await Notification.insertMany(notificationsData);
+
+    return {
+      success: true,
+      message: `${notifications.length} notifications sent successfully.`,
+      notifications,
+    };
+  } catch (error) {
+    console.error("Error sending notifications to users:", error);
+    return {
+      success: false,
+      message: "Failed to send notifications.",
+      error: error.message,
+    };
+  }
+};
+
+// const storeUserSentNotification = async (
+//   userId,
+//   title,
+//   message,
+//   sendedUsersId
+// ) => {
+//   try {
+//     if (!userId || !title || !message || !sendedUsersId.length) {
+//       return {
+//         success: false,
+//         message:
+//           "All fields (userId, title, message, sendedUsersId) are required.",
+//       };
+//     }
+
+//     const newNotification = new SendedNotification({
+//       userId,
+//       title,
+//       message,
+//       sendedUsersId,
+//     });
+
+//     await newNotification.save();
+
+//     return {
+//       success: true,
+//       message: "Notification stored successfully.",
+//       notification: newNotification,
+//     };
+//   } catch (error) {
+//     console.error("Error storing user sent notification:", error);
+//     return {
+//       success: false,
+//       message: "Failed to store notification.",
+//       error: error.message,
+//     };
+//   }
+// };
+
+
+
+
+// ✅ دالة لحفظ الإشعار عند الإرسال
+
+
+const storeUserSentNotification = async (userId, title, message, sendedUsersId) => {
+  try {
+    if (!userId || !title || !message || !sendedUsersId.length) {
+      return { success: false, message: "كل الحقول مطلوبة." };
+    }
+
+    const newNotification = new SendedNotification({ userId, title, message, sendedUsersId });
+    await newNotification.save();
+
+    return { success: true, message: "تم إرسال الإشعار بنجاح.", notification: newNotification };
+  } catch (error) {
+    console.error("خطأ أثناء حفظ الإشعار:", error);
+    return { success: false, message: "فشل في إرسال الإشعار.", error: error.message };
+  }
+};
+
+// ✅ دالة لجلب جميع الإشعارات التي أرسلها مستخدم معين
+const getUserSentNotifications = async (userId) => {
+  try {
+    const notifications = await SendedNotification.find({ userId })
+      .populate("sendedUsersId", "name email") // جلب بيانات المستخدمين المستلمين
+      .sort({ createdAt: -1 }); // ترتيب حسب الأحدث
+
+    if (!notifications.length) {
+      return { success: false, message: "لا يوجد إشعارات مرسلة لهذا المستخدم." };
+    }
+
+    return { success: true, message: "تم جلب الإشعارات بنجاح.", notifications };
+  } catch (error) {
+    console.error("خطأ أثناء جلب الإشعارات:", error);
+    return { success: false, message: "فشل في جلب الإشعارات.", error: error.message };
+  }
+};
+
+
+
+
+
+export {
+  createNotification,
+  sendNotificationToRoles,
+  sendNotificationToUsers,
+  storeUserSentNotification,
+  getUserSentNotifications,
+};
