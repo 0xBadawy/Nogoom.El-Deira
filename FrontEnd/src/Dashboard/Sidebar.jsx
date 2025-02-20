@@ -11,7 +11,7 @@ import { TbSpeakerphone } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { IoNotificationsSharp } from "react-icons/io5";
+import { IoNotificationsCircleSharp, IoNotificationsSharp } from "react-icons/io5";
 import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
 import { BsFillSendPlusFill } from "react-icons/bs";
 import { FaMoneyBill } from 'react-icons/fa';
@@ -79,6 +79,12 @@ const Sidebar = () => {
       icon: <IoNotificationsSharp />,
       text: "الإشعارات",
       link: "/dashboard/notifications",
+      roles: ["admin", "editor"],
+    },
+    {
+      icon: <IoNotificationsCircleSharp />,
+      text: "الإشعارات المرسلة",
+      link: "/dashboard/Sended-Notifications",
       roles: ["admin", "editor"],
     },
     {

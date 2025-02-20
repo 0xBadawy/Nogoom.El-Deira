@@ -25,6 +25,9 @@ const Apartments = React.lazy(() => import("../Dashboard/Pages/Apartments"));
 const NotificationsPanel = React.lazy(
   () => import("../Dashboard/Pages/NotificationsPanel")
 );
+const SendedNotificationsPanel = React.lazy(
+  () => import("../Dashboard/Pages/SendedNotificationsPanel")
+);
 const SendNotification = React.lazy(
   () => import("../Dashboard/Pages/SendNotification")
 );
@@ -144,6 +147,10 @@ export const router = createBrowserRouter([
       {
         path: "notifications",
         element: withProtection(NotificationsPanel, ["admin", "editor"]),
+      },
+      {
+        path: "Sended-notifications",
+        element: withProtection(SendedNotificationsPanel, ["admin", "editor"]),
       },
       {
         path: "Send_Notification",

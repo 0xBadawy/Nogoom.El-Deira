@@ -1,6 +1,10 @@
 import express from "express";
 import Notification from "../models/notificationSchema.js";
-import { getUserSentNotifications, storeUserSentNotification } from "../functions/notification.js";
+import {
+  getUserSentNotifications,
+  sendNotificationToUsers,
+  storeUserSentNotification,
+} from "../functions/notification.js";
 
 const router = express.Router();
 
@@ -50,14 +54,18 @@ router.post("/notifications", async (req, res) => {
 
 router.post("/group-notifications", async (req, res) => {
   try {
-    const { title, message, userIds } = req.body;
+    const { title, message, userIds, serderId } = req.body;
+    // console.log("userIds -- ", serderId);
+    // console.log("req.body", req.body);
+    const response = await storeUserSentNotification(
+      serderId,
+      title,
+      message,
+      userIds
+    );
 
-     const response = await storeUserSentNotification(
-       userId,
-       title,
-       message,
-       sendedUsersId
-     );
+    console.log("response ---------------- ", response);
+
     sendNotificationToUsers(userIds, title, message, null, "info");
     res
       .status(201)
@@ -67,8 +75,6 @@ router.post("/group-notifications", async (req, res) => {
   }
 });
 
-
-
 // // 🔹 إرسال إشعار جديد وحفظه في قاعدة البيانات
 // router.post("/send", async (req, res) => {
 //   const { userId, title, message, sendedUsersId } = req.body;
@@ -77,15 +83,16 @@ router.post("/group-notifications", async (req, res) => {
 
 //   res.status(response.success ? 200 : 400).json(response);
 // });
+router.get("/group-notifications", async (req, res) => {
+  const userId = req.query.userId; // تعديل هنا
+  console.log("-----------------------------------");
+  console.log("userId", userId);
 
-// router.get("/:userId", async (req, res) => {
-//   const { userId } = req.params;
+  const response = await getUserSentNotifications(userId);
 
-//   const response = await getUserSentNotifications(userId);
+  console.log(" response 0 -- 0 ", response);
 
-//   res.status(response.success ? 200 : 400).json(response);
-// });
-
-
+  res.status(response.success ? 200 : 400).json(response);
+});
 
 export default router;

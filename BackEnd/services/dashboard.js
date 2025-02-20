@@ -24,9 +24,40 @@ export const getCountes = asyncHandler(async (req, res, next) => {
       userCount,
     },
   });
-
-  
-
-
-
 } );
+
+
+
+
+export const fetch = asyncHandler(async (req, res) => {
+  try {
+    const site = await Site.findOne(); // Get the only record
+    if (!site) {
+      return res.status(404).json({ message: "No site data found." });
+    }
+    res.json(site);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+export const update = asyncHandler( async (req, res) => {
+  try {
+    const updatedSite = await Site.findOneAndUpdate(
+      {}, // No filter, so it updates the first document
+      req.body, // New data from request
+      { upsert: true, new: true } // Create if not exists, return updated
+    );
+    res.json(updatedSite);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+
+export default router;
+
+

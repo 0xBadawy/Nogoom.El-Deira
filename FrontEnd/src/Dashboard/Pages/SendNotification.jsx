@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { GovernmentData } from "../../Stars/SignUp/data";
 import UserSelector from "../../Components/UserSelector2";
 import axiosInstance from "../../Configuration/axiosInstance";
+import { useAuth } from "../../Context/AuthContext";
 
 const SendNotification = () => {
   const [selectStars, setSelectStars] = useState([]);
@@ -14,20 +15,13 @@ const SendNotification = () => {
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedGovern, setSelectedGovern] = useState("all");
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const { user } = useAuth();
 
-  const onSubmit = (data) => {
-    const adData = {
-      message: data.message,
-      stars: selectedUsers,
-      title: "إشعار جديد",
-    };
-    console.log("adData : ", adData);
-
-    const sendData = async () => {
+  const handelFeachData = () => {
+    const feachData = async () => {
       try {
         const response = await axiosInstance.post(
-          "/notifications/group-notifications",
-          adData
+          `/notifications/group-notifications?userId=${user._id}`
         );
         console.log("response : ", response);
       } catch (error) {
@@ -35,17 +29,46 @@ const SendNotification = () => {
       }
     };
 
+    feachData();
+  };
+
+  const onSubmit = (data) => {
+     if (data.message == "") {
+       toast.error("لا يمكن ارسال رسالة فارغة");
+       return;
+     }
+
+    if (selectedUsers.length == 0) {
+      toast.error("يجب اختيار مستخدم واحد على الأقل");
+      return;
+    }
+    const adData = {
+      message: data.message,
+      userIds: selectedUsers,
+      title: "إشعار جديد",
+      serderId: user._id,
+    };
+
+    const sendData = async () => {
+     
+
+     
+      try {
+        const response = await axiosInstance.post(
+          "/notifications/group-notifications",
+          adData
+        );
+        // console.log("response : ", response);
+        reset();
+        setSelectedUsers([]);
+      } catch (error) {
+        console.log("error : ", error);
+      }
+    };
+
     sendData();
 
-    // if (data.message == "") {
-    //   toast.error("لا يمكن ارسال رسالة فارغة");
-    //   return;
-    // }
-
-    // if (selectStars.length == 0) {
-    //   toast.error("يجب اختيار نجم على الاقل");
-    //   return;
-    // }
+   
   };
 
   const {

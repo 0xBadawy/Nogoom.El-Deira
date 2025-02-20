@@ -200,6 +200,7 @@ const sendNotificationToUsers = async (
 
 
 const storeUserSentNotification = async (userId, title, message, sendedUsersId) => {
+  console.log("storeUserSentNotification", userId, title, message, sendedUsersId);
   try {
     if (!userId || !title || !message || !sendedUsersId.length) {
       return { success: false, message: "كل الحقول مطلوبة." };
