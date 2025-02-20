@@ -167,12 +167,12 @@ const CreateAd = () => {
       const response = await axiosInstance.post("/advertisement/add", adData);
       // addADs(response.data);
       console.log(response.data);
-      toast.success("تم إضافة الإعلان بنجاح");
+      toast.success("تم إضافة الحملة بنجاح");
       // reset();
       // navigate("/dashboard/ads");
     }
     catch (error) {
-      toast.error(`خطأ في إضافة الإعلان: ${error.message}`);
+      toast.error(`خطأ في إضافة الحملة: ${error.message}`);
     }
 
    
@@ -194,10 +194,10 @@ const CreateAd = () => {
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                  عنوان الإعلان
+                  عنوان الحملة
                 </label>
                 <input
-                  {...register("title", { required: "عنوان الإعلان مطلوب" })}
+                  {...register("title", { required: "عنوان الحملة مطلوب" })}
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
                 />
                 {errors.title && (
@@ -209,11 +209,11 @@ const CreateAd = () => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                  وصف الإعلان
+                  شرح الحملة
                 </label>
                 <textarea
                   {...register("description", {
-                    required: "وصف الإعلان مطلوب",
+                    required: "وصف الحملة مطلوب",
                   })}
                   rows={4}
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-600"
@@ -260,7 +260,7 @@ const CreateAd = () => {
               {/* Image Upload */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                  صور الإعلان
+                  صور الحملة
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -323,7 +323,7 @@ const CreateAd = () => {
               {/* Video Upload */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
-                  فيديو الإعلان
+                  فيديو الحملة
                 </label>
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                   <div className="space-y-1 text-center">
@@ -434,7 +434,7 @@ const CreateAd = () => {
                   : "bg-blue-500 hover:bg-blue-600"
               }`}
             >
-              {loading ? "جاري الإضافة..." : "إضافة الإعلان"}
+              {loading ? "جاري الإضافة..." : "إضافة الحملة"}
             </button>
           </div>
         </form>

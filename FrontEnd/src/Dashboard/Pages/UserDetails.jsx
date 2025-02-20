@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, set } from "react-hook-form";
 import { useAuth } from "../../Context/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 import { Input } from "@/Components/ui/input";
@@ -35,6 +35,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
       setValue("name", user.name);
       setValue("phone", user.phone);
       setValue("bio", user.bio);
+      setValue("email", user.email);
       // setValue
       
       
@@ -207,6 +208,25 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="email">البريد الإلكتروني* </Label>
+              <Controller
+                name="email"
+                control={control}
+                rules={{ required: "الاسم الكامل مطلوب" }}
+                render={({ field, fieldState: { error } }) => (
+                  <>
+                    <Input {...field} />
+                    {error && (
+                      <span className="text-red-500 text-sm">
+                        {error.message}
+                      </span>
+                    )}
+                  </>
+                )}
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="phone">رقم الهاتف*</Label>
               <Controller
                 name="phone"
@@ -224,11 +244,6 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
                 )}
               />
             </div>
-
-            <AreaGovernmentSelector
-              initialData={address}
-              onSelectionChange={handleSelectionChange}
-            />
 
             <div className="grid grid-cols-3 gap-6">
               <label htmlFor="">التواصل الاجتماعي</label>
@@ -265,7 +280,12 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
               </button>
             </div>
 
-            <div className="space-y-2 col-span-2">
+            <AreaGovernmentSelector
+              initialData={address}
+              onSelectionChange={handleSelectionChange}
+            />
+
+            <div className="space-y-2 col-span- h-full">
               <Label htmlFor="bio">نبذة عنك</Label>
               <Controller
                 name="bio"
@@ -276,17 +296,6 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
 
             {/* -------------------------------------------------------------- */}
 
-
-
-
-
-
-
-
-
-
-
-            
             {/* -------------------------------------------------------------- */}
           </div>
 

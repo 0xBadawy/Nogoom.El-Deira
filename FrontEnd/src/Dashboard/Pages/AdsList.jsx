@@ -20,9 +20,10 @@ const AdsList = () => {
     const featchAds = async () => {
       const response = await axiosInstance.get("/advertisement/all");
       const data = response.data.advertisements;
-      setAds(data);
-      console.log(data);
       
+      setAds(data);
+      console.table( data);
+
     }
     featchAds();
 
@@ -42,8 +43,7 @@ const AdsList = () => {
         Array.isArray(ad.governorates) &&
         ad.governorates.includes(selectedGovernorate));
     return regionMatch && governorateMatch;
-  })
-  .sort((a, b) => new Date(a.startDate) - new Date(b.startDate)); // فرز حسب تاريخ البدء
+    }).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
 
   // حساب العناصر المعروضة في الصفحة الحالية بناءً على البيانات المفلترة
@@ -102,10 +102,10 @@ const AdsList = () => {
           <thead>
             <tr className="border-b">
               <th className="py-2 px-4 text-right">اسم الحملة</th>
-              <th className="py-2 px-4 text-right">المنطقة</th>
+              {/* <th className="py-2 px-4 text-right">المنطقة</th>
               <th className="py-2 px-4 text-right">المحافظة</th>
               <th className="py-2 px-4 text-right min-w-32">الفترة</th>
-              <th className="py-2 px-4 text-right">عدد المشاهدات</th>
+              <th className="py-2 px-4 text-right">عدد المشاهدات</th> */}
             </tr>
           </thead>
           <tbody>
@@ -118,7 +118,7 @@ const AdsList = () => {
                 }`}
               >
                 <td className="py-2 px-4">{row.title}</td>
-                <td className="py-2 px-4">{row.address.area}</td>
+                {/* <td className="py-2 px-4">{row.address.area}</td>
                 <td className="py-2 px-4 max-w-96 ">
                   {Area(row.address.govern)}
                 </td>
@@ -126,7 +126,7 @@ const AdsList = () => {
                   <p className="text-xs">من {formatDate(row.startDate)}</p>
                   <p className="text-xs">إلى {formatDate(row.endDate)}</p>
                 </td>
-                <td className="py-2 px-4">{row.views}</td>
+                <td className="py-2 px-4">{row.views}</td> */}
               </tr>
             ))}
           </tbody>
