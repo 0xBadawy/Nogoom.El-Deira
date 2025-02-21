@@ -11,6 +11,7 @@ import {
 } from "../services/handler.js";
 import Advertisement from "../models/advertisementSchema.js";
 import User from "../models/userModel.js";
+import Site from "../models/siteSchema.js";
 
 
 export const getCountes = asyncHandler(async (req, res, next) => {
@@ -42,22 +43,32 @@ export const fetch = asyncHandler(async (req, res) => {
 });
 
 
-export const update = asyncHandler( async (req, res) => {
+export const update = asyncHandler(async (req, res) => {
+  console.log("req.body ------------ ", req.body);
+
   try {
+    // تحويل القيم النصية إلى أرقام عند الحاجة
+    const updatedData = {
+      ...req.body,
+      campaignCount: Number(req.body.campaignCount) || 0,
+      clientCount: Number(req.body.clientCount) || 0,
+      satisfactionRate: Number(req.body.satisfactionRate) || 100,
+      viewCount: Number(req.body.viewCount) || 0,
+    };
+
     const updatedSite = await Site.findOneAndUpdate(
-      {}, // No filter, so it updates the first document
-      req.body, // New data from request
-      { upsert: true, new: true } // Create if not exists, return updated
+      {}, // لا يوجد فلتر، لذا سيتم تحديث أول مستند
+      updatedData,
+      { upsert: true, new: true }
     );
+
     res.json(updatedSite);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
 
-
-
-export default router;
 
 

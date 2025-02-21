@@ -1,3 +1,6 @@
+
+import mongoose from "mongoose";
+
 const siteSchema = new mongoose.Schema({
   _id: { type: String, default: "singleton" }, // Enforce a single record
   mainTitle: { type: String, required: true },

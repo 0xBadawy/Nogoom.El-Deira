@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDashboard } from "../../Context/DashboardContext";
 import { toast } from "sonner";
 import FormField from "./FormField";
+import axiosInstance from "../../Configuration/axiosInstance";
 // import { ClipLoader } from "react-spinners";
 
 const WebsiteData = () => {
@@ -21,22 +22,43 @@ const WebsiteData = () => {
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      const initialData = await getHomeData();
-      if (initialData.image1Url) setImage1Url(initialData.image1Url);
-      if (initialData.image2Url) setImage2Url(initialData.image2Url);
+      const response = await axiosInstance.get("/dashboard/defult");
+      const initialData = response.data;
+
+      setImage1Url(initialData.image1);
+      setImage2Url(initialData.image2);
+
+      console.log(initialData);
+
       reset(initialData);
     };
     fetchInitialData();
   }, [getHomeData, reset]);
 
   const handleImageUpload = async (file, imageName) => {
+    console.log("file");
     if (!file) return null;
     const storageRef = ref(storage, `images/${imageName}`);
     await uploadBytes(storageRef, file);
-    return getDownloadURL(storageRef);
+    const downLoadUrl = await getDownloadURL(storageRef);
+    console.log(downLoadUrl);
+    return downLoadUrl;
+  };
+
+  const submit = async (data) => {
+    try {
+      const response = await axiosInstance.post("/dashboard/update", data);
+      console.log(response);
+      toast.success("تم تحديث البيانات بنجاح");
+    } catch (error) {
+      console.error(error);
+      toast.error("حدث خطأ أثناء تحديث البيانات");
+    }
   };
 
   const onSubmit = async (data) => {
+    console.log(data);
+
     setIsLoading(true);
     try {
       if (image1) {
@@ -46,7 +68,14 @@ const WebsiteData = () => {
         data.image2Url = await handleImageUpload(image2, "image2");
       }
 
-      await addHomeData(data);
+      const allData = {
+        ...data,
+        image1: data.image1Url,
+        image2: data.image2Url,
+      };
+
+      submit(allData);
+
       toast.success("تم تحديث البيانات بنجاح");
       reset();
     } catch (error) {
@@ -76,28 +105,28 @@ const WebsiteData = () => {
             {/* قسم البيانات الرئيسية */}
             <div>
               <FormField
-                id="main_title"
+                id="mainTitle"
                 label={"العنوان الرئيسي للموقع"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="subtitle"
+                id="subTitle"
                 label={"العنوان الفرعي للموقع"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="ad_title"
+                id="adTitle"
                 label={"عنوان الإعلان للموقع"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="ad_description"
+                id="adDescription"
                 type="textarea"
                 label={"وصف الإعلان للموقع"}
                 register={register}
@@ -106,28 +135,28 @@ const WebsiteData = () => {
             {/* قسم النجوم */}
             <div>
               <FormField
-                id="star_ad_1"
+                id="starAd1"
                 label={"إعلان النجوم 1"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="star_ad_2"
+                id="starAd2"
                 label={"إعلان النجوم 2"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="star_ad_3"
+                id="starAd3"
                 label={"إعلان النجوم 3"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="star_ad_4"
+                id="starAd4"
                 label={"إعلان النجوم 4"}
                 register={register}
               />
@@ -135,60 +164,96 @@ const WebsiteData = () => {
             {/* قسم الإحصائيات */}
             <div>
               <FormField
-                id="campaigns_count"
+                id="campaignCount"
                 label={"عدد الحملات"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="clients_count"
+                id="clientCount"
                 label={"عدد العملاء"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="satisfaction_rate"
+                id="satisfactionRate"
                 label={"معدل الرضا"}
                 register={register}
               />
             </div>
             <div>
               <FormField
-                id="views_count"
+                id="viewCount"
                 label={"عدد المشاهدات"}
                 register={register}
               />
             </div>
 
-
-        
-
-
-
-  {/* قسم تحميل الصور */}
-  <div>
+            {/* قسم تحميل الصور */}
+            <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 تحميل الصورة الأولى
               </label>
-              {image1Url && <img src={image1Url} alt="الصورة الحالية 1" className="w-32 h-32 mt-2 object-cover rounded-md" />}
-              {previewImage1 && <img src={previewImage1} alt="معاينة الصورة الأولى" className="w-32 h-32 mt-2 object-cover rounded-md" />}
-              <input type="file" accept="image/*" onChange={(e) => handlePreviewImage(e, setImage1, setPreviewImage1)} className="mt-2" />
+              {image1Url && (
+                <img
+                  src={image1Url}
+                  alt="الصورة الحالية 1"
+                  className="w-32 h-32 mt-2 object-cover rounded-md"
+                />
+              )}
+              {previewImage1 && (
+                <img
+                  src={previewImage1}
+                  alt="معاينة الصورة الأولى"
+                  className="w-32 h-32 mt-2 object-cover rounded-md"
+                />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) =>
+                  handlePreviewImage(e, setImage1, setPreviewImage1)
+                }
+                className="mt-2"
+              />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 تحميل الصورة الثانية
               </label>
-              {image2Url && <img src={image2Url} alt="الصورة الحالية 2" className="w-32 h-32 mt-2 object-cover rounded-md" />}
-              {previewImage2 && <img src={previewImage2} alt="معاينة الصورة الثانية" className="w-32 h-32 mt-2 object-cover rounded-md" />}
-              <input type="file" accept="image/*" onChange={(e) => handlePreviewImage(e, setImage2, setPreviewImage2)} className="mt-2" />
+              {image2Url && (
+                <img
+                  src={image2Url}
+                  alt="الصورة الحالية 2"
+                  className="w-32 h-32 mt-2 object-cover rounded-md"
+                />
+              )}
+              {previewImage2 && (
+                <img
+                  src={previewImage2}
+                  alt="معاينة الصورة الثانية"
+                  className="w-32 h-32 mt-2 object-cover rounded-md"
+                />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) =>
+                  handlePreviewImage(e, setImage2, setPreviewImage2)
+                }
+                className="mt-2"
+              />
             </div>
           </div>
 
-          <button type="submit" className="w-full bg-indigo-600 text-white py-2 mt-6 rounded-lg hover:bg-indigo-700 flex justify-center items-center">
-            {isLoading ? "تحميل.... ": "تسجيل"}
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 mt-6 rounded-lg hover:bg-indigo-700 flex justify-center items-center"
+          >
+            {isLoading ? "تحميل.... " : "تسجيل"}
           </button>
         </form>
       </div>
