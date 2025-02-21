@@ -5,9 +5,11 @@ import { Button } from "@/Components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/Components/ui/card";
 import { useDashboard } from "../../Context/DashboardContext";
 import { useAuth } from "../../Context/AuthContext";
+import axiosInstance from "../../Configuration/axiosInstance";
+import formatDate, { formatDateTime } from "../../hooks/formatDate";
 
 const Notifications = () => {
-  const { getUserData, getUserId } = useAuth();
+  const { user } = useAuth();
   const [UserId, setUserId] = useState();
 
   const { updateNotificationReaded } = useDashboard();
@@ -27,34 +29,22 @@ const Notifications = () => {
     // { id: 3, message: "تم تسجيل الدخول بنجاح من جهاز جديد.", readed: true },
   ]);
 
-  const handleReadNotification = (id) => {
-    updateNotificationReaded(UserId, id);
-    fetchData();
-  };
-
   const fetchData = async () => {
     try {
-      const data = await getUserData();
-      const sortedNotifications = data.notifications.sort(
-        (a, b) =>
-          new Date(b.time.seconds * 1000) - new Date(a.time.seconds * 1000)
+      const userId = await user._id;
+      const response = await axiosInstance.get(`/notifications/notifications`, {
+        params: { userId },
+      });
+      const sortedNotifications = response.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
       setNotifications(sortedNotifications);
-      // console.log(sortedNotifications);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, [getUserData, updateNotificationReaded]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getUserId();
-      setUserId(data);
-    };
     fetchData();
   }, []);
 
@@ -84,11 +74,7 @@ const Notifications = () => {
                       {notification?.message}
                     </p>
                     <p className="text-xs text-gray-500">
-                      {notification?.time
-                        ? new Date(
-                            notification.time.seconds * 1000
-                          ).toLocaleString()
-                        : "Invalid date"}
+                      {formatDateTime(notification?.createdAt)}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 ">

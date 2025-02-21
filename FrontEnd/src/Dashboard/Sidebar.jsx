@@ -99,12 +99,12 @@ const Sidebar = () => {
       link: "/dashboard/website_data",
       roles: ["admin", "editor"],
     },
-    {
-      icon: <RiContactsBook3Line />,
-      text: "بيانات التواصل",
-      link: "/dashboard/contact",
-      roles: ["admin", "editor"],
-    },
+    // {
+    //   icon: <RiContactsBook3Line />,
+    //   text: "بيانات التواصل",
+    //   link: "/dashboard/contact",
+    //   roles: ["admin", "editor"],
+    // },
     {
       icon: <MdOutlinePrivacyTip />,
       text: "الشروط والخصوصية",

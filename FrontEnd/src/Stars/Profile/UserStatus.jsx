@@ -5,14 +5,34 @@ import { FaUser, FaRegUser, FaStar, FaMedal } from "react-icons/fa";
 const UserStatus = ({ verified, accountType }) => {
   const renderAccountType = () => {
     switch (accountType) {
-      case "عادي":
-        return <FaUser className="text-gray-600" size={24} />;
-      case "فضي":
-        return <FaStar className="text-silver-500" size={24} />;
-      case "ذهبي":
-        return <FaMedal className="text-yellow-500" size={24} />;
-      case "برونزي":
-        return <FaRegUser className="text-brown-500" size={24} />;
+      case "none":
+        return (
+          <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
+            <FaUser className="text-gray-600" size={24} />
+            <p className="mt-1">حساب عادي</p>
+          </p>
+        );
+      case "silver":
+        return (
+          <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
+            <FaStar className="text-silver-500" size={24} />
+            <p className="mt-1">حساب فضي</p>
+          </p>
+        );
+      case "gold":
+        return (
+          <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
+            <FaMedal className="text-yellow-500" size={24} />
+            <p className="mt-1">حساب ذهبي</p>
+          </p>
+        );
+      case "bronze":
+        return (
+          <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
+            <FaRegUser className="text-brown-500" size={24} />
+            <p className="mt-1">حساب برونزي</p>
+          </p>
+        );
       default:
         return null;
     }
@@ -20,13 +40,13 @@ const UserStatus = ({ verified, accountType }) => {
 
   const getColorClasses = () => {
     switch (accountType) {
-      case "عادي":
+      case "none":
         return "bg-gray-100 text-gray-700";
-      case "فضي":
+      case "silver":
         return "bg-gray-200 text-gray-700";
-      case "ذهبي":
+      case "gold":
         return "bg-yellow-100 text-yellow-700";
-      case "برونزي":
+      case "bronze":
         return "bg-orange-100 text-orange-700";
       default:
         return "bg-gray-100 text-gray-700";

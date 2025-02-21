@@ -76,9 +76,9 @@ export const signUp = asyncHandler(async (req, res, next) => {
     // }
 
     sendNotificationToRoles(
-      ["admin", "manager", "editor", "star"],
-      "مستخدم جديد",
-      `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+      ["admin", "manager", "editor"],
+      "تم إنشاء حساب جديد",
+      `قام المستخدم ${req.body.name} (${req.body.email}) بإنشاء حساب جديد.`,
       user._id,
       "newUser"
     );
@@ -100,10 +100,7 @@ export const signUp = asyncHandler(async (req, res, next) => {
     console.error("Signup Error:", err);
     next(new ApiError(err.message || "حدث خطأ أثناء معالجة الطلب", 500));
   }
-
 });
-
-
 
 // SignIn function
 export const signIn = asyncHandler(async (req, res, next) => {
@@ -129,7 +126,7 @@ export const signIn = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     token,
-    data:user
+    data: user,
   });
 });
 
@@ -177,7 +174,6 @@ export const authorize = (...roles) => {
     next();
   };
 };
-
 
 export const forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await UserModel.findOne({ email: req.body.email });
@@ -241,9 +237,8 @@ export const verifyPasswordResetCode = asyncHandler(async (req, res, next) => {
 });
 
 export const resetPassword = asyncHandler(async (req, res, next) => {
-
   const user = await UserModel.findOne({ email: req.body.email });
-   
+
   if (!user) {
     return next(new ApiError("No user found with this email", 404));
   }
@@ -256,8 +251,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
   user.passwordResetCode = undefined;
   user.passwordResetExpires = undefined;
   user.passwordResetVerified = false;
-  await user.save();  
-
+  await user.save();
 
   const token = generateToken(user._id);
 
@@ -271,8 +265,6 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     },
   });
 });
-
-
 
 // {
 //         "email": "mohmaaaaed222@ssqmm.com",

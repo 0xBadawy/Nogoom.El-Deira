@@ -9,13 +9,16 @@ import toast, { Toaster } from "react-hot-toast";
 import { useDashboard } from "../../Context/DashboardContext";
 import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
 import axiosInstance from "../../Configuration/axiosInstance";
-
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../Configuration/Firebase";
 const SignUpPage = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { SendSignupNotification } = useDashboard();
 
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [mediaUrl, setMediaUrl] = useState(""); // تغييرها من مصفوفة إلى رابط واحد
   const [address, setAddress] = useState({ area: "", govern: [] });
   const [inputs, setInputs] = useState([{ type: "general", link: "" }]);
   const [error, setError] = useState(null);
@@ -59,7 +62,12 @@ const SignUpPage = () => {
       return;
     }
 
-    const finalData = { ...data, address, social: inputs };
+    const finalData = {
+      ...data,
+      address,
+      social: inputs,
+      profileImage: mediaUrl,
+    };
 
     try {
       setLoading(true);
@@ -70,7 +78,6 @@ const SignUpPage = () => {
       signup(response.data.user);
       toast.success(" تم انشاء الحساب بنجاح");
       navigate("/Status");
-
     } catch (error) {
       if (error.response) {
         setError(
@@ -88,6 +95,46 @@ const SignUpPage = () => {
     }
   };
 
+  const handleFileUpload = async (file) => {
+    if (!file) return;
+
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      toast.error(`نوع الملف غير مدعوم: ${file.name}`);
+      return;
+    }
+
+    setLoading(true);
+
+    const fileName = "noUser";
+    const storageRef = ref(storage, `${fileName}/images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      (error) => {
+        toast.error(`خطأ في رفع الملف: ${error.message}`);
+        setLoading(false);
+      },
+      async () => {
+        try {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          setMediaUrl(url);
+          console.log("Media URL:", url);
+        } catch (error) {
+          toast.error(`خطأ في الحصول على رابط الصورة: ${error.message}`);
+        } finally {
+          setLoading(false);
+        }
+      }
+    );
+  };
+
   return (
     <div className="PatternBG py-10 flex items-center justify-center min-h-screen">
       <div className="w-full max-w-7xl bg-white p-6 rounded-lg shadow-md">
@@ -103,6 +150,56 @@ const SignUpPage = () => {
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
+          {/* -- --- - - - - - - - - - */}
+          <div className="mb-4">
+            {/* عرض الصورة المختارة */}
+            {mediaUrl ? (
+              <div className="mt-4 flex justify-center">
+                <img
+                  src={mediaUrl}
+                  alt="Preview"
+                  className="w-48 h-48 object-cover rounded-full "
+                  // onClick={() => setMediaUrl("")}
+                />
+              </div>
+            ) : (
+              <div className="mt-1 flex  justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed mx-auto w-48 h-48 object-cover rounded-full">
+                <div className="space-y-1 text-center mt-12 ">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e.target.files[0])}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <label
+                    htmlFor="image-upload"
+                    className="cursor-pointer bg-white py-2 px-4  border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  >
+                    اختر صورة شخصية
+                  </label>
+                  <p className="text-xs text-gray-500 pt-4">
+                    PNG, JPG, GIF حتى 10MB
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* شريط تقدم التحميل */}
+            {uploadProgress > 0 && uploadProgress < 100 && (
+              <div className="mt-2">
+                <div className="h-2 bg-gray-200 rounded-full">
+                  <div
+                    className="h-2 bg-blue-500 rounded-full"
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* -- --- - - - - - - - - - */}
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <FormField id="name" label={TextData.name} register={register} />

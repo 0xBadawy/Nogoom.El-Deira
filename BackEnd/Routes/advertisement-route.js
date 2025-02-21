@@ -67,21 +67,23 @@ router.post(
   })
 );
 
-router.get("/all", asyncHandler(async (req, res) => { // Get all advertisements
-  try {
-    const advertisements = await Advertisement.find().exec();
+router.get(
+  "/all",
+  asyncHandler(async (req, res) => {
+    // Get all advertisements
+    try {
+      const advertisements = await Advertisement.find().exec();
 
-    res.status(200).json({
-      message: "تم جلب الإعلانات بنجاح",
-      advertisements,
-    });
-  } catch (error) {
-    console.error("خطأ أثناء جلب الإعلانات:", error);
-    res.status(500).json({ message: "حدث خطأ أثناء جلب الإعلانات." });
-  }
-}));
-
-
+      res.status(200).json({
+        message: "تم جلب الإعلانات بنجاح",
+        advertisements,
+      });
+    } catch (error) {
+      console.error("خطأ أثناء جلب الإعلانات:", error);
+      res.status(500).json({ message: "حدث خطأ أثناء جلب الإعلانات." });
+    }
+  })
+);
 
 router.get(
   "/get_one/:adId",
@@ -148,17 +150,6 @@ router.delete(
   })
 );
 
-
-
-
-
-
-
-
-
-
-
-
 router.get(
   "/user-ads/:userId",
   asyncHandler(async (req, res) => {
@@ -187,8 +178,6 @@ router.get(
     }
   })
 );
-
-
 
 router.post(
   "/edit-links/:adId/:userId",
@@ -237,9 +226,6 @@ router.post(
   })
 );
 
-
- 
-
 router.put(
   "/edit/:adId",
   asyncHandler(async (req, res) => {
@@ -277,19 +263,36 @@ router.put(
 
         // Sync user references without creating duplicates
         for (const user of updatedUsers) {
-          await User.findByIdAndUpdate(
-            user.userId,
-            {
-              $set: {
-                "ads.$[elem].links": user.links || [],
-              },
-            },
-            {
-              arrayFilters: [{ "elem.adId": adId }],
-              new: true,
-              upsert: true,
-            }
+          const existingUser = await User.findById(user.userId);
+
+          if (!existingUser) continue; // تجاهل المستخدم غير الموجود
+
+          const adExists = existingUser.ads.some(
+            (ad) => ad.adId.toString() === adId
           );
+
+          if (adExists) {
+            // تحديث الروابط فقط إذا كان الإعلان موجودًا
+            await User.findByIdAndUpdate(
+              user.userId,
+              {
+                $set: { "ads.$[elem].links": user.links || [] },
+              },
+              {
+                arrayFilters: [{ "elem.adId": adId }],
+                new: true,
+              }
+            );
+          } else {
+            // إضافة الإعلان إلى المستخدم إذا لم يكن موجودًا
+            await User.findByIdAndUpdate(
+              user.userId,
+              {
+                $push: { ads: { adId: adId, links: user.links || [] } },
+              },
+              { new: true }
+            );
+          }
         }
       }
 
@@ -306,12 +309,5 @@ router.put(
     }
   })
 );
-
-
-
-
-
-
-
 
 export default router;

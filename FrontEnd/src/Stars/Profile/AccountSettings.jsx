@@ -177,7 +177,7 @@ const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
       <CardHeader>
         <CardTitle className="text-3xl font-bold text-indigo-900">
           إعدادات الحساب
-        </CardTitle>
+        </CardTitle> 
       </CardHeader>
       <CardContent>
         <p className="mb-6 text-gray-600">

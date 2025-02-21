@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../Configuration/Firebase";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { storage } from "../../Configuration/Firebase";
 import { useDashboard } from "../../Context/DashboardContext";
 import { useAuth } from "../../Context/AuthContext";
 import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
@@ -304,7 +304,7 @@ const CreateAd = () => {
                           <X size={16} />
                         </button>
                       </div>
-                    ))}
+                    ))} 
                   </div>
                 )}
 
