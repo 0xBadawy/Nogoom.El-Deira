@@ -57,10 +57,10 @@ const PublicProfile = () => {
     { label: "عنوان البريد الإلكتروني", value: userData?.email },
     { label: "رقم الهاتف", value: userData?.phone },
     { label: "تاريخ إنشاء الحساب", value: formatDate(userData?.createdAt) },
-    { label: "المنطقة", value: userData.address?.area },
-    { label: "المحافظات", value: userData.address?.govern.join(", ") },
-    { label: "رصيد الحساب", value: `$${userData.balance}` },
-    { label: "تم التحقق", value: userData.verified ? "نعم" : "لا" },
+    { label: "المنطقة", value: userData?.address?.area },
+    { label: "المحافظات", value: userData?.address?.govern.join(", ") },
+    { label: "رصيد الحساب", value: `$${userData?.balance}` },
+    { label: "تم التحقق", value: userData?.verified ? "نعم" : "لا" },
   ];
 
 

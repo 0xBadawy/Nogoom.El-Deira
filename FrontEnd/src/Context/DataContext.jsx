@@ -1,19 +1,25 @@
-import { createContext, useContext } from "react";
+ import { createContext, useContext, useEffect, useState } from "react";
+import axiosInstance from "../Configuration/axiosInstance";
 const DataContext = createContext();
 const DataProvider = ({ children }) => {
-  const users = [
-    {
-      name: "John Doe",
-      email: "test@test.com",
-    },
-    {
-      name: "Jane Doe",
-      email: "test@test.com",
-    },
-  ];
+  const [websiteData, setWebsiteData] = useState({});
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const response = await axiosInstance.get("/dashboard/defult");
+        console.log("fetchInitialData",response.data);
+        setWebsiteData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchInitialData();
+  }, []);
 
   return (
-    <DataContext.Provider value={{ users }}>{children}</DataContext.Provider>
+    <DataContext.Provider value={{ websiteData }}>
+      {children}
+    </DataContext.Provider>
   );
 };
 

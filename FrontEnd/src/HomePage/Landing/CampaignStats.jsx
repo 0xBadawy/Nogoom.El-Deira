@@ -7,39 +7,41 @@ import "swiper/css/pagination";
 import { FaChartBar, FaUsers, FaBullhorn } from "react-icons/fa";
 import { MdOutlineMoreTime } from "react-icons/md";
 import { useDashboard } from "../../Context/DashboardContext";
+import { useData } from "../../Context/DataContext";
 
 const CampaignStats = () => {
   const [data, setData] = useState();
   const { getHomeData } = useDashboard();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const Data = await getHomeData();
-      console.log(Data);
-      setData(Data);
-    };
-    fetchData();
-  }, []);
-
+   
+   const { websiteData } = useData();
+ 
+   useEffect(() => {
+     setData(websiteData);
+     console.log("websiteData 4 ",websiteData);
+   }, [websiteData]);
+ 
   const cards = [
     {
       icon: <FaChartBar className="text-5xl text-blue-500 mb-4 mx-auto" />,
-      count: `${data?.campaigns_count} حملة`,
+      count: `${data?.campaignCount} حملة`,
       description: "عدد الحملات المنفذة",
     },
     {
       icon: <FaUsers className="text-5xl text-green-500 mb-4 mx-auto" />,
-      count: `+${data?.clients_count} عميل`,
+      count: `+${data?.clientCount} عميل`,
       description: "عدد العملاء المستفيدين",
     },
     {
       icon: <FaBullhorn className="text-5xl text-yellow-500 mb-4 mx-auto" />,
-      count: `${data?.satisfaction_rate}% رضا`,
+      count: `${data?.satisfactionRate}% رضا`,
       description: "معدل رضا العملاء",
     },
     {
-      icon: <MdOutlineMoreTime className="text-5xl text-blue-500 mb-4 mx-auto" />,
-      count: `${data?.views_count} مشاهدة`,
+      icon: (
+        <MdOutlineMoreTime className="text-5xl text-blue-500 mb-4 mx-auto" />
+      ),
+      count: `${data?.viewCount} مشاهدة`,
       description: "عدد المشاهدات",
     },
   ];

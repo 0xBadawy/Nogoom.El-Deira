@@ -24,7 +24,7 @@ export const NavLinks = ({ links, isMobile = false, isScrolled }) => {
                 ? "md:text-gray-800 md:after:bg-primary "
                 : "md:text-white md:after:bg-white"
             }
-            font-bold text-primary hover:text-primaryHover 
+            font-bold text-primary hover:text-w 
             px-4 py-2 rounded-lg transition-all duration-300
             relative after:content-[''] after:absolute after:bottom-0 
             after:left-0 after:w-full after:h-0.5 

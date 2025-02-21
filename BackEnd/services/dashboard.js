@@ -12,7 +12,8 @@ import {
 import Advertisement from "../models/advertisementSchema.js";
 import User from "../models/userModel.js";
 import Site from "../models/siteSchema.js";
-
+import Contact from "../models/contactSchema.js";
+import mongoose from "mongoose";
 
 export const getCountes = asyncHandler(async (req, res, next) => {
   const advertisementCount = await Advertisement.countDocuments();
@@ -25,10 +26,7 @@ export const getCountes = asyncHandler(async (req, res, next) => {
       userCount,
     },
   });
-} );
-
-
-
+});
 
 export const fetch = asyncHandler(async (req, res) => {
   try {
@@ -41,7 +39,6 @@ export const fetch = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 export const update = asyncHandler(async (req, res) => {
   console.log("req.body ------------ ", req.body);
@@ -69,6 +66,38 @@ export const update = asyncHandler(async (req, res) => {
   }
 });
 
+// export const fetchContact = asyncHandler(async (req, res) => {
+//   try {
+//     const contact = await Contact.findOne(); // Get the only record
+//     if (!contact) {
+//       return res.status(404).json({ message: "No contact data found." });
+//     }
+//     res.json(contact);
+//   } catch (error) {
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
+// export const updateContact = asyncHandler(async (req, res) => {
+//   console.log("req.body ------------ updateContact ", req.body);
 
+//   try {
+//     // تحويل القيم النصية إلى أرقام عند الحاجة
 
+//     const existingContact = await Contact.findOne({ _id: req.body._id });
+//     console.log("Existing Contact:", existingContact);
+
+//     const updatedSite = await Contact.findOneAndUpdate(
+//       { _id: new mongoose.Types.ObjectId("singleton") }, // تحويل إلى ObjectId
+//       { $set: req.body },
+//       { upsert: true, new: true }
+//     );
+
+//     console.log("updatedSite ------------ ", updatedSite);
+
+//     res.json(updatedSite);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });

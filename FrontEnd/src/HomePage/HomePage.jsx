@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import Navbar from "../Components/navigation/Navbar";
 import "../style/pattern.css";
 import Loading from "../Components/Loading";
+import { useData } from "../Context/DataContext";
 
 const HeroSection = React.lazy(() => import("./Landing/hero/HeroSection"));
 const CurrentAdv = React.lazy(() => import("./Landing/CurrentAdv"));
@@ -16,7 +17,6 @@ const ContactSection = React.lazy(() => import("./Landing/ContactSection"));
 
 const HomePage = () => {
 
-  
 
   return (
     <HomePageItems />

@@ -7,7 +7,7 @@ import { storage } from "../../Configuration/Firebase";
 import { useDashboard } from "../../Context/DashboardContext";
 import { useAuth } from "../../Context/AuthContext";
 import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
-import UserSelector from "../../Components/UserSelector";
+import UserSelector from "../../Components/UserSelector2";
 import { X } from "lucide-react"; // Import X icon for delete button
 import axiosInstance from "../../Configuration/axiosInstance";
 
@@ -168,8 +168,8 @@ const CreateAd = () => {
       // addADs(response.data);
       console.log(response.data);
       toast.success("تم إضافة الحملة بنجاح");
-      // reset();
-      // navigate("/dashboard/ads");
+      reset();
+      navigate("/dashboard/ads-list");
     }
     catch (error) {
       toast.error(`خطأ في إضافة الحملة: ${error.message}`);

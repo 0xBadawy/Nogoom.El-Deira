@@ -10,20 +10,22 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { useDashboard } from "../../Context/DashboardContext";
+import { useData } from "../../Context/DataContext";
 
 
 const ContactSection = () => {
   const [contact, setContact] = useState()
   const { fetchContact } = useDashboard();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const Data = await fetchContact();
-      setContact(Data);
-    };
-    fetchData();
-  }, []);
-
+ 
+   const [data, setData] = useState();
+   const { websiteData } = useData();
+ 
+   useEffect(() => {
+     setData(websiteData);
+     console.log("websiteData cty ", websiteData);
+   }, [websiteData]);
+ 
 
   return (
     <section className="relative py-12 overflow-hidden">
@@ -48,7 +50,7 @@ const ContactSection = () => {
               </h3>
               <div className="flex justify-center gap-3 lg:gap-8  mt-10 ">
                 <a
-                  href={contact?.facebook}
+                  href={data?.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 text-4xl"
@@ -57,7 +59,7 @@ const ContactSection = () => {
                   <FaFacebookF size={55} />
                 </a>
                 <a
-                  href={contact?.twitter}
+                  href={data?.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-blue-600 text-4xl"
@@ -66,7 +68,7 @@ const ContactSection = () => {
                   <FaTwitter size={55} />
                 </a>
                 <a
-                  href={contact?.instagram}
+                  href={data?.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-pink-600 hover:text-pink-800 text-4xl"
@@ -75,7 +77,7 @@ const ContactSection = () => {
                   <FaInstagram size={55} />
                 </a>
                 <a
-                  href={contact?.snapchat}
+                  href={data?.snapchat}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-yellow-400 hover:text-yellow-600 text-4xl"
@@ -84,7 +86,7 @@ const ContactSection = () => {
                   <FaSnapchatGhost size={55} />
                 </a>
                 <a
-                  href={contact?.tiktok}
+                  href={data?.tiktok}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-black hover:text-gray-700 text-4xl"
@@ -101,33 +103,32 @@ const ContactSection = () => {
                 تواصل معنا
               </h3>
               <div className="space-y-4 text-center">
-              <p className="text-lg text-gray-800">
-  <FaPhoneAlt className="inline text-blue-600 ml-2" />
-  <a
-    href={`tel:${contact?.phone}`}
-    className="hover:text-blue-800"
-  >
-    {contact?.phone}
-  </a>
-</p>
+                <p className="text-lg text-gray-800">
+                  <FaPhoneAlt className="inline text-blue-600 ml-2" />
+                  <a
+                    href={`tel:${data?.phone}`}
+                    className="hover:text-blue-800"
+                  >
+                    {data?.phone}
+                  </a>
+                </p>
 
                 <p className="text-lg text-gray-800">
                   <FaEnvelope className="inline text-blue-600 ml-2" />
                   <a
-                    href={`mailto:${contact?.email}`}
+                    href={`mailto:${data?.email}`}
                     className="hover:text-blue-800"
                   >
-                    {contact?.email}
+                    {data?.email}
                   </a>
                 </p>
                 <button
                   className="flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 mx-auto rounded-full shadow-md hover:bg-green-600 transition-transform"
-                  onClick={() => window.open(`https://wa.me/${contact?.whatsapp}`)}
+                  onClick={() => window.open(`https://wa.me/${data?.whatsapp}`)}
                 >
                   <FaWhatsapp className="text-xl" />
                   واتساب
                 </button>
-
               </div>
             </div>
           </div>

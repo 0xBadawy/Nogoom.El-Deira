@@ -191,7 +191,101 @@ const WebsiteData = () => {
               />
             </div>
 
-            {/* قسم تحميل الصور */}
+            <div>
+              <FormField id="phone" label={"رقم الهاتف"} register={register} />
+            </div>
+            <div>
+              <FormField
+                id="email"
+                label={"البريد الإلكتروني"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField id="whatsapp" label={"واتساب"} register={register} />
+            </div>
+
+            <div>
+              <FormField
+                id="facebook"
+                label={"رابط فيسبوك"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="instagram"
+                label={"رابط إنستجرام"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="twitter"
+                label={"رابط تويتر"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="snapchat"
+                label={"رابط سناب شات"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="linkedin"
+                label={"رابط لينكد إن"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="youtube"
+                label={"رابط يوتيوب"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="tiktok"
+                label={"رابط تيك توك"}
+                register={register}
+              />
+            </div>
+
+            {/* <div>
+              <FormField
+                id="telegram"
+                label={"رابط تيليجرام"}
+                register={register}
+              />
+            </div> */}
+
+            <div>
+              <FormField
+                id="googlePlay"
+                label={"رابط جوجل بلاي"}
+                register={register}
+              />
+            </div>
+
+            <div>
+              <FormField
+                id="appStore"
+                label={"رابط آب ستور"}
+                register={register}
+              />
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 تحميل الصورة الأولى

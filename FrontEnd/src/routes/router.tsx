@@ -38,7 +38,7 @@ const EditAd = React.lazy(() => import("../Dashboard/Pages/EditAd"));
 
 const Privacy = React.lazy(() => import("../Dashboard/Pages/Privacy"));
 const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
-const Contact = React.lazy(() => import("../Dashboard/Pages/Contact"));
+const Contact = React.lazy(() => import("../Dashboard/Pages/ContactPage"));
 const Unauthorized = React.lazy(() => import("../Pages/Unauthorized"));
 const PrivacyPolicy = React.lazy(() => import("../Pages/PrivacyPolicy"));
 
