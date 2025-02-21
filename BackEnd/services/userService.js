@@ -82,3 +82,11 @@ export const updateLogedUser = asyncHandler(async (req, res, next) => {
     data: user,
   });
 });
+
+export const getStarsUsers = asyncHandler(async (req, res, next) => {
+  const users = await UserModal.find({ role: "star", verified: true });
+  res.status(200).json({
+    status: "success",
+    data: users,
+  });
+});

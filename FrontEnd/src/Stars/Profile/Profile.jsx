@@ -62,7 +62,7 @@ const handelLogout=()=>{
                     userData?.profileImage || "https://via.placeholder.com/150"
                   }
                   alt="Profile"
-                  className="w-32 h-32 rounded-full border-4 border-indigo-300 mb-4"
+                  className="w-32 h-32 rounded-full border-4 border-indigo-300 mb-4 object-cover"
                 />
                 <h2 className="text-2xl font-bold text-indigo-900">
                   {userData?.name || "User Name"}

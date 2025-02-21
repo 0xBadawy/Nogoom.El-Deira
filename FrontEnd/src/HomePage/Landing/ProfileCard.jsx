@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaMapMarkerAlt, FaUsers } from 'react-icons/fa';
+import React from "react";
+import { motion } from "framer-motion";
+import { FaMapMarkerAlt, FaUsers } from "react-icons/fa";
 
 const ProfileCard = ({ name, image, area, followers }) => {
   return (
@@ -40,7 +40,7 @@ const ProfileCard = ({ name, image, area, followers }) => {
           </div>
         </div>
         {/* Follow Button */}
-{/* 
+        {/* 
         <div className="flex justify-center pb-6">
           <motion.button
             className="px-6 py-2 bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-full font-semibold hover:from-purple-600 hover:to-indigo-600 transition-all shadow-lg hover:shadow-xl"

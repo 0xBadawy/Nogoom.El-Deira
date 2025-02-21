@@ -6,11 +6,13 @@ import { useDashboard } from "../../Context/DashboardContext";
 import { toast } from "sonner";
 import FormField from "./FormField";
 import axiosInstance from "../../Configuration/axiosInstance";
+import PageLoader from "../../Components/PageLoader";
 // import { ClipLoader } from "react-spinners";
 
 const WebsiteData = () => {
   const { register, handleSubmit, reset } = useForm();
   const { getHomeData, addHomeData } = useDashboard();
+  const [lodding, setLodding] = useState(false);
 
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
@@ -21,6 +23,7 @@ const WebsiteData = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setLodding(true);
     const fetchInitialData = async () => {
       const response = await axiosInstance.get("/dashboard/defult");
       const initialData = response.data;
@@ -33,6 +36,7 @@ const WebsiteData = () => {
       reset(initialData);
     };
     fetchInitialData();
+    setLodding(false);
   }, [getHomeData, reset]);
 
   const handleImageUpload = async (file, imageName) => {
@@ -93,9 +97,10 @@ const WebsiteData = () => {
       setPreview(URL.createObjectURL(file));
     }
   };
-
   return (
-    <div className="grow p-8 dark:bg-gray-800">
+   <>
+    {lodding ? (<PageLoader/>) : (
+       <div className="grow p-8 dark:bg-gray-800">
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
         <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
           بيانات الموقع
@@ -286,6 +291,19 @@ const WebsiteData = () => {
               />
             </div>
 
+            <div className="col-span-2">
+              <div className="flex flex-col">
+                <label htmlFor="privacy" className="text-lg">
+                  سياسة الخصوصية
+                </label>
+                <textarea
+                  {...register("privacy")}
+                  className="border border-gray-300 p-2 rounded-lg mt-2"
+                  style={{ minHeight: "300px" }}
+                ></textarea>
+              </div>
+            </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-white">
                 تحميل الصورة الأولى
@@ -352,6 +370,8 @@ const WebsiteData = () => {
         </form>
       </div>
     </div>
+    )}
+   </>
   );
 };
 

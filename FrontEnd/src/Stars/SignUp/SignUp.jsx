@@ -62,6 +62,24 @@ const SignUpPage = () => {
       return;
     }
 
+    if (address.area === "" || address.govern.length === 0) {
+      toast.error("يجب اختيار المنطقة والمحافظة");
+      return;
+    }
+
+    if (inputs.length === 0) {
+      toast.error("يجب إضافة رابط واحد على الأقل");
+      return;
+    }
+
+    if (!mediaUrl) {
+      toast.error("يجب اختيار صورة شخصية");
+      return;
+    }
+
+
+
+
     const finalData = {
       ...data,
       address,

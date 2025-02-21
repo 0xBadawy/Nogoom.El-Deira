@@ -30,6 +30,7 @@ const siteSchema = new mongoose.Schema({
   telegram: { type: String, default: "" },
   googlePlay: { type: String, default: "" },
   appStore: { type: String, default: "" },
+  privacy: { type: String, default: "" },
 });
 
 const Site = mongoose.model("Site", siteSchema);

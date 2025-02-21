@@ -11,6 +11,7 @@ import {
   getLoggedInUser,
   updateLogedUser,
   getUsersAdmin,
+  getStarsUsers,
 } from "../services/userService.js";
 import { protect } from "../services/authService.js";
 
@@ -25,6 +26,8 @@ router.delete("/delete_user", deleteUser);                              // Delet
 router.put("/change_password/:id", changePassword);                         // Change a user's password
 router.get("/me", protect, getLoggedInUser, getUserById);            // Get logged-in user's details
 router.put("/update_loggedin_user", protect, updateLogedUser);             // Update logged-in user's details
+
+router.get("/stars_users", getStarsUsers);                                         // Get all users
 
 router.get("/", (req, res) => {
   res.send("Heddddddddddddllo, Express!");
