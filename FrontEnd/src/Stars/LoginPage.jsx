@@ -27,7 +27,7 @@ const LoginPage = () => {
     login: "تسجيل الدخول",
   };
 
-  const {
+  const { 
     register,
     handleSubmit,
     formState: { errors },
@@ -44,13 +44,14 @@ const LoginPage = () => {
         const { data } = response;
         console.log(data);
         console.log(data.data.role);
-        login(data);
+        login(data.data);
         localStorage.setItem("token", data.token);
         
         if (data.data.role === "admin") navigate("/dashboard");
         else navigate("/profile");
 
       } catch (error) {
+        console.log(error);
         const errorMessage = handleFirebaseError(error);
         setError(errorMessage);
       }

@@ -220,7 +220,11 @@ const SignUpPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <FormField id="name" label={TextData.name} register={register} />
+              <FormField
+                id="name"
+                label={"أسم الشهرة او الحساب*"}
+                register={register}
+              />
               <FormField
                 id="email"
                 label={TextData.email}
@@ -229,7 +233,7 @@ const SignUpPage = () => {
               />
               <FormField
                 id="userName"
-                label="اسم المستخدم"
+                label="اسم المستخدم*"
                 type="text"
                 register={register}
               />

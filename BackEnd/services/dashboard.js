@@ -17,6 +17,9 @@ import mongoose from "mongoose";
 
 export const getCountes = asyncHandler(async (req, res, next) => {
   const advertisementCount = await Advertisement.countDocuments();
+  const activeAdvertisementCount = await Advertisement.countDocuments({
+    endDate: { $gte: new Date() },
+  });
   const userCount = await User.countDocuments();
 
   res.status(200).json({
@@ -24,6 +27,7 @@ export const getCountes = asyncHandler(async (req, res, next) => {
     data: {
       advertisementCount,
       userCount,
+      activeAdvertisementCount,
     },
   });
 });

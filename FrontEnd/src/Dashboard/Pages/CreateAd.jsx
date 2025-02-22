@@ -141,8 +141,13 @@ const CreateAd = () => {
       return;
     }
 
-    if (!selectedAddress.govern.length) {
-      toast.error("يجب اختيار المنطقة");
+    if (selectedUsers.length === 0) {
+      toast.error("يجب اختيار نجم واحد على الأقل");
+      return;
+    }
+
+    if(selectedAddress.area === "" || selectedAddress.govern.length === 0) {
+      toast.error("يجب اختيار منطقة واحدة على الأقل");
       return;
     }
 

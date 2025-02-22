@@ -39,7 +39,13 @@ const [links, setLinks] = useState(["https://example.com", "https://test.com"]);
       const response = await axiosInstance.get(
         `/advertisement/user-ads/${user._id}`
       );
-      setAds(response.data.ads);
+
+      const ads = response.data.ads;
+       
+      const sortedAds = ads.sort( (a, b) => new Date(b.adId.createdAt) - new Date(a.adId.createdAt));
+      setAds(sortedAds);
+
+      // setAds(response.data.ads);
 
       console.log(response.data.ads);
     };
@@ -124,10 +130,12 @@ const handleDeleteInput = (index) => {
                     </h4>
                     <div
                       className={`mt-2 px-4 py-1 rounded w-fit text-sm text-white ${
-                        isExpired(ad.endDate) ? "bg-red-600" : "bg-green-600"
+                        isExpired(ad.adId.endDate)
+                          ? "bg-red-600"
+                          : "bg-green-600"
                       }`}
                     >
-                      {isExpired(ad.endDate)
+                      {isExpired(ad.adId.endDate)
                         ? "الحملة منتهية"
                         : "الحملة مستمرة"}
                     </div>
@@ -142,7 +150,7 @@ const handleDeleteInput = (index) => {
                       variant="outlined"
                       color="indigo"
                       className="flex items-center bg-indigo-800 text-white px-2 py-2 text-sm rounded-md"
-                      to={`/ads/${ad.adId}`}
+                      to={`/ads/${ad.adId._id}`}
                       // onClick={() => UpdateCurrentUserAds(ad.id)}
                     >
                       <FaStar className="text-white mr-2" />
@@ -187,7 +195,9 @@ const handleDeleteInput = (index) => {
                   isExpired(AdID.adId.endDate) ? "bg-red-600" : "bg-green-600"
                 }`}
               >
-                {isExpired(AdID.endDate) ? "الحملة منتهية" : "الحملة مستمرة"}
+                {isExpired(AdID.adId.endDate)
+                  ? "الحملة منتهية"
+                  : "الحملة مستمرة"}
                 <span className="text-gray-700 text-sm">
                   {` (${formatDate(AdID.adId.startDate)} - ${formatDate(
                     AdID.adId.endDate
@@ -204,7 +214,7 @@ const handleDeleteInput = (index) => {
               className="space-y-6 mt-10 p-8 bg-white rounded-2xl shadow-lg max-w-3xl mx-auto"
             >
               <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
-                    اضافة روابط المشاركات
+                اضافة روابط المشاركات
               </h2>
 
               <div className="space-y-4">

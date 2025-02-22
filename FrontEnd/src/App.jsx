@@ -15,7 +15,7 @@ function App() {
         <ThemeProvider>
           <DashboardProvider>
             <RouterProvider router={router} />
-            <Toaster position="top-center" />
+              <Toaster position="top-center" />
           </DashboardProvider>
         </ThemeProvider>
       </DataProvider>

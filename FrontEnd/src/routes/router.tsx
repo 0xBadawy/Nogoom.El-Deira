@@ -9,6 +9,10 @@ const HomePage = React.lazy(() => import("../HomePage/HomePage"));
 const LoginPage = React.lazy(() => import("../Stars/LoginPage"));
 const AdminLoginPage = React.lazy(() => import("../Stars/AdminLoginPage"));
 const ForgetPasswordPage = React.lazy(() => import("../Stars/ForgetPasswordPage"));
+const ConfirmPasswordCode = React.lazy(
+  () => import("../Stars/ConfirmPasswordCode")
+);
+const NewPassword = React.lazy(() => import("../Stars/NewPassword"));
 const SignUp = React.lazy(() => import("../Stars/SignUp/SignUp"));
 const SignUpStatus = React.lazy(() => import("../Stars/SignUp/SignUpStatus"));
 const Profile = React.lazy(() => import("../Stars/Profile/Profile"));
@@ -92,6 +96,18 @@ export const router = createBrowserRouter([
     // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
     path: "/forget-password",
     element: withSuspense(ForgetPasswordPage),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
+    path: "/verify-code",
+    element: withSuspense(ConfirmPasswordCode),
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
+    path: "/new-password",
+    element: withSuspense(NewPassword),
     errorElement: <ErrorBoundary />,
   },
   {

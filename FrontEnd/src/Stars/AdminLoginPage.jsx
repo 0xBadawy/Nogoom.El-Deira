@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "../Context/AuthContext";
 import Logo from "../../src/assets/Images/Logo/Deira-logo2.png";
+import axiosInstance from "../Configuration/axiosInstance";
+import handleFirebaseError from "../Validations/Errors";
 
 const AdminLoginPage = () => {
   const navigate = useNavigate();
@@ -22,28 +24,32 @@ const AdminLoginPage = () => {
 
   const {
     register,
-    handleSubmit,
+    handleSubmit, 
     formState: { errors },
   } = useForm();
 
   const onFormSubmit = async (data) => {
-    try {
-      await login(data.email, data.password);
-      toast.success("تم تسجيل الدخول بنجاح");
-      navigate("/dashboard")
-    } catch (error) {
-      console.error("Error during login:", error);
-      setError("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+    const { email, password } = data;
+    const loginR = async () => {
+      try {
+        const response = await axiosInstance.post("/auth/signin", {
+          email,
+          password,
+        });
+        const { data } = response;
+        console.log(data);
+        console.log(data.data.role);
+        login(data.data);
+        localStorage.setItem("token", data.token);
 
-      // Handle specific Firebase error codes
-      if (error.code === "auth/user-not-found") {
-        toast.error("البريد الإلكتروني غير مسجل");
-      } else if (error.code === "auth/wrong-password") {
-        toast.error("كلمة المرور غير صحيحة");
-      } else {
-        toast.error("فشل تسجيل الدخول. الرجاء المحاولة مرة أخرى.");
+        if (data.data.role === "admin") navigate("/dashboard");
+        else navigate("/profile");
+      } catch (error) {
+        const errorMessage = handleFirebaseError(error);
+        setError(errorMessage); 
       }
-    }
+    };
+    loginR();
   };
 
   return (

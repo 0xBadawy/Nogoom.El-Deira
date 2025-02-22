@@ -18,6 +18,7 @@ const DashboardHome = () => {
   const fetchData = async () => {
     try {
       const userId = await user._id;
+      console.log("userId----  ", user);
       const response = await axiosInstance.get(`/notifications/notifications`, {
         params: { userId },
       });
@@ -47,10 +48,13 @@ const DashboardHome = () => {
     fetchUserData();
   }, [user]);
 
+
   const dataText = (name) => {
     if (name == "admin") return "مدير";
     if (name == "editor") return "محرر";
-    if (name == "viewer") return "مشرف";
+    if (name == "manager") return "مدير";
+    if (name == "star") return "نجم";
+    if (name == "user") return "مستخدم";
   };
 
   const [data, setData] = useState([]);
@@ -59,7 +63,8 @@ const DashboardHome = () => {
     const fetchStats = async () => {
       try {
         const stats = await axiosInstance.get("/dashboard/get");
-        const { advertisementCount, userCount } = stats.data.data;
+        const { advertisementCount, userCount, activeAdvertisementCount } =
+          stats.data.data;
         
         setData([
           {
@@ -71,7 +76,7 @@ const DashboardHome = () => {
           {
             icon: <FaChartLine className="text-3xl text-green-500" />,
             title: "الحملات النشطة",
-            value: advertisementCount,
+            value: activeAdvertisementCount,
             color: "text-green-500",
           },
 
@@ -110,7 +115,7 @@ const DashboardHome = () => {
               مرحباً، {UserData?.name}
             </h2>
             <p className="text-gray-600 text-right mt-1">
-              الوظيفة: {UserData?.role}
+              الوظيفة: {dataText(UserData?.role)}
             </p>
           </div>
 

@@ -5,12 +5,17 @@ import { toast } from "sonner";
 import Logo from "../../src/assets/Images/Logo/Deira-logo2.png";
 import LoginImage from "../../src/assets/Images/LoginStar.jpg";
 import { useAuth } from "../Context/AuthContext";
+import axiosInstance from "../Configuration/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 const ForgetPasswordPage = () => {
   const { resetPassword } = useAuth(); // Ensure your AuthContext has this method
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSent, setIsSent] = useState(false); // State to toggle between form and success message
+
+  const navigate = useNavigate();
+
 
   const Text = {
     title: "استعادة كلمة المرور",
@@ -30,15 +35,16 @@ const ForgetPasswordPage = () => {
     setError(null);
 
     try {
-      await resetPassword(data.email); // Call resetPassword with the email
-      toast.success("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.");
-      setIsSent(true); // Show the success message
-    } catch (error) {
-      console.error("Error resetting password:", error);
-      setError("حدث خطأ أثناء استعادة كلمة المرور. الرجاء المحاولة مرة أخرى.");
-    } finally {
+      const response = await axiosInstance.post("/auth/forgotpassword", data);
+      console.log(response.data);
+      toast.success("تم إرسال رابط إعادة تعيين كلمة المرور بنجاح!");
+      navigate("/verify-code");
       setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setError(error.response.data.message);
     }
+    setLoading(false);
   };
 
   return (
@@ -101,13 +107,50 @@ const ForgetPasswordPage = () => {
             </>
           ) : (
             <div className="bg-green-100 border border-green-400 text-green-700 p-4 rounded-md shadow-md mt-4">
-              <h3 className="font-bold text-lg mb-2">{"تم إرسال الرابط بنجاح!"}</h3>
+              <h3 className="font-bold text-lg mb-2">
+                {"تم إرسال الرابط بنجاح!"}
+              </h3>
               <p className="mb-2">
                 {"تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني."}
               </p>
               <p className="mb-2">
-                {"إذا لم تجد البريد، يُرجى التحقق من قسم البريد العشوائي (Spam)."}
+                {
+                  "إذا لم تجد البريد، يُرجى التحقق من قسم البريد العشوائي (Spam)."
+                }
               </p>
+
+              <form onSubmit={handleSubmit(onFormSubmit)}>
+                <div className="mb-4">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="code"
+                  >
+                    {"رمز إعادة تعيين كلمة المرور"}
+                  </label>
+                  <input
+                    type="text"
+                    id="code"
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
+                    placeholder="رمز إعادة تعيين كلمة المرور"
+                    {...register("code", {
+                      required: "رمز إعادة تعيين كلمة المرور مطلوب.",
+                    })}
+                  />
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.code?.message}
+                  </p>
+                </div>
+
+                <div className="mb-4">
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-indigo-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-600"
+                  >
+                    {loading ? "جاري التحقق..." : "تحقق"}
+                  </button>
+                </div>
+              </form>
             </div>
           )}
 

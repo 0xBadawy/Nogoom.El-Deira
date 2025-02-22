@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
-import sendEmail from "../utils/sendEmail.js";
+import sendEmail, { sendEmailHTML } from "../utils/sendEmail.js";
 import Notification from "../models/notificationSchema.js";
 import { sendNotificationToRoles } from "../functions/notification.js";
 
@@ -192,12 +192,27 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save();
 
   try {
-    await sendEmail({
+    await sendEmailHTML({
       email: user.email,
-      subject: "Password reset code",
-      message: ` Hi ${user.name}, \n
-    Your password reset code will expire in 10 minutes. \n     
-    Your password reset code is ${resetCode}`,
+      subject: "رمز إعادة تعيين كلمة المرور - نجوم الديرة",
+      message: `
+    <html>
+      <body style="direction: rtl; text-align: right; font-family: Tahoma, Arial, sans-serif; background-color: #f8f9fa; padding: 20px;">
+        <div style="max-width: 500px; margin: auto; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+          <h2 style="color: #007bff; text-align: center;">إعادة تعيين كلمة المرور</h2>
+          <p style="font-size: 16px; color: #333;">مرحبًا <strong>${user.name}</strong>,</p>
+          <p style="font-size: 14px; color: #555;">لقد طلبت إعادة تعيين كلمة المرور الخاصة بك على <strong>نجوم الديرة</strong>. يرجى استخدام الرمز أدناه خلال <strong>10 دقائق</strong> لإكمال العملية:</p>
+          <div style="text-align: center; margin: 20px 0;">
+            <span style="font-size: 20px; font-weight: bold; color: #d32f2f; background: #ffecec; padding: 10px 20px; border-radius: 5px; display: inline-block;">
+              ${resetCode}
+            </span>
+          </div>
+          <p style="font-size: 14px; color: #555;">إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذه الرسالة بأمان.</p>
+          <p style="text-align: center; font-size: 14px; color: #777; margin-top: 20px;">شكرًا لاستخدامك <strong>نجوم الديرة</strong>.</p>
+        </div>
+      </body>
+    </html>
+  `,
     });
   } catch (error) {
     user.passwordResetCode = undefined;
@@ -237,7 +252,11 @@ export const verifyPasswordResetCode = asyncHandler(async (req, res, next) => {
 });
 
 export const resetPassword = asyncHandler(async (req, res, next) => {
+  console.log(req.body.email);
+  console.log(req.body.password);
+
   const user = await UserModel.findOne({ email: req.body.email });
+
 
   if (!user) {
     return next(new ApiError("No user found with this email", 404));
@@ -247,7 +266,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     return next(new ApiError("Password reset code not verified", 400));
   }
 
-  user.password = await bcrypt.hash(req.body.password, 10);
+  user.password = req.body.password;//await bcrypt.hash(req.body.password, 10);
   user.passwordResetCode = undefined;
   user.passwordResetExpires = undefined;
   user.passwordResetVerified = false;

@@ -18,7 +18,7 @@ import { FaMoneyBill } from 'react-icons/fa';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { user, logOut } = useAuth();
+  const { user, logout } = useAuth();
   const [userRole, setUserRole] = useState(null);
   const [phone, setPhone] = useState(false);
   const [currentRoute, setCurrentRoute] = useState("");
@@ -34,8 +34,8 @@ const Sidebar = () => {
   }, [user]);
 
   const handleLogOut = async () => {
-    await logOut();
-    navigate("/login");
+    await logout();
+    navigate("/admin-login");
   };
 
   const menuItems = [
@@ -105,12 +105,12 @@ const Sidebar = () => {
     //   link: "/dashboard/contact",
     //   roles: ["admin", "editor"],
     // },
-    {
-      icon: <MdOutlinePrivacyTip />,
-      text: "الشروط والخصوصية",
-      link: "/dashboard/privacy",
-      roles: ["admin", "editor"],
-    },
+    // {
+    //   icon: <MdOutlinePrivacyTip />,
+    //   text: "الشروط والخصوصية",
+    //   link: "/dashboard/privacy",
+    //   roles: ["admin", "editor"],
+    // },
   ];
 
   const filteredMenuItems = menuItems.filter(item =>

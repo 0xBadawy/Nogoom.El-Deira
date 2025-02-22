@@ -10,9 +10,9 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
 
   // Fetch users from the API
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsers = async () => { 
       try {
-        const response = await axiosInstance.get("/user/all_users");
+        const response = await axiosInstance.get("/user/stars_users");
         const data = response.data.data;
         setUsers(data);
         setFilteredUsers(data);

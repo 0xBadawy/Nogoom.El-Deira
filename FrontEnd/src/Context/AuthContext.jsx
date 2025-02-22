@@ -224,6 +224,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null); // Reset user data on logout
+    localStorage.removeItem("token"); // Remove token from local storage
   };
 
   const signup = (userData) => {
