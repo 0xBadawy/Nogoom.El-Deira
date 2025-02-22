@@ -1,0 +1,1 @@
+const o=e=>{const t=new Date(e),n={year:"numeric",month:"numeric",day:"numeric"};return t.toLocaleDateString("en-US",n)},r=e=>{const t=new Date(e),n={year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric"};return t.toLocaleDateString("en-US",n)};export{o as a,r as f};

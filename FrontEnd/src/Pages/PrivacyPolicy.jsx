@@ -6,23 +6,22 @@ import PrivacyList from "./privacy/PrivacyList";
 import PrivacyFooter from "./privacy/PrivacyFooter";
 import { privacyContent } from "../data/privacyContent";
 import { useDashboard } from "../Context/DashboardContext";
+import { useData } from "../Context/DataContext";
 
 const PrivacyPolicy = () => {
 
   const [text, setTest] = useState({});
      const [Date, setDate] = useState("");
 
-   const { getPrivacy } = useDashboard();
-   useEffect(() => {
-     const fetchData = async () => {
-       const response = await getPrivacy();
-       setTest(response);
-       console.log(response);
-       setDate(new Date(response.updatedAt.seconds * 1000).toLocaleString());
-
-     };
-     fetchData();
-   }, []);
+  
+    const [data, setData] = useState();
+    const { websiteData } = useData();
+  
+    useEffect(() => {
+      setData(websiteData);
+      console.log("websiteData cty ", websiteData);
+    }, [websiteData]);
+  
   return (
     <div className="min-h-screen bg-gray-50" style={{ direction: "rtl" }}>
       <Navbar color={"black"} />
@@ -35,16 +34,16 @@ const PrivacyPolicy = () => {
             }
           />
 
-          <PrivacyHeader title={""} description={text.privacy} />
+          <PrivacyHeader title={""} description={data?.privacy} />
 
           <PrivacyFooter lastUpdated={""} />
-          <div className="text-gray-500 text-sm mt-4">
+          {/* <div className="text-gray-500 text-sm mt-4">
             {text.updatedAt
               ? text.updatedAt.toDate
                 ? text.updatedAt.toDate().toLocaleString() // Handle Firestore Timestamp
                 : new Date(text.updatedAt.seconds * 1000).toLocaleString() // Handle raw {seconds, nanoseconds}
               : "Unknown Date"}
-          </div>
+          </div> */}
         </div>
       </main>
     </div>

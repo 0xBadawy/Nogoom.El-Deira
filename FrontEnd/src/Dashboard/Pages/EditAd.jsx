@@ -7,7 +7,7 @@ import { storage } from "../../Configuration/Firebase";
 import { useDashboard } from "../../Context/DashboardContext";
 import { useAuth } from "../../Context/AuthContext";
 import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
-import UserSelector from "../../Components/UserSelector";
+import UserSelector from "../../Components/UserSelector2";
 import { X } from "lucide-react";
 import axiosInstance from "../../Configuration/axiosInstance";
 

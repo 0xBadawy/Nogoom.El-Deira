@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import Image2 from "../../assets/Images/Image1.png";
 import { useDashboard } from "../../Context/DashboardContext";
+import { useData } from "../../Context/DataContext";
 
 const DownloadSection = () => {
   const [contact, setContact] = useState();
   const { fetchContact } = useDashboard();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchContact();
-      setContact(data);
-    };
-    fetchData();
-  }, []);
-
+  
+    const [data, setData] = useState();
+    const { websiteData } = useData();
+  
+    useEffect(() => {
+      setData(websiteData);
+      console.log("websiteData cty ", websiteData);
+    }, [websiteData]);
+  
   return (
     <div
       className="bg-gradient-to-r from-blue-50 to-green-50 relative w-[95%] py-14 mt-10 md:px-32 px-10 rounded-3xl shadow-xl mx-auto flex flex-col md:flex-row items-center gap-10 overflow-hidden"
@@ -24,18 +26,15 @@ const DownloadSection = () => {
       <div className="text-center md:text-right flex-1 z-10">
         <div className="mb-6">
           <h2 className="text-4xl font-extrabold text-blue-800 mb-4">
-            حمل و أربح 
+            حمل و أربح
           </h2>
           <h2 className="text-4xl font-extrabold text-blue-800 mb-4">
-              <span className="text-red-600">٥٠ ريال</span>
+            <span className="text-red-600">٥٠ ريال</span>
           </h2>
           <p className="text-lg text-gray-500">في محفظتك</p>
         </div>
         <div className="mb-6">
-          <h2
-            className="text-5xl font-bold py-2"
-            style={{ color: "#8929e1" }}
-          >
+          <h2 className="text-5xl font-bold py-2" style={{ color: "#8929e1" }}>
             تطبيق الديرة
           </h2>
           <p className="text-lg text-gray-600">للإعلانات</p>
@@ -48,14 +47,14 @@ const DownloadSection = () => {
           style={{ direction: "ltr" }}
         >
           <a
-            href={contact?.appStore}
+            href={data?.appStore}
             className="flex items-center justify-center bg-black text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-900 transition-transform transform hover:scale-110"
           >
             <FaApple className="text-3xl mr-3" />
             <span className="text-lg">تحميل من أبل ستور</span>
           </a>
           <a
-            href={contact?.googlePlay}
+            href={data?.googlePlay}
             className="flex items-center justify-center bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-green-700 transition-transform transform hover:scale-110"
           >
             <FaGooglePlay className="text-3xl mr-3" />

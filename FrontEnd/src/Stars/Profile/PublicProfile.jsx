@@ -6,11 +6,12 @@ import {
   FaTiktok,
   FaTwitter,
   FaLink,
-  FaYoutube 
+  FaYoutube,
 } from "react-icons/fa";
 import { useAuth } from "../../Context/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
+import { formatDateTime } from "../../hooks/formatDate";
 
 const PublicProfile = () => {
   const { user } = useAuth();
@@ -59,20 +60,23 @@ const PublicProfile = () => {
     { label: "تاريخ إنشاء الحساب", value: formatDate(userData?.createdAt) },
     { label: "المنطقة", value: userData?.address?.area },
     { label: "المحافظات", value: userData?.address?.govern.join(", ") },
-    { label: "رصيد الحساب", value: `$${userData?.balance}` },
-    { label: "تم التحقق", value: userData?.verified ? "نعم" : "لا" },
+    {
+      label: "تم التحقق",
+      value: userData.verified ? "نعم" : "حسابك قيد المراجعة",
+    },
   ];
-
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-3xl font-bold text-indigo-900">
-          بياناتى
-        </CardTitle>
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-3xl font-bold text-indigo-900">
+            بياناتى
+          </CardTitle>
+        </div>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col items-center sm:items-start mb-8">
+        <div className="flex md:flex-row flex-col justify-between items-center sm:items-start mb-8">
           <img
             className="object-cover w-32 h-32 rounded-full ring-4 ring-indigo-300"
             src={
@@ -81,6 +85,37 @@ const PublicProfile = () => {
             }
             alt="Profile"
           />
+          <div className="flex mt-10 md:-mt-5 flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl shadow-lg border border-green-200 hover:shadow-xl transition-shadow duration-300">
+            <p className="text-2xl font-semibold text-green-800 mb-2">
+              رصيد الحساب
+            </p>
+            <p className="text-5xl font-bold text-green-700">
+              {new Intl.NumberFormat("en-SA", {
+                style: "currency",
+                currency: "SAR",
+                minimumFractionDigits: 2,
+              }).format(userData?.balance || 0)}
+            </p>
+            <div className="mt-4 flex items-center space-x-2">
+              <span className="text-sm text-green-600">
+                آخر تحديث: {formatDateTime(userData?.updatedAt)}
+              </span>
+              <svg
+                className="w-4 h-4 text-green-600 animate-pulse"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {UserDataInput.map((item, index) => (

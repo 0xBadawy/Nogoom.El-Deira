@@ -20,7 +20,7 @@ const siteSchema = new mongoose.Schema({
   phone: { type: String, default: "" },
   email: { type: String, default: "" },
   whatsapp: { type: String, default: "" },
-  facebook: { type: String, default: "" },
+  facebook: { type: String, default: "" }, 
   instagram: { type: String, default: "" },
   twitter: { type: String, default: "" },
   snapchat: { type: String, default: "" },

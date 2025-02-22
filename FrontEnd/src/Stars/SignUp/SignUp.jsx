@@ -265,7 +265,7 @@ const SignUpPage = () => {
               {inputs.map((input, index) => (
                 <input
                   key={index}
-                  type="text"
+                  type="url"
                   value={input.link}
                   onChange={(e) => handleInputChange(index, e.target.value)}
                   className="block w-full p-2 mb-2 border border-gray-300 rounded-md focus:outline-none"

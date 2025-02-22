@@ -22,7 +22,7 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
       }
     };
 
-    fetchUsers();
+    fetchUsers(); 
   }, []);
 
   // Filter users based on selected area and govrn

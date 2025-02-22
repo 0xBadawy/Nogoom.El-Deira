@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { getRoutePermissions, hasPermission } from "../utils/permissions";
 import { useAuth } from "../Context/AuthContext";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -12,38 +12,33 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRoles,
 }) => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth(); // جلب `loading` من `useAuth`
   const location = useLocation();
+
   const [userRole, setUserRole] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Use useCallback to memoize the function so it doesn't change every render
-  const fetchUserData = useCallback(async () => {
-    try {
-      const userData = await user;
-      setUserRole(userData?.role || "user");
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    } finally {
+  useEffect(() => {
+    console.log("User from AuthContext:", user); // تحقق مما إذا كان `user` يحتوي على البيانات الصحيحة
+
+    if (!authLoading) {
+      // لا يتم تحديث `userRole` إلا بعد انتهاء تحميل `user`
+      setUserRole(user?.role ?? "guest");
       setLoading(false);
     }
-  }, [user]);
+  }, [user, authLoading]); // يتم تشغيل `useEffect` عند تغيير `user` أو انتهاء `authLoading`
 
-  // UseEffect should run only once on mount
-  useEffect(() => {
-    fetchUserData(); // This will only trigger once on mount
-  }, [fetchUserData]); // Only run when `fetchUserData` changes
-
-  // Prevent re-renders until user data is fetched
+  // إظهار رسالة تحميل إذا لم تكتمل البيانات بعد
   if (loading) {
-    return <div>Loading...</div>; // Replace with a spinner or skeleton
+    return <div>Loading...</div>; // يمكن استبدالها بمؤشر تحميل
   }
 
-  // Get route permissions
+  // جلب الصلاحيات المطلوبة للمسار الحالي
   const routeRoles = requiredRoles ?? getRoutePermissions(location.pathname);
 
-  // If the user doesn't have permission, redirect to unauthorized page
-  if (!hasPermission("admin" || "guest", routeRoles)) {
+  // التحقق مما إذا كان المستخدم لديه الصلاحيات المطلوبة
+  console.log("User role:", userRole);
+  if (!hasPermission(userRole || "guest", routeRoles)) {
     return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }
 
