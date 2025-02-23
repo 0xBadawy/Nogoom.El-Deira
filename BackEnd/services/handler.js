@@ -195,7 +195,7 @@ export const createOne = (Model) =>
         //  await Notification.insertMany(notifications);
 
         sendNotificationToRoles(
-          ["admin", "manager", "editor","star"],
+          ["admin", "manager", "editor"],
           "مستخدم جديد",
           `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
           doc._id,

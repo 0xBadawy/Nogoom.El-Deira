@@ -83,7 +83,7 @@ export const signUp = asyncHandler(async (req, res, next) => {
       "newUser"
     );
 
-    // Generate token
+    // Generate token 
     const token = generateToken(user._id);
 
     res.status(201).json({

@@ -85,7 +85,7 @@ const PublicProfile = () => {
             }
             alt="Profile"
           />
-          <div className="flex mt-10 md:-mt-5 flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl shadow-lg border border-green-200 hover:shadow-xl transition-shadow duration-300">
+          {/* <div className="flex mt-10 md:-mt-5 flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl shadow-lg border border-green-200 hover:shadow-xl transition-shadow duration-300">
             <p className="text-2xl font-semibold text-green-800 mb-2">
               رصيد الحساب
             </p>
@@ -115,7 +115,7 @@ const PublicProfile = () => {
                 ></path>
               </svg>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {UserDataInput.map((item, index) => (
@@ -123,7 +123,7 @@ const PublicProfile = () => {
               <label className="block text-sm font-medium text-indigo-900">
                 {item.label}
               </label>
-              <div className="p-2 rounded-lg bg-gray-100 text-gray-800 min-h-10">
+              <div className="p-2 rounded-lg bg-gray-100 text-gray-800 min-h-10 overflow-auto">
                 {item.value}
               </div>
             </div>
@@ -143,9 +143,9 @@ const PublicProfile = () => {
                   <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
                     <div className="flex items-center">
                       {/* Optional icon */}
-                      <span>
+                      <span className=" overflow-a uto">
                         {item.link?.length > 30
-                          ? `${item.link.slice(0, 30)}...`
+                          ? `${item.link.slice(0, 20)}...`
                           : item.link}
                       </span>
                     </div>

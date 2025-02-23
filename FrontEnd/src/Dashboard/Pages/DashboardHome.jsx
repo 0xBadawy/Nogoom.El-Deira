@@ -148,12 +148,26 @@ const DashboardHome = () => {
                           !notif.readed ? "bg-blue-50" : ""
                         }`}
                       >
-                        <Link
-                          to={`/dashboard/users/${notif.messageUserId}`}
-                          className="text-indigo-900 font-semibold hover:text-indigo-700"
-                        >
-                          {notif.title}
-                        </Link>
+                        {notif?.title === "مستخدم جديد" ? (
+                          <Link
+                            to={`/dashboard/employees`}
+                            // to={`/dashboard/employees/${notification.messageUserId}`}
+                            className="text-indigo-900 font-semibold hover:text-indigo-700"
+                          >
+                            <p className="text-sm text-indigo-900 whitespace-normal">
+                              {notif?.message}
+                            </p>
+                          </Link>
+                        ) : (
+                          <Link
+                            to={`/dashboard/users/${notif.messageUserId}`}
+                            className="text-indigo-900 font-semibold hover:text-indigo-700"
+                          >
+                            <p className="text-sm text-indigo-900 whitespace-normal">
+                              {notif?.message}
+                            </p>
+                          </Link>
+                        )}
                         <p className="text-gray-600">{notif.message}</p>
                         {/* {!notif.readed && (
                           <span className="text-xs text-blue-500">
