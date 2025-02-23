@@ -22,7 +22,7 @@ const AdsList = () => {
       const data = response.data.advertisements;
       
       setAds(data);
-      console.table( data);
+      console.table( data); 
 
     }
     featchAds();
@@ -36,12 +36,13 @@ const AdsList = () => {
 
   const filteredAds = ads
   .filter((ad) => {
-    const regionMatch = selectedRegion === "الكل" || ad.region === selectedRegion;
+    const regionMatch =
+      selectedRegion === "الكل" || ad.address.area === selectedRegion;
     const governorateMatch =
       selectedGovernorate === "الكل" ||
-      (ad.governorates &&
-        Array.isArray(ad.governorates) &&
-        ad.governorates.includes(selectedGovernorate));
+      (ad.address.govern &&
+        Array.isArray(ad.address.govern) &&
+        ad.address.govern.includes(selectedGovernorate));
     return regionMatch && governorateMatch;
     }).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 

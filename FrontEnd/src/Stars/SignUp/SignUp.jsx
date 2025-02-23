@@ -32,6 +32,11 @@ const SignUpPage = () => {
 
   const addInput = (e) => {
     e.preventDefault();
+     if (inputs.length >= 6) {
+       toast.error("لا يمكنك إضافة أكثر من 6 روابط.");
+       return;
+     }
+
     setInputs([...inputs, { type: "general", link: "" }]);
   };
 
@@ -50,17 +55,27 @@ const SignUpPage = () => {
       return;
     }
 
+  if (
+    !data.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/)
+  ) {
+    toast.error(
+      "يجب أن تحتوي كلمة المرور على 8-20 حرفًا، وحرف كبير، وحرف صغير، ورقم على الأقل"
+    );
+    return;
+  }
+
+
     if (data.confirmPassword !== data.password) {
       toast.error("كلمة المرور غير متطابقة");
       return;
     }
 
-    if (!/^\d{10,11}$/.test(data.phone)) {
-      toast.error(
-        "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
-      );
-      return;
-    }
+    // if (!/^\d{10,11}$/.test(data.phone)) {
+    //   toast.error(
+    //     "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
+    //   );
+    //   return;
+    // }
 
     if (address.area === "" || address.govern.length === 0) {
       toast.error("يجب اختيار المنطقة والمحافظة");
@@ -76,9 +91,6 @@ const SignUpPage = () => {
       toast.error("يجب اختيار صورة شخصية");
       return;
     }
-
-
-
 
     const finalData = {
       ...data,
@@ -181,7 +193,7 @@ const SignUpPage = () => {
                 />
               </div>
             ) : (
-              <div className="mt-1 flex  justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed mx-auto w-48 h-48 object-cover rounded-full">
+              <div className="mt-1 flex  justify-center px- pt-5 pb-6 border-2 border-gray-300 border-dashed mx-auto w-48 h-48 object-cover rounded-full">
                 <div className="space-y-1 text-center mt-12 ">
                   <input
                     type="file"
@@ -192,9 +204,9 @@ const SignUpPage = () => {
                   />
                   <label
                     htmlFor="image-upload"
-                    className="cursor-pointer bg-white py-2 px-4  border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    className="cursor-pointer text-xs bg-white py-2 px -4  border border-gray-300 rounded-md shadow-sm   font-medium text-gray-700 hover:bg-gray-50"
                   >
-                    اختر صورة شخصية
+                    اختر صورة شخصية او صورة حسابك
                   </label>
                   <p className="text-xs text-gray-500 pt-4">
                     PNG, JPG, GIF حتى 10MB

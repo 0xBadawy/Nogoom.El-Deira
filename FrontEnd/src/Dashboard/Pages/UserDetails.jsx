@@ -285,14 +285,14 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
               onSelectionChange={handleSelectionChange}
             />
 
-            <div className="space-y-2 col-span- h-full">
+            {/* <div className="space-y-2 col-span- h-full">
               <Label htmlFor="bio">نبذة عنك</Label>
               <Controller
                 name="bio"
                 control={control}
                 render={({ field }) => <Textarea {...field} rows={4} />}
               />
-            </div>
+            </div> */}
 
             {/* -------------------------------------------------------------- */}
 

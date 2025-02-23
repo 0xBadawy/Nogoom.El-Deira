@@ -44,8 +44,8 @@ const AdminLoginPage = () => {
 
         if (data.data.role === "admin") navigate("/dashboard");
         else navigate("/profile");
-      } catch (error) {
-        const errorMessage = handleFirebaseError(error);
+      } catch (error) { 
+        const errorMessage = handleFirebaseError(error.response.data.message);
         setError(errorMessage); 
       }
     };

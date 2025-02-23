@@ -134,7 +134,7 @@ const Employees = () => {
 
   return (
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full">
-      <h2 className="text-2xl mb-4">النجوم</h2>
+      <h2 className="text-2xl mb-4">الموظفين</h2>
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 w-full max-w-screen overflow-x-auto">
         <AddEmployees />
      

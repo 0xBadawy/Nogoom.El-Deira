@@ -82,7 +82,7 @@ const DashboardHome = () => {
 
           {
             icon: <FaEye className="text-3xl text-slate-600" />,
-            title: "المستخدمين ",
+            title: "النجوم ",
             value: userCount,
             color: "text-slate-600",
           },

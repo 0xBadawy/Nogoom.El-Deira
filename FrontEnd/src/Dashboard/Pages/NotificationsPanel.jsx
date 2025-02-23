@@ -29,7 +29,7 @@ const NotificationsPanel = () => {
     readNotification();
   };
 
-  const fetchData = async () => {
+  const fetchData = async () => { 
     try {
       const userId = await user._id;
       const response = await axiosInstance.get(`/notifications/notifications`, {
@@ -38,6 +38,7 @@ const NotificationsPanel = () => {
       const sortedNotifications = response.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
+      console.log(sortedNotifications);
       setNotifications(sortedNotifications);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -81,14 +82,26 @@ const NotificationsPanel = () => {
               >
                 <div className="flex justify-between items-start flex-col md:flex-row max-w-full overflow-hidden">
                   <div className="w-full text-ellipsis overflow-hidden">
-                    <Link
-                      to={`/dashboard/users/${notification.messageUserId}`}
-                      className="text-indigo-900 font-semibold hover:text-indigo-700"
-                    >
-                      <p className="text-sm text-indigo-900 whitespace-normal">
-                        {notification?.message}
-                      </p>
-                    </Link>
+                    {notification?.title === "مستخدم جديد" ? (
+                      <Link
+                        to={`/dashboard/employees`}
+                        // to={`/dashboard/employees/${notification.messageUserId}`}
+                        className="text-indigo-900 font-semibold hover:text-indigo-700"
+                      >
+                        <p className="text-sm text-indigo-900 whitespace-normal">
+                          {notification?.message}
+                        </p>
+                      </Link>
+                    ) : (
+                      <Link
+                        to={`/dashboard/users/${notification.messageUserId}`}
+                        className="text-indigo-900 font-semibold hover:text-indigo-700"
+                      >
+                        <p className="text-sm text-indigo-900 whitespace-normal">
+                          {notification?.message}
+                        </p>
+                      </Link>
+                    )}
                     <p className="text-xs text-gray-500 whitespace-normal">
                       {formatDateTime(notification?.createdAt)}
                     </p>

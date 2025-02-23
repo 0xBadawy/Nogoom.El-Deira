@@ -14,6 +14,17 @@ export const TextData = {
 
   export const AreaData = [
     {
+      name: "الكويت",
+      subGovernments: [
+        "العاصمة",
+        "حولي",
+        "الأحمدي",
+        "الجهراء",
+        "الفروانية",
+        "مبارك الكبير",
+      ],
+    },
+    {
       name: "الرياض",
       subGovernments: [
         "الرياض",

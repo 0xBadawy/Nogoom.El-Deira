@@ -39,16 +39,16 @@ const AddEmployees = () => {
   const onSubmit = async (formData) => {
     // return
 
-    if (!/^\d{10,11}$/.test(formData.phone)) {
-      toast.error(
-        "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
-      );
-      return;
-    }
+    // if (!/^\d{10,11}$/.test(formData.phone)) {
+    //   toast.error(
+    //     "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
+    //   );
+    //   return;
+    // }
 
     if (!/^[a-zA-Z0-9]{3,15}$/.test(formData.username)) {
       toast.error(
-        "يجب أن يكون اسم المستخدم مكوناً من 3 إلى 15 حرفاً ويمكن أن يحتوي على حروف وأرقام فقط"
+        "يجب أن يكون اسم الموظف مكوناً من 3 إلى 15 حرفاً ويمكن أن يحتوي على حروف وأرقام فقط"
       );
       return;
     }
@@ -58,12 +58,12 @@ const AddEmployees = () => {
       return;
     }
 
-    if (confirm("هل انت متأكد من إضافة هذا المستخدم؟") == true) {
+    if (confirm("هل انت متأكد من إضافة هذا الموظف") == true) {
       try {
         await handleUserSubmission(formData);
-        // toast.success("تم إضافة المستخدم بنجاح!");
+        // toast.success("تم إضافة الموظف بنجاح!");
       } catch (error) {
-        toast.error("حدث خطأ أثناء إضافة المستخدم.");
+        toast.error("حدث خطأ أثناء إضافة الموظف.");
       }
     } else {
       toast.error("تم إلغاء العملية");
@@ -84,15 +84,15 @@ const AddEmployees = () => {
         return;
       }
 
-      toast.success("تم إضافة المستخدم بنجاح!");
+      toast.success("تم إضافة الموظف بنجاح!");
     } catch (error) {
       console.log("Error:", error);
       if (error.response.data.message === "Email already exists") {
-        toast.error("المستخدم موجود بالفعل");
-        setError("المستخدم موجود بالفعل");
+        toast.error("الموظف موجود بالفعل");
+        setError("الموظف موجود بالفعل");
       } else {
-        setError("حدث خطأ أثناء إضافة المستخدم.");
-        toast.error("حدث خطأ أثناء إضافة المستخدم.");
+        setError("حدث خطأ أثناء إضافة الموظف.");
+        toast.error("حدث خطأ أثناء إضافة الموظف.");
       }
     }
     setLoading(false);
@@ -143,17 +143,17 @@ const AddEmployees = () => {
             <p className="text-red-500 text-sm">{errors.email.message}</p>
           )}
         </div>
-        {/* اسم المستخدم */}
+        {/* اسم الموظف */}
 
         <div>
           <label className="block text-gray-700 font-medium mb-1">
-            اسم المستخدم
+            اسم الموظف
           </label>
           <input
             type="text"
-            {...register("username", { required: "اسم المستخدم مطلوب" })}
+            {...register("username", { required: "اسم الموظف مطلوب" })}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="أدخل اسم المستخدم"
+            placeholder="أدخل اسم الموظف"
           />
           {errors.username && (
             <p className="text-red-500 text-sm">{errors.username.message}</p>

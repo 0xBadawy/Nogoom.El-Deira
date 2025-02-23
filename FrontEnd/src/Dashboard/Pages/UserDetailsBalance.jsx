@@ -7,17 +7,18 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import axiosInstance from "../../Configuration/axiosInstance";
 
 const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
-  const { 
-    register, 
+  const {
+    register,
     handleSubmit,
-    reset, 
+    reset,
+    setValue,
     formState: { errors },
   } = useForm();
-   const Tiers = [
-    { name: "عادي", views: 1000, earnings: 10 ,value:"none"},
-    { name: "فضي", views: 5000, earnings: 30, value:"silver"}, 
-    { name: "ذهبي", views: 10000, earnings: 50 ,value:"gold"},
-    { name: "برونزي", views: 100000, earnings: 100 ,value:"bronze"},
+  const Tiers = [
+    { name: "نجم عادي", views: 1000, earnings: 10, value: "none" },
+    { name: "نجم فضي", views: 5000, earnings: 30, value: "silver" },
+    { name: " نجم ذهبي", views: 10000, earnings: 50, value: "gold" },
+    { name: " نجم برونزي", views: 100000, earnings: 100, value: "bronze" },
   ];
   const [selectedSubGovernments, setSelectedSubGovernments] = useState([]);
   const [balance, setBalance] = useState(0);
@@ -28,10 +29,13 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
     if (user) {
       console.log("UserDetailsBalance User found:", user);
       reset(user);
+      setValue(
+        "userStatus",
+        user.verified ? `accepted_${user.accountType}` : "pending"
+      );
       setBalance(user.balance || 0);
     }
   }, [selectedUserUid, usersData, reset]);
-
 
   const adjustBalance = (amount) => {
     setBalance((prevBalance) => {
@@ -44,16 +48,11 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
     });
   };
 
-
-
   const HandelSave = async (dataForm) => {
-
     const allData = {
-     
       balance: balance,
       accountType: dataForm.accountType,
       verified: dataForm.verified,
-      
     };
 
     console.log("handelSave allData:", allData);
@@ -74,27 +73,27 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
     setIsUpdating(false);
   };
 
-
   const onSubmit = (data) => {
     setIsUpdating(true);
 
-    console.log("onSubmit data:", data);
+    const isVerified = data.userStatus.startsWith("accepted");
+    const selectedTier = isVerified ? data.userStatus.split("_")[1] : "none";
 
-    const isVerified = JSON.parse(data.verified);
-  
-    const message = `سيتم تغيير مبلغ النجم إلى ${balance} ريال و ${isVerified ? "وتفعيل الحساب" : "إلغاء تفعيل الحساب"}`;
+    const allData = {
+      balance: balance,
+      accountType: selectedTier, // تخزين الفئة وحدها
+      verified: isVerified, // تخزين الحالة وحدها
+    };
+
     confirmAlert({
       title: "تأكيد الحفظ",
-      message: message,
+      message: `سيتم تغيير مبلغ النجم إلى ${balance} ريال و ${
+        isVerified ? `تفعيل الحساب (${selectedTier})` : "إلغاء تفعيل الحساب"
+      }`,
       buttons: [
         {
           label: "نعم",
-          onClick: () => {
-            // onSave({ ...data, verified: isVerified, balance });
-
-            HandelSave(data);
-
-          },
+          onClick: () => HandelSave(allData),
         },
         {
           label: "إلغاء",
@@ -106,7 +105,6 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
       ],
     });
   };
-  
 
   return (
     <div className="max-w- xl mx-auto mt-10 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
@@ -121,44 +119,21 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
       <div className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
             {/* User Status */}
+            {/* User Status with Star Category */}
             <div className="space-y-2">
               <label className="block text-right text-gray-700 font-medium">
-                حالة المستخدم
+                حالة المستخدم والفئة
               </label>
 
               <select
-                {...register("verified")}
+                {...register("userStatus")}
                 className="w-full p-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
               >
-                <option value="true" className="flex items-center gap-2">
-                  <CheckCircle2 className="inline h-4 w-4 text-green-500" />
-                  تم القبول
-                </option>
-                <option value="false" className="flex items-center gap-2">
-                  <AlertCircle className="inline h-4 w-4 text-yellow-500" />
-                  قيد المراجعة
-                </option>
-              </select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="block text-right text-gray-700 font-medium pb">
-                فئة النجم
-              </label>
-
-              <select
-                {...register("accountType")}
-                className="w-full p-3 rounded-lg bg-white border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
-              >
-                <option value="" disabled>
-                  اختر فئة
-                </option>
+                <option value="pending">قيد المراجعة</option>
                 {Tiers.map((tier) => (
-                  <option key={tier.name} value={tier.value}>
-                    {tier.name} - شرط المشاهدات: {tier.views}+ - الأرباح:{" "}
-                    {tier.earnings} ريال
+                  <option key={tier.value} value={`accepted_${tier.value}`}>
+                    تم القبول - {tier.name}
                   </option>
                 ))}
               </select>

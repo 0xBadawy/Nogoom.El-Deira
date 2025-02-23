@@ -27,10 +27,15 @@ const Users = () => {
   }, [id, usersData]); // التحقق عند تغير `id` أو `usersData`
 
   const filteredUsers = usersData.filter((user) => {
+
+
     const regionMatch =
-      selectedRegion === "all" || user.govern === selectedRegion;
+      selectedRegion === "all" || user.address.area === selectedRegion;
     const governMatch =
-      selectedGovern === "all" || user.area?.includes(selectedGovern);
+      selectedGovern === "all" || user.address.govern?.includes(selectedGovern);
+
+      console.log("regionMatch:", user.address.govern);
+      console.log("governMatch:", user.address.area);
 
     return regionMatch && governMatch;
   });
@@ -82,9 +87,9 @@ const Users = () => {
   const getStarColor = (accountType) => {
     switch (accountType) {
       case "none":
-        return "text-white";
+        return "transparent"; // لا تظهر النجمة
       case "silver":
-        return "text-gray-300"; // نجمة ذهبية
+        return "text-white"; // نجمة ذهبية
       case "gold":
         return "text-yellow-500"; // نجمة ذهبية
       case "bronze":
@@ -143,17 +148,17 @@ const Users = () => {
 
         <h3 className="text-lg font-semibold mb-4">بيانات النجوم</h3>
 
-        <table className="table-auto w-full  text-sm md:text-base">
+        <table className="table-auto w-fit  text-sm md:text-base">
           <thead>
             <tr className="border-b">
-              <th className="py-2 px-4 text-right min-w-36 ">الاسم</th>
+              <th className="py-2 px-1 text-right min-w-36 ">الاسم</th>
               {/* <th className="py-2 px-4 text-right">المنطقة</th>
               <th className="py-2 px-4 text-right">المحافظة</th>
               <th className="py-2 px-4 text-right">الرصيد</th>
 
               <th className="py-2 px-4 text-right">عدد الحملات</th>
               <th className="py-2 px-4 text-center">القبول</th> */}
-              <th className="py-2 px-4 text-right">فئة النجم</th>
+              <th className="py-2 px-1 text-right">فئة النجم</th>
             </tr>
           </thead>
           <tbody>
@@ -169,7 +174,7 @@ const Users = () => {
                         : ""
                     }`}
                   >
-                    <td className="py-2 px-4">{row.name}</td>
+                    <td className="py-2 px-1">{row.name}</td>
                     {/* <td className="py-2 px-4">{row.address.area}</td> */}
                     {/* <td className="py-2 px-4">{Area(row.address.govern)}</td>
                     <td className="py-2 px-4">{row.balance}</td>
@@ -186,12 +191,14 @@ const Users = () => {
                         {row.verified ? "مقبول" : "قيد المراجعة"}
                       </span>
                     </td>*/}
-                    <td className="py-2 px-4 flex items-center gap-2">
-                      {row.accountType !== "غير مقبول" && (
-                        <AiFillStar className={getStarColor(row.accountType)} />
+                    <td className="py2 px4 flex items-center gap-2 ">
+                      {row.accountType !== "none" && (
+                        <AiFillStar
+                          className={getStarColor(row.accountType)}
+                          size={24}
+                        />
                       )}
                     </td>
-
                   </tr>
                 )
             )}

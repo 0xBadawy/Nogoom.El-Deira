@@ -7,371 +7,220 @@ import { toast } from "sonner";
 import FormField from "./FormField";
 import axiosInstance from "../../Configuration/axiosInstance";
 import PageLoader from "../../Components/PageLoader";
-// import { ClipLoader } from "react-spinners";
 
 const WebsiteData = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { getHomeData, addHomeData } = useDashboard();
-  const [lodding, setLodding] = useState(false);
-
-  const [image1, setImage1] = useState(null);
-  const [image2, setImage2] = useState(null);
-  const [image1Url, setImage1Url] = useState("");
-  const [image2Url, setImage2Url] = useState("");
-  const [previewImage1, setPreviewImage1] = useState(null);
-  const [previewImage2, setPreviewImage2] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { getHomeData } = useDashboard();
+  const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageData, setImageData] = useState({
+    image1: { file: null, preview: null, url: "" },
+    image2: { file: null, preview: null, url: "" },
+  });
 
   useEffect(() => {
-    setLodding(true);
     const fetchInitialData = async () => {
-      const response = await axiosInstance.get("/dashboard/defult");
-      const initialData = response.data;
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get("/dashboard/defult");
+        const initialData = response.data;
 
-      setImage1Url(initialData.image1);
-      setImage2Url(initialData.image2);
+        setImageData((prev) => ({
+          image1: { ...prev.image1, url: initialData.image1 },
+          image2: { ...prev.image2, url: initialData.image2 },
+        }));
 
-      console.log(initialData);
-
-      reset(initialData);
+        reset(initialData);
+      } catch (error) {
+        toast.error("فشل في تحميل البيانات");
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchInitialData();
-    setLodding(false);
   }, [getHomeData, reset]);
 
   const handleImageUpload = async (file, imageName) => {
-    console.log("file");
     if (!file) return null;
     const storageRef = ref(storage, `images/${imageName}`);
     await uploadBytes(storageRef, file);
-    const downLoadUrl = await getDownloadURL(storageRef);
-    console.log(downLoadUrl);
-    return downLoadUrl;
+    return await getDownloadURL(storageRef);
   };
 
-  const submit = async (data) => {
-    try {
-      const response = await axiosInstance.post("/dashboard/update", data);
-      console.log(response);
-      toast.success("تم تحديث البيانات بنجاح");
-    } catch (error) {
-      console.error(error);
-      toast.error("حدث خطأ أثناء تحديث البيانات");
+  const handleImagePreview = (e, imageKey) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageData((prev) => ({
+        ...prev,
+        [imageKey]: {
+          ...prev[imageKey],
+          file,
+          preview: URL.createObjectURL(file),
+        },
+      }));
     }
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
-
-    setIsLoading(true);
+    setIsSubmitting(true);
     try {
-      if (image1) {
-        data.image1Url = await handleImageUpload(image1, "image1");
+      const uploadData = { ...data };
+
+      if (imageData.image1.file) {
+        uploadData.image1 = await handleImageUpload(
+          imageData.image1.file,
+          "image1"
+        );
       }
-      if (image2) {
-        data.image2Url = await handleImageUpload(image2, "image2");
+      if (imageData.image2.file) {
+        uploadData.image2 = await handleImageUpload(
+          imageData.image2.file,
+          "image2"
+        );
       }
 
-      const allData = {
-        ...data,
-        image1: data.image1Url,
-        image2: data.image2Url,
-      };
-
-      submit(allData);
-
+      await axiosInstance.post("/dashboard/update", uploadData);
       toast.success("تم تحديث البيانات بنجاح");
       reset();
     } catch (error) {
-      toast.error("حدث خطأ أثناء رفع الصور");
-      console.error(error);
+      toast.error("حدث خطأ أثناء تحديث البيانات");
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-  const handlePreviewImage = (e, setImage, setPreview) => {
-    const file = e.target.files[0];
-    setImage(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
+  const formSections = {
+    mainInfo: [
+      { id: "mainTitle", label: "العنوان الرئيسي للموقع" },
+      { id: "subTitle", label: "العنوان الفرعي للموقع" },
+      { id: "adTitle", label: "عنوان الإعلان للموقع" },
+      { id: "adDescription", label: "وصف الإعلان للموقع", type: "textarea" },
+    ],
+    starAds: [
+      { id: "starAd1", label: "إعلان النجوم 1" },
+      { id: "starAd2", label: "إعلان النجوم 2" },
+      { id: "starAd3", label: "إعلان النجوم 3" },
+      { id: "starAd4", label: "إعلان النجوم 4" },
+    ],
+    statistics: [
+      { id: "campaignCount", label: "عدد الحملات" },
+      { id: "clientCount", label: "عدد العملاء" },
+      { id: "satisfactionRate", label: "معدل الرضا" },
+      { id: "viewCount", label: "عدد المشاهدات" },
+    ],
+    contact: [
+      { id: "phone", label: "رقم الهاتف" },
+      { id: "email", label: "البريد الإلكتروني" },
+      { id: "whatsapp", label: "واتساب" },
+    ],
+    socialMedia: [
+      { id: "facebook", label: "رابط فيسبوك" },
+      { id: "instagram", label: "رابط إنستجرام" },
+      { id: "twitter", label: "رابط تويتر" },
+      { id: "snapchat", label: "رابط سناب شات" },
+      { id: "linkedin", label: "رابط لينكد إن" },
+      { id: "youtube", label: "رابط يوتيوب" },
+      { id: "tiktok", label: "رابط تيك توك" },
+    ],
+    stores: [
+      { id: "googlePlay", label: "رابط جوجل بلاي" },
+      { id: "appStore", label: "رابط آب ستور" },
+    ],
   };
+
+  if (loading) return <PageLoader />;
+
   return (
-   <>
-    {lodding ? (<PageLoader/>) : (
-       <div className="grow p-8 dark:bg-gray-800">
-      <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          بيانات الموقع
-        </h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* قسم البيانات الرئيسية */}
-            <div>
-              <FormField
-                id="mainTitle"
-                label={"العنوان الرئيسي للموقع"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="subTitle"
-                label={"العنوان الفرعي للموقع"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="adTitle"
-                label={"عنوان الإعلان للموقع"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="adDescription"
-                type="textarea"
-                label={"وصف الإعلان للموقع"}
-                register={register}
-              />
-            </div>
-            {/* قسم النجوم */}
-            <div>
-              <FormField
-                id="starAd1"
-                label={"إعلان النجوم 1"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="starAd2"
-                label={"إعلان النجوم 2"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="starAd3"
-                label={"إعلان النجوم 3"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="starAd4"
-                label={"إعلان النجوم 4"}
-                register={register}
-              />
-            </div>
-            {/* قسم الإحصائيات */}
-            <div>
-              <FormField
-                id="campaignCount"
-                label={"عدد الحملات"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="clientCount"
-                label={"عدد العملاء"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="satisfactionRate"
-                label={"معدل الرضا"}
-                register={register}
-              />
-            </div>
-            <div>
-              <FormField
-                id="viewCount"
-                label={"عدد المشاهدات"}
-                register={register}
-              />
-            </div>
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto bg-white dark:bg-gray-700 rounded-xl shadow-lg">
+        <div className="p-4 sm:p-6 lg:p-8">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+            بيانات الموقع
+          </h2>
 
-            <div>
-              <FormField id="phone" label={"رقم الهاتف"} register={register} />
-            </div>
-            <div>
-              <FormField
-                id="email"
-                label={"البريد الإلكتروني"}
-                register={register}
-              />
-            </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            {Object.entries(formSections).map(([section, fields]) => (
+              <div key={section} className="space-y-6">
+                <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 border-b pb-2">
+                  {section === "mainInfo" && "معلومات رئيسية"}
+                  {section === "starAds" && "إعلانات النجوم"}
+                  {section === "statistics" && "الإحصائيات"}
+                  {section === "contact" && "معلومات الاتصال"}
+                  {section === "socialMedia" && "وسائل التواصل الاجتماعي"}
+                  {section === "stores" && "متاجر التطبيقات"}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {fields.map((field) => (
+                    <div key={field.id} className="space-y-2">
+                      <FormField
+                        id={field.id}
+                        label={field.label}
+                        type={field.type}
+                        register={register}
+                        className="w-full truncate"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
 
-            <div>
-              <FormField id="whatsapp" label={"واتساب"} register={register} />
-            </div>
-
-            <div>
-              <FormField
-                id="facebook"
-                label={"رابط فيسبوك"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="instagram"
-                label={"رابط إنستجرام"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="twitter"
-                label={"رابط تويتر"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="snapchat"
-                label={"رابط سناب شات"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="linkedin"
-                label={"رابط لينكد إن"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="youtube"
-                label={"رابط يوتيوب"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="tiktok"
-                label={"رابط تيك توك"}
-                register={register}
-              />
-            </div>
-
-            {/* <div>
-              <FormField
-                id="telegram"
-                label={"رابط تيليجرام"}
-                register={register}
-              />
-            </div> */}
-
-            <div>
-              <FormField
-                id="googlePlay"
-                label={"رابط جوجل بلاي"}
-                register={register}
-              />
-            </div>
-
-            <div>
-              <FormField
-                id="appStore"
-                label={"رابط آب ستور"}
-                register={register}
-              />
-            </div>
-
-            <div className="col-span-2">
-              <div className="flex flex-col">
-                <label htmlFor="privacy" className="text-lg">
-                  سياسة الخصوصية
-                </label>
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 border-b pb-2">
+                سياسة الخصوصية
+              </h3>
+              <div>
                 <textarea
                   {...register("privacy")}
-                  className="border border-gray-300 p-2 rounded-lg mt-2"
-                  style={{ minHeight: "300px" }}
-                ></textarea>
+                  className="w-full min-h-[300px] p-3 border rounded-lg resize-y dark:bg-gray-800 dark:text-white"
+                />
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-white">
-                تحميل الصورة الأولى
-              </label>
-              {image1Url && (
-                <img
-                  src={image1Url}
-                  alt="الصورة الحالية 1"
-                  className="w-32 h-32 mt-2 object-cover rounded-md"
-                />
-              )}
-              {previewImage1 && (
-                <img
-                  src={previewImage1}
-                  alt="معاينة الصورة الأولى"
-                  className="w-32 h-32 mt-2 object-cover rounded-md"
-                />
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) =>
-                  handlePreviewImage(e, setImage1, setPreviewImage1)
-                }
-                className="mt-2"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {["image1", "image2"].map((imageKey, index) => (
+                <div key={imageKey} className="space-y-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-white">
+                    تحميل الصورة {index + 1}
+                  </label>
+                  <div className="space-y-4">
+                    {imageData[imageKey].url && (
+                      <img
+                        src={imageData[imageKey].url}
+                        alt={`الصورة الحالية ${index + 1}`}
+                        className="w-32 h-32 object-cover rounded-lg"
+                      />
+                    )}
+                    {imageData[imageKey].preview && (
+                      <img
+                        src={imageData[imageKey].preview}
+                        alt={`معاينة الصورة ${index + 1}`}
+                        className="w-32 h-32 object-cover rounded-lg"
+                      />
+                    )}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImagePreview(e, imageKey)}
+                      className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-white">
-                تحميل الصورة الثانية
-              </label>
-              {image2Url && (
-                <img
-                  src={image2Url}
-                  alt="الصورة الحالية 2"
-                  className="w-32 h-32 mt-2 object-cover rounded-md"
-                />
-              )}
-              {previewImage2 && (
-                <img
-                  src={previewImage2}
-                  alt="معاينة الصورة الثانية"
-                  className="w-32 h-32 mt-2 object-cover rounded-md"
-                />
-              )}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) =>
-                  handlePreviewImage(e, setImage2, setPreviewImage2)
-                }
-                className="mt-2"
-              />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-2 mt-6 rounded-lg hover:bg-indigo-700 flex justify-center items-center"
-          >
-            {isLoading ? "تحميل.... " : "تسجيل"}
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full max-w-md mx-auto block py-3 px-4 rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 disabled:opacity-50 transition duration-200"
+            >
+              {isSubmitting ? "جاري التحديث..." : "حفظ التغييرات"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-    )}
-   </>
   );
 };
 

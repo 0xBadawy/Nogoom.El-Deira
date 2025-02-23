@@ -395,7 +395,7 @@ const CreateAd = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">
-                روابط التواصل الاجتماعي
+               روابط المعلن
               </label>
               {socialLinks.map((link, index) => (
                 <div key={index} className="mb-2">

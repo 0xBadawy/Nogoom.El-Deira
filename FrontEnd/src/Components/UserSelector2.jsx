@@ -101,7 +101,7 @@ useEffect(() => {
         </div>
 
         <div>
-          <label className="block text-gray-700 mb-1">الموقع:</label>
+          <label className="block text-gray-700 mb-1">المحافظات:</label>
           <select
             name="govrn"
             value={filters.govrn}
@@ -109,7 +109,7 @@ useEffect(() => {
             className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
             disabled={!subGovernments.length}
           >
-            <option value="">اختر الموقع</option>
+            <option value="">اختر المحافظات</option>
             {subGovernments.map((subGov, index) => (
               <option key={index} value={subGov}>
                 {subGov}

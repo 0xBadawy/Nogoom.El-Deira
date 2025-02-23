@@ -2,6 +2,8 @@ const handleFirebaseError = (errorCode) => {
   const errorMessages =
   
  {
+  "Invalid email or password 1" :"المستخدم غير موجود ",
+  "Invalid email or password 2" :"كلمة المرور غير صحيحة",
     "auth/claims-too-large": "حجم بيانات المطالبات المقدمة لـ setCustomUserClaims() يتجاوز الحد الأقصى المسموح به وهو 1000 بايت.",
     "auth/email-already-exists": "البريد الإلكتروني المقدّم مستخدم بالفعل من قبل مستخدم موجود. يجب أن يكون لكل مستخدم بريد إلكتروني فريد.",
     "auth/id-token-expired": "رمز تعريف Firebase المقدم منتهي الصلاحية.",

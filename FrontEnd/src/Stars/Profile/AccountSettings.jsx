@@ -57,14 +57,13 @@ const AccountSettings = () => {
     console.log("Updated address:", address);
   }, [address]);
 
-    const handleInputChange = (index, value) => {
-      const updatedLinks = [...socialLinks];
-      updatedLinks[index].link = value;
-      setSocialLinks(updatedLinks);
-    };
+  const handleInputChange = (index, value) => {
+    const updatedLinks = [...socialLinks];
+    updatedLinks[index].link = value;
+    setSocialLinks(updatedLinks);
+  };
 
   const onSubmit = (data) => {
-
     const allData = {
       ...data,
       selectedAddress,
@@ -74,8 +73,6 @@ const AccountSettings = () => {
     };
 
     console.log(allData);
-
-
 
     // if (!address.govern) {
     //   toast.error("يجب إدخال المنطقة.");
@@ -94,7 +91,7 @@ const AccountSettings = () => {
     //   return;
     // }
 
-   const updatedData = async () => {
+    const updatedData = async () => {
       try {
         const response = await axiosInstance.put(
           "/user/update_loggedin_user",
@@ -108,26 +105,23 @@ const AccountSettings = () => {
     };
 
     updatedData();
-    // 
-    
-  
+    //
 
     toast.success("تم حفظ التعديلات بنجاح");
     console.log(updatedData); // Use this to debug the final payload.
   };
 
-const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
-  setSelectedAddress((prevState) => {
-    if (
-      prevState.area === selectedArea &&
-      JSON.stringify(prevState.govern) === JSON.stringify(selectedGovernments)
-    ) {
-      return prevState; // Avoid unnecessary re-renders
-    }
-    return { area: selectedArea, govern: selectedGovernments };
-  });
-};
-
+  const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
+    setSelectedAddress((prevState) => {
+      if (
+        prevState.area === selectedArea &&
+        JSON.stringify(prevState.govern) === JSON.stringify(selectedGovernments)
+      ) {
+        return prevState; // Avoid unnecessary re-renders
+      }
+      return { area: selectedArea, govern: selectedGovernments };
+    });
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -177,7 +171,7 @@ const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
       <CardHeader>
         <CardTitle className="text-3xl font-bold text-indigo-900">
           إعدادات الحساب
-        </CardTitle> 
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <p className="mb-6 text-gray-600">
@@ -262,13 +256,14 @@ const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
               />
             </div>
 
-            <AreaGovernmentSelector
-              initialData={
-                Object.keys(address).length > 0 ? address : preloadedData
-              }
-              onSelectionChange={handleSelectionChange}
-            />
-
+            <div  >
+              <AreaGovernmentSelector
+                initialData={
+                  Object.keys(address).length > 0 ? address : preloadedData
+                }
+                onSelectionChange={handleSelectionChange}
+              />
+            </div>
             <div className="grid grid-cols-3 gap-6">
               <label htmlFor="">التواصل الاجتماعي</label>
 
@@ -276,7 +271,6 @@ const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
                 (item, index) =>
                   (item.link || item.label) && (
                     <div key={index} className="space-y- col-span-3">
-                     
                       <div className="p-2 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-between">
                         <input
                           type="url"
@@ -306,14 +300,14 @@ const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
               </button>
             </div>
 
-            <div className="space-y-2 col-span-2">
+            {/* <div className="space-y-2 col-span-2">
               <Label htmlFor="bio">نبذة عنك</Label>
               <Controller
                 name="bio"
                 control={control}
                 render={({ field }) => <Textarea {...field} rows={4} />}
               />
-            </div>
+            </div> */}
           </div>
 
           <Button type="submit" className="w-full text-white">

@@ -11,10 +11,13 @@ import { TbSpeakerphone } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { IoNotificationsCircleSharp, IoNotificationsSharp } from "react-icons/io5";
+import {
+  IoNotificationsCircleSharp,
+  IoNotificationsSharp,
+} from "react-icons/io5";
 import { MdOutlinePrivacyTip, MdVideoSettings } from "react-icons/md";
 import { BsFillSendPlusFill } from "react-icons/bs";
-import { FaMoneyBill } from 'react-icons/fa';
+import { FaMoneyBill } from "react-icons/fa";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -34,6 +37,11 @@ const Sidebar = () => {
   }, [user]);
 
   const handleLogOut = async () => {
+
+    const prmpit = window.confirm("هل تريد تسجيل الخروج؟");
+    if (!prmpit) return;
+
+
     await logout();
     navigate("/admin-login");
   };
@@ -113,7 +121,7 @@ const Sidebar = () => {
     // },
   ];
 
-  const filteredMenuItems = menuItems.filter(item =>
+  const filteredMenuItems = menuItems.filter((item) =>
     item.roles.includes(userRole)
   );
 
@@ -132,7 +140,11 @@ const Sidebar = () => {
           <li
             key={index}
             className={`py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white 
-                        ${currentRoute === item.link ? "bg-blue-600 text-white rounded " : ""}
+                        ${
+                          currentRoute === item.link
+                            ? "bg-blue-600 text-white rounded "
+                            : ""
+                        }
                         `}
             onClick={() => setCurrentRoute(window.location.pathname)}
           >
@@ -157,6 +169,19 @@ const Sidebar = () => {
             )}
           </li>
         ))}
+
+        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white">
+          <div className=" w-full">
+            <button
+              type="button"
+              className="flex items-center space-x-4 pb- gap-3  "
+              onClick={handleLogOut}
+            >
+              <BiLogOut size={28} />
+              <span className="hidden md:inline text-lg">تسجيل الخروج</span>
+            </button>
+          </div>
+        </li>
       </ul>
 
       <div className="absolute bottom-10 w-full inline md:hidden">
@@ -174,7 +199,7 @@ const Sidebar = () => {
       </div>
 
       {/* Logout button */}
-      <div className="absolute bottom-0 w-full">
+      {/* <div className="absolute bottom-0 w-full">
         <button
           type="button"
           className="flex items-center space-x-4 pb-5 gap-3 hover:bg-gray-300"
@@ -183,7 +208,7 @@ const Sidebar = () => {
           <BiLogOut size={28} />
           <span className="hidden md:inline text-lg">تسجيل الخروج</span>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

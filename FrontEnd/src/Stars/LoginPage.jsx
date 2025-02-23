@@ -51,8 +51,10 @@ const LoginPage = () => {
         else navigate("/profile");
 
       } catch (error) {
-        console.log(error);
-        const errorMessage = handleFirebaseError(error);
+        console.log(error.response.data.message);
+        
+
+        const errorMessage = handleFirebaseError(error.response.data.message);
         setError(errorMessage);
       }
     };
