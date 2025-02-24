@@ -32,10 +32,10 @@ const SignUpPage = () => {
 
   const addInput = (e) => {
     e.preventDefault();
-     if (inputs.length >= 6) {
-       toast.error("لا يمكنك إضافة أكثر من 6 روابط.");
-       return;
-     }
+    if (inputs.length >= 6) {
+      toast.error("لا يمكنك إضافة أكثر من 6 روابط.");
+      return;
+    }
 
     setInputs([...inputs, { type: "general", link: "" }]);
   };
@@ -55,15 +55,16 @@ const SignUpPage = () => {
       return;
     }
 
-  if (
-    !data.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/)
-  ) {
-    toast.error(
-      "يجب أن تحتوي كلمة المرور على 8-20 حرفًا، وحرف كبير، وحرف صغير، ورقم على الأقل"
-    );
-    return;
-  }
-
+    if (
+      data.password.length < 6 ||
+      data.password.length > 11 ||
+      !/[a-zA-Z]/.test(data.password)
+    ) {
+      toast.error(
+        "يجب أن تحتوي كلمة المرور على 6-11 حرفًا وتتضمن حرفًا واحدًا على الأقل"
+      );
+      return;
+    }
 
     if (data.confirmPassword !== data.password) {
       toast.error("كلمة المرور غير متطابقة");
@@ -243,12 +244,12 @@ const SignUpPage = () => {
                 type="email"
                 register={register}
               />
-              <FormField
+              {/* <FormField
                 id="userName"
                 label="اسم المستخدم*"
                 type="text"
                 register={register}
-              />
+              /> */}
               <FormField
                 id="phone"
                 label={TextData.phone}

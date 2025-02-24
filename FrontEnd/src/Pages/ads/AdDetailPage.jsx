@@ -12,6 +12,7 @@ import {
   Link as LinkIcon,
   ChevronLeft,
   ChevronRight,
+  Download,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import axiosInstance from "../../Configuration/axiosInstance";
@@ -53,6 +54,56 @@ const AdDetailPage = () => {
       prev === 0 ? (ad?.Images?.length || 0) - 1 : prev - 1
     );
   };
+const handleDownloadAll = async () => {
+  if (!ad) return;
+
+  // Download images
+  for (let i = 0; i < ad.Images?.length; i++) {
+    const imageUrl = ad.Images[i];
+    try {
+      // Fetch the image as a Blob
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+
+      // Create a downloadable link
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `image_${i + 1}.jpg`; // Customize the filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Revoke the object URL to free up memory
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error(`Failed to download image ${i + 1}:`, error);
+      toast.error(`فشل تنزيل الصورة ${i + 1}`);
+    }
+  }
+
+  // Download videos (if applicable)
+  if (ad.videos) {
+    try {
+      const videoUrl = ad.videos;
+      const response = await fetch(videoUrl);
+      const blob = await response.blob();
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `video.mp4`; // Customize the filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error("Failed to download video:", error);
+      toast.error("فشل تنزيل الفيديو");
+    }
+  }
+
+  toast.success("تم بدء تنزيل جميع الصور والفيديوهات");
+};
 
   const AdLinks = ({ links }) => {
     const [copiedIndex, setCopiedIndex] = useState(null);
@@ -303,6 +354,17 @@ const AdDetailPage = () => {
                       </video>
                     </motion.div>
                   )}
+
+                  {/* Download All Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleDownloadAll}
+                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+                  >
+                    <Download className="h-5 w-5" />
+                    <span>تنزيل جميع الصور والفيديوهات</span>
+                  </motion.button>
                 </div>
 
                 {/* Details Section */}

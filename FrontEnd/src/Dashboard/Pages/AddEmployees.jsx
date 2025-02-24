@@ -144,7 +144,7 @@ const AddEmployees = () => {
           )}
         </div>
         {/* اسم الموظف */}
-
+{/* 
         <div>
           <label className="block text-gray-700 font-medium mb-1">
             اسم الموظف
@@ -158,7 +158,7 @@ const AddEmployees = () => {
           {errors.username && (
             <p className="text-red-500 text-sm">{errors.username.message}</p>
           )}
-        </div>
+        </div> */}
 
         {/* الهاتف */}
 
