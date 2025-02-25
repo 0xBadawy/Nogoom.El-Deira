@@ -59,7 +59,7 @@ const AdsList = () => {
       {/* <Outlet /> */}
       <h2 className="text-2xl mb-4">الحملات الاعلانية</h2>
       <div className="mt-6 bg-white w-fit dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <div className="flex gap-4 mb-4">
+        <div className="flex gap-4 mb-4 flex-col md:flex-row">
           {/* قائمة المنطقة */}
           <select
             value={selectedRegion}

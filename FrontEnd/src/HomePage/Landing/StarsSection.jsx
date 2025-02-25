@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import 'swiper/css/navigation';
 import ProfileCard from "./ProfileCard";
 import axiosInstance from "../../Configuration/axiosInstance";
+import { use } from "react";
 
 
 
@@ -23,9 +24,19 @@ const StarsSection = function () {
   const [users, setUsers] = useState([]);
   const { getAllStarUsers } = useDashboard();
 
-  const selectedArea = localStorage.getItem("selectedArea");
-  useEffect(() => {
+  const [selectedArea, setSelectedArea] = useState("all");
+
   
+  useEffect(() => {
+       setSelectedArea(localStorage.getItem("selectedArea") || "all");
+
+  }, []);
+  
+  
+  useEffect(() => {
+
+    // setSelectedArea(localStorage.getItem("selectedArea") || "all");
+    
     const fetchData = async () => {
       const response = await axiosInstance.get("/user/stars_users");
       const data = response.data.data;

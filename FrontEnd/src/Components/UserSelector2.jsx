@@ -78,8 +78,8 @@ useEffect(() => {
     AreaData.find((area) => area.name === filters.area)?.subGovernments || [];
 
   return (
-    <div className="w-full bg-white p-6 border rounded-2xl shadow-xl h-fit">
-      <h2 className="text-xl font-bold text-gray-700 mb-4">اختر المستخدمين:</h2>
+    <div className="w-full bg-white p-2 md:p-6 border rounded-2xl shadow-xl h-fit">
+      <h2 className="text-xl font-bold text-gray-700 mb-4">اختر النجوم:</h2>
 
       {/* Filters */}
       <div className="grid grid-cols-2 gap-4 mb-4">
@@ -136,7 +136,7 @@ useEffect(() => {
                 htmlFor={`user-${user._id}`}
                 className="ml-3 text-gray-700"
               >
-                {user.name} - {user?.email}
+                {user.name}  
               </label>
             </div>
           ))

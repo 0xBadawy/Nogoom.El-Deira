@@ -5,7 +5,10 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/userModel.js";
 import mongoose from "mongoose";
 import Notification from "../models/notificationSchema.js";
-import { sendNotificationToRoles } from "../functions/notification.js";
+import {
+  createNotification,
+  sendNotificationToRoles,
+} from "../functions/notification.js";
 
 export const deleteOne = (Model) =>
   asyncHandler(async (req, res, next) => {
@@ -75,12 +78,32 @@ export const updateOne = (Model) =>
     });
   });
 
-
- 
-
 export const updateOneParam = (Model) =>
   asyncHandler(async (req, res, next) => {
+    console.log("Model ////////////  ");
+
     const id = req.params.id;
+
+    // check if the Model is UserModal
+    if (Model === UserModel) {
+      console.log("Model is UserModel");
+      // check if the update in user balance
+      if (req.body.balance) {
+
+        const user = await UserModel.findById(id);
+        if (!user) {
+          return next(new ApiError(`No user found with that id => ${id}`, 404));
+        }
+
+        createNotification(
+          user._id,
+          "تم تحديث الرصيد",
+          `تم تحديث رصيدك واصبح بمقدار   ${req.body.balance} ريال`,
+          user._id,
+          "balance"
+        );
+      }
+    }
 
     // Debugging
     console.log("Request ID:", id);
@@ -112,9 +135,6 @@ export const updateOneParam = (Model) =>
     });
   });
 
-
-
-
 // const updateHomeDisplay = (Model) =>
 //   asyncHandler(async (req, res, next) => {
 //     try {
@@ -145,8 +165,8 @@ export const updateOneParam = (Model) =>
 //     res.status(201).json({
 //       status: "success",
 //       data: doc,
-//     }); 
-//   }); 
+//     });
+//   });
 
 export const createOne = (Model) =>
   asyncHandler(async (req, res, next) => {
@@ -167,51 +187,47 @@ export const createOne = (Model) =>
     }
   });
 
+export const createOneUser = (Model) =>
+  asyncHandler(async (req, res, next) => {
+    try {
+      console.log("Request Body:", req.body); // Log the incoming data
+      const doc = await Model.create(req.body);
+      console.log("Document Created:", doc); // Log the created document
+      res.status(201).json({
+        status: "success",
+        data: doc,
+      });
 
-  export const createOneUser = (Model) =>
-    asyncHandler(async (req, res, next) => {
-      try {
-        console.log("Request Body:", req.body); // Log the incoming data
-        const doc = await Model.create(req.body);
-        console.log("Document Created:", doc); // Log the created document
-        res.status(201).json({
-          status: "success",
-          data: doc,
-        });
+      //  const targetUsers = await Model.find({
+      //    role: { $in: ["admin", "manager", "editor"] },
+      //  });
 
-        //  const targetUsers = await Model.find({
-        //    role: { $in: ["admin", "manager", "editor"] },
-        //  });
+      //  // إنشاء إشعارات للمستخدمين
+      //  const notifications = targetUsers.map((user) => ({
+      //    userId: user._id,
+      //    title: "مستخدم جديد",
+      //    message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+      //  }));
+      //  console.log("Notifications:", notifications);
 
-        //  // إنشاء إشعارات للمستخدمين
-        //  const notifications = targetUsers.map((user) => ({
-        //    userId: user._id,
-        //    title: "مستخدم جديد",
-        //    message: `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
-        //  }));
-        //  console.log("Notifications:", notifications);
+      //  // حفظ الإشعارات في قاعدة البيانات
+      //  await Notification.insertMany(notifications);
 
-        //  // حفظ الإشعارات في قاعدة البيانات
-        //  await Notification.insertMany(notifications);
-
-        sendNotificationToRoles(
-          ["admin", "manager", "editor"],
-          "مستخدم جديد",
-          `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
-          doc._id,
-          "newAdmin"          
-        );
-
-         
-      } catch (err) {
-        console.error("Error in createOne:", err); // Log the error details
-        res.status(500).json({
-          status: "error",
-          message: err.message,
-        });
-      }
-    });
-
+      // sendNotificationToRoles(
+      //   ["admin", "manager", "editor"],
+      //   "مستخدم جديد",
+      //   `تمت إضافة المستخدم ${req.body.name} (${req.body.email})`,
+      //   doc._id,
+      //   "newAdmin"
+      // );
+    } catch (err) {
+      console.error("Error in createOne:", err); // Log the error details
+      res.status(500).json({
+        status: "error",
+        message: err.message,
+      });
+    }
+  });
 
 export const createHomeHandeler = (Model) =>
   asyncHandler(async (req, res, next) => {
@@ -240,9 +256,9 @@ export const createHomeHandeler = (Model) =>
 export const getOne = (Model) =>
   asyncHandler(async (req, res, next) => {
     const id = req.params.id;
-    console.log("Request ID:", id);
+    // console.log("Request ID:", id);
     const doc = await Model.findById(id);
-    console.log("Document:", doc);
+    // console.log("Document:", doc);
     if (!doc) {
       return next(new ApiError(`No document found with that id => ${id}`, 404));
     }
@@ -250,14 +266,13 @@ export const getOne = (Model) =>
     res.status(200).json({ status: "success", data: doc });
   });
 
-
 export const getOneHomeM = (Model) =>
   asyncHandler(async (req, res, next) => {
     try {
       // const { id } = req.params;
       const id = req.query.id;
 
-      console.log("Request ID:", id);
+      // console.log("Request ID:", id);
       // Validate MongoDB ObjectId format
       if (!mongoose.Types.ObjectId.isValid(id)) {
         return next(new ApiError(`Invalid ID format: ${id}`, 400));
@@ -268,7 +283,7 @@ export const getOneHomeM = (Model) =>
         .populate("propertyType")
         .populate("locationCity")
         .populate("owner");
-      console.log("Document  :", document);
+      // console.log("Document  :", document);
 
       // Handle not found case
       if (!document) {
@@ -286,8 +301,6 @@ export const getOneHomeM = (Model) =>
       return next(new ApiError("Internal server error", 500));
     }
   });
-
-
 
 export const getAll = (Model) =>
   asyncHandler(async (req, res, next) => {
@@ -307,8 +320,6 @@ export const getAll = (Model) =>
     });
   });
 
-
-
 export const getAllAdmins = (Model) =>
   asyncHandler(async (req, res, next) => {
     const apiFeatures = new ApiFeatures(Model.find(), req.query)
@@ -326,7 +337,6 @@ export const getAllAdmins = (Model) =>
       data: category,
     });
   });
-
 
 export const getCurruntUserHomes = (Model) =>
   asyncHandler(async (req, res, next) => {
@@ -379,7 +389,6 @@ export const getAllHomes = (Model) =>
       .limitFields()
       .search()
       .paginate();
-      
 
     const { mongooseQuery, paginationResult } = apiFeatures;
     const category = await mongooseQuery;

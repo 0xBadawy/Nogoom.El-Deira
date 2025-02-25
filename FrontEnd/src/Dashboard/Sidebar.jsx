@@ -37,10 +37,8 @@ const Sidebar = () => {
   }, [user]);
 
   const handleLogOut = async () => {
-
     const prmpit = window.confirm("هل تريد تسجيل الخروج؟");
     if (!prmpit) return;
-
 
     await logout();
     navigate("/admin-login");
@@ -170,8 +168,8 @@ const Sidebar = () => {
           </li>
         ))}
 
-        <li className="py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white">
-          <div className=" w-full">
+        <li className="py-3 px-2 space-x-4 ">
+          <div className=" w-full hover:rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white">
             <button
               type="button"
               className="flex items-center space-x-4 pb- gap-3  "
@@ -181,22 +179,21 @@ const Sidebar = () => {
               <span className="hidden md:inline text-lg">تسجيل الخروج</span>
             </button>
           </div>
+          <div className="pt-3 w-full inline md:hidden">
+            <button
+              type="button"
+              onClick={() => setPhone(!phone)}
+              className="flex items-center space-x-4 pb-5 mt-5 gap-3 hover:bg-gray-300"
+            >
+              {!phone ? (
+                <IoIosArrowBack size={28} />
+              ) : (
+                <IoIosArrowForward size={28} />
+              )}
+            </button>
+          </div>
         </li>
       </ul>
-
-      <div className="absolute bottom-10 w-full inline md:hidden">
-        <button
-          type="button"
-          onClick={() => setPhone(!phone)}
-          className="flex items-center space-x-4 pb-5 gap-3 hover:bg-gray-300"
-        >
-          {!phone ? (
-            <IoIosArrowBack size={28} />
-          ) : (
-            <IoIosArrowForward size={28} />
-          )}
-        </button>
-      </div>
 
       {/* Logout button */}
       {/* <div className="absolute bottom-0 w-full">

@@ -83,6 +83,22 @@ export const signUp = asyncHandler(async (req, res, next) => {
       "newUser"
     );
 
+    createNotification(
+      user._id,
+      "تم إنشاء حساب جديد",
+      "مرحبًا بك! 🎉 تم إنشاء حسابك بنجاح، ونتمنى لك تجربة رائعة معنا. استكشف الميزات المتاحة، وابدأ رحلتك الآن! 🚀",
+      user._id,
+      "newUser"
+    );
+      
+
+
+
+
+
+
+
+
     // Generate token 
     const token = generateToken(user._id);
 
