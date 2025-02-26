@@ -269,7 +269,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
                   )
               )}
 
-              <button
+              {/* <button
                 type="button"
                 onClick={() =>
                   setSocialLinks([...socialLinks, { label: "", link: " " }])
@@ -277,7 +277,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
                 className="col-span-3 mt-4 max-h-10 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
               >
                 إضافة رابط جديد
-              </button>
+              </button> */}
             </div>
 
             <AreaGovernmentSelector

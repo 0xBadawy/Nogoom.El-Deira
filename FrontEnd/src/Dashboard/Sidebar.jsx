@@ -29,8 +29,8 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchUserRole = async () => {
       const User = user;
-      // setUserRole(User.role); // Set the user role
-      setUserRole("admin");
+      setUserRole(User.role); // Set the user role
+      // setUserRole("admin");
       // console.log("User Role:", User.role);
     };
     fetchUserRole();
@@ -61,7 +61,7 @@ const Sidebar = () => {
       icon: <FaRegGrinStars />,
       text: "النجوم",
       link: "/dashboard/users",
-      roles: ["admin"],
+      roles: ["admin", "editor", "viewer"],
     },
     // {
     //   icon: <FaCog />,
@@ -73,25 +73,25 @@ const Sidebar = () => {
       icon: <MdVideoSettings />,
       text: "الحملات",
       link: "/dashboard/ads-list",
-      roles: ["admin", "editor"],
+      roles: ["admin", "editor", "viewer"],
     },
     {
       icon: <TbSpeakerphone />,
       text: "حملة جديدة",
       link: "/dashboard/createAd",
-      roles: ["admin", "viewer"],
+      roles: ["admin", "editor"],
     },
     {
       icon: <IoNotificationsSharp />,
       text: "الإشعارات",
       link: "/dashboard/notifications",
-      roles: ["admin", "editor"],
+      roles: ["admin", "editor", "viewer"],
     },
     {
       icon: <IoNotificationsCircleSharp />,
       text: "الإشعارات المرسلة",
       link: "/dashboard/Sended-Notifications",
-      roles: ["admin", "editor"],
+      roles: ["admin", "editor", "viewer"],
     },
     {
       icon: <BsFillSendPlusFill />,

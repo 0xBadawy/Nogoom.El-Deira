@@ -34,9 +34,11 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
       Object.keys(userData).forEach((key) => {
         setValue(key, userData[key]);
       });
+      
     } else {
       reset(); // Clear the form for adding a new user.
     }
+    setValue("password", "");
   }, [userData, setValue, reset]);
 
   const onSubmit = async (formData) => {
@@ -150,13 +152,13 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
         </div>
 
         {/* Password Field */}
-        {!userData && (
+        {/* {!userData && ( */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               كلمة المرور
             </label>
             <input
-              type="password"
+              type="text"
               {...register("password", {
                 required: "كلمة المرور مطلوبة",
                 minLength: {
@@ -171,7 +173,7 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
           </div>
-        )}
+        {/* )} */}
 
         {/* Role Field */}
         <div>

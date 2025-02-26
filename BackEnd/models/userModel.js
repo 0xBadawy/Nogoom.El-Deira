@@ -106,6 +106,7 @@ const userSchema = new Schema(
 );
 
 userSchema.pre("save", async function (next) {
+  console.log("Pre Save Middleware");
   if (!this.isModified("password")) next();
   this.password = await bcrypt.hash(this.password, 10);
   next();

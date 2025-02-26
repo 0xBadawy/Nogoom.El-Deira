@@ -142,64 +142,129 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: withProtection(DashboardHome, ["admin", "editor", "viewer"]),
+        element: withProtection(DashboardHome, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "users",
-        element: withProtection(Users, ["admin"]),
+        element: withProtection(Users, ["admin", "editor", "viewer", "editor"]),
       },
       {
         path: "users/:id",
-        element: withProtection(Users, ["admin"]),
+        element: withProtection(Users, ["admin", "editor", "viewer", "editor"]),
       },
       {
         path: "apartments",
-        element: withProtection(Apartments, ["admin", "editor"]),
+        element: withProtection(Apartments, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "balance",
-        element: withProtection(UsersBalance, ["admin", "editor"]),
+        element: withProtection(UsersBalance, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "notifications",
-        element: withProtection(NotificationsPanel, ["admin", "editor"]),
+        element: withProtection(NotificationsPanel, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "Sended-notifications",
-        element: withProtection(SendedNotificationsPanel, ["admin", "editor"]),
+        element: withProtection(SendedNotificationsPanel, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "Send_Notification",
-        element: withProtection(SendNotification, ["admin", "editor"]),
+        element: withProtection(SendNotification, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "createAd",
-        element: withProtection(CreateAd, ["admin", "viewer"]),
+        element: withProtection(CreateAd, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "employees",
-        element: withProtection(Employees, ["admin"]),
+        element: withProtection(Employees, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "ads-list",
-        element: withProtection(AdsList, ["admin", "editor"]),
+        element: withProtection(AdsList, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "editAd/:id",
-        element: withProtection(EditAd, ["admin", "editor"]),
+        element: withProtection(EditAd, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
 
       {
         path: "privacy",
-        element: withProtection(Privacy, ["admin", "editor"]),
+        element: withProtection(Privacy, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "contact",
-        element: withProtection(Contact, ["admin", "editor"]),
+        element: withProtection(Contact, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "website_data",
-        element: withProtection(WebsiteData, ["admin", "editor"]),
+        element: withProtection(WebsiteData, [
+          "admin",
+          "editor",
+          "viewer",
+          "editor",
+        ]),
       },
       {
         path: "unauthorized",

@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 import sendEmail, { sendEmailHTML } from "../utils/sendEmail.js";
 import Notification from "../models/notificationSchema.js";
-import { sendNotificationToRoles } from "../functions/notification.js";
+import { createNotification, sendNotificationToRoles } from "../functions/notification.js";
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
@@ -82,6 +82,7 @@ export const signUp = asyncHandler(async (req, res, next) => {
       user._id,
       "newUser"
     );
+
 
     createNotification(
       user._id,
