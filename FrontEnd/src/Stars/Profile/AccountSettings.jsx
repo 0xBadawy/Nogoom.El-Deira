@@ -142,28 +142,19 @@ const AccountSettings = () => {
     const storageRef = ref(storage, `${fileName}/profile/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setUploadImageProgress(progress);
-      },
-      (error) => {
-        toast.error("خطأ أثناء رفع الصورة.");
-        console.error("خطأ أثناء رفع الصورة:", error);
-      },
-      async () => {
-        try {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setImageURL(downloadURL);
-          setUploadImageProgress(0);
-          toast.success("تم رفع الصورة بنجاح.");
-        } catch (err) {
-          console.error("خطأ في الحصول على رابط التنزيل:", err);
-        }
-      }
-    );
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setUploadImageProgress(progress);
+    },
+    (error) => {
+      console.error("Storage Upload Error:", error.code, error.message);
+      toast.error(`خطأ أثناء رفع الصورة: ${error.message}`);
+    }
+  );
+
+
   };
 
   return (

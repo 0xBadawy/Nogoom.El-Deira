@@ -27,6 +27,8 @@ const port = process.env.PORT || 3000;
 // Middleware
 // app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors({ origin: '*' }));
+// app.use(cors({ origin:"http://localhost:5173" }));
+
 app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
