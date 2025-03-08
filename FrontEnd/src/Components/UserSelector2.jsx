@@ -3,11 +3,13 @@ import { AreaData } from "./data"; // Import AreaData
 import axiosInstance from "../Configuration/axiosInstance";
 
 const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
+
+
   const [users, setUsers] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState(initialSelectedUsers);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [filters, setFilters] = useState({ area: "", govrn: "" });
-  const [selectAll, setSelectAll] = useState(false);
+  const [selectAll, setSelectAll] = useState(false); 
 
   useEffect(() => {
     const fetchUsers = async () => {

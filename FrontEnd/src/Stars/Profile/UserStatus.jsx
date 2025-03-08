@@ -9,28 +9,28 @@ const UserStatus = ({ verified, accountType }) => {
         return (
           <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
             <FaUser className="text-gray-600" size={24} />
-            <p className="mt-1">حساب عادي</p>
+            <p className="mt-1">نجم عادي</p>
           </p>
         );
       case "silver":
         return (
           <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
             <FaStar className="text-silver-500" size={24} />
-            <p className="mt-1">حساب فضي</p>
+            <p className="mt-1">نجم فضي</p>
           </p>
         );
       case "gold":
         return (
           <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
             <FaMedal className="text-yellow-500" size={24} />
-            <p className="mt-1">حساب ذهبي</p>
+            <p className="mt-1">نجم ذهبي</p>
           </p>
         );
       case "bronze":
         return (
           <p className="m2 text-lg font-semibold flex flex-row-reverse items-center gap-2">
             <FaRegUser className="text-brown-500" size={24} />
-            <p className="mt-1">حساب برونزي</p>
+            <p className="mt-1">نجم برونزي</p>
           </p>
         );
       default:

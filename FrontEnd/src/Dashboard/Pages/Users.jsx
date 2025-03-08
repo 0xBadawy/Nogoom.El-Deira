@@ -107,9 +107,9 @@ const Users = () => {
   return (
     <div className="grow md:p-8 p-2  dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">النجوم</h2>
-      <div className="my-6  bg-white  dark:bg-gray-800 rounded-lg shadow-md p-4 w-fit full max-w-screen overflow-x-auto">
+      <div className="my-6  bg-white  dark:bg-gray-800 rounded-lg shadow-md p-4 w-fit md:w-full max-w-screen overflow-x-auto">
         <div>
-          <div className="flex gap-4 mb-4 flex-col md:flex-col">
+          <div className="flex gap-4 mb-4 flex-col md:flex-row">
             <select
               value={selectedRegion}
               onChange={(e) => {
@@ -151,7 +151,7 @@ const Users = () => {
 
         <h3 className="text-lg font-semibold mb-4">بيانات النجوم</h3>
 
-        <table className="table-auto w-fit  text-sm md:text-base">
+        <table className="table-auto w-fit  md:w-full  text-sm md:text-base">
           <thead>
             <tr className="border-b">
               <th className="py-2 px-1 text-right min-w-36 ">الاسم</th>
