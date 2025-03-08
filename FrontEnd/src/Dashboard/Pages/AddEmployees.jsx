@@ -144,7 +144,7 @@ const AddEmployees = () => {
           )}
         </div>
         {/* اسم الموظف */}
-{/* 
+        {/* 
         <div>
           <label className="block text-gray-700 font-medium mb-1">
             اسم الموظف
@@ -168,7 +168,7 @@ const AddEmployees = () => {
             رقم الهاتف
           </label>
           <input
-            type="text"
+            type="number"
             {...register("phone", { required: "رقم الهاتف مطلوب" })}
             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="أدخل رقم الهاتف"
@@ -258,7 +258,7 @@ const AddEmployees = () => {
               <span>محرر</span>
               (كل الصلاحيات عدا الموظفين والمحفظة)
             </option>
-            <option value="manager">
+            <option value="viewer">
               {" "}
               <span>مشاهد</span> (الدخول والمتابعة فقط)
             </option>

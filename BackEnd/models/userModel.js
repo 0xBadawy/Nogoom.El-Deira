@@ -19,9 +19,11 @@ const userSchema = new Schema(
     // },
     email: {
       type: String,
+      lowercase: true,
       required: [true, "Email is required"],
       unique: [true, "Email already exists"],
     },
+
     phone: {
       type: String,
       required: [true, "Phone is required"],
@@ -34,7 +36,7 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["star", "admin", "manager", "editor", "user"],
+      enum: ["star", "admin", "manager", "editor", "user", "viewer"],
       default: "star",
     },
     verified: {

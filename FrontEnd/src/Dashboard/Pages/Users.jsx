@@ -8,15 +8,18 @@ import UserDetailsBalance from "./UserDetailsBalance"; // استيراد الم�
 import axiosInstance from "../../Configuration/axiosInstance";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import { useAuth } from "../../Context/AuthContext";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
   const { allUsers, updateUser } = useDashboard();
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedGovern, setSelectedGovern] = useState("all");
+  const { user } = useAuth();
+  console.log("User:", user.role);
 
   const { id } = useParams();
-  console.log("useParams output:", id);
+  // console.log("useParams output:", id);
   useEffect(() => {
     if (id && usersData.length > 0) {
       const foundUser = usersData.find((user) => user._id === id);
@@ -34,8 +37,8 @@ const Users = () => {
     const governMatch =
       selectedGovern === "all" || user.address.govern?.includes(selectedGovern);
 
-      console.log("regionMatch:", user.address.govern);
-      console.log("governMatch:", user.address.area);
+      // console.log("regionMatch:", user.address.govern);
+      // console.log("governMatch:", user.address.area);
 
     return regionMatch && governMatch;
   });
@@ -55,7 +58,7 @@ const Users = () => {
     const featchUsers = async () => {
       try {
         const response = await axiosInstance.get("/user/all_users");
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setUsersData(response.data.data);
       } catch (error) {
         console.log(error);
@@ -246,7 +249,7 @@ const Users = () => {
         />
       )}
 
-      {selectedUser && (
+      {selectedUser && user.role !== "viewer" && (
         <UserDetailsBalance
           selectedUserUid={selectedUser}
           usersData={usersData}

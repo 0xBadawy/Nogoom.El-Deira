@@ -59,6 +59,7 @@ const SendNotification = () => {
           adData
         );
         // console.log("response : ", response);
+        toast.success("تم ارسال الاشعار بنجاح");
         reset();
         setSelectedUsers([]);
       } catch (error) {

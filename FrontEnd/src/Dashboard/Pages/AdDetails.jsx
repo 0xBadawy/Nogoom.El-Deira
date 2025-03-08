@@ -1,4 +1,11 @@
-import { FaStar, FaRegStar, FaCalendarAlt, FaMapMarkerAlt, FaVideo, FaImage } from "react-icons/fa";
+import {
+  FaStar,
+  FaRegStar,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaVideo,
+  FaImage,
+} from "react-icons/fa";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
@@ -11,33 +18,30 @@ import formatDate from "../../hooks/formatDate";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 const AdDetails = ({ ads, selected }) => {
-  
-
-
   const [ad, setAds] = useState(null);
 
-
+  const { user } = useAuth();
 
   useEffect(() => {
-      const fetchUserData = async () => {
-       try {
-         const response = await axiosInstance.get(
-           `/advertisement/get_one/${selected}`
-         );
-         setAds(response.data.advertisement);
-         console.log("response.data.advertisement " , response.data.advertisement);
-       }
-        catch (error) {
-          console.error("حدث خطأ أثناء جلب البيانات:", error);
-        }
-      };
+    const fetchUserData = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `/advertisement/get_one/${selected}`
+        );
+        setAds(response.data.advertisement);
+        console.log(
+          "response.data.advertisement ",
+          response.data.advertisement
+        );
+      } catch (error) {
+        console.error("حدث خطأ أثناء جلب البيانات:", error);
+      }
+    };
 
-      fetchUserData();
-
-
-
+    fetchUserData();
   }, [selected]);
 
   useEffect(() => {
@@ -45,33 +49,24 @@ const AdDetails = ({ ads, selected }) => {
   }, [ad]);
 
   const handleDeleteAd = async () => {
-
     const confirm = window.confirm("هل أنت متأكد من حذف الإعلان؟");
     if (!confirm) return;
 
     try {
-      const response = await axiosInstance.delete(`/advertisement/delete/${selected}`);
+      const response = await axiosInstance.delete(
+        `/advertisement/delete/${selected}`
+      );
       console.log(response);
       if (response.status === 200) {
         toast.success("تم حذف الإعلان بنجاح");
-        // reload the page 
-        window.location.reload();        
+        // reload the page
+        window.location.reload();
       }
     } catch (error) {
       console.error("حدث خطأ أثناء حذف الإعلان:", error);
       toast.error("حدث خطأ أثناء حذف الإعلان");
     }
   };
-
-
-
-
-
-
-
-
-
-
 
   return (
     <Card className="max-w-full sm:max-w-lg md:max-w-xl lg:max-w-full mx-auto">
@@ -249,7 +244,14 @@ const AdDetails = ({ ads, selected }) => {
             حذف الإعلان
           </Button>
 
-          <Link to={`/dashboard/editAd/${selected}`}>تعديل الإعلان</Link>
+          {user?.role === "admin" && (
+            <Link
+              className="bg-blue-600 text-white mx-3 px-4 py-2 rounded-lg"
+              to={`/dashboard/editAd/${selected}`}
+            >
+              تعديل الإعلان
+            </Link>
+          )}
         </div>
       </CardContent>
     </Card>
@@ -257,4 +259,3 @@ const AdDetails = ({ ads, selected }) => {
 };
 
 export default AdDetails;
-

@@ -124,8 +124,10 @@ export const signIn = asyncHandler(async (req, res, next) => {
   console.log(req.body);
   const { email, password } = req.body;
 
+
   // Find user by email
-  const user = await UserModel.findOne({ email });
+ const user = await UserModel.findOne({ email: email.toLowerCase() });
+
   console.log("user", user);
   if (!user) {
     return next(new ApiError("Invalid email or password 1", 401));

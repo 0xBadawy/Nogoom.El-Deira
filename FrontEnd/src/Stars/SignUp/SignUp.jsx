@@ -55,14 +55,22 @@ const SignUpPage = () => {
       return;
     }
 
-    if (
-      data.password.length < 6 ||
-      data.password.length > 11 ||
-      !/[a-zA-Z]/.test(data.password)
-    ) {
+    if (data.password.length < 6) {
       toast.error(
-        "يجب أن تحتوي كلمة المرور على 6-11 حرفًا وتتضمن حرفًا واحدًا على الأقل"
+        "كلمة المرور ضعيفة جدًا. يجب أن تحتوي على 6 أحرف على الأقل."
       );
+      return;
+    }
+
+    if (data.password.length > 11) {
+      toast.error("كلمة المرور قوية جدًا. يجب أن تحتوي على 11 حرفًا فقط.");
+      return;
+    }
+
+    // at least one letter
+
+    if (!/[a-zA-Z]/.test(data.password)) {
+      toast.error("كلمة المرور يجب ان تحتوي على حرف واحد على الاقل");
       return;
     }
 

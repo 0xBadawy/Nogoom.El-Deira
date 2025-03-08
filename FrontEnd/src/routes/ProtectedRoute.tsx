@@ -36,9 +36,12 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   // جلب الصلاحيات المطلوبة للمسار الحالي
   const routeRoles = requiredRoles ?? getRoutePermissions(location.pathname);
 
+  console.log("Route roles:", routeRoles);
+
   // التحقق مما إذا كان المستخدم لديه الصلاحيات المطلوبة
   console.log("User role:", userRole);
   if (!hasPermission(userRole || "guest", routeRoles)) {
+    console.log("Unauthorized access");
     return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }
 

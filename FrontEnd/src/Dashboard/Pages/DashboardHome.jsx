@@ -53,6 +53,7 @@ const DashboardHome = () => {
     if (name == "admin") return "مدير";
     if (name == "editor") return "محرر";
     if (name == "manager") return "مدير";
+    if (name == "viewer") return "مشاهد";
     if (name == "star") return "نجم";
     if (name == "user") return "مستخدم";
   };

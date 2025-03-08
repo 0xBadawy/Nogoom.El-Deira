@@ -227,7 +227,6 @@ const EditAd = () => {
     };
 
 
-    console.log("adData", adData);
 
     try {
       const response = await axiosInstance.put(
@@ -238,7 +237,8 @@ const EditAd = () => {
     //   updateADs(id, response.data);
       console.log("response.data", response.data);
       toast.success("تم تحديث الإعلان بنجاح");
-    //   navigate("/dashboard/ads");
+
+      navigate("/dashboard/ads-list");
     } catch (error) {
       toast.error(`خطأ في تحديث الإعلان: ${error.message}`);
     }

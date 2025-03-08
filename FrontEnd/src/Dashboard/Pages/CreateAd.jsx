@@ -157,9 +157,11 @@ const CreateAd = () => {
       Images: mediaUrls.images.length
         ? mediaUrls.images
         : [
-            "https://firebasestorage.googleapis.com/v0/b/default-placeholder-image.jpg",
+            "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2FYour%20paragraph%20text.png?alt=media&token=b981c853-cc70-4300-91bd-1bdf2a6915cd",
           ],
-      videos: mediaUrls.video,
+      videos:
+        mediaUrls.video ||
+        "https://firebasestorage.googleapis.com/v0/b/nogoomel-deira.firebasestorage.app/o/Website%20Images%2F1741421044108video.mp4?alt=media&token=709e9570-6e7a-4206-b6cc-286511dc14fa",
       views: 0,
       links: socialLinks.filter((link) => link.link?.trim()),
       users: selectedUsers,

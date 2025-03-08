@@ -79,7 +79,7 @@ const Sidebar = () => {
       icon: <TbSpeakerphone />,
       text: "حملة جديدة",
       link: "/dashboard/createAd",
-      roles: ["admin", "editor"],
+      roles: ["admin"],
     },
     {
       icon: <IoNotificationsSharp />,

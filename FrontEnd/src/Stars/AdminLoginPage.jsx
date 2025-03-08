@@ -42,7 +42,13 @@ const AdminLoginPage = () => {
         login(data.data);
         localStorage.setItem("token", data.token);
 
-        if (data.data.role === "admin") navigate("/dashboard");
+        if (
+          data.data.role === "admin" ||
+          data.data.role === "editor" ||
+          data.data.role === "viewer" ||
+          data.data.role === "manager"
+        )
+          navigate("/dashboard");
         else navigate("/profile");
       } catch (error) { 
         const errorMessage = handleFirebaseError(error.response.data.message);
