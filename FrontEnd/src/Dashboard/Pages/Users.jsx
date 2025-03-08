@@ -9,6 +9,7 @@ import axiosInstance from "../../Configuration/axiosInstance";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import { useAuth } from "../../Context/AuthContext";
+import Star from "./Star";
 
 const Users = () => {
   const [usersData, setUsersData] = useState([]);
@@ -106,7 +107,9 @@ const Users = () => {
 
   return (
     <div className="grow md:p-8 p-2  dark:bg-gray-800 h-full">
+
       <h2 className="text-2xl mb-4">النجوم</h2>
+
       <div className="my-6  bg-white  dark:bg-gray-800 rounded-lg shadow-md p-4 w-fit md:w-full max-w-screen overflow-x-auto">
         <div>
           <div className="flex gap-4 mb-4 flex-col md:flex-row">
@@ -195,11 +198,10 @@ const Users = () => {
                       </span>
                     </td>*/}
                     <td className="py2 px4 flex items-center gap-2 ">
-                      {row.accountType !== "none" && (
-                        <AiFillStar
-                          className={getStarColor(row.accountType)}
-                          size={24}
-                        />
+                      {row.verified  && (
+                        <Star type={row.accountType} size={32} /> 
+
+                      
                       )}
                     </td>
                   </tr>
