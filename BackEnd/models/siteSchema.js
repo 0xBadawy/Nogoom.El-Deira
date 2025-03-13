@@ -31,6 +31,7 @@ const siteSchema = new mongoose.Schema({
   googlePlay: { type: String, default: "" },
   appStore: { type: String, default: "" },
   privacy: { type: String, default: "" },
+  hideSection: { type: Boolean, default: false },
 });
 
 const Site = mongoose.model("Site", siteSchema);

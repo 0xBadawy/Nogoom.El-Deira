@@ -131,7 +131,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
-    path: "/profile",
+    path: "/profile", 
     element: withProtection(Profile, ["star"]),
     errorElement: <ErrorBoundary />,
   },
