@@ -162,7 +162,6 @@ export const router = createBrowserRouter([
           "editor",
           "viewer",
           "manager",
-
           "editor",
         ]),
       },
@@ -222,29 +221,21 @@ export const router = createBrowserRouter([
         element: withProtection(SendNotification, [
           "admin",
           "editor",
-          "viewer",
-          "manager",
-          "editor",
+        
         ]),
       },
       {
         path: "createAd",
         element: withProtection(CreateAd, [
           "admin",
-          "editor",
-          "viewer",
-          "manager",
-          "editor",
+        
         ]),
       },
       {
         path: "employees",
         element: withProtection(Employees, [
           "admin",
-          "editor",
-          "viewer",
-          "manager",
-          "editor",
+        
         ]),
       },
       {
@@ -261,10 +252,7 @@ export const router = createBrowserRouter([
         path: "editAd/:id",
         element: withProtection(EditAd, [
           "admin",
-          "editor",
-          "viewer",
-          "manager",
-          "editor",
+         
         ]),
       },
 
@@ -273,9 +261,7 @@ export const router = createBrowserRouter([
         element: withProtection(Privacy, [
           "admin",
           "editor",
-          "viewer",
-          "manager",
-          "editor",
+      
         ]),
       },
       {
@@ -283,9 +269,7 @@ export const router = createBrowserRouter([
         element: withProtection(Contact, [
           "admin",
           "editor",
-          "viewer",
-          "manager",
-          "editor",
+      
         ]),
       },
       {
@@ -293,9 +277,7 @@ export const router = createBrowserRouter([
         element: withProtection(WebsiteData, [
           "admin",
           "editor",
-          "viewer",
-          "manager",
-          "editor",
+   
         ]),
       },
       {

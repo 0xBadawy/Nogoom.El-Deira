@@ -251,7 +251,7 @@ const Users = () => {
         />
       )}
 
-      {selectedUser && user.role !== "viewer" && (
+      {selectedUser && user.role === "admin" && (
         <UserDetailsBalance
           selectedUserUid={selectedUser}
           usersData={usersData}
