@@ -208,6 +208,8 @@ const EditAd = () => {
       return;
     }
 
+    console.log("selectedAddress.govern", selectedAddress);
+
     if (!selectedAddress.govern.length) {
       toast.error("يجب اختيار المنطقة");
       return;

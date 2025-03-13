@@ -40,6 +40,19 @@ app.get('/', (req, res) => {
   res.send('Hello, Badawy (: !');
 });
 
+app.get("/info", (req, res) => {
+    const projectName = "Noogom El-Dira Project";
+  const description = "This is a simple Node.js project using Express.";
+  const version = "5.4.3";
+    const lastUpdate = "2025-03-13 10:00:00 PM";
+    const responseText = `Project Name: ${projectName}\nDescription: ${description}\nLast Update: ${lastUpdate} \nVersion: ${version}`; 
+    res.type("text/plain"); 
+    res.send(responseText);
+});
+
+
+
+
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/notifications", notificationsRoute);
 app.use("/api/v1/advertisement", advertisementRoute);

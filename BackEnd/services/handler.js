@@ -80,7 +80,7 @@ export const updateOne = (Model) =>
 
 export const updateOneParam = (Model) =>
   asyncHandler(async (req, res, next) => {
-    console.log("Model ////////////  ");
+    // console.log("Model ////////////  ");
 
     const id = req.params.id;
 
@@ -91,17 +91,31 @@ export const updateOneParam = (Model) =>
       if (req.body.balance) {
 
         const user = await UserModel.findById(id);
+
+
         if (!user) {
           return next(new ApiError(`No user found with that id => ${id}`, 404));
         }
+const oldBalance = user.balance;
+const newBalance = req.body.balance;
+const balanceDifference = newBalance - oldBalance;
 
-        createNotification(
+let message = "";
+if (balanceDifference > 0) {
+    message = `تم إيداع مبلغ ${balanceDifference} ريال. رصيدك الحالي هو ${newBalance} ريال.`;
+} else {
+    message = `تم سحب مبلغ ${Math.abs(balanceDifference)} ريال. رصيدك الحالي هو ${newBalance} ريال.`;
+}
+
+         createNotification(
           user._id,
           "تم تحديث الرصيد",
-          `تم تحديث رصيدك واصبح بمقدار   ${req.body.balance} ريال`,
+          message,
           user._id,
           "balance"
         );
+        
+       
       }
     }
 

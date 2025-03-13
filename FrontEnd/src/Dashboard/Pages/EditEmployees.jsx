@@ -38,7 +38,7 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
     } else {
       reset(); // Clear the form for adding a new user.
     }
-    setValue("password", "");
+    // setValue("password", "");
   }, [userData, setValue, reset]);
 
   const onSubmit = async (formData) => {
@@ -53,7 +53,9 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
       try {
         await handleUserSubmission(formData, isUpdate);
         alert("تمت العملية بنجاح!"); // Optional success message
-        // reload 
+        // reload  
+        window.location.reload();
+
 
         window.location.reload();
 
@@ -153,7 +155,9 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
 
         {/* Password Field */}
         {/* {!userData && ( */}
-          <div>
+        {/* <div
+          
+        >
             <label className="block text-gray-700 font-medium mb-1">
               كلمة المرور
             </label>
@@ -172,7 +176,7 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password.message}</p>
             )}
-          </div>
+          </div> */}
         {/* )} */}
 
         {/* Role Field */}

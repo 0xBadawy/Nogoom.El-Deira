@@ -79,8 +79,8 @@ const WebsiteData = () => {
           "image2"
         );
       }
-
-      await axiosInstance.post("/dashboard/update", uploadData);
+      console.log(uploadData);
+       await axiosInstance.post("/dashboard/update", uploadData);
       toast.success("تم تحديث البيانات بنجاح");
       reset();
     } catch (error) {
@@ -94,20 +94,24 @@ const WebsiteData = () => {
     mainInfo: [
       { id: "mainTitle", label: "العنوان الرئيسي للموقع" },
       { id: "subTitle", label: "العنوان الفرعي للموقع" },
-      { id: "adTitle", label: "عنوان الإعلان للموقع" },
+     
+    ],
+    mainInfo2: [
+       { id: "adTitle", label: "عنوان الإعلان للموقع" },
       { id: "adDescription", label: "وصف الإعلان للموقع", type: "textarea" },
+    ],
+
+    statistics: [
+      { id: "campaignCount", label: "عدد الحملات" },
+      { id: "clientCount", label: "عدد العملاء" },
+      { id: "satisfactionRate", label: "معدل الرضا" },
+      { id: "viewCount", label: "عدد المشاهدات" },
     ],
     starAds: [
       { id: "starAd1", label: "إعلان النجوم 1" },
       { id: "starAd2", label: "إعلان النجوم 2" },
       { id: "starAd3", label: "إعلان النجوم 3" },
       { id: "starAd4", label: "إعلان النجوم 4" },
-    ],
-    statistics: [
-      { id: "campaignCount", label: "عدد الحملات" },
-      { id: "clientCount", label: "عدد العملاء" },
-      { id: "satisfactionRate", label: "معدل الرضا" },
-      { id: "viewCount", label: "عدد المشاهدات" },
     ],
     contact: [
       { id: "phone", label: "رقم الهاتف" },
@@ -126,6 +130,7 @@ const WebsiteData = () => {
     stores: [
       { id: "googlePlay", label: "رابط جوجل بلاي" },
       { id: "appStore", label: "رابط آب ستور" },
+      { id: "hideSection", label: "إخفاء القسم" },
     ],
   };
 
@@ -143,16 +148,33 @@ const WebsiteData = () => {
             {Object.entries(formSections).map(([section, fields]) => (
               <div key={section} className="space-y-6">
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 border-b pb-2">
-                  {section === "mainInfo" && "معلومات رئيسية"}
-                  {section === "starAds" && "إعلانات النجوم"}
-                  {section === "statistics" && "الإحصائيات"}
+                  {section === "mainInfo" && "القسم رقم 1"}
+                  {section === "mainInfo2" && "القسم رقم 2"}
+                  {section === "starAds" && " القسم رقم 4"}
+                  {section === "statistics" && "القسم رقم 3"}
                   {section === "contact" && "معلومات الاتصال"}
                   {section === "socialMedia" && "وسائل التواصل الاجتماعي"}
                   {section === "stores" && "متاجر التطبيقات"}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {fields.map((field) => (
-                    <div key={field.id} className="space-y-2">
+                    <>
+                      {field.id === "hideSection" ? (
+                        <div key={field.id} className="flex items-center">
+                          <input
+                            type="checkbox"
+                            {...register(field.id)}
+                            className="text-indigo-600 rounded border-gray-300 dark:border-gray-500 focus:ring-indigo-500"
+                          />
+                          <label
+                            htmlFor={field.id}
+                            className="text-sm text-gray-700 dark:text-gray-200 ml-2"
+                          >
+                            {field.label}
+                          </label>
+                        </div>
+                      ) : (
+                        <div key={field.id} className="space-y-2">
                       <FormField
                         id={field.id}
                         label={field.label}
@@ -161,6 +183,9 @@ const WebsiteData = () => {
                         className="w-full truncate"
                       />
                     </div>
+                      )}
+                    
+                    </>
                   ))}
                 </div>
               </div>

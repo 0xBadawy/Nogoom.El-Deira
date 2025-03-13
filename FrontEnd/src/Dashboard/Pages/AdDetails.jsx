@@ -109,7 +109,9 @@ const AdDetails = ({ ads, selected }) => {
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 المنطقة
               </p>
-              <p className="text-base font-semibold">{ad?.address.area}</p>
+              <p className="text-base font-semibold">{ad?.address.area}
+                
+              </p>
             </div>
           </div>
           <div>

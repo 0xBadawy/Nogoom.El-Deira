@@ -16,14 +16,26 @@ const StarsSection = React.lazy(() => import("./Landing/StarsSection"));
 const ContactSection = React.lazy(() => import("./Landing/ContactSection"));
 
 const HomePage = () => {
+ 
+ 
 
+  
 
-  return (
+  return ( 
     <HomePageItems />
   );
 };
 
 const HomePageItems = () => {
+
+  const [data, setData] = useState();
+  const { websiteData } = useData();
+
+  useEffect(() => {
+    setData(websiteData);
+    //  console.log("websiteData cty home", websiteData);
+  }, [websiteData]);
+
   return (
     <div className="PatternBG" style={{ fontFamily: "Cairo" }}>
       <Navbar />
@@ -45,9 +57,17 @@ const HomePageItems = () => {
       <Suspense fallback={<Loading />}>
         <SocialMediaInfluencers />
       </Suspense>
-      <Suspense fallback={<Loading />}>
+
+      {
+        data?.
+hideSection
+ ? null : (  <Suspense fallback={<Loading />}>
         <DownloadSection />
-      </Suspense>
+        </Suspense>)
+        
+
+      }
+    
      
       <Suspense fallback={<Loading />}>
         <ContactSection />

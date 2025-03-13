@@ -61,13 +61,18 @@ const AddEmployees = () => {
     if (confirm("هل انت متأكد من إضافة هذا الموظف") == true) {
       try {
         await handleUserSubmission(formData);
-        // toast.success("تم إضافة الموظف بنجاح!");
+        toast.success("تم إضافة الموظف بنجاح!");
+        reset();
+        window.location.reload();
       } catch (error) {
         toast.error("حدث خطأ أثناء إضافة الموظف.");
       }
+
     } else {
       toast.error("تم إلغاء العملية");
     }
+
+
   };
 
   const handleUserSubmission = async (formData) => {

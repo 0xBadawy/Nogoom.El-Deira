@@ -63,7 +63,7 @@ const SignUpPage = () => {
     }
 
     if (data.password.length > 11) {
-      toast.error("كلمة المرور قوية جدًا. يجب أن تحتوي على 11 حرفًا فقط.");
+      toast.error("كلمة المرور. يجب أن تحتوي على 11 حرفًا فقط.");
       return;
     }
 
