@@ -1,1 +1,0 @@
-import{u as s,a as n,r,j as i}from"./index-BOfctVcA.js";const f=()=>{var o,a;const e=s(),t=((a=(o=n().state)==null?void 0:o.from)==null?void 0:a.pathname)||"/";return r.useEffect(()=>{e(t==="/dashboard"?"/admin-login":"/login")},[]),i.jsx("div",{className:"min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-100 p-2"})};export{f as default};

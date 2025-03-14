@@ -61,18 +61,20 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
   const onSubmit = async (data) => {
     const allData = {
       ...data,
-      selectedAddress,
+      address:selectedAddress,
       profileImage: imageURL,
       verified: false,
       socialLinks,
     };
+
+    console.log("All Data: selectedAddress ", allData);
 
     try {
       const response = await axiosInstance.put(
         `/user/update_user/${selectedUserUid}`,
         allData
       );
-      await updateUser(response.data.data);
+      // await updateUser(response.data.data);
       toast.success("تم حفظ التعديلات بنجاح");
       console.log(response.data);
     } catch (error) {
