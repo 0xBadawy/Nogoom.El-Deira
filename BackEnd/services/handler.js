@@ -20,6 +20,17 @@ export const deleteOne = (Model) =>
     res.status(204).json({ status: "success", data: null });
   });
 
+
+  export const deleteOneParam = (Model) =>
+    asyncHandler(async (req, res, next) => {
+      const { id } = req.params;
+      console.log("req", id);
+      const category = await Model.findByIdAndDelete(id);
+
+      if (!category) return next(new ApiError("Category not found", 404));
+      res.status(204).json({ status: "success", data: null });
+    });
+
 // export const updateOne = (Model) =>
 //   asyncHandler(async (req, res, next) => {
 //     console.log("Request Params:", req.params); // Debugging
@@ -89,33 +100,29 @@ export const updateOneParam = (Model) =>
       console.log("Model is UserModel");
       // check if the update in user balance
       if (req.body.balance) {
-
         const user = await UserModel.findById(id);
-
 
         if (!user) {
           return next(new ApiError(`No user found with that id => ${id}`, 404));
         }
-const oldBalance = user.balance;
-const newBalance = req.body.balance;
-const balanceDifference = newBalance - oldBalance;
+        const oldBalance = user.balance;
+        const newBalance = req.body.balance;
+        const balanceDifference = newBalance - oldBalance;
 
-let message = "";
-if (balanceDifference > 0) {
-    message = `تم إيداع مبلغ ${balanceDifference} ريال. رصيدك الحالي هو ${newBalance} ريال.`;
-} else {
-    message = `تم سحب مبلغ ${Math.abs(balanceDifference)} ريال. رصيدك الحالي هو ${newBalance} ريال.`;
-}
+        let message = "";
+        if (balanceDifference > 0) {
+          message = `تم إيداع مبلغ ${balanceDifference} ريال. رصيدك الحالي هو ${newBalance} ريال.`;
+        } else {
+          message = `تم سحب مبلغ ${Math.abs(balanceDifference)} ريال. رصيدك الحالي هو ${newBalance} ريال.`;
+        }
 
-         createNotification(
+        createNotification(
           user._id,
           "تم تحديث الرصيد",
           message,
           user._id,
           "balance"
         );
-        
-       
       }
     }
 

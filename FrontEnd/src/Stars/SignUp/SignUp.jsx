@@ -11,6 +11,7 @@ import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
 import axiosInstance from "../../Configuration/axiosInstance";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Configuration/Firebase";
+
 const SignUpPage = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();

@@ -1,0 +1,410 @@
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../Configuration/firebase";
+import axiosInstance from "../../Configuration/axiosInstance";
+
+const SponsersData = () => {
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [mediaUrl, setMediaUrl] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sponsers, setSponsers] = useState([]);
+
+  const fetchSponsers = async () => {
+    try {
+      const response = await axiosInstance.get("/sponser");
+      console.log(response.data.data);
+      setSponsers(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchSponsers();
+  }, []);
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const formSubmit = (data) => {
+    console.log(data, mediaUrl);
+
+    const sponserData = {
+      name: data.name,
+      logo: mediaUrl,
+    };
+
+    if (!mediaUrl) {
+      alert("يرجى تحميل صورة الراعي");
+      return;
+    }
+
+    // Send the data to the backend
+
+    const post = async () => {
+      try {
+        const response = await axiosInstance.post("/sponser", sponserData);
+        console.log(response.data);
+        toast.success("تم إضافة الراعي بنجاح");
+        reset();
+        setMediaUrl("");
+        fetchSponsers();
+      } catch (error) {
+        console.error(error);
+        toast.error("حدث خطأ أثناء إضافة الراعي");
+      }
+    };
+    post();
+  };
+
+  const handleFileUpload = async (file) => {
+    if (!file) return;
+
+    const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      toast.error(`نوع الملف غير مدعوم: ${file.name}`);
+      return;
+    }
+
+    setLoading(true);
+
+    const fileName = "noUser";
+    const storageRef = ref(storage, `${fileName}/images/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      (error) => {
+        toast.error(`خطأ في رفع الملف: ${error.message}`);
+        setLoading(false);
+      },
+      async () => {
+        try {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          setMediaUrl(url);
+          console.log("Media URL:", url);
+        } catch (error) {
+          toast.error(`خطأ في الحصول على رابط الصورة: ${error.message}`);
+        } finally {
+          setLoading(false);
+        }
+      }
+    );
+  };
+  
+  const handelDelete = async (id) => {
+
+    const confirm = window.confirm("هل أنت متأكد من حذف الراعي؟");
+    if (!confirm) return;
+    try {
+      const response = await axiosInstance.delete(`/sponser/${id}`);
+      console.log(response.data);
+      toast.success("تم حذف الراعي بنجاح");
+      fetchSponsers();
+    } catch (error) {
+      console.error(error);
+      toast.error("حدث خطأ أثناء حذف الراعي");
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-b lue-50 to-gray -100 pt-16 pb-12">
+      <div className="max-w- 6xl mx-auto px-4">
+        {/* Add Sponsor Card */}
+        <div className="p-4 max-w-xl mx-auto bg-white rounded-3xl shadow-lg space-y-6 transition-all duration-300 hover:shadow-xl border border-gray-100 mb-12">
+          <div className="flex items-center justify-center mb-2"></div>
+          <h1 className="text-3xl font-bold text-center text-gray-900 tracking-tight">
+            بيانات الرعاة
+          </h1>
+          <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-semibold text-gray-700"
+              >
+                الاسم
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="block w-full border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 p-3 transition-all duration-200 bg-gray-50 text-gray-900 placeholder-gray-400 text-right"
+                placeholder="أدخل الاسم هنا"
+                {...register("name", { required: true })}
+                dir="rtl"
+              />
+              {errors.name && (
+                <span className="text-red-500 text-sm font-medium animate-pulse flex justify-end">
+                  هذا الحقل مطلوب
+                </span>
+              )}
+            </div>
+
+            <div className="space-y-4">
+              {mediaUrl ? (
+                <div className="flex justify-center">
+                  <div className="relative group">
+                    <img
+                      src={mediaUrl}
+                      alt="Preview"
+                      className="w-48 h-48 object-cover rounded-full border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <label
+                        htmlFor="image-upload"
+                        className="cursor-pointer text-white"
+                      >
+                        <svg
+                          className="w-10 h-10"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                          />
+                        </svg>
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleFileUpload(e.target.files[0])}
+                        className="hidden"
+                        id="image-upload"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex justify-center">
+                  <div className="flex justify-center items-center border-2 border-dashed border-blue-200 rounded-2xl w-64 h-64 mx-auto bg-blue-50 hover:border-blue-300 transition-colors duration-200">
+                    <div className="text-center px-4 py-6">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleFileUpload(e.target.files[0])}
+                        className="hidden"
+                        id="image-upload"
+                      />
+                      <label
+                        htmlFor="image-upload"
+                        className="cursor-pointer inline-flex flex-col items-center"
+                      >
+                        <div className="bg-white p-4 rounded-full shadow-md mb-4">
+                          <svg
+                            className="w-8 h-8 text-blue-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                            />
+                          </svg>
+                        </div>
+                        <span className="block text-sm font-medium text-blue-600 hover:text-blue-700 transition-all duration-200">
+                          رفع صورة العميل أو شريك النجاح
+                        </span>
+                        <p className="text-xs text-gray-500 mt-3">
+                          PNG, JPG, GIF بحد أقصى 10MB
+                        </p>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {uploadProgress > 0 && uploadProgress < 100 && (
+                <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                  <div
+                    className="bg-blue-500 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                    style={{ width: `${uploadProgress}%` }}
+                  />
+                  <p className="text-xs text-center text-gray-500 mt-1">
+                    {uploadProgress}%
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 text-white rounded-lg p-4 font-semibold hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 focus:outline-none transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]"
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center">
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    جارٍ تحميل الصورة...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center">
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    إضافة الراعي
+                  </span>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* Sponsors List Section */}
+        <div className="mx-auto px-4 mb-12  ">
+          <div className="flex items-center justify-center space-x-2 mb-8">
+            <div className="h-px w-16 bg-b lue-200"></div>
+            <h1 className="text-3xl font-bold text-center text-gray-900 tracking-tight">
+              قائمة الرعاة
+            </h1>
+            <div className="h-px w-16 bg- blue-200"></div>
+          </div>
+
+          <div className="mt-6 flex flex-row flex-wrap justify-center gap-6">
+            {sponsers.map((sponser) => (
+              <div
+                key={sponser._id}
+                className="flex items-center flex-col md:flex-row justify-between md:p-6 p-2 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-100 w-full md:w-96"
+              >
+                <div className="flex  flex-col md:flex-row  items-center space-x-5 rtl:space-x-reverse">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={sponser.logo}
+                      alt={sponser.name}
+                      className="w-16 h-16 object-cover rounded-full border-2 border-gray-100 shadow-sm hover:scale-105 transition-transform duration-200"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 opacity-0 rounded-full"></div>
+                  </div>
+                  <div className="ml4   ">
+                    <h1 className="text-lg font-semibold text-gray-900 tracking-tight overflow-hidden">
+                      {sponser.name}
+                    </h1>
+                    <p className="text-sm mt-2 text-gray-500 text-center">شريك النجاح</p>
+                  </div>
+                </div>
+                <button
+                  className="bg-red-50 text-red-600 rounded-lg px-4 py-2 font-semibold hover:bg-red-600 hover:text-white focus:ring-4 focus:ring-red-200 focus:outline-none transition-all duration-200 active:scale-95"
+                  onClick={() => handelDelete(sponser._id)}
+                >
+                  <span className="flex items-center">
+                    <svg
+                      className="w-5 h-5 inline-block ml-1 rtl:mr-1 rtl:ml-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                    حذف
+                  </span>
+                </button>
+              </div>
+            ))}
+
+            {sponsers.length === 0 && (
+              <div className="text-center py-12 px-8 bg-white rounded-xl shadow-md border border-gray-100 w-full max-w-lg">
+                <div className="mb-4 flex justify-center">
+                  <div className="bg-blue-50 p-4 rounded-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-12 w-12 text-blue-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <p className="text-xl font-semibold text-gray-700">
+                  لا يوجد رعاة حاليًا
+                </p>
+                <p className="text-base text-gray-500 mt-2">
+                  أضف رعاة جدد لعرضهم هنا
+                </p>
+                <button
+                  onClick={() =>
+                    document.getElementById("image-upload").click()
+                  }
+                  className="mt-6 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                    />
+                  </svg>
+                  إضافة راعي جديد
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SponsersData;

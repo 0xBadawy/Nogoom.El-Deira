@@ -109,9 +109,7 @@ const AdDetails = ({ ads, selected }) => {
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 المنطقة
               </p>
-              <p className="text-base font-semibold">{ad?.address.area}
-                
-              </p>
+              <p className="text-base font-semibold">{ad?.address.area}</p>
             </div>
           </div>
           <div>
@@ -180,16 +178,18 @@ const AdDetails = ({ ads, selected }) => {
 
               {/* Display users without links */}
               <h2 className="text-xl font-bold py-8">النجوم بدون مشاركات</h2>
-              {ad?.users
-                ?.filter((user) => user?.links?.length === 0)
-                .map((user, index) => (
-                  <span
-                    key={index}
-                    className="bg-gray-50 w-32 mx-1 px-2 py-1 rounded-full text-sm font-semibold text-gray-800 shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    {user?.userId?.name}
-                  </span>
-                ))}
+              <div className="flex flex-wrap gap-2">
+                {ad?.users
+                  ?.filter((user) => user?.links?.length === 0)
+                  .map((user, index) => (
+                    <span
+                      key={index}
+                      className="bg-gray-50 w-auto max-w-xs mx-2 px-4 py-1 rounded-full text-sm font-semibold text-gray-800 shadow-sm hover:shadow-md transition-shadow truncate"
+                    >
+          {user?.userId?.name}{" "}
+                    </span>
+                  ))}
+              </div>
             </div>
           </div>
         </div>

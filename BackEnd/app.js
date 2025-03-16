@@ -8,6 +8,8 @@ import settingsRoute from "./Routes/settings-route.js";
 import dashboardRoute from "./Routes/dashboard-route.js";
 import notificationsRoute from "./Routes/notifications-route.js";
 import advertisementRoute from "./Routes/advertisement-route.js";
+import sponserRoute from "./Routes/sponser-route.js";
+import messagesRoute from "./Routes/message-route.js";
 
 import userRoute from "./Routes/users.js";
 import authRoute from "./Routes/auth.js";
@@ -66,6 +68,8 @@ app.use("/api/v1/preferences", preferencesRoute);
 app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/settings", settingsRoute);
 app.use("/api/v1/dashboard", dashboardRoute);
+app.use("/api/v1/sponser", sponserRoute);
+app.use("/api/v1/messages", messagesRoute);
 
 
 app.all('*', (req, res, next) => {

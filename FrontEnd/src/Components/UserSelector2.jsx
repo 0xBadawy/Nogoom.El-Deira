@@ -27,7 +27,7 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
 
   useEffect(() => {
     let { area, govrn } = filters;
-    if (!area && !govrn) {
+     if ((!area || area === "كل المحافظات") && !govrn) {
       setFilteredUsers(users);
       return;
     }
@@ -126,13 +126,13 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
             <div className="flex items-center border-b pb-2 mb-2">
               <input
                 type="checkbox"
-                id="select-all"
+                id="select-all2"
                 checked={selectAll}
                 onChange={handleSelectAll}
                 className="w-5 h-5 accent-blue-500 rounded-md"
               />
               <label
-                htmlFor="select-all"
+                htmlFor="select-all2"
                 className="ml-3 text-gray-700 font-bold"
               >
                 تحديد الكل
