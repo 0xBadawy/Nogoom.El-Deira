@@ -107,7 +107,7 @@ const Sidebar = () => {
     },
     {
       icon: <FaCog />,
-      text: "بيانات الشركات",
+      text: "قائمة العملاء ",
       link: "/dashboard/sponsers",
       roles: ["admin", "editor"],
     },

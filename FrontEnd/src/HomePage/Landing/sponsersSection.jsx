@@ -93,7 +93,7 @@ const SponsorsSection = () => {
           variants={itemVariants}
           className="text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-0 relative group"
         >
-          شركاء النجاح
+          عملائنا
           <span className="absolute -bottom-1 right-0 w-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
         </motion.h1>
 
@@ -172,7 +172,7 @@ const SponsorsSection = () => {
                           className="w-20 h-20 object-cover rounded-full border-2 border-gray-100 dark:border-gray-500 shadow-sm z-10 relative"
                         />
                       </div>
-                      <div className="text-center mt-2">
+                      <div className="text-center mt-2 mr-5">
                         <h2 className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight line-clamp-1">
                           {sponsor.name}
                         </h2>

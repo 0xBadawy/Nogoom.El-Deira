@@ -101,9 +101,8 @@ const SponsersData = () => {
       }
     );
   };
-  
-  const handelDelete = async (id) => {
 
+  const handelDelete = async (id) => {
     const confirm = window.confirm("هل أنت متأكد من حذف الراعي؟");
     if (!confirm) return;
     try {
@@ -115,7 +114,7 @@ const SponsersData = () => {
       console.error(error);
       toast.error("حدث خطأ أثناء حذف الراعي");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-b lue-50 to-gray -100 pt-16 pb-12">
@@ -124,7 +123,7 @@ const SponsersData = () => {
         <div className="p-4 max-w-xl mx-auto bg-white rounded-3xl shadow-lg space-y-6 transition-all duration-300 hover:shadow-xl border border-gray-100 mb-12">
           <div className="flex items-center justify-center mb-2"></div>
           <h1 className="text-3xl font-bold text-center text-gray-900 tracking-tight">
-            بيانات الرعاة
+            اضافة عميل جديد
           </h1>
           <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">
             <div className="space-y-2">
@@ -300,7 +299,7 @@ const SponsersData = () => {
           <div className="flex items-center justify-center space-x-2 mb-8">
             <div className="h-px w-16 bg-b lue-200"></div>
             <h1 className="text-3xl font-bold text-center text-gray-900 tracking-tight">
-              قائمة الرعاة
+              قائمة العملاء
             </h1>
             <div className="h-px w-16 bg- blue-200"></div>
           </div>
@@ -320,11 +319,13 @@ const SponsersData = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 opacity-0 rounded-full"></div>
                   </div>
-                  <div className="ml4   ">
+                  <div className="pr-4   ">
                     <h1 className="text-lg font-semibold text-gray-900 tracking-tight overflow-hidden">
                       {sponser.name}
                     </h1>
-                    <p className="text-sm mt-2 text-gray-500 text-center">شريك النجاح</p>
+                    <p className="text-sm mt-2 text-gray-500 text-center">
+                      شريك النجاح
+                    </p>
                   </div>
                 </div>
                 <button

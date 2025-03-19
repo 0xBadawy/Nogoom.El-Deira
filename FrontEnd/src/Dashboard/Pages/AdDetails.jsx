@@ -189,6 +189,8 @@ const AdDetails = ({ ads, selected }) => {
           {user?.userId?.name}{" "}
                     </span>
                   ))}
+                
+                
               </div>
             </div>
           </div>

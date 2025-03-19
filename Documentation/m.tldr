@@ -10,18 +10,18 @@
 			"com.tldraw.instance": 25,
 			"com.tldraw.instance_page_state": 5,
 			"com.tldraw.page": 1,
-			"com.tldraw.instance_presence": 5,
+			"com.tldraw.instance_presence": 6,
 			"com.tldraw.pointer": 1,
 			"com.tldraw.shape": 4,
 			"com.tldraw.asset.bookmark": 2,
 			"com.tldraw.asset.image": 5,
 			"com.tldraw.asset.video": 5,
 			"com.tldraw.shape.group": 0,
-			"com.tldraw.shape.text": 2,
+			"com.tldraw.shape.text": 3,
 			"com.tldraw.shape.bookmark": 2,
 			"com.tldraw.shape.draw": 2,
-			"com.tldraw.shape.geo": 9,
-			"com.tldraw.shape.note": 8,
+			"com.tldraw.shape.geo": 10,
+			"com.tldraw.shape.note": 9,
 			"com.tldraw.shape.line": 5,
 			"com.tldraw.shape.frame": 0,
 			"com.tldraw.shape.arrow": 5,
@@ -46,278 +46,6 @@
 			"name": "Page 1",
 			"index": "a1",
 			"typeName": "page"
-		},
-		{
-			"id": "pointer:pointer",
-			"typeName": "pointer",
-			"x": 1990.5943170014448,
-			"y": 2206.172995642757,
-			"lastActivityTimestamp": 1731960164148,
-			"meta": {}
-		},
-		{
-			"followingUserId": null,
-			"opacityForNextShape": 1,
-			"stylesForNextShape": {},
-			"brush": null,
-			"scribbles": [],
-			"cursor": {
-				"type": "default",
-				"rotation": 0
-			},
-			"isFocusMode": false,
-			"exportBackground": true,
-			"isDebugMode": false,
-			"isToolLocked": false,
-			"screenBounds": {
-				"x": 0,
-				"y": 0,
-				"w": 1581,
-				"h": 905
-			},
-			"insets": [
-				false,
-				false,
-				true,
-				false
-			],
-			"zoomBrush": null,
-			"isGridMode": false,
-			"isPenMode": false,
-			"chatMessage": "",
-			"isChatting": false,
-			"highlightedUserIds": [],
-			"isFocused": true,
-			"devicePixelRatio": 1,
-			"isCoarsePointer": false,
-			"isHoveringCanvas": true,
-			"openMenus": [],
-			"isChangingStyle": false,
-			"isReadonly": false,
-			"meta": {},
-			"duplicateProps": null,
-			"id": "instance:instance",
-			"currentPageId": "page:page",
-			"typeName": "instance"
-		},
-		{
-			"editingShapeId": null,
-			"croppingShapeId": null,
-			"selectedShapeIds": [
-				"shape:Cf-y0gHYEXVEVipkVa1Ld",
-				"shape:S4sCrbbjPg_aIfB5Ydn9f",
-				"shape:5eW8K7cJqTfDnEDiFvRxU",
-				"shape:MnmO9QwpHx5DDrt-Ln-96",
-				"shape:dYTQbJr778gvgQ_WG6Iw5",
-				"shape:02DI2cBDhPHoaRv5DLOmD",
-				"shape:LZoT5FlluocgldDdWUsXp",
-				"shape:LvVqSid8YKpP2o3FGjeYW",
-				"shape:Z89n73iGZg19L2M1pGgwY",
-				"shape:lHa02KFxqRGTQQYpOdkFm",
-				"shape:9MmGZbwN6OjquJWDC5JzM",
-				"shape:eYwttyDmcgbusKdec2fRe",
-				"shape:0xBsm7yflhRK0rIPF-2QY",
-				"shape:qQNX7IBH_CFYkWY4fo-jn",
-				"shape:to4ngKBckTukHRVsv6Rtc",
-				"shape:H8-TVWe-2rykzWIKUkgKi",
-				"shape:gySgMrwsA-MBxx5JV-C0-",
-				"shape:5G9ayzGs0zwze4tgTWjqA",
-				"shape:WI8E_AcO-Y6IxedP_970b",
-				"shape:BWzSXpRrbVNb1sUjNqIyY",
-				"shape:fYnCUs1gCFvl9MRckEfla",
-				"shape:EAM-vuaaeETWmFGIsL1xW",
-				"shape:7CJozN3i0eQGWTkCH5Kcd",
-				"shape:dgIXE_QB-JIGuqrcgRd_C",
-				"shape:Dp1yH3nJHuQvNHiWKQ_zS",
-				"shape:PT8fT7NMUDoThD7fdvZkg",
-				"shape:ERbGNNf14d_RFZrr6mbLw",
-				"shape:0LFP-kOS37dfDKVSr1zbl",
-				"shape:cErMgv45xULtpiWeEI_Q6",
-				"shape:r4_4B11v0Zbpdz6HhbGAx",
-				"shape:y2KXhGrGx-UlvEJRS3Lin",
-				"shape:WR0GslCXj_2ZjfSLL-eYI",
-				"shape:h5sTBKUUO7UpnunZjQVfK",
-				"shape:AqMJnjspYux5WeyN66DcX",
-				"shape:fuGwZK91UF53Qk1gzVRIr",
-				"shape:U6alZLu9Z3frPnG8mhtQW",
-				"shape:VBjWnYbQXht1BJ2tDerJO",
-				"shape:68BNDu5tm8SLD-LfulUAu",
-				"shape:E-ifALRsybsavxZP_fenb",
-				"shape:WwpFOUAGCluy0OycA5zis",
-				"shape:zsctlYSuGqENawrdRoKpz",
-				"shape:2NXcSRj3oLWH5cv1CvAtT",
-				"shape:vfwe8nPSwgfIc1ih_crqj",
-				"shape:Vq37yht9RGL5bQwamvRQ_",
-				"shape:9JKJz37IoT4B8PNH-D5XF",
-				"shape:8mXUuzIc2DA0-VfMvRSl5",
-				"shape:vwhrqS0hgt6DmbP9LNd0e",
-				"shape:uS5IgMfvdfoDHb-UyqDSy",
-				"shape:lT6FJbxiuZpbJbwiNId9K",
-				"shape:B1YkL6udTmctdOZ_zDXlc",
-				"shape:WGVS2n2hh18l7Se77yH0Z",
-				"shape:eUMC7HERHcxke_BX4WH9c",
-				"shape:1Xzvl6blMeNgQd9KnNyh1",
-				"shape:myIBb-muBEAN3FkrG-mnS",
-				"shape:zYpc1gbPs6ZjIralnEPe_",
-				"shape:oWpPhL10LX90RmET6hEZp",
-				"shape:K14RZQ7shUbBKYIGZr1ov",
-				"shape:NIvmnZRw7QuOlu5WOU57I",
-				"shape:KYK5t0Avk7UjMDvmW-Rhw",
-				"shape:kT5He4HPgwgZDE1Q0AJeu",
-				"shape:t1An-cM11wXKou4UR1Pn0",
-				"shape:P0cxQ_695Mq9xP7nSlu37",
-				"shape:8qdbQqjkBoRB4p8RJuTs8",
-				"shape:hzw1s1UaA4Xf4Qti5XAA-",
-				"shape:FHv9bCBdGlClCWYv3VibR",
-				"shape:wDzQFOboyz8UJVB6YlXxr",
-				"shape:FEwJAn66rNwBSwVxd93Ou",
-				"shape:I3ALtdQ_xwvG8wFmFVwzU",
-				"shape:cyIM681nvXJKpjdZr2DVW",
-				"shape:Fg1o8r0Ay3c8K_fHTNEC0",
-				"shape:SScerOnjNvfb9NLri1-i1",
-				"shape:5OZZKP8ahJ7Tzd43cBWjr",
-				"shape:70BeH-foWEHucP4SiF0ME",
-				"shape:69SdLqI95tGXC2wppXHd6",
-				"shape:6t1t2UPb_BOohjwljNYXd",
-				"shape:TLUB9TmUczaMO5lvezMin",
-				"shape:ZN0Ycsh9tf3a2H3BjK42f",
-				"shape:k3MGUp-94C8g3L6HpL-C8",
-				"shape:xF5r86Voz4R5j3oIWjv--",
-				"shape:HMFFrQe8b14E6cbcyMgbP",
-				"shape:Ofl_4tTVu-gkLN841vOg7",
-				"shape:t3Z_req4sNmJgnsDGou2U",
-				"shape:XjOFO4xW0maFuBa2VWHjg",
-				"shape:R26Bv-HyZ5tWTdqWixMxr",
-				"shape:l35n662_724aXVMfHUxoq",
-				"shape:oMWT6pp4vXYUdtv2u0nVv",
-				"shape:Liaw5z-RYuCLSkcaTVGrs",
-				"shape:TUn0zZTuqL_5rpiOr3rUC",
-				"shape:Gd1OqWqMsmvl6kfwdjUNN",
-				"shape:EfUFlHvLQqeG4Y5jesXAx",
-				"shape:ek6vWjRVhIU0EqVRDEOLa",
-				"shape:sYsooVFh_dNpZThLJ605P",
-				"shape:efB9j57vb4T1mF4UfyQyF",
-				"shape:qFxUkV7qvIoNFoRxFQa-d",
-				"shape:jhprth4ok1tvg-lPilx6n",
-				"shape:UugjCfGK6lVibceUAxGGB",
-				"shape:joZet9FZUdnr8LK5N2_ic",
-				"shape:uG8h7LSnxuptiv-x7gQiN",
-				"shape:IzX-_K3VrNE_pHcK_XWcs",
-				"shape:6RrCIwMEuz1MvjhzL3PKc",
-				"shape:hd24jEV_j9sHBW58kBUja",
-				"shape:WwKKBsI1zA_oPyl3dY14A",
-				"shape:TNuY8MsdSYpfgdBydP7Ku",
-				"shape:n9yCBFJI0TwL4Kt370p20",
-				"shape:L8sjhiQk9nEoW6FUz75T0",
-				"shape:AaX3o_9g9cQpwfL0idhlQ",
-				"shape:rb6SYlQ8EDQxqvJ7Q4Jai",
-				"shape:JT-JmymI7d6J95jiR6hU_",
-				"shape:aZRNjGRR8lNyjZvhVfOU1",
-				"shape:89n5hP4-PBS5zQjNLweWH",
-				"shape:EZNKJVaZtqtvj3T28LIC8",
-				"shape:_uh3_y3i4TRijYJXcqb77",
-				"shape:Ucb1BXmN5NxF9r9aUPOUc",
-				"shape:eTsn2ceWbcVQ7eAZ1YLo7",
-				"shape:AYPJIIyqsvxgNIm4vxSY1",
-				"shape:pVk9hmbMkwq2SgjPb6Rak",
-				"shape:Nqo5RspHoiELtpp_WLUaB",
-				"shape:SZIizjgb5wAHQ--Y-pSUx",
-				"shape:HlVGQ_6Y4tptOCSdAa10Y",
-				"shape:CUbFJUL9qkcv0gQUmjnxI",
-				"shape:DX_jjN8QeBQBLXqyLbkfy",
-				"shape:9yCFrvSwZZbUt10N1QGsu",
-				"shape:7X0HILAoxNbjb7nwTEd8I",
-				"shape:Tm3ItIVVfUz0gIH6D0W3H",
-				"shape:i0eowbmdH4pD0uHqb7GVF",
-				"shape:NSoTfu7zNvJLIaZpl6mNo",
-				"shape:09lP89ZJOtqj-xVfvtfjB",
-				"shape:tnnKfygZMnDfUWPWSdSv0",
-				"shape:JlAW6veHRN1vm_LYKBAPw",
-				"shape:jruohyNSS3ytzovh2k086",
-				"shape:Crl6IlYhKdBGAw4qJl_YW",
-				"shape:d0FLZe-yaEuZ36_6MJMxL",
-				"shape:Wome6seIcAdPxfcgrkSFm",
-				"shape:VD7bxa4YoWU5kVRq0Gtfq",
-				"shape:QoaobKvQ2wo7J9FwWh3Mo",
-				"shape:C4rKabUOwlcQqNMk-LpCW",
-				"shape:EGcwjz6txgmhhWF3CG8Gm",
-				"shape:y6Z2RM7VCvLLq-x-UTno4",
-				"shape:8mf1xAuB7lgu_uIz4P8qX",
-				"shape:MXVL3kNgcqbxAhdiqa546",
-				"shape:XOf3ZE4jCH5UVaII6KaiM",
-				"shape:JZ0WqxjanWw4VKsZJLxZv",
-				"shape:uZQDTE19TkpTLBNxHehFs",
-				"shape:mWpYtyg8OpFo687ZzZRlI",
-				"shape:7hM0ZUPhf1e9vP2sA0m9W",
-				"shape:HalRnrLkDm0waoSam3ct5",
-				"shape:2sC7r4I6gHUPlhQUirf0y",
-				"shape:UlcqhUce8CYo26CCnOIbE",
-				"shape:mxRaOXkBZfIrrqOtu4poS",
-				"shape:w_ROBvl2A84oK4oy9jBaW",
-				"shape:XJOFeSEygiIJVnrsj162h",
-				"shape:GVOLA8d1_M6i5LfpIZFJc",
-				"shape:g0ZUZPt9F8feWokeZ3VvF",
-				"shape:7eapIe7ALrLb9VaA7VCOP",
-				"shape:UouuqCjz54c5efqIlP6jK",
-				"shape:UpB9fnk8DujgaCVye0Hmn",
-				"shape:O4qxwXTHf2dlZKPAZnDRf",
-				"shape:aNcQuI175V3G_eB-7V_uf",
-				"shape:wamc3_OgdCyTYTj3vAssG",
-				"shape:Ao_qAKRt4XmuI4QBu5l2n",
-				"shape:S0ZJn2KSDsHodCVqp1-Q1",
-				"shape:OsKSUcCX9zyly7xMlXh9T",
-				"shape:H-IBUCWthGaYcDWiiX_Ln",
-				"shape:sA80QrIv7iHj44akKcvHu",
-				"shape:P5eSHDAAksjZtZA1CTfiH",
-				"shape:xMR6Ri71ITwPqf7geqepk",
-				"shape:K5BAsDlxRukG67nRkUa8c",
-				"shape:eQ_PN_AYUsG42k3cWyL-x",
-				"shape:tBxxYmgyem8yyMv1cTE-K",
-				"shape:yENgXxxsDk7Y95kX1fsxz",
-				"shape:h1IjeBzaRMCV_oYBEWcGi",
-				"shape:ghwhanebCiscr8D6ekB7P",
-				"shape:oQ-Q0wDnC7VsfqMdGEJbe",
-				"shape:EcP0io4umv67U1YqZkOdt",
-				"shape:epA99GzPGR5xJEWOT1Wek",
-				"shape:4TYi7DR-h-mTNGT2D06mh",
-				"shape:GSFFYF6-7GG-ihPMfNu2M",
-				"shape:-mdVXHHtcwttOSPx8eulF",
-				"shape:tCnNV8_qf1mHWN9HhGj_f",
-				"shape:VuPVpGo_41qxl8rU4Wgd1",
-				"shape:6cxkHeee4kBuLRl6gU1gp",
-				"shape:QDwH2HA_TprPZQE1Z4vmn",
-				"shape:Om5r9OqvZ6x-wdcZ_JJdb",
-				"shape:249BgZlWgilnm8ewBRNCU",
-				"shape:edefNjoEWQ6vwZgR3y0w0",
-				"shape:RK1WNPpDIIiZGWhw4YtkW",
-				"shape:1GgQnVh2q8bttWQamuYNZ",
-				"shape:zk9Kv9kM3la8hW5hcamyA",
-				"shape:t8bLwgySpBPi0yavNApxO",
-				"shape:8mlcSsHp5ceILpHtFwUqJ",
-				"shape:uD4L83_r7QPP_vTjJN5bN",
-				"shape:fyo2d_0TbVYmcvnoOg5QR",
-				"shape:WDLkvW8mVIW-WLsX43drO",
-				"shape:Wt4w7e1KahxyNom8bMPm3",
-				"shape:2PCkVYUrNjFhp1zhLd4mR",
-				"shape:fc8bDShmmzLOn_MGmsuq5",
-				"shape:xZOPYlq_X0LGczjNp_BOw"
-			],
-			"hoveredShapeId": null,
-			"erasingShapeIds": [],
-			"hintingShapeIds": [],
-			"focusedGroupId": null,
-			"meta": {},
-			"id": "instance_page_state:page:page",
-			"pageId": "page:page",
-			"typeName": "instance_page_state"
-		},
-		{
-			"x": 23.869370267857448,
-			"y": -463.13178413184505,
-			"z": 0.23579476910000013,
-			"meta": {},
-			"id": "camera:page:page",
-			"typeName": "camera"
 		},
 		{
 			"id": "asset:2051989196",
@@ -518,12 +246,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "a1",
@@ -548,12 +283,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "a28m2",
@@ -578,12 +320,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "a353R",
@@ -671,12 +420,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a1",
@@ -701,12 +457,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a22GY",
@@ -731,12 +494,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a39R8",
@@ -761,12 +531,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a4AMc",
@@ -791,12 +568,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a5CHy",
@@ -815,11 +599,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.10032655260104234
+				"scale": 0.10032655260104234,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a615r",
@@ -844,12 +641,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AVX-jzcUFQem1Ws_xISBs",
 			"index": "a722I",
@@ -934,12 +738,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a1eDs",
@@ -964,12 +775,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a2m57",
@@ -994,12 +812,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a3pDM",
@@ -1024,12 +849,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a4mky",
@@ -1054,12 +886,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a5jDu",
@@ -1078,11 +917,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.19441115818763982
+				"scale": 0.19441115818763982,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a6e1z",
@@ -1107,12 +959,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Rgsnv7FI6Ql7znRYcGbMd",
 			"index": "a86Hk",
@@ -1197,12 +1056,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a2Ins",
@@ -1227,12 +1093,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a3OaT",
@@ -1257,12 +1130,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a4VJk",
@@ -1287,12 +1167,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a5OLg",
@@ -1317,12 +1204,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a6EZI",
@@ -1341,11 +1235,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a7YrL",
@@ -1370,12 +1277,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3ErrpakZPMgW-8Lxprp4I",
 			"index": "a94wu",
@@ -1460,12 +1374,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "a2qhA0eO",
@@ -1490,12 +1411,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "a3wx60cZ",
@@ -1520,12 +1448,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "a4wpi4I4",
@@ -1550,12 +1485,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "a5oSc9Z",
@@ -1580,12 +1522,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "a6tiJ16g",
@@ -1604,11 +1553,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "a8Pqs",
@@ -1633,12 +1595,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:3b_nI8DSjvS11nzoKJAO8",
 			"index": "aA1rR",
@@ -1723,12 +1692,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "a3Op87ue",
@@ -1753,12 +1729,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "a4RtPBFn",
@@ -1783,12 +1766,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "a5NeAAT8",
@@ -1813,12 +1803,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "a6M5SkRl",
@@ -1843,12 +1840,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "a7emaYRQ",
@@ -1867,11 +1871,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "a9L7H",
@@ -1896,12 +1913,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rWN9rk54Od6lvtDmnM4pi",
 			"index": "aBBIo",
@@ -1986,12 +2010,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "a3vMGgJV",
@@ -2016,12 +2047,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "a4ulmpNL",
@@ -2046,12 +2084,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "a5rroeKR",
@@ -2076,12 +2121,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "a70R1hUW",
@@ -2106,12 +2158,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "a8UwvmpB",
@@ -2130,11 +2189,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "aANrQ",
@@ -2159,12 +2231,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7w8Ad_asML4LqYlY5O-O-",
 			"index": "aC8Dk",
@@ -2249,12 +2328,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "a2qhA5Cd",
@@ -2279,12 +2365,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "a3wx66nW",
@@ -2309,12 +2402,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "a4wpi22R",
@@ -2339,12 +2439,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "a5oSXV9",
@@ -2369,12 +2476,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "a6tiJBYQ",
@@ -2393,11 +2507,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "a8S7s",
@@ -2422,12 +2549,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dPgFPmEiPhETLtGInANsa",
 			"index": "aA3Kc",
@@ -2484,12 +2618,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:9MmGZbwN6OjquJWDC5JzM",
 			"index": "a68iO",
@@ -2542,12 +2683,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "a3Op8Amy",
@@ -2572,12 +2720,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "a4RtPEGm",
@@ -2602,12 +2757,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "a5Ne7wed",
@@ -2632,12 +2794,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "a6M5QTK9",
@@ -2662,12 +2831,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "a7fv5i0c",
@@ -2686,11 +2862,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "a9Gd3",
@@ -2715,12 +2904,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:IhlgEZnGPK7yjLb90XlFR",
 			"index": "aB25R",
@@ -2777,12 +2973,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:eYwttyDmcgbusKdec2fRe",
 			"index": "a76eW",
@@ -2835,12 +3038,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "a3vMGrCR",
@@ -2865,12 +3075,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "a4ullhJj",
@@ -2895,12 +3112,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "a5rrmPBJ",
@@ -2925,12 +3149,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "a710GEB2",
@@ -2955,12 +3186,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "a8TH4QW4",
@@ -2979,11 +3217,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.275158267231689
+				"scale": 0.275158267231689,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "aAJol",
@@ -3008,12 +3259,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yWaSw4DoDlkMlzivZmXJN",
 			"index": "aC2qv",
@@ -3105,12 +3363,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aF3uK",
@@ -3135,12 +3400,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aG821",
@@ -3165,12 +3437,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aH1Jc",
@@ -3195,12 +3474,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aI3Eg",
@@ -3225,12 +3511,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aJ1ID",
@@ -3249,11 +3542,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.2009621132922239
+				"scale": 0.2009621132922239,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aKAo2",
@@ -3278,12 +3584,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aL5Ix",
@@ -3368,12 +3681,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a1byM",
@@ -3398,12 +3718,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a2ch2",
@@ -3428,12 +3755,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a3ggM",
@@ -3458,12 +3792,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a4nZB",
@@ -3488,12 +3829,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a5d9k",
@@ -3512,11 +3860,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.2009621132922239
+				"scale": 0.2009621132922239,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a6Z3W",
@@ -3541,12 +3902,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cUTQHbfZSERllwjzrx_Ul",
 			"index": "a80K3",
@@ -3635,12 +4003,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7CJozN3i0eQGWTkCH5Kcd",
 			"index": "a63GM",
@@ -3665,12 +4040,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7CJozN3i0eQGWTkCH5Kcd",
 			"index": "a7BIU",
@@ -3689,11 +4071,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 236.06478204780953,
-				"text": "  الدخول الى  الواجهة الرئيسية",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "  الدخول الى  الواجهة الرئيسية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:7CJozN3i0eQGWTkCH5Kcd",
 			"index": "a88AC",
@@ -3712,11 +4107,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 216.60607983996408,
-				"text": "  الدخول الى واجهة النجوم",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "  الدخول الى واجهة النجوم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:7CJozN3i0eQGWTkCH5Kcd",
 			"index": "a94Kf",
@@ -3769,12 +4177,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a2IAO",
@@ -3799,12 +4214,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a3EB5",
@@ -3829,12 +4251,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a4KOr",
@@ -3859,12 +4288,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a5Na4",
@@ -3889,12 +4325,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a673s",
@@ -3913,11 +4356,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.2214851153465373
+				"scale": 0.2214851153465373,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a7J5a",
@@ -3942,12 +4398,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:-nezkPZ5-OJcajil85ms2",
 			"index": "a93qg",
@@ -4036,12 +4499,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "a95YY",
@@ -4060,11 +4530,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": "تسجيل الدخول",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تسجيل الدخول"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aA5BE",
@@ -4089,12 +4572,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aBCJ5",
@@ -4119,12 +4609,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aC1YJ",
@@ -4143,11 +4640,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 118.69949122015532,
-				"text": "اسم المستخدم",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اسم المستخدم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aDAYm",
@@ -4166,11 +4676,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 118.69949122015532,
-				"text": "كلمة المرور",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "كلمة المرور"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aE3gI",
@@ -4195,12 +4718,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aF8J2",
@@ -4219,11 +4749,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": "دخول",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "دخول"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aGAtF",
@@ -4242,11 +4785,24 @@
 				"color": "blue",
 				"size": "s",
 				"w": 316.8079201497223,
-				"text": "ليس لديك حساب انشاء حساب جديد ؟",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.5458079105628204
+				"scale": 0.5458079105628204,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "ليس لديك حساب انشاء حساب جديد ؟"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:dgIXE_QB-JIGuqrcgRd_C",
 			"index": "aHA2C",
@@ -4299,12 +4855,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "a2pFl",
@@ -4329,12 +4892,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "a3uAZ",
@@ -4359,12 +4929,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "a4qzS1u6",
@@ -4389,12 +4966,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "a5r69",
@@ -4419,12 +5003,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "a6oi6",
@@ -4443,11 +5034,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.2009621132922239
+				"scale": 0.2009621132922239,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "a8LXK",
@@ -4472,12 +5076,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:mFzU5Tu5wFYNcDRscik_J",
 			"index": "aA4Nq",
@@ -4566,12 +5177,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "a9cCn",
@@ -4590,11 +5208,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": "تسجيل الدخول",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تسجيل الدخول"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aAlwE",
@@ -4619,12 +5250,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aBeVN",
@@ -4649,12 +5287,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aCmeE",
@@ -4673,11 +5318,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 118.69949122015532,
-				"text": "اسم المستخدم",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اسم المستخدم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aDe38",
@@ -4696,11 +5354,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 118.69949122015532,
-				"text": "كلمة المرور",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "كلمة المرور"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aEmoq",
@@ -4725,12 +5396,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aFkOv",
@@ -4749,11 +5427,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": "دخول",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "دخول"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aGqhc",
@@ -4772,11 +5463,24 @@
 				"color": "blue",
 				"size": "s",
 				"w": 316.8079201497223,
-				"text": "ليس لديك حساب انشاء حساب جديد ؟",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4952328782306697
+				"scale": 0.4952328782306697,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "ليس لديك حساب انشاء حساب جديد ؟"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Dp1yH3nJHuQvNHiWKQ_zS",
 			"index": "aI4vQ",
@@ -4829,12 +5533,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "a2m0Y",
@@ -4859,12 +5570,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "a3vXD",
@@ -4889,12 +5607,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "a4qzS24L",
@@ -4919,12 +5644,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "a5qLy",
@@ -4949,12 +5681,19 @@
 				"dash": "draw",
 				"size": "xl",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "a6mCz",
@@ -4973,11 +5712,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 454.05929659236006,
-				"text": "Nogoom.El-Deira.com",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.2214851153465373
+				"scale": 0.2214851153465373,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Nogoom.El-Deira.com"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "a8Cvj",
@@ -5002,12 +5754,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fnOQv8OFa8PejnPQCHGk1",
 			"index": "aA9q3",
@@ -5096,12 +5855,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "a9eT1",
@@ -5120,11 +5886,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": "انشاء حساب جديد",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "انشاء حساب جديد"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aAixZ",
@@ -5163,12 +5942,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cFD5DJL3cyCwKRgwIUVM3",
 			"index": "a1",
@@ -5187,11 +5973,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 118.69949122015532,
-				"text": "الاسم",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الاسم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cFD5DJL3cyCwKRgwIUVM3",
 			"index": "a24Mo",
@@ -5230,12 +6029,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:yZJ7--sieFC0hi5MORWwg",
 			"index": "a1jMF",
@@ -5254,11 +6060,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب تويتر",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب تويتر"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:yZJ7--sieFC0hi5MORWwg",
 			"index": "a388W",
@@ -5297,12 +6116,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:B2r0L_OAWsz28Cp2H-lfd",
 			"index": "a2abA",
@@ -5321,11 +6147,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب إنستغرام",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب إنستغرام"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:B2r0L_OAWsz28Cp2H-lfd",
 			"index": "a43T9",
@@ -5364,12 +6203,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:GWVYZvSDg9gAfXpjv9w-n",
 			"index": "a3LMn",
@@ -5388,11 +6234,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب فيسبوك",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب فيسبوك"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:GWVYZvSDg9gAfXpjv9w-n",
 			"index": "a59av",
@@ -5431,12 +6290,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:p4qsYJIQeGRQu3QrIoIlb",
 			"index": "a4JN6",
@@ -5455,11 +6321,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب  تيك توك",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب  تيك توك"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:p4qsYJIQeGRQu3QrIoIlb",
 			"index": "a6465",
@@ -5498,12 +6377,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:HKYPV21eLgfnV2N56E0sp",
 			"index": "a5Fsq",
@@ -5522,11 +6408,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب  يوتيوب",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب  يوتيوب"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:HKYPV21eLgfnV2N56E0sp",
 			"index": "a7AcR",
@@ -5565,12 +6464,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:DsB9bQEBFsRoaurZYIhGE",
 			"index": "a6E6O",
@@ -5589,11 +6495,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب  سناب شات",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب  سناب شات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:DsB9bQEBFsRoaurZYIhGE",
 			"index": "a88kU",
@@ -5632,12 +6551,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:AfGfZ3a0sXB-I0RnEjbQs",
 			"index": "a7FwW",
@@ -5656,11 +6582,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "رقم الحساب البنكي IBAN",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "رقم الحساب البنكي IBAN"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:AfGfZ3a0sXB-I0RnEjbQs",
 			"index": "a96Je",
@@ -5699,12 +6638,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:LSIgm7JT_0oK3_CjZml9P",
 			"index": "a1e5w",
@@ -5723,11 +6669,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 302.72950367575675,
-				"text": " البريد الإلكتروني",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " البريد الإلكتروني"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:LSIgm7JT_0oK3_CjZml9P",
 			"index": "a36gs",
@@ -5766,12 +6725,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:rvDEskFHrZOQ9T5VKy1VT",
 			"index": "a2Xzr",
@@ -5790,11 +6756,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 302.72950367575675,
-				"text": " رقم الهاتف",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " رقم الهاتف"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:rvDEskFHrZOQ9T5VKy1VT",
 			"index": "a41AY",
@@ -5833,12 +6812,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Ie873QkOtHh-B02aOwGK0",
 			"index": "a3Rww",
@@ -5857,11 +6843,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 302.72950367575675,
-				"text": " اسم المستخدم",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " اسم المستخدم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Ie873QkOtHh-B02aOwGK0",
 			"index": "a53xf",
@@ -5900,12 +6899,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Wd9KD9a-LaGHlAv31IQGP",
 			"index": "a4L6S",
@@ -5924,11 +6930,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 168.6185634247119,
-				"text": "وكلمة المرور",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "وكلمة المرور"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Wd9KD9a-LaGHlAv31IQGP",
 			"index": "a6B1m",
@@ -5967,12 +6986,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:qI8ym7xfay5t592HhtqSP",
 			"index": "a5N5A",
@@ -5991,11 +7017,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 168.6185634247119,
-				"text": "تأكيد كلمة المرور",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تأكيد كلمة المرور"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:qI8ym7xfay5t592HhtqSP",
 			"index": "a70i5",
@@ -6020,12 +7059,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aFp0C",
@@ -6044,11 +7090,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": "ارســــال",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "ارســــال"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aGkNA",
@@ -6102,11 +7161,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 269.3845844280463,
-				"text": " ( يمكن اختيار اكثر من محافظة )",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.41256461126211846
+				"scale": 0.41256461126211846,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ( يمكن اختيار اكثر من محافظة )"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aHy289aa",
@@ -6125,11 +7197,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 200.61587056385468,
-				"text": "قبول الشروط و الخصوصية",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.590723944879383
+				"scale": 0.590723944879383,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "قبول الشروط و الخصوصية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aIZrcFyq",
@@ -6168,12 +7253,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:QSo6AT8rBcPn8QD0hMYWA",
 			"index": "a1",
@@ -6192,11 +7284,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 152.95584243875768,
-				"text": "اختر المحافظات1-4",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7011421048396437
+				"scale": 0.7011421048396437,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اختر المحافظات1-4"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:QSo6AT8rBcPn8QD0hMYWA",
 			"index": "a217a",
@@ -6221,12 +7326,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:QSo6AT8rBcPn8QD0hMYWA",
 			"index": "a3BNx",
@@ -6265,12 +7377,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7u2vn1uHs6yF4jp72yiQ7",
 			"index": "a1cQt",
@@ -6289,11 +7408,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 345.43076366237887,
-				"text": " فئة النجوم (عادي، فضي، ذهبي، برونزي)",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7412561970927319
+				"scale": 0.7412561970927319,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فئة النجوم (عادي، فضي، ذهبي، برونزي)"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:7u2vn1uHs6yF4jp72yiQ7",
 			"index": "a2gF1",
@@ -6318,12 +7450,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7u2vn1uHs6yF4jp72yiQ7",
 			"index": "a45pg",
@@ -6362,12 +7501,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7Tn4RoloJVaWECPcXK_ve",
 			"index": "a1f0N",
@@ -6386,11 +7532,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 131.3655244660882,
-				"text": "اختر المنطقة",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7555809832068136
+				"scale": 0.7555809832068136,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اختر المنطقة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:7Tn4RoloJVaWECPcXK_ve",
 			"index": "a2iuA",
@@ -6415,12 +7574,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:7Tn4RoloJVaWECPcXK_ve",
 			"index": "a44Xz",
@@ -6439,11 +7605,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 416.3926181552158,
-				"text": " ( حروف او ارقام من ٤ خانات إلى ١٠ خانات )",
 				"font": "draw",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.25083987984654843
+				"scale": 0.25083987984654843,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ( حروف او ارقام من ٤ خانات إلى ١٠ خانات )"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aLBLE",
@@ -6468,12 +7647,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:PT8fT7NMUDoThD7fdvZkg",
 			"index": "aM8aA",
@@ -6582,12 +7768,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:cErMgv45xULtpiWeEI_Q6",
 			"index": "a1",
@@ -6638,11 +7831,24 @@
 				"color": "violet",
 				"size": "l",
 				"w": 168.74964592636383,
-				"text": "نجوم الديرة",
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.48612708072054267
+				"scale": 0.48612708072054267,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "نجوم الديرة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cErMgv45xULtpiWeEI_Q6",
 			"index": "a354P",
@@ -6661,11 +7867,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 127.58010684638131,
-				"text": "تــواصــل مـعـنـا",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.7057133528705064
+				"scale": 0.7057133528705064,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تــواصــل مـعـنـا"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cErMgv45xULtpiWeEI_Q6",
 			"index": "a4A3i",
@@ -6684,11 +7903,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 64.46793975391662,
-				"text": "الرئيسية",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.7057133528705064
+				"scale": 0.7057133528705064,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الرئيسية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cErMgv45xULtpiWeEI_Q6",
 			"index": "a54mc",
@@ -6707,11 +7939,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 64.46793975391662,
-				"text": "النجوم",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.7057133528705064
+				"scale": 0.7057133528705064,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "النجوم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cErMgv45xULtpiWeEI_Q6",
 			"index": "a60EN",
@@ -6730,11 +7975,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 149.29612132980995,
-				"text": "الشروط والخصوصية",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.7057133528705064
+				"scale": 0.7057133528705064,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الشروط والخصوصية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:cErMgv45xULtpiWeEI_Q6",
 			"index": "a77zr",
@@ -7008,11 +8266,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 299.78378378378375,
-				"text": "إعلانات مع مشاهير منطقتك",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "إعلانات مع مشاهير منطقتك"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aX0am",
@@ -7031,11 +8302,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 433.72972972972957,
-				"text": "(المحتوى يعرض بناءً على موقع المستخدم)",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "(المحتوى يعرض بناءً على موقع المستخدم)"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aY5Sl",
@@ -7054,11 +8338,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 538.9442415388362,
-				"text": "نحن نقدم لك فرصة رائعة للتعاون مع مشاهير من منطقتك للترويج لعلامتك التجارية أو منتجاتك. اختَر عبارات تحفيزية مخصصة وتوجيهها عبر مشاهير المنطقة في حملات إعلانية مؤثرة فى محافظة (---------).",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.6686746987951807
+				"scale": 0.6686746987951807,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "نحن نقدم لك فرصة رائعة للتعاون مع مشاهير من منطقتك للترويج لعلامتك التجارية أو منتجاتك. اختَر عبارات تحفيزية مخصصة وتوجيهها عبر مشاهير المنطقة في حملات إعلانية مؤثرة فى محافظة (---------)."
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aZAxQ",
@@ -7077,11 +8374,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 538.9442415388362,
-				"text": "اعلن عند جميع مشاهير و نجوم منطقتك و محافظتك مباشرة و وفر فلوسك من الحملات المكلفة و غير المجيدة",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.6686746987951807
+				"scale": 0.6686746987951807,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعلن عند جميع مشاهير و نجوم منطقتك و محافظتك مباشرة و وفر فلوسك من الحملات المكلفة و غير المجيدة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aa2WW",
@@ -7242,12 +8552,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "af6Pg",
@@ -7272,12 +8589,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ag3Aq",
@@ -7302,12 +8626,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ah6HR",
@@ -7326,11 +8657,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 176.46846846846825,
-				"text": "كيف تطلب إعلاناً؟",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "كيف تطلب إعلاناً؟"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ai9Lj",
@@ -7349,11 +8693,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 277.6650313970831,
-				"text": "حمل تطبيق الديرة للإعلانات",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "حمل تطبيق الديرة للإعلانات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aj0b7",
@@ -7372,11 +8729,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 546.8318563705709,
-				"text": "إحصائيات الحملات الإعلانية السابقة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "إحصائيات الحملات الإعلانية السابقة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ak0IU",
@@ -7395,11 +8765,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 546.8318563705709,
-				"text": " الحملات الإعلانات الحالية فى محافظة (-------)",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " الحملات الإعلانات الحالية فى محافظة (-------)"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "al4Qq",
@@ -7418,11 +8801,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 198.49831816958687,
-				"text": "عدد الحملات الناجحة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.7012736982786218
+				"scale": 0.7012736982786218,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "عدد الحملات الناجحة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "am0zc",
@@ -7441,11 +8837,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 198.49831816958687,
-				"text": "معدل الوصول",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.7012736982786218
+				"scale": 0.7012736982786218,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "معدل الوصول"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "an09i",
@@ -7464,11 +8873,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 198.49831816958687,
-				"text": "معدل التفاعل",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.7012736982786218
+				"scale": 0.7012736982786218,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "معدل التفاعل"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ao0S1",
@@ -7487,11 +8909,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 198.49831816958687,
-				"text": "زيادة المبيعات",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.7012736982786218
+				"scale": 0.7012736982786218,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "زيادة المبيعات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ap35M",
@@ -7510,11 +8945,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 58.01311716645135,
-				"text": "+100",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 2.9824563659691297
+				"scale": 2.9824563659691297,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "+100"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "aq1J0",
@@ -7533,11 +8981,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 963.7765460353849,
-				"text": "نحن فخورون بنجاح حملاتنا الإعلانية السابقة. إليك بعض الإحصائيات التي تثبت فعالية حملاتنا:",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.557344881407972
+				"scale": 0.557344881407972,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "نحن فخورون بنجاح حملاتنا الإعلانية السابقة. إليك بعض الإحصائيات التي تثبت فعالية حملاتنا:"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "ar82k",
@@ -7556,11 +9017,48 @@
 				"color": "black",
 				"size": "m",
 				"w": 466.8611405978225,
-				"text": "اختر \"طلب إعلان\" لبدء العملية.\n\nتحديد المشهور المناسب والعبارات الإعلانية.\n\nسيتم توجيهك للتواصل مع فريقنا عبر واتساب لإتمام التفاصيل",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.5690290002397683
+				"scale": 0.5690290002397683,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اختر \"طلب إعلان\" لبدء العملية."
+								}
+							]
+						},
+						{
+							"type": "paragraph"
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تحديد المشهور المناسب والعبارات الإعلانية."
+								}
+							]
+						},
+						{
+							"type": "paragraph"
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "سيتم توجيهك للتواصل مع فريقنا عبر واتساب لإتمام التفاصيل"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "as6Nl",
@@ -7579,11 +9077,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 560.066852148253,
-				"text": "لمزيد من سهولة الوصول إلى حملاتك الإعلانية وطلبها بسرعة، حمل تطبيق \"الديرة للإعلانات\" الآن!",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.5690290002397683
+				"scale": 0.5690290002397683,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لمزيد من سهولة الوصول إلى حملاتك الإعلانية وطلبها بسرعة، حمل تطبيق \"الديرة للإعلانات\" الآن!"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "at9bs",
@@ -7608,12 +9119,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "auAS5",
@@ -7632,11 +9150,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 103.7325430015332,
-				"text": "طلب اعلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.5321696384181672
+				"scale": 0.5321696384181672,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "طلب اعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "av8Hm",
@@ -7767,12 +9298,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:P0cxQ_695Mq9xP7nSlu37",
 			"index": "a1",
@@ -7791,11 +9329,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 323.40579903963675,
-				"text": "عروض التسجيل الخاصة",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "عروض التسجيل الخاصة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:P0cxQ_695Mq9xP7nSlu37",
 			"index": "a27F8",
@@ -7814,11 +9365,42 @@
 				"color": "black",
 				"size": "m",
 				"w": 455.35032108546403,
-				"text": "هل لديك حسابات سوشيال ميديا نشطة؟\nسجل معنا الآن واحصل على مكافأة مالية تصل إلى 50 ريال فور التفعيل!\n(العرض ساري لفترة محدودة)",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7148521665386848
+				"scale": 0.7148521665386848,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "هل لديك حسابات سوشيال ميديا نشطة؟"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "سجل معنا الآن واحصل على مكافأة مالية تصل إلى 50 ريال فور التفعيل!"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "(العرض ساري لفترة محدودة)"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:P0cxQ_695Mq9xP7nSlu37",
 			"index": "a337Z",
@@ -7843,12 +9425,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:P0cxQ_695Mq9xP7nSlu37",
 			"index": "a40EN",
@@ -7867,11 +9456,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 74.86302061022536,
-				"text": "ســجل",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "ســجل"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:P0cxQ_695Mq9xP7nSlu37",
 			"index": "a58oy",
@@ -7910,12 +9512,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:8qdbQqjkBoRB4p8RJuTs8",
 			"index": "a1",
@@ -7934,11 +9543,27 @@
 				"color": "black",
 				"size": "m",
 				"w": 323.40579903963675,
-				"text": "واجهة النجوم\n",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "واجهة النجوم"
+								}
+							]
+						},
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:8qdbQqjkBoRB4p8RJuTs8",
 			"index": "a23qU",
@@ -7957,11 +9582,33 @@
 				"color": "black",
 				"size": "m",
 				"w": 455.35032108546403,
-				"text": "هل أنت نجم وتريد التعاون معنا؟\nسجل الآن وابدأ في نشر إعلاناتك مع \"الديرة\" لزيادة شهرتك وجني العوائد!",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7148521665386848
+				"scale": 0.7148521665386848,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "هل أنت نجم وتريد التعاون معنا؟"
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "سجل الآن وابدأ في نشر إعلاناتك مع \"الديرة\" لزيادة شهرتك وجني العوائد!"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:8qdbQqjkBoRB4p8RJuTs8",
 			"index": "a372U",
@@ -7980,11 +9627,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 455.35032108546403,
-				"text": "انضم إلى نجوم (---------)",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.7148521665386848
+				"scale": 0.7148521665386848,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "انضم إلى نجوم (---------)"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:8qdbQqjkBoRB4p8RJuTs8",
 			"index": "a3exb",
@@ -8009,12 +9669,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:8qdbQqjkBoRB4p8RJuTs8",
 			"index": "a43sZ",
@@ -8033,11 +9700,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 74.86302061022536,
-				"text": "ســجل",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "ســجل"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:8qdbQqjkBoRB4p8RJuTs8",
 			"index": "a556o",
@@ -8062,12 +9742,19 @@
 				"dash": "draw",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b021Hu",
@@ -8086,11 +9773,63 @@
 				"color": "black",
 				"size": "s",
 				"w": 536.587253753197,
-				"text": "الفئات:\n\nعادي: مجموع مشاهدات الحسابات + 1000، الربح 10 ريال لكل حملة.\nفضي: مجموع مشاهدات الحسابات + 5000، الربح 30 ريال لكل حملة.\nذهبي: مجموع مشاهدات الحسابات + 10000، الربح 50 ريال لكل حملة.\nبرونزي: مجموع مشاهدات الحسابات + 100000، الربح 100 ريال لكل حملة.",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.8529521591365201
+				"scale": 0.8529521591365201,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الفئات:"
+								}
+							]
+						},
+						{
+							"type": "paragraph"
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "عادي: مجموع مشاهدات الحسابات + 1000، الربح 10 ريال لكل حملة."
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "فضي: مجموع مشاهدات الحسابات + 5000، الربح 30 ريال لكل حملة."
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "ذهبي: مجموع مشاهدات الحسابات + 10000، الربح 50 ريال لكل حملة."
+								}
+							]
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "برونزي: مجموع مشاهدات الحسابات + 100000، الربح 100 ريال لكل حملة."
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b03AC6",
@@ -8115,12 +9854,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b043Q7",
@@ -8145,12 +9891,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b05AsM",
@@ -8169,11 +9922,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 424.55668316290263,
-				"text": " ( اسم المحافظة حسب لوكيشن المستخدم )",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.675967602715905
+				"scale": 0.675967602715905,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ( اسم المحافظة حسب لوكيشن المستخدم )"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b06C9Y",
@@ -8192,11 +9958,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 424.55668316290263,
-				"text": " ( اسم المحافظة حسب لوكيشن المستخدم )",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.675967602715905
+				"scale": 0.675967602715905,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ( اسم المحافظة حسب لوكيشن المستخدم )"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b07Bm9",
@@ -8235,12 +10014,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Fg1o8r0Ay3c8K_fHTNEC0",
 			"index": "a1",
@@ -8322,12 +10108,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Fg1o8r0Ay3c8K_fHTNEC0",
 			"index": "a4B6W",
@@ -8352,12 +10145,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Fg1o8r0Ay3c8K_fHTNEC0",
 			"index": "a58fo",
@@ -8376,11 +10176,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Fg1o8r0Ay3c8K_fHTNEC0",
 			"index": "a60rK",
@@ -8399,11 +10212,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Fg1o8r0Ay3c8K_fHTNEC0",
 			"index": "a73Gi",
@@ -8422,11 +10248,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 121.10835905869601,
-				"text": "اعـــلان رقم 1",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1562499999999996
+				"scale": 1.1562499999999996,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان رقم 1"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Fg1o8r0Ay3c8K_fHTNEC0",
 			"index": "a81IZ",
@@ -8465,12 +10304,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:SScerOnjNvfb9NLri1-i1",
 			"index": "a1hYd",
@@ -8552,12 +10398,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:SScerOnjNvfb9NLri1-i1",
 			"index": "a4icV",
@@ -8582,12 +10435,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:SScerOnjNvfb9NLri1-i1",
 			"index": "a5kCh",
@@ -8606,11 +10466,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:SScerOnjNvfb9NLri1-i1",
 			"index": "a6gVF",
@@ -8629,11 +10502,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:SScerOnjNvfb9NLri1-i1",
 			"index": "a7ik1",
@@ -8652,11 +10538,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 121.10835905869601,
-				"text": "اعـــلان رقم 2",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1562499999999996
+				"scale": 1.1562499999999996,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان رقم 2"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:SScerOnjNvfb9NLri1-i1",
 			"index": "a98TP",
@@ -8695,12 +10594,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:5OZZKP8ahJ7Tzd43cBWjr",
 			"index": "a2JuH",
@@ -8782,12 +10688,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:5OZZKP8ahJ7Tzd43cBWjr",
 			"index": "a5HwA",
@@ -8812,12 +10725,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:5OZZKP8ahJ7Tzd43cBWjr",
 			"index": "a6G2B",
@@ -8836,11 +10756,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:5OZZKP8ahJ7Tzd43cBWjr",
 			"index": "a7KC9",
@@ -8859,11 +10792,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:5OZZKP8ahJ7Tzd43cBWjr",
 			"index": "a8U0X",
@@ -8882,11 +10828,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 121.10835905869601,
-				"text": "اعـــلان رقم 3",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1562499999999996
+				"scale": 1.1562499999999996,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان رقم 3"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:5OZZKP8ahJ7Tzd43cBWjr",
 			"index": "aA7tW",
@@ -8925,12 +10884,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:70BeH-foWEHucP4SiF0ME",
 			"index": "a2vTO",
@@ -9012,12 +10978,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:70BeH-foWEHucP4SiF0ME",
 			"index": "a5q1J",
@@ -9042,12 +11015,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:70BeH-foWEHucP4SiF0ME",
 			"index": "a6yjM",
@@ -9066,11 +11046,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:70BeH-foWEHucP4SiF0ME",
 			"index": "a7u6L9H0",
@@ -9089,11 +11082,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 66.34612678703104,
-				"text": "اعـــلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.48660714285714235
+				"scale": 0.48660714285714235,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:70BeH-foWEHucP4SiF0ME",
 			"index": "a9RzZ",
@@ -9112,11 +11118,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 121.10835905869601,
-				"text": "اعـــلان رقم 4",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1562499999999996
+				"scale": 1.1562499999999996,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اعـــلان رقم 4"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:70BeH-foWEHucP4SiF0ME",
 			"index": "aB4P8",
@@ -9181,11 +11200,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 303.51411140976654,
-				"text": " واجهة النجوم",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 2.326135074945676
+				"scale": 2.326135074945676,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " واجهة النجوم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0E6MU",
@@ -9204,11 +11236,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 303.51411140976654,
-				"text": "الواجهة الرئيسية",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 2.326135074945676
+				"scale": 2.326135074945676,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الواجهة الرئيسية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0F1YL",
@@ -9227,11 +11272,24 @@
 				"color": "black",
 				"size": "xl",
 				"w": 463.6736816119372,
-				"text": "لوحة تحكم المديرين",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 3.043800450735242
+				"scale": 3.043800450735242,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لوحة تحكم المديرين"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0G937",
@@ -9256,12 +11314,19 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0H2fi",
@@ -9286,12 +11351,19 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0IA5w",
@@ -9316,12 +11388,19 @@
 				"dash": "solid",
 				"size": "m",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0J1vk",
@@ -9585,11 +11664,18 @@
 				"color": "black",
 				"size": "m",
 				"w": 20,
-				"text": "",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": true,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0R5Px",
@@ -9608,11 +11694,24 @@
 				"color": "black",
 				"size": "l",
 				"w": 323.13649233866033,
-				"text": "الحساب بأنتظار الموافقة من الأدارة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الحساب بأنتظار الموافقة من الأدارة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0S7cN",
@@ -9637,12 +11736,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0T7sK",
@@ -9661,11 +11767,24 @@
 				"color": "green",
 				"size": "s",
 				"w": 555.1421186392945,
-				"text": " تم اضافة ٥٠ ريال هدية في الحساب",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " تم اضافة ٥٠ ريال هدية في الحساب"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0U7Ue",
@@ -9690,12 +11809,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0V7hB",
@@ -9714,11 +11840,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 521.0145165685643,
-				"text": " مرحباً بك شكراً لتسجيلك سيتم مراجعة بياناتك و الرد خلال ٤٨ ساعة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " مرحباً بك شكراً لتسجيلك سيتم مراجعة بياناتك و الرد خلال ٤٨ ساعة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0W2dV",
@@ -9743,12 +11882,19 @@
 				"dash": "draw",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0XBgD",
@@ -9767,11 +11913,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 237.79846630224452,
-				"text": "تعديل الحساب",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.5358421369535786
+				"scale": 0.5358421369535786,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تعديل الحساب"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0Y9I4",
@@ -9790,11 +11949,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "البيانات",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "البيانات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0Z5Qj",
@@ -9813,11 +11985,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0a5iJ",
@@ -9836,11 +12021,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0b6HL",
@@ -9859,11 +12057,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0c8rO",
@@ -9882,11 +12093,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0d7Ga",
@@ -9905,11 +12129,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0eAq1",
@@ -9928,11 +12165,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0f47K",
@@ -9951,11 +12201,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 188.56445182820792,
-				"text": "------------------",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.1021237372462858
+				"scale": 1.1021237372462858,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------------------"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0gBuD",
@@ -9974,11 +12237,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "إدارة الموظفين",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "إدارة الموظفين"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0hCLN",
@@ -9997,11 +12273,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 365.74373665289795,
-				"text": " الشروط و الخصوصية",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " الشروط و الخصوصية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0i7RF",
@@ -10020,11 +12309,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 365.74373665289795,
-				"text": "حساباتنا في السوشل ميديا",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "حساباتنا في السوشل ميديا"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0j0bU",
@@ -10043,11 +12345,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 365.74373665289795,
-				"text": "تواصل معنا",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تواصل معنا"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0k5PG",
@@ -10066,11 +12381,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "إدارة النجوم",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "إدارة النجوم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0l94d",
@@ -10089,11 +12417,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 300.8773221793866,
-				"text": "إدارة  الحملات الإعلانية",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "إدارة  الحملات الإعلانية"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0m2Mn",
@@ -10112,11 +12453,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 300.8773221793866,
-				"text": "الاعلان",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الاعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0n90n",
@@ -10135,11 +12489,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 745.7226553123187,
-				"text": " إضافة موظف",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " إضافة موظف"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0oAlo",
@@ -10158,11 +12525,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 745.7226553123187,
-				"text": "النجوم",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "النجوم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0pAxn",
@@ -10181,11 +12561,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 745.7226553123187,
-				"text": "الاعلانات",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الاعلانات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0qCNZ",
@@ -10204,11 +12597,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 745.7226553123187,
-				"text": "الاعلان",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1.4069070704233035
+				"scale": 1.4069070704233035,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الاعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0r5qH",
@@ -10227,11 +12633,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " فرز حسب المنطقة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فرز حسب المنطقة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0s2Zd",
@@ -10250,11 +12669,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " فرز حسب المنطقة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فرز حسب المنطقة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0t12j",
@@ -10273,11 +12705,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 238.14948076169992,
-				"text": " فرز حسب المحافظة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فرز حسب المحافظة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0u1KD",
@@ -10296,11 +12741,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 238.14948076169992,
-				"text": " فرز حسب المحافظة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فرز حسب المحافظة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0v2YK",
@@ -10319,11 +12777,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " فرز حسب النوع",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فرز حسب النوع"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0w6iX",
@@ -10342,11 +12813,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " فرز حسب النوع",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " فرز حسب النوع"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0x2rt",
@@ -10365,11 +12849,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": "اسم النجم",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اسم النجم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0yBVq",
@@ -10388,11 +12885,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": "الاعلان",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الاعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b0z2ns",
@@ -10411,11 +12921,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " عدد مشاركاته",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " عدد مشاركاته"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b100NH",
@@ -10434,11 +12957,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " بداية الحملة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " بداية الحملة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1176S",
@@ -10457,11 +12993,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": " نهاية الحملة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " نهاية الحملة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b129Mk",
@@ -10480,11 +13029,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 283.4929310394781,
-				"text": " عدد المشاهدات الإجمالي",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " عدد المشاهدات الإجمالي"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b132x1",
@@ -10503,11 +13065,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 187.29097387936648,
-				"text": "زر فتح واجهة النجم",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "زر فتح واجهة النجم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b148T4",
@@ -10526,11 +13101,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 361.6570212320682,
-				"text": "و زر فتح واجهة الإعلان",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "و زر فتح واجهة الإعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b15BHs",
@@ -10569,12 +13157,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:jruohyNSS3ytzovh2k086",
 			"index": "a1",
@@ -10593,11 +13188,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "الاسم",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.5763387584720836
+				"scale": 0.5763387584720836,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الاسم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:jruohyNSS3ytzovh2k086",
 			"index": "a29y7",
@@ -10636,12 +13244,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Crl6IlYhKdBGAw4qJl_YW",
 			"index": "a1",
@@ -10660,11 +13275,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "اسم المستخدم",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.5916339437564624
+				"scale": 0.5916339437564624,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اسم المستخدم"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Crl6IlYhKdBGAw4qJl_YW",
 			"index": "a29y7",
@@ -10703,12 +13331,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:d0FLZe-yaEuZ36_6MJMxL",
 			"index": "a1eEA",
@@ -10727,11 +13362,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "الرقم السري",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.6047441025716453
+				"scale": 0.6047441025716453,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الرقم السري"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:d0FLZe-yaEuZ36_6MJMxL",
 			"index": "a36Un",
@@ -10770,12 +13418,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Wome6seIcAdPxfcgrkSFm",
 			"index": "a2OZm",
@@ -10794,11 +13449,48 @@
 				"color": "black",
 				"size": "m",
 				"w": 395.87188912601334,
-				"text": "- الدخول و المتابعة فقط\n\n- كل الصلاحيات عدى المديرين و المحفظة ( اضافة مبالغ او تصفية)\n\n- كل الصلاحيات",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.6047441025716453
+				"scale": 0.6047441025716453,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "- الدخول و المتابعة فقط"
+								}
+							]
+						},
+						{
+							"type": "paragraph"
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "- كل الصلاحيات عدى المديرين و المحفظة ( اضافة مبالغ او تصفية)"
+								}
+							]
+						},
+						{
+							"type": "paragraph"
+						},
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "- كل الصلاحيات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Wome6seIcAdPxfcgrkSFm",
 			"index": "a4414",
@@ -10837,12 +13529,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:VD7bxa4YoWU5kVRq0Gtfq",
 			"index": "a2Wz3",
@@ -10861,11 +13560,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "الصلاحيات",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.5697836790644921
+				"scale": 0.5697836790644921,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الصلاحيات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:VD7bxa4YoWU5kVRq0Gtfq",
 			"index": "a44ZE",
@@ -10890,12 +13602,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1BALB",
@@ -10934,12 +13653,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:C4rKabUOwlcQqNMk-LpCW",
 			"index": "a1",
@@ -10958,11 +13684,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "المنطقة",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.4588482591234044
+				"scale": 0.4588482591234044,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "المنطقة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:C4rKabUOwlcQqNMk-LpCW",
 			"index": "a29y7",
@@ -11001,12 +13740,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:EGcwjz6txgmhhWF3CG8Gm",
 			"index": "a1jju",
@@ -11025,11 +13771,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "المنطقة",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.4588482591234044
+				"scale": 0.4588482591234044,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "المنطقة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:EGcwjz6txgmhhWF3CG8Gm",
 			"index": "a390D",
@@ -11068,12 +13827,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:y6Z2RM7VCvLLq-x-UTno4",
 			"index": "a1gJl",
@@ -11092,11 +13858,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "المحافظة",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.4588482591234044
+				"scale": 0.4588482591234044,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "المحافظة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:y6Z2RM7VCvLLq-x-UTno4",
 			"index": "a37el",
@@ -11135,12 +13914,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:8mf1xAuB7lgu_uIz4P8qX",
 			"index": "a2RCN",
@@ -11159,11 +13945,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "المحافظة",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.4588482591234044
+				"scale": 0.4588482591234044,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "المحافظة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:8mf1xAuB7lgu_uIz4P8qX",
 			"index": "a40hv",
@@ -11202,12 +14001,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:MXVL3kNgcqbxAhdiqa546",
 			"index": "a2Pd2",
@@ -11226,11 +14032,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "النوع",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.4588482591234044
+				"scale": 0.4588482591234044,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "النوع"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:MXVL3kNgcqbxAhdiqa546",
 			"index": "a49LQ",
@@ -11269,12 +14088,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:XOf3ZE4jCH5UVaII6KaiM",
 			"index": "a3TGY",
@@ -11293,11 +14119,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 185.72150594375125,
-				"text": "النوع",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 0.4588482591234044
+				"scale": 0.4588482591234044,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "النوع"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:XOf3ZE4jCH5UVaII6KaiM",
 			"index": "a5CM7",
@@ -11392,12 +14231,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1K7IQ",
@@ -11422,12 +14268,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1L6et",
@@ -11452,12 +14305,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1M5iW",
@@ -11482,12 +14342,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1N7DC",
@@ -11512,12 +14379,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1O6vJ",
@@ -11542,12 +14416,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1PCL8",
@@ -11572,12 +14453,19 @@
 				"dash": "dotted",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1QBQE",
@@ -11602,12 +14490,19 @@
 				"dash": "dotted",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1R3BM",
@@ -11626,11 +14521,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 964.6995790807454,
-				"text": " ( مناسبات - عقارات - سيارات - إلكترونيات- خدمات - لوازم منزلية- لوازم شخصية - حيوانات … )",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ( مناسبات - عقارات - سيارات - إلكترونيات- خدمات - لوازم منزلية- لوازم شخصية - حيوانات … )"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1S4x4",
@@ -11649,11 +14557,24 @@
 				"color": "black",
 				"size": "m",
 				"w": 964.6995790807454,
-				"text": " ( مناسبات - عقارات - سيارات - إلكترونيات- خدمات - لوازم منزلية- لوازم شخصية - حيوانات … )",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.4291915853020479
+				"scale": 0.4291915853020479,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ( مناسبات - عقارات - سيارات - إلكترونيات- خدمات - لوازم منزلية- لوازم شخصية - حيوانات … )"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1TCKQ",
@@ -11950,12 +14871,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1cBZ8",
@@ -11980,12 +14908,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1dCHU",
@@ -12010,12 +14945,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1e6Kt",
@@ -12040,12 +14982,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1f0BR",
@@ -12070,12 +15019,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1gCI3",
@@ -12094,11 +15050,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 254.33280699785462,
-				"text": "اسم الاعلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "اسم الاعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1h1HA",
@@ -12117,11 +15086,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 254.33280699785462,
-				"text": "رابط الاعلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "رابط الاعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1i9JT",
@@ -12140,11 +15122,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 254.33280699785462,
-				"text": " عدد مشاهداته",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " عدد مشاهداته"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1jBBG",
@@ -12163,11 +15158,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 324.65814016938594,
-				"text": "www.Nogoom.El-Deira.com/ad/23421",
 				"font": "sans",
 				"textAlign": "start",
 				"autoSize": false,
-				"scale": 0.7801748528475234
+				"scale": 0.7801748528475234,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "www.Nogoom.El-Deira.com/ad/23421"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1k97v",
@@ -12186,11 +15194,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 324.65814016938594,
-				"text": "243322 مرة مشاهدة",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 0.7801748528475234
+				"scale": 0.7801748528475234,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "243322 مرة مشاهدة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1l8kV",
@@ -12209,11 +15230,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 185.45568387466972,
-				"text": " تفاصيل الإعلان",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " تفاصيل الإعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1m5cC",
@@ -12232,11 +15266,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 624.9573266607064,
-				"text": "------ ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- --",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------ ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- --"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1n6bV",
@@ -12255,11 +15302,24 @@
 				"color": "black",
 				"size": "l",
 				"w": 1022.1079498689154,
-				"text": "------ ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- --",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------ ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- --"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1o3Ty",
@@ -12278,11 +15338,24 @@
 				"color": "black",
 				"size": "l",
 				"w": 1022.1079498689154,
-				"text": "------ ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- --",
 				"font": "sans",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "------ ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- -------- ---------- ----- --"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1p674",
@@ -12301,11 +15374,24 @@
 				"color": "black",
 				"size": "s",
 				"w": 254.33280699785462,
-				"text": "صورة الاعلان",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "صورة الاعلان"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1q5eV",
@@ -12353,12 +15439,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1sAfW",
@@ -12383,12 +15476,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1t5SX",
@@ -12407,11 +15507,24 @@
 				"color": "red",
 				"size": "s",
 				"w": 116.02344886319725,
-				"text": "الحذف",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الحذف"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1u24c",
@@ -12430,11 +15543,24 @@
 				"color": "blue",
 				"size": "s",
 				"w": 116.02344886319725,
-				"text": "الحفظ",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الحفظ"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1v3ts",
@@ -12459,12 +15585,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1w6NO",
@@ -12489,12 +15622,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1x6BA",
@@ -12519,12 +15659,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "sans",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1y5T9",
@@ -12543,11 +15690,24 @@
 				"color": "blue",
 				"size": "s",
 				"w": 116.02344886319725,
-				"text": "الحفظ",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "الحفظ"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b1z87x",
@@ -12566,11 +15726,24 @@
 				"color": "blue",
 				"size": "s",
 				"w": 116.02344886319725,
-				"text": "تعديل او حفظ",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تعديل او حفظ"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b204YZ",
@@ -12589,11 +15762,24 @@
 				"color": "blue",
 				"size": "s",
 				"w": 116.02344886319725,
-				"text": "تعديل او حفظ",
 				"font": "sans",
 				"textAlign": "middle",
 				"autoSize": false,
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "تعديل او حفظ"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "page:page",
 			"index": "b213ve",
@@ -12632,12 +15818,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:zk9Kv9kM3la8hW5hcamyA",
 			"index": "a1jMF",
@@ -12656,11 +15849,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب تويتر",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب تويتر"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:zk9Kv9kM3la8hW5hcamyA",
 			"index": "a388W",
@@ -12699,12 +15905,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:t8bLwgySpBPi0yavNApxO",
 			"index": "a2WK1",
@@ -12723,11 +15936,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "رقم اتصال",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "رقم اتصال"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:t8bLwgySpBPi0yavNApxO",
 			"index": "a49Wr",
@@ -12766,12 +15992,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:8mlcSsHp5ceILpHtFwUqJ",
 			"index": "a2abA",
@@ -12790,11 +16023,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب إنستغرام",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب إنستغرام"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:8mlcSsHp5ceILpHtFwUqJ",
 			"index": "a43T9",
@@ -12833,12 +16079,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:uD4L83_r7QPP_vTjJN5bN",
 			"index": "a3P1s",
@@ -12857,11 +16110,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": " رقم واتساب",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " رقم واتساب"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:uD4L83_r7QPP_vTjJN5bN",
 			"index": "a54Jx",
@@ -12900,12 +16166,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fyo2d_0TbVYmcvnoOg5QR",
 			"index": "a3LMn",
@@ -12924,11 +16197,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب فيسبوك",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب فيسبوك"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:fyo2d_0TbVYmcvnoOg5QR",
 			"index": "a59av",
@@ -12967,12 +16253,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:WDLkvW8mVIW-WLsX43drO",
 			"index": "a4MAe",
@@ -12991,11 +16284,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": " ايميل مكتوبة",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": " ايميل مكتوبة"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:WDLkvW8mVIW-WLsX43drO",
 			"index": "a6A3A",
@@ -13034,12 +16340,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:Wt4w7e1KahxyNom8bMPm3",
 			"index": "a4JN6",
@@ -13058,11 +16371,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب  تيك توك",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب  تيك توك"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:Wt4w7e1KahxyNom8bMPm3",
 			"index": "a6465",
@@ -13101,12 +16427,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:2PCkVYUrNjFhp1zhLd4mR",
 			"index": "a5JvU",
@@ -13125,11 +16458,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "وسيلة تواصل اخرى",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "وسيلة تواصل اخرى"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:2PCkVYUrNjFhp1zhLd4mR",
 			"index": "a78YD",
@@ -13168,12 +16514,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:fc8bDShmmzLOn_MGmsuq5",
 			"index": "a5Fsq",
@@ -13192,11 +16545,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب  يوتيوب",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب  يوتيوب"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:fc8bDShmmzLOn_MGmsuq5",
 			"index": "a7AcR",
@@ -13235,12 +16601,19 @@
 				"dash": "solid",
 				"size": "s",
 				"font": "draw",
-				"text": "",
 				"align": "middle",
 				"verticalAlign": "middle",
 				"growY": 0,
 				"url": "",
-				"scale": 1
+				"scale": 1,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
 			},
 			"parentId": "shape:xZOPYlq_X0LGczjNp_BOw",
 			"index": "a6E6O",
@@ -13259,11 +16632,24 @@
 				"color": "grey",
 				"size": "s",
 				"w": 211.03611226237882,
-				"text": "لينك حساب  سناب شات",
 				"font": "draw",
 				"textAlign": "end",
 				"autoSize": false,
-				"scale": 1.3197307183279887
+				"scale": 1.3197307183279887,
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "لينك حساب  سناب شات"
+								}
+							]
+						}
+					]
+				}
 			},
 			"parentId": "shape:xZOPYlq_X0LGczjNp_BOw",
 			"index": "a88kU",
@@ -13408,6 +16794,117 @@
 				"terminal": "start"
 			},
 			"typeName": "binding"
+		},
+		{
+			"id": "pointer:pointer",
+			"typeName": "pointer",
+			"x": 1853.0974933901762,
+			"y": 15165.041409110858,
+			"lastActivityTimestamp": 1742325948413,
+			"meta": {}
+		},
+		{
+			"followingUserId": null,
+			"opacityForNextShape": 1,
+			"stylesForNextShape": {},
+			"brush": null,
+			"scribbles": [],
+			"cursor": {
+				"type": "default",
+				"rotation": 0
+			},
+			"isFocusMode": false,
+			"exportBackground": true,
+			"isDebugMode": false,
+			"isToolLocked": false,
+			"screenBounds": {
+				"x": 0,
+				"y": 0,
+				"w": 1231.6666259765625,
+				"h": 784.1666259765625
+			},
+			"insets": [
+				false,
+				false,
+				true,
+				false
+			],
+			"zoomBrush": null,
+			"isGridMode": false,
+			"isPenMode": false,
+			"chatMessage": "",
+			"isChatting": false,
+			"highlightedUserIds": [],
+			"isFocused": true,
+			"devicePixelRatio": 1.2000000476837158,
+			"isCoarsePointer": false,
+			"isHoveringCanvas": true,
+			"openMenus": [],
+			"isChangingStyle": false,
+			"isReadonly": false,
+			"meta": {},
+			"duplicateProps": null,
+			"id": "instance:instance",
+			"currentPageId": "page:page",
+			"typeName": "instance"
+		},
+		{
+			"editingShapeId": null,
+			"croppingShapeId": null,
+			"selectedShapeIds": [
+				"shape:LjnakBBrWkiNqZK6FCOA_"
+			],
+			"hoveredShapeId": null,
+			"erasingShapeIds": [],
+			"hintingShapeIds": [],
+			"focusedGroupId": null,
+			"meta": {},
+			"id": "instance_page_state:page:page",
+			"pageId": "page:page",
+			"typeName": "instance_page_state"
+		},
+		{
+			"x": 5433.621256609824,
+			"y": -10384.963284110858,
+			"z": 0.1,
+			"meta": {},
+			"id": "camera:page:page",
+			"typeName": "camera"
+		},
+		{
+			"x": -2330.2359416684176,
+			"y": 14740.041409110858,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:LjnakBBrWkiNqZK6FCOA_",
+			"type": "arrow",
+			"props": {
+				"dash": "draw",
+				"size": "m",
+				"fill": "none",
+				"color": "black",
+				"labelColor": "black",
+				"bend": 0,
+				"start": {
+					"x": 0,
+					"y": 0
+				},
+				"end": {
+					"x": 4201.828897615967,
+					"y": 5.684341886080802e-14
+				},
+				"arrowheadStart": "none",
+				"arrowheadEnd": "arrow",
+				"text": "",
+				"labelPosition": 0.5,
+				"font": "draw",
+				"scale": 1
+			},
+			"parentId": "page:page",
+			"index": "b2CBnA",
+			"typeName": "shape"
 		}
 	]
 }

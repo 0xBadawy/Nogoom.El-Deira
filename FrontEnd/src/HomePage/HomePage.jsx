@@ -51,6 +51,11 @@ const HomePageItems = () => {
       <Suspense fallback={<Loading />}>
         <SocialMediaInfluencers />
       </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <CurrentAdv />
+      </Suspense>
+
       <Suspense fallback={<Loading />}>
         <SponsersSection />
       </Suspense>
