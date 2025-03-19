@@ -1,1 +1,0 @@
-import{j as s}from"./index-BLZ4aqdM.js";const m=({id:e,label:t,type:l="text",register:o})=>s.jsxs("div",{className:"mb-4",children:[s.jsx("label",{htmlFor:e,className:"block text-gray-700 text-sm font-bold mb-2",children:t}),s.jsx("input",{id:e,type:l,required:!0,className:"w-full px-3 py-2 border rounded-lg focus:outline-none",...o(e)})]});export{m as F};

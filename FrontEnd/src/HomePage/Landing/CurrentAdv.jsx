@@ -68,6 +68,46 @@ const CurrentAdv = function () {
     });
   };
 
+
+  
+  const getCityNameInArabicQQ = async function (lat, lng) {
+    console.log("Getting city name in Arabic for coordinates:", lat, lng);
+
+    const apiKey = "AIzaSyAjI3P4a0X9Woulx01POM5hJxNHxOoq5bE"; // Replace with your Google Maps API key
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}&language=ar`;
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // استخراج اسم الدولة من النتائج
+      if (data.status === "OK" && data.results.length > 0) {
+        const addressComponents = data.results[0].address_components;
+
+        console.log("Address components:", addressComponents);
+
+        // البحث عن اسم الدولة في المكونات
+        const countryComponent = addressComponents.find((component) =>
+          component.types.includes("country")
+        );
+
+        return countryComponent?.long_name || "دولة غير معروفة";
+      } else {
+        throw new Error("لم يتم العثور على نتائج");
+      }
+    } catch (error) {
+      console.error("خطأ أثناء جلب اسم الدولة:", error);
+      return "فشل في جلب اسم الدولة";
+    }
+  };
+
+
+
   const fetchCityName = async function () {
     try {
       const position = await getLocation();
@@ -113,7 +153,32 @@ const CurrentAdv = function () {
     if (matchedArea) {
       localStorage.setItem("selectedArea", matchedArea);
     } else {
-      console.log("No match found");
+      const fun = async function () {
+      
+        const position = await getLocation();
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const cityName = await getCityNameInArabicQQ(lat, lng);
+
+        console.log("No match found", gov);
+        console.log("City name in Arabic:", cityName);
+
+        const matchedArea = GovernmentNames.find(
+          (name) => name.includes(cityName) || cityName.includes(name)
+        );
+
+        console.log("Matched Area:", matchedArea);
+        if (matchedArea) {
+          localStorage.setItem("selectedArea", matchedArea);
+        } else {
+          localStorage.setItem("selectedArea", "all");
+        }
+        
+
+
+      }
+      fun();
+
     }
 
 

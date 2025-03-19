@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Configuration/firebase";
 import axiosInstance from "../../Configuration/axiosInstance";
+import RatingInput from "./RatingInput";
 
 const MessagesData = () => {
   const [mediaUrl, setMediaUrl] = useState("");
@@ -27,15 +28,13 @@ const MessagesData = () => {
     register,
     reset,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
   const formSubmit = (data) => {
     console.log(data, mediaUrl);
 
-
-
-    
     // Send the data to the backend
 
     const post = async () => {
@@ -55,19 +54,18 @@ const MessagesData = () => {
   };
 
   const handelDelete = async (id) => {
-
-    const confirm = window.confirm("هل أنت متأكد من حذف الراعي؟");
+    const confirm = window.confirm("هل أنت متأكد من الحذف ");
     if (!confirm) return;
     try {
       const response = await axiosInstance.delete(`/messages/${id}`);
       console.log(response.data);
-      toast.success("تم حذف الراعي بنجاح");
+      toast.success("تم الحذف بنجاح");
       fetchMessage();
     } catch (error) {
       console.error(error);
-      toast.error("حدث خطأ أثناء حذف الراعي");
+      toast.error("حدث خطأ أثناء الحذف");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-b lue-50 to-gray -100 pt-16 pb-12">
@@ -76,7 +74,6 @@ const MessagesData = () => {
         <div className="p-4 max-w-xl mx-auto bg-white rounded-3xl shadow-lg space-y-6 transition-all duration-300 hover:shadow-xl border border-gray-100 mb-12">
           <div className="flex items-center justify-center mb-2"></div>
           <h1 className="text-3xl font-bold text-center text-gray-900 tracking-tight">
-
             إضافة تعليق جديد
           </h1>
           <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">
@@ -124,7 +121,7 @@ const MessagesData = () => {
               )}
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <label
                 htmlFor="rating"
                 className="block text-sm font-semibold text-gray-700"
@@ -146,7 +143,9 @@ const MessagesData = () => {
                   هذا الحقل مطلوب
                 </span>
               )}
-            </div>
+            </div> */}
+
+            <RatingInput register={register} errors={errors} setValue={setValue} />
 
             <div className="space-y-2">
               <button
