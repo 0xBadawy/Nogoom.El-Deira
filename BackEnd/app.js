@@ -45,8 +45,8 @@ app.get('/', (req, res) => {
 app.get("/info", (req, res) => {
     const projectName = "Noogom El-Dira Project";
   const description = "This is a simple Node.js project using Express.";
-  const version = "5.5.3";
-    const lastUpdate = "2025-03-16 10:00:00 PM";
+  const version = "5.7.3";
+    const lastUpdate = "2025-03-23 10:00:00 PM";
     const responseText = `Project Name: ${projectName}\nDescription: ${description}\nLast Update: ${lastUpdate} \nVersion: ${version}`; 
     res.type("text/plain"); 
     res.send(responseText);

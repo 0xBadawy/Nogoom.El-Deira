@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 router.get("/get",lastSeen, getCountes);
-router.get("/defult",lastSeen, fetch);
+router.get("/defult",fetch);
 router.post("/update", lastSeen,update);
 // router.post("/update-contact", updateContact);
 // router.get("/contact", fetchContact);

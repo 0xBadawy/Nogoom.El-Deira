@@ -6,7 +6,10 @@ import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 import sendEmail, { sendEmailHTML } from "../utils/sendEmail.js";
 import Notification from "../models/notificationSchema.js";
-import { createNotification, sendNotificationToRoles } from "../functions/notification.js";
+import {
+  createNotification,
+  sendNotificationToRoles,
+} from "../functions/notification.js";
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
@@ -83,7 +86,6 @@ export const signUp = asyncHandler(async (req, res, next) => {
       "newUser"
     );
 
-
     createNotification(
       user._id,
       "تم إنشاء حساب جديد",
@@ -91,16 +93,8 @@ export const signUp = asyncHandler(async (req, res, next) => {
       user._id,
       "newUser"
     );
-      
 
-
-
-
-
-
-
-
-    // Generate token 
+    // Generate token
     const token = generateToken(user._id);
 
     res.status(201).json({
@@ -124,9 +118,8 @@ export const signIn = asyncHandler(async (req, res, next) => {
   console.log(req.body);
   const { email, password } = req.body;
 
-
   // Find user by email
- const user = await UserModel.findOne({ email: email.toLowerCase() });
+  const user = await UserModel.findOne({ email: email.toLowerCase() });
 
   console.log("user", user);
   if (!user) {
@@ -181,9 +174,6 @@ export const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-
-
-
 export const lastSeen = asyncHandler(async (req, res, next) => {
   let token;
 
@@ -195,7 +185,7 @@ export const lastSeen = asyncHandler(async (req, res, next) => {
   }
 
   if (!token) {
-    return next(new ApiError("Not authorized to access this route", 401));
+    return next(); // تخطي إذا لم يكن هناك توكن
   }
 
   try {
@@ -207,17 +197,11 @@ export const lastSeen = asyncHandler(async (req, res, next) => {
       { new: true }
     );
 
-    console.log("last seen updated ----------------------------");
-
-
-
     next();
   } catch (error) {
-    return next(new ApiError("Not authorized to access this route", 401));
+    return next();
   }
 });
-
-
 
 // authorize route
 
@@ -314,7 +298,6 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
   const user = await UserModel.findOne({ email: req.body.email });
 
-
   if (!user) {
     return next(new ApiError("No user found with this email", 404));
   }
@@ -323,7 +306,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     return next(new ApiError("Password reset code not verified", 400));
   }
 
-  user.password = req.body.password;//await bcrypt.hash(req.body.password, 10);
+  user.password = req.body.password; //await bcrypt.hash(req.body.password, 10);
   user.passwordResetCode = undefined;
   user.passwordResetExpires = undefined;
   user.passwordResetVerified = false;

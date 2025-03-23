@@ -80,13 +80,14 @@ const WebsiteData = () => {
         );
       }
       console.log(uploadData);
-       await axiosInstance.post("/dashboard/update", uploadData);
+      await axiosInstance.post("/dashboard/update", uploadData);
       toast.success("تم تحديث البيانات بنجاح");
       reset();
     } catch (error) {
       toast.error("حدث خطأ أثناء تحديث البيانات");
     } finally {
       setIsSubmitting(false);
+      window.location.reload();
     }
   };
 
@@ -94,10 +95,9 @@ const WebsiteData = () => {
     mainInfo: [
       { id: "mainTitle", label: "العنوان الرئيسي للموقع" },
       { id: "subTitle", label: "العنوان الفرعي للموقع" },
-     
     ],
     mainInfo2: [
-       { id: "adTitle", label: "عنوان الإعلان للموقع" },
+      { id: "adTitle", label: "عنوان الإعلان للموقع" },
       { id: "adDescription", label: "وصف الإعلان للموقع", type: "textarea" },
     ],
 
@@ -132,6 +132,10 @@ const WebsiteData = () => {
       { id: "appStore", label: "رابط آب ستور" },
       { id: "hideSection", label: "إخفاء القسم" },
     ],
+
+    profile: [
+      { id: "hideBalanceSection", label: " قسم الرصيد فى الملف الشخصي" },
+    ],
   };
 
   if (loading) return <PageLoader />;
@@ -155,36 +159,38 @@ const WebsiteData = () => {
                   {section === "contact" && "معلومات الاتصال"}
                   {section === "socialMedia" && "وسائل التواصل الاجتماعي"}
                   {section === "stores" && "متاجر التطبيقات"}
+                  {section === "profile" && "الملف الشخصي"}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {fields.map((field) => (
                     <>
-                      {field.id === "hideSection" ? (
+                      {field.id === "hideSection" ||
+                      field.id === "hideBalanceSection" ? (
                         <div key={field.id} className="flex items-center">
                           <input
                             type="checkbox"
+                            id={field.id}
                             {...register(field.id)}
                             className="text-indigo-600 rounded border-gray-300 dark:border-gray-500 focus:ring-indigo-500"
                           />
                           <label
                             htmlFor={field.id}
-                            className="text-sm text-gray-700 dark:text-gray-200 ml-2"
+                            className="text-sm text-gray-700 dark:text-gray-200 mr-2"
                           >
                             {field.label}
                           </label>
                         </div>
                       ) : (
                         <div key={field.id} className="space-y-2">
-                      <FormField
-                        id={field.id}
-                        label={field.label}
-                        type={field.type}
-                        register={register}
-                        className="w-full truncate"
-                      />
-                    </div>
+                          <FormField
+                            id={field.id}
+                            label={field.label}
+                            type={field.type}
+                            register={register}
+                            className="w-full truncate"
+                          />
+                        </div>
                       )}
-                    
                     </>
                   ))}
                 </div>
