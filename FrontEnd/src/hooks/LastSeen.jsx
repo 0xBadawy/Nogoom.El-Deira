@@ -9,7 +9,9 @@ const LastSeenAgo = ({ lastSeenDate }) => {
       const lastSeen = new Date(lastSeenDate);
       const diffInSeconds = Math.floor((now - lastSeen) / 1000);
 
-      if (diffInSeconds < 60) {
+      if (diffInSeconds < 120) {
+        setTimeAgo("🟢 نشط الآن ");
+      } else if (diffInSeconds < 60) {
         setTimeAgo(`منذ ${diffInSeconds} ثانية`);
       } else if (diffInSeconds < 3600) {
         const minutes = Math.floor(diffInSeconds / 60);
@@ -24,7 +26,7 @@ const LastSeenAgo = ({ lastSeenDate }) => {
     };
 
     calculateTimeAgo();
-    const interval = setInterval(calculateTimeAgo, 60000); // Update every minute
+    const interval = setInterval(calculateTimeAgo, 60000); // تحديث كل دقيقة
 
     return () => clearInterval(interval);
   }, [lastSeenDate]);

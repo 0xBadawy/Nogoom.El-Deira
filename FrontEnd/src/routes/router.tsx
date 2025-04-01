@@ -42,6 +42,8 @@ const EditAd = React.lazy(() => import("../Dashboard/Pages/EditAd"));
 
 const Privacy = React.lazy(() => import("../Dashboard/Pages/Privacy"));
 const WebsiteData = React.lazy(() => import("../Dashboard/Pages/WebsiteData"));
+const SponsersData = React.lazy(() => import("../Dashboard/Pages/SponsersData"));
+const MessagesData = React.lazy(() => import("../Dashboard/Pages/MessagesData"));
 const Contact = React.lazy(() => import("../Dashboard/Pages/ContactPage"));
 const Unauthorized = React.lazy(() => import("../Pages/Unauthorized"));
 const PrivacyPolicy = React.lazy(() => import("../Pages/PrivacyPolicy"));
@@ -275,6 +277,22 @@ export const router = createBrowserRouter([
       {
         path: "website_data",
         element: withProtection(WebsiteData, [
+          "admin",
+          "editor",
+   
+        ]),
+      },
+      {
+        path: "sponsers",
+        element: withProtection(SponsersData, [
+          "admin",
+          "editor",
+   
+        ]),
+      },
+      {
+        path: "reviews",
+        element: withProtection(MessagesData, [
           "admin",
           "editor",
    

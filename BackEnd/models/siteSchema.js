@@ -32,6 +32,7 @@ const siteSchema = new mongoose.Schema({
   appStore: { type: String, default: "" },
   privacy: { type: String, default: "" },
   hideSection: { type: Boolean, default: false },
+  hideBalanceSection: { type: Boolean, default: false },
 });
 
 const Site = mongoose.model("Site", siteSchema);

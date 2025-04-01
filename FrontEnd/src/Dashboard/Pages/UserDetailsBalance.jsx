@@ -64,7 +64,9 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
       );
       // await updateUser(response.data.data);
       toast.success("تم حفظ التعديلات بنجاح");
-      console.log(response.data);
+      // console.log(response.data);
+      window.location.reload();
+
     } catch (error) {
       console.error("خطأ في تحديث البيانات:", error);
       toast.error("فشل في تحديث البيانات");

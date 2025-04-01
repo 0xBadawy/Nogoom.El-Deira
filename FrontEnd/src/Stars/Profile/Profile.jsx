@@ -3,7 +3,14 @@ import PublicProfile from "./PublicProfile";
 import AccountSettings from "./AccountSettings";
 import Notifications from "./Notifications";
 import ProAccount from "./ProAccount";
-import { MdPreview, MdVerified, MdPublic, MdSettings, MdNotifications, MdStar } from "react-icons/md";
+import {
+  MdPreview,
+  MdVerified,
+  MdPublic,
+  MdSettings,
+  MdNotifications,
+  MdStar,
+} from "react-icons/md";
 import { useAuth } from "../../Context/AuthContext";
 import { IoMdHome } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +18,12 @@ import UserAds from "./UserAds";
 import UserStatus from "./UserStatus";
 import { HiOutlineLogout } from "react-icons/hi";
 import { formatDateTime } from "../../hooks/formatDate";
+import { useData } from "../../Context/DataContext";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
   const { user } = useAuth();
-  const  navigate =useNavigate();
+  const navigate = useNavigate();
   const [verified, setVerified] = useState(true);
   const [userData, setUserData] = useState(null);
 
@@ -41,18 +49,26 @@ const Profile = () => {
     { id: "UserAds", label: "الحملات الاعلانية", icon: MdStar },
   ];
 
-const handelLogout=()=>{
-  const confirmLogout = window.confirm("هل أنت متأكد من تسجيل الخروج؟");
-  if (!confirmLogout) 
-    return; // If the user cancels the logout, do nothing
+  const handelLogout = () => {
+    const confirmLogout = window.confirm("هل أنت متأكد من تسجيل الخروج؟");
+    if (!confirmLogout) return; // If the user cancels the logout, do nothing
+
+    // logOut();
+    navigate("/login");
+  };
+
+
+
+    const [data, setData] = useState();
+    const { websiteData } = useData();
   
-  // logOut();
-  navigate("/login");
-
-
-
-}
-
+    useEffect(() => {
+      setData(websiteData);
+       console.log("websiteData cty home", websiteData);
+    }, [websiteData]);
+  
+  
+  
 
   return (
     <>
@@ -85,41 +101,39 @@ const handelLogout=()=>{
                     />
                   </div>
 
-                  
-
-
-                  <div className="flex my-3  flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl shadow-lg border border-green-200 hover:shadow-xl transition-shadow duration-300">
-                    <p className="text-2xl font-semibold text-green-800 mb -2">
-                      رصيد الحساب
-                    </p>
-                    <p className="text-5xl font-bold text-green-700">
-                      {new Intl.NumberFormat("en-SA", {
-                        style: "currency",
-                        currency: "SAR",
-                        minimumFractionDigits: 2,
-                      }).format(userData?.balance || 0)}
-                    </p>
-                    <div className="mt4 flex items-center space-x-2">
-                      <span className="text-sm text-green-600">
-                        آخر تحديث: {formatDateTime(userData?.updatedAt)}
-                      </span>
-                      <svg
-                        className="w-4 h-4 text-green-600 animate-pulse"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
+                  {data?.hideBalanceSection && (
+                    <div className="flex my-3  flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl shadow-lg border border-green-200 hover:shadow-xl transition-shadow duration-300">
+                      <p className="text-2xl font-semibold text-green-800 mb -2">
+                        رصيد الحساب
+                      </p>
+                      <p className="text-5xl font-bold text-green-700">
+                        {new Intl.NumberFormat("en-SA", {
+                          style: "currency",
+                          currency: "SAR",
+                          minimumFractionDigits: 2,
+                        }).format(userData?.balance || 0)}
+                      </p>
+                      <div className="mt4 flex items-center space-x-2">
+                        <span className="text-sm text-green-600">
+                          آخر تحديث: {formatDateTime(userData?.updatedAt)}
+                        </span>
+                        <svg
+                          className="w-4 h-4 text-green-600 animate-pulse"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-
+                  )}
                   <nav>
                     {menuItems.map((item) => (
                       <button
@@ -171,4 +185,3 @@ const handelLogout=()=>{
 };
 
 export default Profile;
-

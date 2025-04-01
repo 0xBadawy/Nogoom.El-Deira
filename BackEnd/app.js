@@ -8,6 +8,8 @@ import settingsRoute from "./Routes/settings-route.js";
 import dashboardRoute from "./Routes/dashboard-route.js";
 import notificationsRoute from "./Routes/notifications-route.js";
 import advertisementRoute from "./Routes/advertisement-route.js";
+import sponserRoute from "./Routes/sponser-route.js";
+import messagesRoute from "./Routes/message-route.js";
 
 import userRoute from "./Routes/users.js";
 import authRoute from "./Routes/auth.js";
@@ -43,8 +45,8 @@ app.get('/', (req, res) => {
 app.get("/info", (req, res) => {
     const projectName = "Noogom El-Dira Project";
   const description = "This is a simple Node.js project using Express.";
-  const version = "5.4.3";
-    const lastUpdate = "2025-03-13 10:00:00 PM";
+  const version = "5.7.3";
+    const lastUpdate = "2025-03-23 10:00:00 PM";
     const responseText = `Project Name: ${projectName}\nDescription: ${description}\nLast Update: ${lastUpdate} \nVersion: ${version}`; 
     res.type("text/plain"); 
     res.send(responseText);
@@ -66,6 +68,8 @@ app.use("/api/v1/preferences", preferencesRoute);
 app.use("/api/v1/contact", contactRoute);
 app.use("/api/v1/settings", settingsRoute);
 app.use("/api/v1/dashboard", dashboardRoute);
+app.use("/api/v1/sponser", sponserRoute);
+app.use("/api/v1/messages", messagesRoute);
 
 
 app.all('*', (req, res, next) => {

@@ -11,6 +11,7 @@ import AreaGovernmentSelector from "../../Components/AreaGovernmentSelector";
 import axiosInstance from "../../Configuration/axiosInstance";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../Configuration/Firebase";
+
 const SignUpPage = () => {
   const { signup } = useAuth();
   const navigate = useNavigate();
@@ -56,9 +57,7 @@ const SignUpPage = () => {
     }
 
     if (data.password.length < 6) {
-      toast.error(
-        "كلمة المرور ضعيفة جدًا. يجب أن تحتوي على 6 أحرف على الأقل."
-      );
+      toast.error("كلمة المرور ضعيفة جدًا. يجب أن تحتوي على 6 أحرف على الأقل.");
       return;
     }
 
@@ -85,6 +84,13 @@ const SignUpPage = () => {
     //   );
     //   return;
     // }
+
+    if (!/^\d{8,11}$/.test(data.phone)) {
+      toast.error(
+        "يجب أن يكون رقم الهاتف مكوناً من 8 إلى 11 رقماً ويتكون من أرقام فقط"
+      );
+      return;
+    }
 
     if (address.area === "" || address.govern.length === 0) {
       toast.error("يجب اختيار المنطقة والمحافظة");

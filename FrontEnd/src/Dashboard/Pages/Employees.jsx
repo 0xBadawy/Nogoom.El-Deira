@@ -19,15 +19,13 @@ const Employees = () => {
       try {
         const response = await axiosInstance.get("/user/all_users_admin");
 
-
         const sortedUsers = response.data.data.sort(
           (a, b) => new Date(b.lastSeen) - new Date(a.lastSeen)
         );
 
         console.log("Sorted Users:", sortedUsers);
 
-
-        setUsersData(sortedUsers  );
+        setUsersData(sortedUsers);
       } catch (error) {
         toast.error("فشل في تحميل البيانات");
       }
@@ -55,9 +53,6 @@ const Employees = () => {
         });
 
         console.log("Response:", response);
-
-        
-
 
         if (response.data.status === "error") {
           toast.error(response.data.message);
@@ -111,97 +106,95 @@ const Employees = () => {
     return formattedDate.toLocaleString();
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5; // عدد المستخدمين في كل صفحة
 
+  // تصفية المستخدمين غير المحذوفين
+  const filteredUsers = usersData?.filter(
+    (user) => user.role !== "star" && !user.isDeleted
+  );
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const usersPerPage = 5; // عدد المستخدمين في كل صفحة
+  // حساب عدد الصفحات
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
-    // تصفية المستخدمين غير المحذوفين
-    const filteredUsers = usersData?.filter(
-      (user) => user.role !== "star" && !user.isDeleted
-    );
-
-    // حساب عدد الصفحات
-    const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
-
-    // تحديد المستخدمين للصفحة الحالية
-    const paginatedUsers = filteredUsers.slice(
-      (currentPage - 1) * usersPerPage,
-      currentPage * usersPerPage
-    );
-
-    
+  // تحديد المستخدمين للصفحة الحالية
+  const paginatedUsers = filteredUsers.slice(
+    (currentPage - 1) * usersPerPage,
+    currentPage * usersPerPage
+  );
 
   return (
     <div className="grow md:p-8 p-2 dark:bg-gray-800 h-full">
       <h2 className="text-2xl mb-4">الموظفين</h2>
       <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 w-full max-w-screen overflow-x-auto">
         <AddEmployees />
-     
-     
-     
-     {/* 000000000000000000000000000000000000000 */}
 
-         <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-      <h3 className="text-lg font-semibold mb-4">قائمة المستخدمين</h3>
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto">
-          <thead>
-            <tr className="border-b bg-gray-50">
-              <th className="py-2 px-4 text-right">الاسم</th>
-              <th className="py-2 px-4 text-right hidden md:table-cell">
-                اخر ظهور
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedUsers.map((user) => (
-              <tr
-                key={user._id}
-                onClick={() => handleUserSelection(user._id)}
-                className={`border-b cursor-pointer ${
-                  user._id === selectedUser ? "bg-gray-200" : ""
-                } hover:bg-gray-100`}
-              >
-                <td className="py-2 px-4">{user.name}</td>
-                <td className="py-2 px-4 hidden md:table-cell">
-                  <LastSeenAgo lastSeenDate={user.lastSeen} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        {/* 000000000000000000000000000000000000000 */}
 
-      {/* أزرار التنقل بين الصفحات */}
-      <div className="flex justify-center mt-4 space-x-2">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className={`px-4 py-2 rounded ${
-            currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
-          }`}
-        >
-          السابق
-        </button>
-        <span className="px-4 py-2">{currentPage} من {totalPages}</span>
-        <button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded ${
-            currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 text-white"
-          }`}
-        >
-          التالي
-        </button>
-      </div>
-    </div>
+        <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
+          <h3 className="text-lg font-semibold mb-4">قائمة المستخدمين</h3>
+          <div className="overflow-x-auto">
+            <table className="min-w-full table-auto">
+              <thead>
+                <tr className="border-b bg-gray-50">
+                  <th className="py-2 px-4 text-right">الاسم</th>
+                  <th className="py-2 px-4 text-right hi dden md:table-cell">
+                    اخر ظهور
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedUsers.map((user) => (
+                  <tr
+                    key={user._id}
+                    onClick={() => handleUserSelection(user._id)}
+                    className={`border-b cursor-pointer ${
+                      user._id === selectedUser ? "bg-gray-200" : ""
+                    } hover:bg-gray-100`}
+                  >
+                    <td className="py-2 px-4">{user.name}</td>
+                    <td className="py-2 px-4 hidd en text-sm md:table-cell">
+                      <LastSeenAgo lastSeenDate={user.lastSeen} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
+          {/* أزرار التنقل بين الصفحات */}
+          <div className="flex justify-center mt-4 space-x-2">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded ${
+                currentPage === 1
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
+              }`}
+            >
+              السابق
+            </button>
+            <span className="px-4 py-2">
+              {currentPage} من {totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded ${
+                currentPage === totalPages
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-blue-500 text-white"
+              }`}
+            >
+              التالي
+            </button>
+          </div>
+        </div>
 
-     {/* 000000000000000000000000000000000000000 */}
-
-
-
+        {/* 000000000000000000000000000000000000000 */}
 
         {selectedUserDetails && (
           <div className="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
@@ -244,6 +237,11 @@ const Employees = () => {
                     <span>{formatDate(selectedUserDetails[field])}</span>
                   </div>
                 ))}
+
+                <div className="flex items-center mb-4 ">
+                  <p className="w-32"> اخر ظهور :</p>
+                  <LastSeenAgo lastSeenDate={selectedUserDetails.lastSeen} />
+                </div>
               </div>
             </div>
             <div className="flex items-center gap-3">

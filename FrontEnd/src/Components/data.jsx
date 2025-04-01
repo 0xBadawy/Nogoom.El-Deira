@@ -12,9 +12,9 @@ export const TextData = {
   privacyPolicyLink: "شروط الاستخدام",
 };
 
-  export const AreaData = [
+  export const AreaData = [ 
     {
-      name: "كل المحافظات  ",
+      name: "كل المحافظات",
       subGovernments: [
         "العاصمة",
         "حولي",

@@ -1,6 +1,6 @@
 import express from "express";
 import { body, validationResult } from "express-validator";
-import { protect, authorize } from "../services/authService.js";
+import { protect, authorize, lastSeen } from "../services/authService.js";
 import {
   getCountes,
   fetch,
@@ -10,9 +10,9 @@ import {
 
 const router = express.Router();
 
-router.get("/get", getCountes);
-router.get("/defult", fetch);
-router.post("/update", update);
+router.get("/get",lastSeen, getCountes);
+router.get("/defult",fetch);
+router.post("/update", lastSeen,update);
 // router.post("/update-contact", updateContact);
 // router.get("/contact", fetchContact);
 

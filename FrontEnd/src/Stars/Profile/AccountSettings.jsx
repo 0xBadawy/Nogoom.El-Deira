@@ -58,21 +58,52 @@ const AccountSettings = () => {
   }, [address]);
 
   const handleInputChange = (index, value) => {
+
+    
+
+
+
     const updatedLinks = [...socialLinks];
     updatedLinks[index].link = value;
     setSocialLinks(updatedLinks);
   };
 
   const onSubmit = (data) => {
+    if (selectedAddress.area === "") {
+      toast.error("يجب إدخال المنطقة.");
+      return;
+    }
+
+    if (selectedAddress.govern.length === 0) {
+      toast.error("يجب اختيار المحافظة.");
+      return;
+    }
+
+    if (!/^\d{8,11}$/.test(data.phone)) {
+      toast.error(
+        "يجب أن يكون رقم الهاتف مكوناً من 8 إلى 11 رقماً ويتكون من أرقام فقط"
+      );
+      return;
+    }
+
+    const filteredLinks = socialLinks.filter(
+      (item) => item.link && item.link.trim() !== ""
+    );
+
+    if(filteredLinks.length === 0) {
+      toast.error("يجب إدخال رابط واحد على الأقل للتواصل الاجتماعي.");
+
+      return;
+    }
+
     const allData = {
       ...data,
       selectedAddress,
       profilePicture: imageURL,
       verified: false,
-      socialLinks,
+      socialLinks: filteredLinks,
     };
 
-    console.log(allData);
 
     // if (!address.govern) {
     //   toast.error("يجب إدخال المنطقة.");
@@ -142,19 +173,18 @@ const AccountSettings = () => {
     const storageRef = ref(storage, `${fileName}/profile/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-  uploadTask.on(
-    "state_changed",
-    (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setUploadImageProgress(progress);
-    },
-    (error) => {
-      console.error("Storage Upload Error:", error.code, error.message);
-      toast.error(`خطأ أثناء رفع الصورة: ${error.message}`);
-    }
-  );
-
-
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadImageProgress(progress);
+      },
+      (error) => {
+        console.error("Storage Upload Error:", error.code, error.message);
+        toast.error(`خطأ أثناء رفع الصورة: ${error.message}`);
+      }
+    );
   };
 
   return (
@@ -247,7 +277,7 @@ const AccountSettings = () => {
               />
             </div>
 
-            <div  >
+            <div>
               <AreaGovernmentSelector
                 initialData={
                   Object.keys(address).length > 0 ? address : preloadedData

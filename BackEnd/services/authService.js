@@ -6,7 +6,10 @@ import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 import sendEmail, { sendEmailHTML } from "../utils/sendEmail.js";
 import Notification from "../models/notificationSchema.js";
-import { createNotification, sendNotificationToRoles } from "../functions/notification.js";
+import {
+  createNotification,
+  sendNotificationToRoles,
+} from "../functions/notification.js";
 
 // Helper function to generate JWT token
 const generateToken = (userId) => {
@@ -83,7 +86,6 @@ export const signUp = asyncHandler(async (req, res, next) => {
       "newUser"
     );
 
-
     createNotification(
       user._id,
       "تم إنشاء حساب جديد",
@@ -91,16 +93,8 @@ export const signUp = asyncHandler(async (req, res, next) => {
       user._id,
       "newUser"
     );
-      
 
-
-
-
-
-
-
-
-    // Generate token 
+    // Generate token
     const token = generateToken(user._id);
 
     res.status(201).json({
@@ -124,9 +118,8 @@ export const signIn = asyncHandler(async (req, res, next) => {
   console.log(req.body);
   const { email, password } = req.body;
 
-
   // Find user by email
- const user = await UserModel.findOne({ email: email.toLowerCase() });
+  const user = await UserModel.findOne({ email: email.toLowerCase() });
 
   console.log("user", user);
   if (!user) {
@@ -178,6 +171,35 @@ export const protect = asyncHandler(async (req, res, next) => {
     next();
   } catch (error) {
     return next(new ApiError("Not authorized to access this route", 401));
+  }
+});
+
+export const lastSeen = asyncHandler(async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
+  if (!token) {
+    return next(); // تخطي إذا لم يكن هناك توكن
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await UserModel.findByIdAndUpdate(
+      decoded.userId,
+      { lastSeen: Date.now() },
+      { new: true }
+    );
+
+    next();
+  } catch (error) {
+    return next();
   }
 });
 
@@ -276,7 +298,6 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
   const user = await UserModel.findOne({ email: req.body.email });
 
-
   if (!user) {
     return next(new ApiError("No user found with this email", 404));
   }
@@ -285,7 +306,7 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     return next(new ApiError("Password reset code not verified", 400));
   }
 
-  user.password = req.body.password;//await bcrypt.hash(req.body.password, 10);
+  user.password = req.body.password; //await bcrypt.hash(req.body.password, 10);
   user.passwordResetCode = undefined;
   user.passwordResetExpires = undefined;
   user.passwordResetVerified = false;

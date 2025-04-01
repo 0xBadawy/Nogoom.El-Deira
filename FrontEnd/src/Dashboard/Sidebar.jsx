@@ -105,6 +105,18 @@ const Sidebar = () => {
       link: "/dashboard/website_data",
       roles: ["admin", "editor"],
     },
+    {
+      icon: <FaCog />,
+      text: "قائمة العملاء ",
+      link: "/dashboard/sponsers",
+      roles: ["admin", "editor"],
+    },
+    {
+      icon: <FaCog />,
+      text: "اراء العملاء",
+      link: "/dashboard/reviews",
+      roles: ["admin", "editor"],
+    },
     // {
     //   icon: <RiContactsBook3Line />,
     //   text: "بيانات التواصل",
@@ -139,7 +151,7 @@ const Sidebar = () => {
             key={index}
             className={`py-3 px-2 space-x-4 hover:rounded hover:cursor-pointer hover:bg-blue-600 hover:text-white 
                         ${
-                          currentRoute === item.link
+                           location.pathname === item.link
                             ? "bg-blue-600 text-white rounded "
                             : ""
                         }

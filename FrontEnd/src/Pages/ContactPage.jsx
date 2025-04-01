@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   FaFacebookF,
   FaTwitter,
-  FaInstagram, 
+  FaInstagram,
   FaSnapchatGhost,
   FaTiktok,
   FaWhatsapp,
@@ -17,14 +17,13 @@ const ContactPage = () => {
   const { fetchContact } = useDashboard();
   const navigate = useNavigate();
 
-   const [data, setData] = useState();
-   const { websiteData } = useData();
- 
-   useEffect(() => {
-     setData(websiteData);
-     console.log("websiteData cty ", websiteData);
-   }, [websiteData]);
- 
+  const [data, setData] = useState();
+  const { websiteData } = useData();
+
+  useEffect(() => {
+    setData(websiteData);
+    console.log("websiteData cty ", websiteData);
+  }, [websiteData]);
 
   return (
     <main className="relative py-16 bg-gray-100 min-h-screen">

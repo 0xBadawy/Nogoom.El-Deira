@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Download,
+  Film,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import axiosInstance from "../../Configuration/axiosInstance";
@@ -54,35 +55,65 @@ const AdDetailPage = () => {
       prev === 0 ? (ad?.Images?.length || 0) - 1 : prev - 1
     );
   };
-const handleDownloadAll = async () => {
-  if (!ad) return;
 
-  // Download images
-  for (let i = 0; i < ad.Images?.length; i++) {
-    const imageUrl = ad.Images[i];
-    try {
-      // Fetch the image as a Blob
-      const response = await fetch(imageUrl);
-      const blob = await response.blob();
+  const handleDownloadAll = async () => {
+    if (!ad) return;
 
-      // Create a downloadable link
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `image_${i + 1}.jpg`; // Customize the filename
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    // Download images
+    for (let i = 0; i < ad.Images?.length; i++) {
+      const imageUrl = ad.Images[i];
+      try {
+        // Fetch the image as a Blob
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
 
-      // Revoke the object URL to free up memory
-      URL.revokeObjectURL(link.href);
-    } catch (error) {
-      console.error(`Failed to download image ${i + 1}:`, error);
-      toast.error(`فشل تنزيل الصورة ${i + 1}`);
+        // Create a downloadable link
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `image_${i + 1}.jpg`; // Customize the filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Revoke the object URL to free up memory
+        URL.revokeObjectURL(link.href);
+      } catch (error) {
+        console.error(`Failed to download image ${i + 1}:`, error);
+        toast.error(`فشل تنزيل الصورة ${i + 1}`);
+      }
     }
-  }
 
-  // Download videos (if applicable)
-  if (ad.videos) {
+    // Download videos (if applicable)
+    if (ad.videos) {
+      try {
+        const videoUrl = ad.videos;
+        const response = await fetch(videoUrl);
+        const blob = await response.blob();
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `video.mp4`; // Customize the filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(link.href);
+      } catch (error) {
+        console.error("Failed to download video:", error);
+        toast.error("فشل تنزيل الفيديو");
+      }
+    }
+
+    toast.success("تم بدء تنزيل جميع الصور والفيديوهات");
+  };
+
+  // New function to download only the video
+  const handleDownloadVideo = async () => {
+    if (!ad || !ad.videos) {
+      toast.error("لا يوجد فيديو متاح للتنزيل");
+      return;
+    }
+
     try {
       const videoUrl = ad.videos;
       const response = await fetch(videoUrl);
@@ -90,20 +121,18 @@ const handleDownloadAll = async () => {
 
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = `video.mp4`; // Customize the filename
+      link.download = `video_${ad.title}.mp4`; // Customize the filename with ad title
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
 
       URL.revokeObjectURL(link.href);
+      toast.success("تم بدء تنزيل الفيديو");
     } catch (error) {
       console.error("Failed to download video:", error);
       toast.error("فشل تنزيل الفيديو");
     }
-  }
-
-  toast.success("تم بدء تنزيل جميع الصور والفيديوهات");
-};
+  };
 
   const AdLinks = ({ links }) => {
     const [copiedIndex, setCopiedIndex] = useState(null);
@@ -342,7 +371,7 @@ const handleDownloadAll = async () => {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="rounded-3xl overflow-hidden shadow-2xl"
+                      className="rounded-3xl overflow-hidden shadow-2xl relative group"
                     >
                       <video
                         controls
@@ -352,19 +381,45 @@ const handleDownloadAll = async () => {
                         <source src={ad.videos} type="video/mp4" />
                         متصفحك لا يدعم وسم الفيديو.
                       </video>
+
+                      {/* Video download button */}
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleDownloadVideo}
+                        className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm p-3 rounded-full text-white hover:bg-white/30 transition-all shadow-lg"
+                      >
+                        <Download className="h-5 w-5" />
+                      </motion.button>
                     </motion.div>
                   )}
 
-                  {/* Download All Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleDownloadAll}
-                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
-                  >
-                    <Download className="h-5 w-5" />
-                    <span>تنزيل جميع الصور والفيديوهات</span>
-                  </motion.button>
+                  {/* Download Buttons */}
+                  <div className="flex gap-4">
+                    {/* Download All Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleDownloadAll}
+                      className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+                    >
+                      <Download className="h-5 w-5" />
+                      <span>تنزيل الكل</span>
+                    </motion.button>
+
+                    {/* Download Video Button (Only shown if video exists) */}
+                    {ad.videos && (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={handleDownloadVideo}
+                        className="flex-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+                      >
+                        <Film className="h-5 w-5" />
+                        <span>تنزيل الفيديو</span>
+                      </motion.button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Details Section */}

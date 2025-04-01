@@ -49,7 +49,6 @@ export const changePassword = async (req, res, next) => {
 
 export const getLoggedInUser = asyncHandler(async (req, res, next) => {
   req.params.id = req.user.id;
-  // update last seen
 
   const user = await UserModal.findByIdAndUpdate(
     req.user.id,
@@ -60,6 +59,11 @@ export const getLoggedInUser = asyncHandler(async (req, res, next) => {
 
   next();
 });
+
+
+
+
+
 
 export const updateLogedUser = asyncHandler(async (req, res, next) => {
   const user = await UserModal.findByIdAndUpdate(
