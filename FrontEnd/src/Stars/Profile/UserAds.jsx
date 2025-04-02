@@ -47,8 +47,7 @@ const [links, setLinks] = useState(["https://example.com", "https://test.com"]);
 
       // setAds(response.data.ads);
 
-      console.log(response.data.ads);
-    };
+     };
 
     fetchUserData();
   }, [user]);
@@ -63,10 +62,7 @@ const [links, setLinks] = useState(["https://example.com", "https://test.com"]);
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
-  console.log(
-    "Saved Links:",
-    links.filter((link) => link.trim() !== "")
-  );
+
 
   const addData = async () => {
     try {
@@ -77,8 +73,7 @@ const handleFormSubmit = (e) => {
         }
       );
 
-      console.log(response.data);
-      toast.success("تم حفظ الروابط بنجاح");
+       toast.success("تم حفظ الروابط بنجاح");
     } catch (error) {
       console.error("Error while saving links:", error);
       toast.error("حدث خطأ أثناء حفظ الروابط");
@@ -163,8 +158,7 @@ const handleDeleteInput = (index) => {
                       className="flex items-center bg-indigo-100"
                       onClick={() => {
                         setAdId(ad);
-                        console.log("ad", ad);
-                        setLinks(ad.links);
+                         setLinks(ad.links);
                       }}
                     >
                       اضافة مشاركات

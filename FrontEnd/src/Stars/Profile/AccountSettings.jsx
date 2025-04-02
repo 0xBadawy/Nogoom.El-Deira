@@ -38,8 +38,7 @@ const AccountSettings = () => {
   }, [user]);
 
   useEffect(() => {
-    // console.log("User Data:", userData.address?.area);
-    if (userData) {
+     if (userData) {
       setValue("name", userData.name || "");
       setValue("phone", userData.phone || "");
       setValue("bio", userData.bio || "");
@@ -49,13 +48,9 @@ const AccountSettings = () => {
       });
       setImageURL(userData.profileImage || "");
       setSocialLinks(userData.social || []);
-      console.log("User address :", address);
-    }
+     }
   }, [userData, setValue]);
-
-  useEffect(() => {
-    console.log("Updated address:", address);
-  }, [address]);
+ 
 
   const handleInputChange = (index, value) => {
 
@@ -128,8 +123,7 @@ const AccountSettings = () => {
           "/user/update_loggedin_user",
           allData
         );
-        console.log(response.data);
-        await updateUser(response.data.data);
+         await updateUser(response.data.data);
       } catch (error) {
         console.error("خطأ في تحديث البيانات:", error);
       }
@@ -139,8 +133,7 @@ const AccountSettings = () => {
     //
 
     toast.success("تم حفظ التعديلات بنجاح");
-    console.log(updatedData); // Use this to debug the final payload.
-  };
+   };
 
   const handleSelectionChange = ({ selectedArea, selectedGovernments }) => {
     setSelectedAddress((prevState) => {

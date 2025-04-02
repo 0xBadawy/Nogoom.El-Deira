@@ -1,12 +1,12 @@
 import { ROLES, ROUTE_PERMISSIONS } from "../Configuration/permissions";
 
 export const hasPermission = (userRole, requiredRoles) => {
-  console.log(
-    "Checking permissions for user role:",
-    userRole,
-    "against required roles:",
-    requiredRoles
-  );
+  // console.log(
+  //   "Checking permissions for user role:",
+  //   userRole,
+  //   "against required roles:",
+  //   requiredRoles
+  // );
 
   if (!userRole || !requiredRoles.length) return false;
 

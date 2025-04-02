@@ -27,8 +27,7 @@ const HomePageItems = () => {
 
   useEffect(() => {
     setData(websiteData);
-    //  console.log("websiteData cty home", websiteData);
-  }, [websiteData]);
+   }, [websiteData]);
 
   return (
     <div className="PatternBG" style={{ fontFamily: "Cairo" }}>

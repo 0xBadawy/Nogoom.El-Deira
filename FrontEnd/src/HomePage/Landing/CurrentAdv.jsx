@@ -21,8 +21,7 @@ const CurrentAdv = function () {
   const selectedArea = localStorage.getItem("selectedArea");
 
   const getCityNameInArabic = async function (lat, lng) {
-    console.log("Getting city name in Arabic for coordinates:", lat, lng);
-
+ 
     const apiKey = "AIzaSyAjI3P4a0X9Woulx01POM5hJxNHxOoq5bE"; // Replace with your Google Maps API key
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}&language=ar`;
 
@@ -39,8 +38,7 @@ const CurrentAdv = function () {
       if (data.status === "OK" && data.results.length > 0) {
         const addressComponents = data.results[0].address_components;
 
-        console.log("Address components:", addressComponents);
-
+ 
         // Find the city name in the address components
         const cityComponent = addressComponents.find(
           (component) =>
@@ -71,8 +69,7 @@ const CurrentAdv = function () {
 
   
   const getCityNameInArabicQQ = async function (lat, lng) {
-    console.log("Getting city name in Arabic for coordinates:", lat, lng);
-
+ 
     const apiKey = "AIzaSyAjI3P4a0X9Woulx01POM5hJxNHxOoq5bE"; // Replace with your Google Maps API key
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}&language=ar`;
 
@@ -89,8 +86,7 @@ const CurrentAdv = function () {
       if (data.status === "OK" && data.results.length > 0) {
         const addressComponents = data.results[0].address_components;
 
-        console.log("Address components:", addressComponents);
-
+ 
         // البحث عن اسم الدولة في المكونات
         const countryComponent = addressComponents.find((component) =>
           component.types.includes("country")
@@ -116,16 +112,14 @@ const CurrentAdv = function () {
       const cityName = await getCityNameInArabic(lat, lng);
       setArabicCityName(cityName);
       Update(cityName);
-      console.log("City name in Arabic:", cityName);
-    } catch (error) {
+     } catch (error) {
       console.error("Error fetching location or city name:", error);
     }
   };
 
   useEffect(function () {
     fetchCityName();
-    // console.log("Fetching city name in Arabic...");
-  }, []);
+   }, []);
 
   const Update = (gov) => {
     const GovernmentNames = [
@@ -149,8 +143,7 @@ const CurrentAdv = function () {
       (name) => name.includes(gov) || gov.includes(name)
     );
 
-    console.log("Matched Area:", matchedArea);
-    if (matchedArea) {
+     if (matchedArea) {
       localStorage.setItem("selectedArea", matchedArea);
     } else {
       const fun = async function () {
@@ -160,15 +153,12 @@ const CurrentAdv = function () {
         const lng = position.coords.longitude;
         const cityName = await getCityNameInArabicQQ(lat, lng);
 
-        console.log("No match found", gov);
-        console.log("City name in Arabic:", cityName);
-
+          
         const matchedArea = GovernmentNames.find(
           (name) => name.includes(cityName) || cityName.includes(name)
         );
 
-        console.log("Matched Area:", matchedArea);
-        if (matchedArea) {
+         if (matchedArea) {
           localStorage.setItem("selectedArea", matchedArea);
         } else {
           localStorage.setItem("selectedArea", "all");
@@ -188,8 +178,7 @@ const CurrentAdv = function () {
     function () {
       const fetchAds = async function () {
         const mockData = await getAllAds();
-        console.log(mockData);
-
+ 
         if (!selectedArea || selectedArea === "all") {
           setAds(mockData);
         } else {
@@ -197,8 +186,7 @@ const CurrentAdv = function () {
             (ad) => ad.region === selectedArea
           ); // Filter based on selected area
           setAds(filteredAds);
-          console.log("Filtered Ads:", filteredAds);
-        }
+         }
       };
       fetchAds();
     },

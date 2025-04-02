@@ -14,8 +14,7 @@ const DownloadSection = () => {
   
     useEffect(() => {
       setData(websiteData);
-      console.log("websiteData cty ", websiteData);
-    }, [websiteData]);
+     }, [websiteData]);
   
   return (
     <div

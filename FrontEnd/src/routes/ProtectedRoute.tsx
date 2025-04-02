@@ -19,8 +19,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("User from AuthContext:", user); // تحقق مما إذا كان `user` يحتوي على البيانات الصحيحة
-
+ 
     if (!authLoading) {
       // لا يتم تحديث `userRole` إلا بعد انتهاء تحميل `user`
       setUserRole(user?.role ?? "guest");
@@ -36,13 +35,10 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   // جلب الصلاحيات المطلوبة للمسار الحالي
   const routeRoles = requiredRoles ?? getRoutePermissions(location.pathname);
 
-  console.log("Route roles:", routeRoles);
-
+ 
   // التحقق مما إذا كان المستخدم لديه الصلاحيات المطلوبة
-  console.log("User role:", userRole);
-  if (!hasPermission(userRole || "guest", routeRoles)) {
-    console.log("Unauthorized access");
-    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+   if (!hasPermission(userRole || "guest", routeRoles)) {
+     return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }
 
   return <>{children}</>;

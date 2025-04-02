@@ -24,8 +24,7 @@ const SendedNotificationsPanel = () => {
           notificationId: id,
         }
       );
-      console.log(response.data);
-      feachData(); // Refresh notifications after marking as read
+       feachData(); // Refresh notifications after marking as read
     };
     readNotification();
   };
@@ -36,9 +35,8 @@ const SendedNotificationsPanel = () => {
         `/notifications/group-notifications?userId=${user._id}`
       );
       setNotifications(response.data.notifications);
-      console.log("response : ", response.data.notifications);
-    } catch (error) {
-      console.log("error : ", error);
+     } catch (error) {
+      console.error("error : ", error);
     }
   };
 

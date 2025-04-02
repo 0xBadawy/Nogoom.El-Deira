@@ -39,8 +39,7 @@ const Users = () => {
   useEffect(() => {
     const users = allUsers;
     setUsersData(users);
-    console.log("users", users);
-  }, [allUsers]);
+   }, [allUsers]);
 
   const Area = (areas) => {
     if (!areas) return "";

@@ -20,8 +20,7 @@ const Contact = () => {
 
   useEffect(() => {
     setData(contact);
-    console.log(contact)
-    setValue("phone", contact.phone);
+     setValue("phone", contact.phone);
     setValue("email", contact.email);
     setValue("whatsapp", contact.whatsapp);
     setValue("facebook", contact.facebook);

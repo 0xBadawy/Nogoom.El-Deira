@@ -6,7 +6,7 @@ import { useData } from "../../Context/DataContext";
 const SocialMediaInfluencers = () => {
   const [location, setLocation] = useState("");
   const [isSignedUp, setIsSignedUp] = useState(false);
-  const { IsLogedIn } = useAuth();
+  const { user } = useAuth();
   // Simulating location fetch
   useEffect(() => {
     setLocation("الحاجز");
@@ -19,12 +19,18 @@ const SocialMediaInfluencers = () => {
   }
 
   useEffect(() => {
+
     const checkSignUpStatus = async () => {
-      const status = await IsLogedIn();
-      setIsSignedUp(status);
+      const status = await user;
+      if (status) {
+        setIsSignedUp(true);
+      } else {
+        setIsSignedUp(false); // Default to false if user is not available
+      }
+      // console.log("User status:", status);
     };
     checkSignUpStatus();
-  }, [IsLogedIn]);
+  }, [user]);
 
   const handleSignUpClick = () => {
     const targetRoute = isSignedUp ? "/profile" : "/signup";
@@ -39,8 +45,7 @@ const SocialMediaInfluencers = () => {
   
     useEffect(() => {
       setData(websiteData);
-      console.log("websiteData cty ", websiteData);
-    }, [websiteData]);
+     }, [websiteData]);
   
   return (
     <div

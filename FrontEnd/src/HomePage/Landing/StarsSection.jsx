@@ -41,19 +41,14 @@ const StarsSection = function () {
       const response = await axiosInstance.get("/user/stars_users");
       const data = response.data.data;
       setUsers(data);
-      console.log(data)
-
+ 
     };
   
     fetchData();
   }, [getAllStarUsers,selectedArea]);
   
 
-  
-  useEffect(() => {
-    console.log(users)
-  }, [users])
-
+ 
 
 return (
   <motion.div

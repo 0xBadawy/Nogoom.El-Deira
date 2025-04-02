@@ -23,8 +23,7 @@ const Employees = () => {
           (a, b) => new Date(b.lastSeen) - new Date(a.lastSeen)
         );
 
-        console.log("Sorted Users:", sortedUsers);
-
+ 
         setUsersData(sortedUsers);
       } catch (error) {
         toast.error("فشل في تحميل البيانات");
@@ -52,8 +51,7 @@ const Employees = () => {
           params: { id: selectedUser },
         });
 
-        console.log("Response:", response);
-
+ 
         if (response.data.status === "error") {
           toast.error(response.data.message);
           return;

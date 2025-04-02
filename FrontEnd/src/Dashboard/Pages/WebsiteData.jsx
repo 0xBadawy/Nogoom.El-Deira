@@ -79,8 +79,7 @@ const WebsiteData = () => {
           "image2"
         );
       }
-      console.log(uploadData);
-      await axiosInstance.post("/dashboard/update", uploadData);
+       await axiosInstance.post("/dashboard/update", uploadData);
       toast.success("تم تحديث البيانات بنجاح");
       reset();
     } catch (error) {

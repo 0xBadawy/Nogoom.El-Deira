@@ -17,11 +17,9 @@ const Users = () => {
   const [selectedRegion, setSelectedRegion] = useState("all");
   const [selectedGovern, setSelectedGovern] = useState("all");
   const { user } = useAuth();
-  console.log("User:", user.role);
-
+ 
   const { id } = useParams();
-  // console.log("useParams output:", id);
-  useEffect(() => {
+   useEffect(() => {
     if (id && usersData.length > 0) {
       const foundUser = usersData.find((user) => user._id === id);
       if (foundUser) {
@@ -38,9 +36,7 @@ const Users = () => {
     const governMatch =
       selectedGovern === "all" || user.address.govern?.includes(selectedGovern);
 
-      // console.log("regionMatch:", user.address.govern);
-      // console.log("governMatch:", user.address.area);
-
+    
     return regionMatch && governMatch;
   });
 
@@ -59,10 +55,9 @@ const Users = () => {
     const featchUsers = async () => {
       try {
         const response = await axiosInstance.get("/user/all_users");
-        // console.log(response.data.data);
-        setUsersData(response.data.data);
+         setUsersData(response.data.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     featchUsers();

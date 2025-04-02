@@ -7,8 +7,7 @@ const DataProvider = ({ children }) => {
     const fetchInitialData = async () => {
       try {
         const response = await axiosInstance.get("/dashboard/defult");
-        console.log("fetchInitialData",response.data);
-        setWebsiteData(response.data);
+         setWebsiteData(response.data);
       } catch (error) {
         console.error(error);
       }

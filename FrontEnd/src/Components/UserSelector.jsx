@@ -14,8 +14,7 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
       try {
         const response = await axiosInstance.get("/user/all_users");
         const data = response.data.data;
-        // console.log(data);
-        setUsers(data);
+         setUsers(data);
         setFilteredUsers(data); 
       } catch (error) {
         console.error("Failed to fetch users:", error);
@@ -28,11 +27,9 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
   // Filter users based on selected area and govrn
   useEffect(() => {
     const { area, govrn } = filters;
-    console.log("Filters: ", filters);
-    console.log("Users: ", users);
+ 
     const filtered = users.filter((user) => {
-      console.log("area ----: ", user.address?.area);
-      console.log("govrn -----: ", user.address?.govern);
+     
       return (
         (!area || user.address?.area === area) &&
         // (!govrn || user.address?.govrn === govrn)
@@ -40,8 +37,7 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
       );
     });
 
-    console.log("Filtered Users: ", filtered);
-
+ 
     setFilteredUsers(filtered);
   }, [filters, users]);
 

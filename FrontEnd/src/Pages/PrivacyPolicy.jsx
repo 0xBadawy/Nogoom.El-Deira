@@ -19,8 +19,7 @@ const PrivacyPolicy = () => {
   
     useEffect(() => {
       setData(websiteData);
-      console.log("websiteData cty ", websiteData);
-    }, [websiteData]);
+     }, [websiteData]);
   
   return (
     <div className="min-h-screen bg-gray-50" style={{ direction: "rtl" }}>

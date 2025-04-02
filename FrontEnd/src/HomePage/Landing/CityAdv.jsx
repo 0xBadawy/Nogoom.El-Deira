@@ -17,8 +17,7 @@ const CityAdv = () => {
 
   useEffect(() => {
     setData(websiteData);
-    console.log("websiteData cty ", websiteData);
-  }, [websiteData]);
+   }, [websiteData]);
 
   
   return (

@@ -37,8 +37,7 @@ const AdminLoginPage = () => {
           password,
         });
         const { data } = response;
-        console.log(data);
-        console.log(data.data.role);
+ 
         login(data.data);
         localStorage.setItem("token", data.token);
 

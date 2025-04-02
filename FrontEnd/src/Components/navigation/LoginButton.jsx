@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export const LoginButton = ({ onLogin, isMobile = false, isScrolled }) => {
-  useEffect(() => {
-    console.log(isScrolled);
-  }, [isScrolled]);
+ 
   return (
     <Link
       to="/login"

@@ -61,8 +61,7 @@ const DashboardProvider = ({ children }) => {
       const contactDoc = await getDoc(contactDocRef);
       if (contactDoc.exists()) {
         setContact(contactDoc.data());
-        // console.log(contactDoc.data());
-        return contactDoc.data();
+         return contactDoc.data();
       }
     } catch (error) {
       return;
@@ -138,18 +137,14 @@ const DashboardProvider = ({ children }) => {
 
   const UpdateCurrentUserAds = async (Uid, data) => {
 
-    console.log("UUU")
-    console.log (Uid, data)
-    try {
+     try {
       const userDocRef = doc(db, "users", Uid);
-      console.log("Fetching user document:", userDocRef);
-    
+     
       const userDoc = await getDoc(userDocRef);
     
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        console.log("User data fetched:", userData);
-    
+     
         const ads = userData.ads;
     
         if (!Array.isArray(ads)) {
@@ -163,15 +158,13 @@ const DashboardProvider = ({ children }) => {
               console.error("No links provided for ad:", ad.adId);
               return ad; // Skip update if links are undefined
             }
-            console.log("Updating ad with ID:", ad.adId);
-            return { ...ad, links: data.links };
+             return { ...ad, links: data.links };
           }
           return ad;
         });
     
         // Log the updated data before calling setDoc
-        console.log("Updated ads:", updatedAds);
-    
+     
         // Ensure no undefined values are being passed
         const sanitizedUserData = { ...userData, ads: updatedAds };
         for (const key in sanitizedUserData) {
@@ -182,10 +175,7 @@ const DashboardProvider = ({ children }) => {
         }
     
         await setDoc(userDocRef, sanitizedUserData);
-        console.log("Document updated successfully");
-      } else {
-        console.log("User document doesn't exist");
-      }
+       } 
     } catch (error) {
       console.error("Error occurred:", error);
       setError(error.message);
@@ -335,39 +325,28 @@ const DashboardProvider = ({ children }) => {
   
 const addUserNotification = async (notification, Uid) => {
   try {
-   console.log("Starting addUserNotification function");
-   console.log("Notification:", notification, "Uid:", Uid);
-
+   
     const userDocRef = doc(db, "users", Uid);
-   console.log("Document reference created:", userDocRef);
-
+ 
     let userDoc;
     try {
       userDoc = await getDoc(userDocRef);
-     console.log("Fetched document:", userDoc);
-    } catch (fetchError) {
-      console.error("Error fetching document:", fetchError);
-      return; // Stop further execution
+     } catch (fetchError) {
+       return; // Stop further execution
     }
 
     if (userDoc.exists()) {
-      // console.log("User document exists");
-      const user = userDoc.data();
-  //    console.log("User data:", user);
-
+       const user = userDoc.data();
+ 
       const notifications = user.notifications || [];
-    //  console.log("Existing notifications:", notifications);
-
+ 
       const notificationWithId = { ...notification, id: crypto.randomUUID() };
-      console.log("New notification with ID:", notificationWithId);
-
+ 
       notifications.push(notificationWithId);
-     console.log("Updated notifications:", notifications);
-
+ 
       await setDoc(userDocRef, { ...user, notifications });
-      // console.log("Notification added successfully");
-    } else {
-      //   console.log("User document does not exist or cannot be accessed");
+     } else {
+        console.error("User document does not exist or cannot be accessed");
     }
   } catch (error) {
     console.error("Error in addUserNotification:", error);
@@ -403,8 +382,7 @@ const addUserNotification = async (notification, Uid) => {
           ...user,
           notifications: updatedNotifications,
         });
-    //    console.log("Notification marked as read.");
-      } else {
+       } else {
         console.error("User document not found.");
       }
     } catch (error) {
@@ -414,8 +392,7 @@ const addUserNotification = async (notification, Uid) => {
 
   const SendNotification = async (notification) => {
     const { message, readed, time, stars } = notification;
-    // console.log(stars);
-    stars.forEach(async (user) => {
+     stars.forEach(async (user) => {
       await addUserNotification({ message, readed, time }, user.Uid);
     });
   };
@@ -441,8 +418,7 @@ const SendSignupNotification = async (notification, type) => {
 
   // Get users based on the type of notification
   const users = getUsersByRole(type);
-  console.log("Not users " ,users);
-  
+   
 
   // Send notification to each user
   for (const user of users) {

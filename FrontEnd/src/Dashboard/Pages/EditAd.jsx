@@ -44,8 +44,7 @@ const EditAd = () => {
           `/advertisement/get_one/${id}`
         );
         const adData = response.data.advertisement;
-        console.log("edit Ad page Data", adData);  
-
+ 
         // Set form values
         setValue("title", adData.title);
         setValue("description", adData.description);
@@ -65,23 +64,20 @@ const EditAd = () => {
 
         const links = adData.links.map((link) => link);
         setSocialLinks(links || []);
-        console.log("links", links);
-
+ 
 
         // Set selected users
         // setSelectedUsers(adData.users || []);
         const users = adData.users.map((user) => user.userId._id);
         setSelectedUsers(users);
 
-        console.log("users", users);
-// setSelectedUsers(adData.users?.map(user => user._id) || []);
+ // setSelectedUsers(adData.users?.map(user => user._id) || []);
 
         // Set selected address
         // setSelectedAddress(adData.address || { area: "", govern: [] });
         const selectedGovernments = adData.address?.govern.map( gov => gov) || [];
         const selectedArea = adData.address?.area || "";
-        console.log("selectedGovernments", selectedGovernments);
-        console.log("selectedArea", selectedArea);
+      
         setSelectedAddress({
           area: adData.address?.area || "",
           governments: selectedGovernments,
@@ -208,8 +204,7 @@ const EditAd = () => {
       return;
     }
 
-    console.log("selectedAddress.govern", selectedAddress);
-
+ 
     if (!selectedAddress.govern.length) {
       toast.error("يجب اختيار المنطقة");
       return;
@@ -237,8 +232,7 @@ const EditAd = () => {
       );
 
     //   updateADs(id, response.data);
-      console.log("response.data", response.data);
-      toast.success("تم تحديث الإعلان بنجاح");
+       toast.success("تم تحديث الإعلان بنجاح");
 
       navigate("/dashboard/ads-list");
     } catch (error) {

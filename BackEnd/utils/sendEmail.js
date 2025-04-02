@@ -20,8 +20,7 @@ const sendEmail = async (options) => {
 
   const info = await transporter.sendMail(message);
 
-  console.log("Message sent: %s", info.messageId);
-};
+ };
 
 export const sendEmailHTML = async (options) => {
   const transporter = nodemailer.createTransport({
@@ -42,8 +41,7 @@ export const sendEmailHTML = async (options) => {
 
   const info = await transporter.sendMail(message);
 
-  console.log("Message sent: %s", info.messageId);
-}
+ }
 
 
 

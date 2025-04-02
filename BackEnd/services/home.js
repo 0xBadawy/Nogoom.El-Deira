@@ -22,8 +22,7 @@ export const getOneHome = getOneHomeM(homeModel);
 
 // asyncHandler(async (req, res, next) => {
 //   const id = req.query.id;
-//   console.log("Request ID:", id);
-//   const home = await homeModel.findById(id);
+ //   const home = await homeModel.findById(id);
 //   if (!home) {
 //     return next(new ApiError("Home not found", 404));
 //   }

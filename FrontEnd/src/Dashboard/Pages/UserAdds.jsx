@@ -22,10 +22,7 @@ import {
 function UserAdds({ selectedUserUid, onSave }) {
   const [userAdds, setUserAdds] = useState([]);
 
-  useEffect(() => {
-    console.log("selectedUserUid", selectedUserUid);
-  }, [selectedUserUid]);
-
+ 
   return (
     <Card className="w-full max-w-4xl mt-10 mx-auto shadow-lg">
       <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">

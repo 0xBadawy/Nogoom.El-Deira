@@ -16,7 +16,7 @@ export default function AdListPage() {
   useEffect(() => {
     const fetchAds = async () => {
       const mockData = await getAllAds();
-      console.table(mockData);
+      // console.table(mockData);
       setAds(mockData);
     };
     fetchAds();

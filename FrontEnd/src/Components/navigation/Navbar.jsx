@@ -110,7 +110,6 @@ const Navbar = ({ color }) => {
 
 
   const handleLogin = () => {
-    console.log("Logging in...");
     navigate("/login");
 
   };
