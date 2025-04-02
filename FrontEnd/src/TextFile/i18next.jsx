@@ -14,5 +14,3 @@ i18next.init({
   });
   
   // استخدام الترجمة
-  console.log(i18next.t('navbar.home')); // الناتج: "الرئيسية"
-  console.log(i18next.t('footer.terms')); // الناتج: "الشروط والأحكام"

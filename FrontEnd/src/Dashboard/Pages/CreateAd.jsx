@@ -167,14 +167,12 @@ const CreateAd = () => {
       users: selectedUsers,
     };
 
-    console.log("Ad Data:", adData);
-    // return;
+     // return;
 
     try {
       const response = await axiosInstance.post("/advertisement/add", adData);
       // addADs(response.data);
-      console.log(response.data);
-      toast.success("تم إضافة الحملة بنجاح");
+       toast.success("تم إضافة الحملة بنجاح");
       reset();
       navigate("/dashboard/ads-list");
     }

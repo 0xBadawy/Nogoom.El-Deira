@@ -14,8 +14,7 @@ const SponsersData = () => {
   const fetchSponsers = async () => {
     try {
       const response = await axiosInstance.get("/sponser");
-      console.log(response.data.data);
-      setSponsers(response.data.data);
+       setSponsers(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -32,8 +31,7 @@ const SponsersData = () => {
   } = useForm();
 
   const formSubmit = (data) => {
-    console.log(data, mediaUrl);
-
+ 
     const sponserData = {
       name: data.name,
       logo: mediaUrl,
@@ -49,8 +47,7 @@ const SponsersData = () => {
     const post = async () => {
       try {
         const response = await axiosInstance.post("/sponser", sponserData);
-        console.log(response.data);
-        toast.success("تم إضافة الراعي بنجاح");
+         toast.success("تم إضافة الراعي بنجاح");
         reset();
         setMediaUrl("");
         fetchSponsers();
@@ -92,8 +89,7 @@ const SponsersData = () => {
         try {
           const url = await getDownloadURL(uploadTask.snapshot.ref);
           setMediaUrl(url);
-          console.log("Media URL:", url);
-        } catch (error) {
+         } catch (error) {
           toast.error(`خطأ في الحصول على رابط الصورة: ${error.message}`);
         } finally {
           setLoading(false);
@@ -107,12 +103,10 @@ const SponsersData = () => {
     if (!confirm) return;
     try {
       const response = await axiosInstance.delete(`/sponser/${id}`);
-      console.log(response.data);
-      toast.success("تم حذف الراعي بنجاح");
+       toast.success("تم حذف الراعي بنجاح");
       fetchSponsers();
     } catch (error) {
-      console.error(error);
-      toast.error("حدث خطأ أثناء حذف الراعي");
+       toast.error("حدث خطأ أثناء حذف الراعي");
     }
   };
 

@@ -53,22 +53,17 @@ export function AdEditModal({ ads, selected, onSave }) {
 
 
     const files2 = event.target.files;
-    console.log("Files:", files2);
-
+ 
     const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp"];
 
     for (let i = 0; i < files2.length; i++) {
       const file = files2[i];
-      console.log("File type:", file.type); // Log the type of each file
-
+ 
       if (!validImageTypes.includes(file.type)) {
-        console.log("Invalid file type detected:", file.type); // Log invalid file type
-        alert("نوع الصورة غير مدعوم. يرجى رفع ملف بصيغة JPEG أو PNG أو GIF أو BMP أو WEBP."); // رسالة خطأ واضحة
+         alert("نوع الصورة غير مدعوم. يرجى رفع ملف بصيغة JPEG أو PNG أو GIF أو BMP أو WEBP."); // رسالة خطأ واضحة
         setLoading(false); // إيقاف حالة التحميل
         return;
-      } else {
-        console.log("Valid file type:", file.type); // Log valid file type
-      }
+      }  
     }
 
 
@@ -99,19 +94,15 @@ export function AdEditModal({ ads, selected, onSave }) {
           // تحديث نسبة الرفع
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(
-            `Upload progress for ${file.name}: ${progress.toFixed(2)}%`
-          );
+         
 
           setuploadImageProgress(progress); // تحديث الحالة
 
           switch (snapshot.state) {
             case "paused":
-              console.log(`Upload for ${file.name} is paused`);
-              break;
+               break;
             case "running":
-              console.log(`Upload for ${file.name} is running`);
-              break;
+               break;
             default:
               break;
           }
@@ -140,8 +131,7 @@ export function AdEditModal({ ads, selected, onSave }) {
           // عند إكمال الرفع بنجاح
           try {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log(`File available at ${downloadURL}`);
-            setImageURL((prevState) => [...prevState, downloadURL]);
+             setImageURL((prevState) => [...prevState, downloadURL]);
 
             // هنا يمكنك تخزين الروابط في مصفوفة أو إضافتها إلى حالة
           } catch (err) {
@@ -188,15 +178,12 @@ export function AdEditModal({ ads, selected, onSave }) {
         // تحديث نسبة الرفع
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(`Upload progress: ${progress.toFixed(2)}%`);
-        setuploadVideoProgress(progress);
+         setuploadVideoProgress(progress);
         switch (snapshot.state) {
           case "paused":
-            console.log("Upload is paused");
-            break;
+             break;
           case "running":
-            console.log("Upload is running");
-            break;
+             break;
           default:
             break;
         }
@@ -223,8 +210,7 @@ export function AdEditModal({ ads, selected, onSave }) {
         // عند إكمال الرفع بنجاح
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log("Video available at", downloadURL);
-          setVideoURL(downloadURL);
+           setVideoURL(downloadURL);
           // يمكنك تخزين الرابط في حالة أو إظهاره في الواجهة
         } catch (err) {
           console.error("Error getting download URL:", err);
@@ -252,13 +238,10 @@ export function AdEditModal({ ads, selected, onSave }) {
   }, [selected, ads, reset])
 
   const onSubmit = (data) => {
-
-    // console.log("imageURL" ,imageURL)
-    // console.log("prevImages" ,prevImages)
+ 
     let img = imageURL.length > 0 ? imageURL : prevImages;
     let vid = videoURL != "" ? videoURL : prevVideo;
-    // console.log("imageURL" ,imageURL)
-    // console.log("img" ,img)
+   
     const adData = {
       ...data,
       images: img,

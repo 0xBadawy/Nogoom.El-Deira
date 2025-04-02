@@ -98,8 +98,7 @@
 //   };
 
 //   const updateUser = async (userId, data) => {
-//     console.log (userId, data)
-//     try {
+ //     try {
 //       await setDoc(doc(db, "users", userId), data, { merge: true });
 //       return { success: true };
 //     } catch (error) {
@@ -135,8 +134,7 @@
 //     if (!currentUser) return null;
 //     const userDocRef = doc(db, "users", currentUser.uid);
 //     const userDoc = await getDoc(userDocRef); // Use 'getDoc' here instead of calling 'get' directly on doc
-//     // console.log(userDoc)
-//     return userDoc.data();
+ //     return userDoc.data();
 //   };
 
 //   useEffect(() => {
@@ -207,10 +205,9 @@ export const AuthProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await axiosInstance.get("/user/me");
-        console.log("form AuthContext.js :", response.data.data);
-        setUser(response.data.data);
+         setUser(response.data.data);
       } catch (err) {
-        console.log("Error:", err.message);
+        console.error("Error:", err.message);
       }
       setLoading(false);
     };

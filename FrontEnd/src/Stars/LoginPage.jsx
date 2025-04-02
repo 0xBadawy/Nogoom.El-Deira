@@ -42,8 +42,7 @@ const LoginPage = () => {
           password,
         });
         const { data } = response;
-        console.log(data);
-        console.log(data.data.role);
+        
         login(data.data);
         localStorage.setItem("token", data.token);
         
@@ -51,7 +50,7 @@ const LoginPage = () => {
         else navigate("/profile");
 
       } catch (error) { 
-        console.log(error);
+        console.error(error);
         
 
         const errorMessage = handleFirebaseError(error.response.data.message);

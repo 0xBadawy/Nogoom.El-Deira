@@ -55,8 +55,7 @@ export const getLoggedInUser = asyncHandler(async (req, res, next) => {
     { lastSeen: Date.now() },
     { new: true }
   );
-  // console.log("last seen updated", user);
-
+ 
   next();
 });
 

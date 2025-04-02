@@ -22,7 +22,7 @@ import { useData } from "../../Context/DataContext";
 
 const Profile = () => {
   const [activePage, setActivePage] = useState("publicProfile");
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [verified, setVerified] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -33,8 +33,7 @@ const Profile = () => {
       if (user.role !== "star") {
         navigate("/dashboard");
       }
-      console.log("User Data:", data);
-      setUserData(data);
+       setUserData(data);
     };
     fetchData();
   }, [user]);
@@ -53,6 +52,7 @@ const Profile = () => {
     const confirmLogout = window.confirm("هل أنت متأكد من تسجيل الخروج؟");
     if (!confirmLogout) return; // If the user cancels the logout, do nothing
 
+    logout(); // Call the logout function from the AuthContext
     // logOut();
     navigate("/login");
   };
@@ -64,8 +64,7 @@ const Profile = () => {
   
     useEffect(() => {
       setData(websiteData);
-       console.log("websiteData cty home", websiteData);
-    }, [websiteData]);
+     }, [websiteData]);
   
   
   

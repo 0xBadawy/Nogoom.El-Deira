@@ -71,8 +71,7 @@ const EditEmployees = ({ userData, onUserUpdated }) => {
 
   const handleUserSubmission = async (formData, isUpdate) => {
       const response  = await axiosInstance.put(`/user/update_user/${userData._id}`, formData);
-      console.log("Response:", response);
-      if (response.data.status === "error") {
+       if (response.data.status === "error") {
         throw new Error(response.data.message);
       }
       onUserUpdated(response.data.data);

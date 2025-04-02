@@ -22,8 +22,7 @@ const ContactPage = () => {
 
   useEffect(() => {
     setData(websiteData);
-    console.log("websiteData cty ", websiteData);
-  }, [websiteData]);
+   }, [websiteData]);
 
   return (
     <main className="relative py-16 bg-gray-100 min-h-screen">

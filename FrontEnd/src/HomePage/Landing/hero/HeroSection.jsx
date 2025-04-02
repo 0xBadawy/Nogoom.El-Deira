@@ -26,8 +26,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     setData(websiteData);
-    console.log("websiteData 4 ",websiteData);
-  }, [websiteData]);
+   }, [websiteData]);
 
 
   

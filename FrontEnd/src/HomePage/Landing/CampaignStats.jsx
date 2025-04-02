@@ -18,8 +18,7 @@ const CampaignStats = () => {
  
    useEffect(() => {
      setData(websiteData);
-     console.log("websiteData 4 ",websiteData);
-   }, [websiteData]);
+    }, [websiteData]);
  
   const cards = [
     {

@@ -77,13 +77,11 @@ const AddEmployees = () => {
 
   const handleUserSubmission = async (formData) => {
     setError(null);
-    console.log("Form Data:", formData);
-
+ 
     try {
       setLoading(true);
       const response = await axiosInstance.post("/user/add_user", formData);
-      console.log("Response:", response);
-      if (response.data.status === "error") {
+       if (response.data.status === "error") {
         toast.error(response.data.message);
         setError(response.data.message);
         return;
@@ -91,8 +89,7 @@ const AddEmployees = () => {
 
       toast.success("تم إضافة الموظف بنجاح!");
     } catch (error) {
-      console.log("Error:", error);
-      if (error.response.data.message === "Email already exists") {
+       if (error.response.data.message === "Email already exists") {
         toast.error("الموظف موجود بالفعل");
         setError("الموظف موجود بالفعل");
       } else {

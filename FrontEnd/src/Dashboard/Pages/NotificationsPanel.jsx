@@ -23,8 +23,7 @@ const NotificationsPanel = () => {
           notificationId: id,
         }
       );
-      console.log(response.data);
-      fetchData(); // Refresh notifications after marking as read
+       fetchData(); // Refresh notifications after marking as read
     };
     readNotification();
   };
@@ -38,8 +37,7 @@ const NotificationsPanel = () => {
       const sortedNotifications = response.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
-      console.log(sortedNotifications);
-      setNotifications(sortedNotifications);
+        setNotifications(sortedNotifications);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

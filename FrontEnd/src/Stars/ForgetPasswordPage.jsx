@@ -36,8 +36,7 @@ const ForgetPasswordPage = () => {
 
     try {
       const response = await axiosInstance.post("/auth/forgotpassword", data);
-      console.log(response.data);
-      toast.success("تم إرسال رابط إعادة تعيين كلمة المرور بنجاح!");
+       toast.success("تم إرسال رابط إعادة تعيين كلمة المرور بنجاح!");
       navigate("/verify-code");
       setLoading(false);
     } catch (error) {

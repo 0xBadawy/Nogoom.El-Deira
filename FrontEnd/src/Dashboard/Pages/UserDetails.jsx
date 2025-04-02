@@ -24,8 +24,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
 
   useEffect(() => {
     const user = usersData.find((user) => user._id === selectedUserUid);
-    console.log(user);
-    if (user) {
+     if (user) {
       setUserData(user);
       setAddress({
         area: user.address?.area || "",
@@ -44,8 +43,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
 
       
       
-      console.log(user.profileImage || "");
-
+ 
 
 
 
@@ -67,8 +65,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
       socialLinks,
     };
 
-    console.log("All Data: selectedAddress ", allData);
-
+ 
     try {
       const response = await axiosInstance.put(
         `/user/update_user/${selectedUserUid}`,
@@ -76,8 +73,7 @@ const AccountSettings = ({ selectedUserUid, usersData }) => {
       );
       // await updateUser(response.data.data);
       toast.success("تم حفظ التعديلات بنجاح");
-      console.log(response.data);
-    } catch (error) {
+     } catch (error) {
       console.error("خطأ في تحديث البيانات:", error);
       toast.error("فشل في تحديث البيانات");
     }

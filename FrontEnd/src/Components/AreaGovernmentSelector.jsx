@@ -14,8 +14,7 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
     }
   }, [initialData]);
 
-  console.log("Initial Data from Props:", initialData);
-
+ 
   const availableGovernments = useMemo(() => {
     const area = AreaData.find((item) => item.name === selectedArea);
     return area ? area.subGovernments : [];

@@ -31,7 +31,7 @@ const Sidebar = () => {
       const User = user;
       setUserRole(User.role); // Set the user role
       // setUserRole("admin");
-      // console.log("User Role:", User.role);
+ 
     };
     fetchUserRole();
   }, [user]);

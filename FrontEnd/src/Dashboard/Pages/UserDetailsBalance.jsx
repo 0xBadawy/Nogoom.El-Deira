@@ -27,8 +27,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
   useEffect(() => {
     const user = usersData.find((user) => user._id === selectedUserUid);
     if (user) {
-      console.log("UserDetailsBalance User found:", user);
-      reset(user);
+       reset(user);
       setValue(
         "userStatus",
         user.verified ? `accepted_${user.accountType}` : "pending"
@@ -55,8 +54,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
       verified: dataForm.verified,
     };
 
-    console.log("handelSave allData:", allData);
-
+ 
     try {
       const response = await axiosInstance.put(
         `/user/update_user/${selectedUserUid}`,
@@ -64,8 +62,7 @@ const UserDetailsBalance = ({ selectedUserUid, usersData, onSave }) => {
       );
       // await updateUser(response.data.data);
       toast.success("تم حفظ التعديلات بنجاح");
-      // console.log(response.data);
-      window.location.reload();
+       window.location.reload();
 
     } catch (error) {
       console.error("خطأ في تحديث البيانات:", error);

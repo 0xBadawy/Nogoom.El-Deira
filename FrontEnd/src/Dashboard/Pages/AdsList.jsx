@@ -22,7 +22,7 @@ const AdsList = () => {
       const data = response.data.advertisements;
       
       setAds(data);
-      console.table( data); 
+      // console.table( data); 
 
     }
     featchAds();

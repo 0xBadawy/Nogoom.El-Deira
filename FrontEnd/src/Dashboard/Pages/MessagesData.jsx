@@ -14,8 +14,7 @@ const MessagesData = () => {
   const fetchMessage = async () => {
     try {
       const response = await axiosInstance.get("/messages");
-      console.log(response.data.data);
-      setMessage(response.data.data);
+       setMessage(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -33,15 +32,13 @@ const MessagesData = () => {
   } = useForm();
 
   const formSubmit = (data) => {
-    console.log(data, mediaUrl);
-
+ 
     // Send the data to the backend
 
     const post = async () => {
       try {
         const response = await axiosInstance.post("/messages", data);
-        console.log(response.data);
-        toast.success("تم إضافة الراعي بنجاح");
+         toast.success("تم إضافة الراعي بنجاح");
         reset();
         setMediaUrl("");
         fetchMessage();
@@ -58,8 +55,7 @@ const MessagesData = () => {
     if (!confirm) return;
     try {
       const response = await axiosInstance.delete(`/messages/${id}`);
-      console.log(response.data);
-      toast.success("تم الحذف بنجاح");
+       toast.success("تم الحذف بنجاح");
       fetchMessage();
     } catch (error) {
       console.error(error);

@@ -23,9 +23,8 @@ const SendNotification = () => {
         const response = await axiosInstance.post(
           `/notifications/group-notifications?userId=${user._id}`
         );
-        console.log("response : ", response);
-      } catch (error) {
-        console.log("error : ", error);
+       } catch (error) {
+        console.error("error : ", error);
       }
     };
 
@@ -58,12 +57,11 @@ const SendNotification = () => {
           "/notifications/group-notifications",
           adData
         );
-        // console.log("response : ", response);
-        toast.success("تم ارسال الاشعار بنجاح");
+         toast.success("تم ارسال الاشعار بنجاح");
         reset();
         setSelectedUsers([]);
       } catch (error) {
-        console.log("error : ", error);
+        console.error("error : ", error);
       }
     };
 
@@ -79,9 +77,7 @@ const SendNotification = () => {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    console.log("selectedUsers : ", selectedUsers);
-  }, [selectedUsers]);
+ 
 
   return (
     <div className=" flex items-center justify-center md:p-4 p-2">

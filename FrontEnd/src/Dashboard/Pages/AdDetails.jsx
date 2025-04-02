@@ -32,10 +32,7 @@ const AdDetails = ({ ads, selected }) => {
           `/advertisement/get_one/${selected}`
         );
         setAds(response.data.advertisement);
-        console.log(
-          "response.data.advertisement ",
-          response.data.advertisement
-        );
+        
       } catch (error) {
         console.error("حدث خطأ أثناء جلب البيانات:", error);
       }
@@ -44,9 +41,7 @@ const AdDetails = ({ ads, selected }) => {
     fetchUserData();
   }, [selected]);
 
-  useEffect(() => {
-    console.log("ad", ad);
-  }, [ad]);
+ 
 
   const handleDeleteAd = async () => {
     const confirm = window.confirm("هل أنت متأكد من حذف الإعلان؟");
@@ -56,8 +51,7 @@ const AdDetails = ({ ads, selected }) => {
       const response = await axiosInstance.delete(
         `/advertisement/delete/${selected}`
       );
-      console.log(response);
-      if (response.status === 200) {
+       if (response.status === 200) {
         toast.success("تم حذف الإعلان بنجاح");
         // reload the page
         window.location.reload();

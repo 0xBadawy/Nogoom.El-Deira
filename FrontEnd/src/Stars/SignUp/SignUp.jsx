@@ -170,8 +170,7 @@ const SignUpPage = () => {
         try {
           const url = await getDownloadURL(uploadTask.snapshot.ref);
           setMediaUrl(url);
-          console.log("Media URL:", url);
-        } catch (error) {
+         } catch (error) {
           toast.error(`خطأ في الحصول على رابط الصورة: ${error.message}`);
         } finally {
           setLoading(false);

@@ -39,8 +39,7 @@ const Apartments = () => {
           Hidin++;
         }
       });
-      console.log(Count, Hidin, Display);
-      setNumbers({
+       setNumbers({
         Apartments: Count,
         Hidin: Hidin,
         Display: Display,

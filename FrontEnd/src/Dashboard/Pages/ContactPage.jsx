@@ -21,12 +21,10 @@ const ContactPage = () => {
   }, [reset]);
 
   const onSubmit = async (data) => {
-    console.log(data);
-    setIsLoading(true);
+     setIsLoading(true);
     try {
       const res = await axiosInstance.post("/dashboard/update-contact", data);
-      console.log(res.data);
-      toast.success("تم تحديث بيانات الاتصال بنجاح");
+       toast.success("تم تحديث بيانات الاتصال بنجاح");
     } catch (error) {
       toast.error("حدث خطأ أثناء تحديث البيانات");
       console.error(error);

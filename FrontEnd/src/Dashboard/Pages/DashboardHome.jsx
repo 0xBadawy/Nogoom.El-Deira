@@ -18,8 +18,7 @@ const DashboardHome = () => {
   const fetchData = async () => {
     try {
       const userId = await user._id;
-      console.log("userId----  ", user);
-      const response = await axiosInstance.get(`/notifications/notifications`, {
+       const response = await axiosInstance.get(`/notifications/notifications`, {
         params: { userId },
       });
       const sortedNotifications = response.data
