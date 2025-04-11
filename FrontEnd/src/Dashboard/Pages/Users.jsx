@@ -55,7 +55,8 @@ const Users = () => {
     const featchUsers = async () => {
       try {
         const response = await axiosInstance.get("/user/all_users");
-         setUsersData(response.data.data);
+        setUsersData(response.data.data);
+        console.log(response.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -134,7 +135,7 @@ const Users = () => {
               className="border rounded px-2 py-1"
               disabled={selectedRegion === "all"}
             >
-              <option value="all">كل المحافظات</option>
+              <option value="all">كل المناطق</option>
               {selectedRegion !== "all" &&
                 GovernmentData.find(
                   (region) => region.name === selectedRegion
@@ -195,8 +196,7 @@ const Users = () => {
                     <td className="py2 px4 flex items-center gap-2 ">
                       {row.verified  && (
                         <Star type={row.accountType} size={32} /> 
-
-                      
+                     
                       )}
                     </td>
                   </tr>

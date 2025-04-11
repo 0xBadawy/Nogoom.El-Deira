@@ -397,7 +397,7 @@ const AdDetailPage = () => {
                   {/* Download Buttons */}
                   <div className="flex gap-4">
                     {/* Download All Button */}
-                    <motion.button
+                    {/* <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={handleDownloadAll}
@@ -405,7 +405,7 @@ const AdDetailPage = () => {
                     >
                       <Download className="h-5 w-5" />
                       <span>تنزيل الكل</span>
-                    </motion.button>
+                    </motion.button> */}
 
                     {/* Download Video Button (Only shown if video exists) */}
                     {ad.videos && (
@@ -416,7 +416,7 @@ const AdDetailPage = () => {
                         className="flex-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-3 rounded-2xl flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
                       >
                         <Film className="h-5 w-5" />
-                        <span>تنزيل الفيديو</span>
+                        <span> اضغط للتنزيل </span>
                       </motion.button>
                     )}
                   </div>

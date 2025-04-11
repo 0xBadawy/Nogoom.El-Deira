@@ -16,6 +16,7 @@ const WebsiteData = () => {
   const [imageData, setImageData] = useState({
     image1: { file: null, preview: null, url: "" },
     image2: { file: null, preview: null, url: "" },
+    image3: { file: null, preview: null, url: "" },
   });
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const WebsiteData = () => {
         setImageData((prev) => ({
           image1: { ...prev.image1, url: initialData.image1 },
           image2: { ...prev.image2, url: initialData.image2 },
+          image3: { ...prev.image3, url: initialData.image3 },
         }));
 
         reset(initialData);
@@ -79,8 +81,23 @@ const WebsiteData = () => {
           "image2"
         );
       }
-       await axiosInstance.post("/dashboard/update", uploadData);
+
+      if (imageData.image3.file) {
+        uploadData.image3 = await handleImageUpload(
+          imageData.image3.file,
+          "image3"
+        );
+      }
+
+      // console.log("uploadData", uploadData);
+
+      // return;
+
+
+
+      const res= await axiosInstance.post("/dashboard/update", uploadData);
       toast.success("تم تحديث البيانات بنجاح");
+      // console.log("res", res.data);
       reset();
     } catch (error) {
       toast.error("حدث خطأ أثناء تحديث البيانات");
@@ -95,10 +112,20 @@ const WebsiteData = () => {
       { id: "mainTitle", label: "العنوان الرئيسي للموقع" },
       { id: "subTitle", label: "العنوان الفرعي للموقع" },
     ],
+
+
     mainInfo2: [
       { id: "adTitle", label: "عنوان الإعلان للموقع" },
       { id: "adDescription", label: "وصف الإعلان للموقع", type: "textarea" },
     ],
+    mainInfo3: [
+      { id: "adTitle3", label: "عنوان الإعلان للموقع" },
+      { id: "adDescription3", label: "وصف الإعلان للموقع", type: "textarea" },
+      { id: "hideMainInfo3", label: "إخفاء القسم" },
+    ],
+
+
+
 
     statistics: [
       { id: "campaignCount", label: "عدد الحملات" },
@@ -153,6 +180,7 @@ const WebsiteData = () => {
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 border-b pb-2">
                   {section === "mainInfo" && "القسم رقم 1"}
                   {section === "mainInfo2" && "القسم رقم 2"}
+                  {section === "mainInfo3" && "القسم رقم 2 (نسخة مكررة)"} 
                   {section === "starAds" && " القسم رقم 4"}
                   {section === "statistics" && "القسم رقم 3"}
                   {section === "contact" && "معلومات الاتصال"}
@@ -164,7 +192,10 @@ const WebsiteData = () => {
                   {fields.map((field) => (
                     <>
                       {field.id === "hideSection" ||
-                      field.id === "hideBalanceSection" ? (
+                        field.id === "hideBalanceSection" ||
+                        field.id === "hideMainInfo3" 
+                      
+                        ? (
                         <div key={field.id} className="flex items-center">
                           <input
                             type="checkbox"
@@ -209,7 +240,7 @@ const WebsiteData = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {["image1", "image2"].map((imageKey, index) => (
+              {["image1", "image2","image3"].map((imageKey, index) => (
                 <div key={imageKey} className="space-y-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-white">
                     تحميل الصورة {index + 1}

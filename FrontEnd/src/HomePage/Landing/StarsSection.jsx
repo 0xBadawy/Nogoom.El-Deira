@@ -27,11 +27,22 @@ const StarsSection = function () {
   const [selectedArea, setSelectedArea] = useState("all");
 
   
-  useEffect(() => {
-       setSelectedArea(localStorage.getItem("selectedArea") || "all");
+useEffect(() => {
+  const storedArea = localStorage.getItem("selectedArea");
+  if (storedArea) {
+    setSelectedArea(storedArea);
+  } else {
+    setSelectedArea("all");
+  }
 
-  }, []);
+  // console.log("Stored Area:", storedArea);
+}, []);
+
   
+  useEffect(() => {
+  // console.log("Selected Area:", selectedArea);
+}, [selectedArea]);
+
   
   useEffect(() => {
 
@@ -48,7 +59,10 @@ const StarsSection = function () {
   }, [getAllStarUsers,selectedArea]);
   
 
- 
+   const filteredUsers = users.filter(
+  (item) => item.address.area === selectedArea || selectedArea === "all"
+);
+
 
 return (
   <motion.div
@@ -92,27 +106,29 @@ return (
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {users
-            .filter(
-              (item) => item.address.area == selectedArea || selectedArea === "all"
-            )
-            .map((item, index) => (
-              <SwiperSlide key={item?.id || index}>
-                <ProfileCard
-                  name={item.name}
-                  image={item.profileImage}
-                  bio={item.bio}
-                  area={item.address.area}
-                  followers={item.referredBy}
-                  facebook={item.facebook}
-                  instagram={item.instagram}
-                  snapchat={item.snapchat}
-                  tiktok={item.tiktok}
-                  twitter={item.twitter}
-                  youtube={item.youtube}
-                />
-              </SwiperSlide>
-            ))}
+        
+{filteredUsers.length > 0 ? (
+  filteredUsers.map((item, index) => (
+    <SwiperSlide key={item?.id || index}>
+      <ProfileCard
+        name={item.name}
+        image={item.profileImage}
+        bio={item.bio}
+        area={item.address.area}
+        followers={item.referredBy}
+        facebook={item.facebook}
+        instagram={item.instagram}
+        snapchat={item.snapchat}
+        tiktok={item.tiktok}
+        twitter={item.twitter}
+        youtube={item.youtube}
+      />
+    </SwiperSlide>
+  ))
+) : (
+  <div className="text-center text-gray-500 py-8">لا يوجد مستخدمون في هذه المنطقة.</div>
+)}
+
         </Swiper>
       ) : (
         <p className="text-center">{"لا يوجد نجوم فى منطقة " + selectedArea}</p>

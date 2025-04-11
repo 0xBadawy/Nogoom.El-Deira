@@ -18,6 +18,10 @@ const SelectArea = ({ isScrolled }) => {
     // Save the selected value in localStorage
     localStorage.setItem("selectedArea", selectedValue);
 
+    sessionStorage.setItem("updatedByButton", "true");
+
+
+
     // reload 
     window.location.reload();
   };

@@ -14,7 +14,7 @@ export const TextData = {
 
   export const AreaData = [ 
     {
-      name: "كل المحافظات",
+      name: "كل المناطق",
       subGovernments: [
         "العاصمة",
         "حولي",

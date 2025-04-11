@@ -322,24 +322,17 @@ export const getOneHomeM = (Model) =>
       return next(new ApiError("Internal server error", 500));
     }
   });
-
+  
 export const getAll = (Model) =>
   asyncHandler(async (req, res, next) => {
-    const apiFeatures = new ApiFeatures(Model.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .search()
-      .paginate();
+    const data = await Model.find();
 
-    const { mongooseQuery, paginationResult } = apiFeatures;
-    const category = await mongooseQuery;
     res.json({
-      paginationResult,
-      results: category.length,
-      data: category,
+      results: data.length,
+      data,
     });
   });
+
 
 export const getAllAdmins = (Model) =>
   asyncHandler(async (req, res, next) => {
