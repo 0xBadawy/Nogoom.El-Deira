@@ -88,7 +88,7 @@ const AdsList = () => {
             className="px-4 py-2 bg-white border rounded-lg dark:bg-gray-700"
             disabled={selectedRegion === "الكل"} // تعطيل إذا لم يتم اختيار منطقة
           >
-            <option value="الكل">كل المحافظات</option>
+            <option value="الكل">كل المناطق </option>
             {GovernmentData.filter((region) => region.name === selectedRegion)
               .flatMap((region) => region.subGovernments)
               .map((gov, index) => (

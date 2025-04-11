@@ -50,7 +50,7 @@ const AreaGovernmentSelector = ({ initialData = {}, onSelectionChange }) => {
     <div className="mx-auto w-full bg-white p-6 border rounded-2xl shadow-xl h-fit">
       {/* Area Selector */}
       <label className="block text-xl font-bold text-gray-700 mb-3">
-        اختر المنطقة:
+        اختر المنطقة: *
       </label>
       <select
         value={selectedArea}

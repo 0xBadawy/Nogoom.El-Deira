@@ -100,7 +100,7 @@ const Users = () => {
               className="border rounded px-2 py-1"
               disabled={selectedRegion === "all"}
             >
-              <option value="all">كل المحافظات</option>
+              <option value="all">كل المناطق  </option>
               {selectedRegion !== "all" &&
                 GovernmentData.find(
                   (region) => region.name === selectedRegion

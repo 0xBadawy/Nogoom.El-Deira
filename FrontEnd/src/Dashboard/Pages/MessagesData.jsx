@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../Configuration/firebase";
+import { storage } from "../../Configuration/Firebase";
 import axiosInstance from "../../Configuration/axiosInstance";
 import RatingInput from "./RatingInput";
 

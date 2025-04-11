@@ -27,7 +27,7 @@ const UserSelector = ({ initialSelectedUsers = [], onSelectionChange }) => {
 
   useEffect(() => {
     let { area, govrn } = filters;
-     if ((!area || area === "كل المحافظات") && !govrn) {
+     if ((!area || area === "كل المناطق") && !govrn) {
       setFilteredUsers(users);
       return;
     }

@@ -1,12 +1,14 @@
 
 import mongoose from "mongoose";
-
+ 
 const siteSchema = new mongoose.Schema({
   _id: { type: String, default: "singleton" }, // Enforce a single record
   mainTitle: { type: String, required: true },
   subTitle: { type: String, required: true },
   adTitle: { type: String, required: true },
+  adTitle3: { type: String, required: true }, // --->
   adDescription: { type: String, required: true },
+  adDescription3: { type: String, required: true }, // --->
   campaignCount: { type: Number, required: true, default: 0 },
   clientCount: { type: Number, required: true, default: 0 },
   satisfactionRate: { type: Number, required: true, default: 100 },
@@ -17,6 +19,7 @@ const siteSchema = new mongoose.Schema({
   starAd4: { type: String, required: true, default: "" },
   image1: { type: String, default: "" },
   image2: { type: String, default: "" },
+  image3: { type: String, default: "" },
   phone: { type: String, default: "" },
   email: { type: String, default: "" },
   whatsapp: { type: String, default: "" },
@@ -33,6 +36,7 @@ const siteSchema = new mongoose.Schema({
   privacy: { type: String, default: "" },
   hideSection: { type: Boolean, default: false },
   hideBalanceSection: { type: Boolean, default: false },
+  hideMainInfo3: { type: Boolean, default: false }, // --->
 });
 
 const Site = mongoose.model("Site", siteSchema);

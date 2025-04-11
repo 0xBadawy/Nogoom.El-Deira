@@ -56,6 +56,12 @@ const SignUpPage = () => {
       return;
     }
 
+      if (!data.email.length) {
+      toast.error("البريد الإلكتروني مطلوب, يجب أن يكون صالحًا");
+
+      return;
+    }
+
     if (data.password.length < 6) {
       toast.error("كلمة المرور ضعيفة جدًا. يجب أن تحتوي على 6 أحرف على الأقل.");
       return;
@@ -78,6 +84,16 @@ const SignUpPage = () => {
       return;
     }
 
+
+    
+    if (inputs.length === 0 || inputs[0].link === "") {
+      toast.error("يجب إضافة رابط واحد على الأقل");
+      return;
+    }
+
+  
+
+
     // if (!/^\d{10,11}$/.test(data.phone)) {
     //   toast.error(
     //     "يجب أن يكون رقم الهاتف مكوناً من 10 أو 11 رقماً ويتكون من أرقام فقط"
@@ -97,16 +113,12 @@ const SignUpPage = () => {
       return;
     }
 
-    if (inputs.length === 0) {
-      toast.error("يجب إضافة رابط واحد على الأقل");
-      return;
-    }
-
     if (!mediaUrl) {
       toast.error("يجب اختيار صورة شخصية");
       return;
     }
 
+  
     const finalData = {
       ...data,
       address,
@@ -276,7 +288,7 @@ const SignUpPage = () => {
               />
               <FormField
                 id="confirmPassword"
-                label="تأكيد كلمة المرور"
+                label="   تأكيد كلمة المرور * "
                 type="password"
                 register={register}
               />
@@ -286,7 +298,7 @@ const SignUpPage = () => {
 
             <div className="w-full mx-auto">
               <label className="block text-gray-700">
-                روابط التواصل الاجتماعي
+                روابط التواصل الاجتماعي * 
               </label>
               {inputs.map((input, index) => (
                 <input

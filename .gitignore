@@ -4,3 +4,5 @@
 .env.*
 node_modules
 FrontEnd/dist
+BackEnd/config.env
+FrontEnd/.firebaserc

@@ -12,7 +12,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRoles,
 }) => {
-  const { user, loading: authLoading } = useAuth(); // جلب `loading` من `useAuth`
+  const { user, loading: authLoading } = useAuth(); 
   const location = useLocation();
 
   const [userRole, setUserRole] = useState<string | null>(null);
@@ -21,22 +21,18 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   useEffect(() => {
  
     if (!authLoading) {
-      // لا يتم تحديث `userRole` إلا بعد انتهاء تحميل `user`
+     
       setUserRole(user?.role ?? "guest");
       setLoading(false);
     }
-  }, [user, authLoading]); // يتم تشغيل `useEffect` عند تغيير `user` أو انتهاء `authLoading`
-
-  // إظهار رسالة تحميل إذا لم تكتمل البيانات بعد
+  }, [user, authLoading]);
   if (loading) {
-    return <div>Loading...</div>; // يمكن استبدالها بمؤشر تحميل
+    return <div>Loading...</div>;
   }
 
-  // جلب الصلاحيات المطلوبة للمسار الحالي
   const routeRoles = requiredRoles ?? getRoutePermissions(location.pathname);
 
  
-  // التحقق مما إذا كان المستخدم لديه الصلاحيات المطلوبة
    if (!hasPermission(userRole || "guest", routeRoles)) {
      return <Navigate to="/unauthorized" state={{ from: location }} replace />;
   }

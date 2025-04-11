@@ -95,19 +95,16 @@ export const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
-    // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
     path: "/forget-password",
     element: withSuspense(ForgetPasswordPage),
     errorElement: <ErrorBoundary />,
   },
   {
-    // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
     path: "/verify-code",
     element: withSuspense(ConfirmPasswordCode),
     errorElement: <ErrorBoundary />,
   },
   {
-    // Suggested code may be subject to a license. Learn more: ~LicenseLog:1270588403.
     path: "/new-password",
     element: withSuspense(NewPassword),
     errorElement: <ErrorBoundary />,
@@ -122,11 +119,7 @@ export const router = createBrowserRouter([
     element: withSuspense(SignUpStatus),
     errorElement: <ErrorBoundary />,
   },
-  // {
-  //   path: "/Status",
-  //   element: withSuspense(SignUpStatus),
-  //   errorElement: <ErrorBoundary />,
-  // },
+
   {
     path: "/privacy-policy",
     element: withSuspense(PrivacyPolicy),
